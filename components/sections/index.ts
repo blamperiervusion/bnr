@@ -1,0 +1,13 @@
+export { default as Hero } from './Hero';
+export { default as ProgrammeTeaser } from './ProgrammeTeaser';
+export { default as BandsGallery } from './BandsGallery';
+export { default as PartnersTeaser } from './PartnersTeaser';
+export { default as CTASection } from './CTASection';
+export { default as ProgrammeDay } from './ProgrammeDay';
+export { default as PartnersPage } from './PartnersPage';
+export { default as BecomePartnerPage } from './BecomePartnerPage';
+export { default as BoutiquePage } from './BoutiquePage';
+export { default as BilletteriePage } from './BilletteriePage';
+export { default as BenevolesPage } from './BenevolesPage';
+export { default as FAQPage } from './FAQPage';
+export { default as VillagePage } from './VillagePage';

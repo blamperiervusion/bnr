@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 841 1189" width="841mm" height="1189mm">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="50%" style="stop-color:#1a0a0a"/>
+      <stop offset="100%" style="stop-color:#0a0a0a"/>
+    </linearGradient>
+    
+    <linearGradient id="fireGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#dc2626;stop-opacity:0.8"/>
+      <stop offset="30%" style="stop-color:#5bcefa;stop-opacity:0.5"/>
+      <stop offset="60%" style="stop-color:#dc2626;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:0"/>
+    </linearGradient>
+    
+    <radialGradient id="flameCenter" cx="50%" cy="100%" r="80%">
+      <stop offset="0%" style="stop-color:#5bcefa;stop-opacity:0.9"/>
+      <stop offset="40%" style="stop-color:#dc2626;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:0"/>
+    </radialGradient>
+    
+    <radialGradient id="flameLeft" cx="20%" cy="100%" r="60%">
+      <stop offset="0%" style="stop-color:#dc2626;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:0"/>
+    </radialGradient>
+    
+    <radialGradient id="flameRight" cx="80%" cy="100%" r="60%">
+      <stop offset="0%" style="stop-color:#dc2626;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:0"/>
+    </radialGradient>
+    
+    <!-- Filters -->
+    <filter id="strongGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur1"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <filter id="subtleGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Pattern for grid -->
+    <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#dc2626" stroke-width="0.5" opacity="0.1"/>
+    </pattern>
+    
+    <!-- Scanlines pattern -->
+    <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="2" fill="black" opacity="0.08"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="841" height="1189" fill="url(#bgGradient)"/>
+  
+  <!-- Grid overlay -->
+  <rect width="841" height="1189" fill="url(#gridPattern)"/>
+  
+  <!-- Fire glow at bottom -->
+  <rect x="0" y="900" width="841" height="289" fill="url(#fireGradient)"/>
+  
+  <!-- Flame effects -->
+  <ellipse cx="420" cy="1189" rx="500" ry="250" fill="url(#flameCenter)"/>
+  <ellipse cx="150" cy="1189" rx="250" ry="200" fill="url(#flameLeft)"/>
+  <ellipse cx="691" cy="1189" rx="250" ry="200" fill="url(#flameRight)"/>
+  
+  <!-- Flame shapes -->
+  <path d="M0,1189 Q100,1000 150,1100 Q200,950 250,1050 Q300,900 350,1000 Q400,850 420,950 Q450,850 500,1000 Q550,900 600,1050 Q650,950 700,1100 Q750,1000 841,1189 Z" fill="#dc2626" opacity="0.25"/>
+  
+  <!-- Top decorative corners -->
+  <g opacity="0.6">
+    <polygon points="0,0 100,0 0,100" fill="#dc2626"/>
+    <polygon points="0,0 60,0 0,60" fill="#0a0a0a"/>
+    <polygon points="841,0 741,0 841,100" fill="#dc2626"/>
+    <polygon points="841,0 781,0 841,60" fill="#0a0a0a"/>
+  </g>
+  
+  <!-- ============ HEADER SECTION ============ -->
+  
+  <!-- Pre-title -->
+  <text x="420" y="55" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="bold" letter-spacing="12" fill="#dc2626">
+    BEARDED ROCK EXPERIENCE
+  </text>
+  
+  <!-- Decorative line -->
+  <line x1="100" y1="70" x2="741" y2="70" stroke="#dc2626" stroke-width="1" opacity="0.5"/>
+  
+  <!-- LOGO -->
+  <image xlink:href="logo.png" x="270" y="80" width="300" height="300" preserveAspectRatio="xMidYMid meet"/>
+  
+  <!-- Main title with glow -->
+  <g filter="url(#strongGlow)">
+    <text x="420" y="440" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="120" font-weight="900" fill="#fafafa" letter-spacing="3">
+      BARB'N'
+    </text>
+  </g>
+  <text x="420" y="440" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="120" font-weight="900" fill="#fafafa" letter-spacing="3">
+    BARB'N'
+  </text>
+  
+  <g filter="url(#strongGlow)">
+    <text x="420" y="545" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="140" font-weight="900" fill="#dc2626" letter-spacing="10">
+      ROCK
+    </text>
+  </g>
+  <text x="420" y="545" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="140" font-weight="900" fill="#dc2626" letter-spacing="10">
+    ROCK
+  </text>
+  
+  <!-- ============ DATE & LOCATION SECTION ============ -->
+  
+  <!-- Date banner -->
+  <rect x="120" y="570" width="601" height="60" fill="#dc2626"/>
+  <rect x="125" y="575" width="591" height="50" fill="#0a0a0a"/>
+  <text x="420" y="612" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="42" font-weight="bold" fill="#fafafa" letter-spacing="4">
+    26 - 27 - 28 JUIN 2026
+  </text>
+  
+  <!-- Location -->
+  <text x="420" y="665" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="28" fill="#5bcefa" letter-spacing="4">
+    CREVECOEUR-LE-GRAND
+  </text>
+  <text x="420" y="695" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#a3a3a3" letter-spacing="3">
+    OISE / HAUTS-DE-FRANCE
+  </text>
+  
+  <!-- ============ LINE-UP SECTION ============ -->
+  
+  <!-- Section title -->
+  <line x1="50" y1="730" x2="791" y2="730" stroke="#dc2626" stroke-width="2"/>
+  <rect x="320" y="718" width="200" height="24" fill="#0a0a0a"/>
+  <text x="420" y="737" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="16" fill="#dc2626" letter-spacing="6">
+    LINE-UP
+  </text>
+  
+  <!-- HEADLINERS -->
+  <g filter="url(#subtleGlow)">
+    <text x="420" y="790" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="52" font-weight="bold" fill="#fafafa" letter-spacing="2">
+      SHAARGHOT
+    </text>
+  </g>
+  <text x="420" y="790" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="52" font-weight="bold" fill="#fafafa" letter-spacing="2">
+    SHAARGHOT
+  </text>
+  
+  <g filter="url(#subtleGlow)">
+    <text x="420" y="845" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="44" font-weight="bold" fill="#5bcefa" letter-spacing="2">
+      LOFOFORA
+    </text>
+  </g>
+  <text x="420" y="845" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="44" font-weight="bold" fill="#5bcefa" letter-spacing="2">
+    LOFOFORA
+  </text>
+  
+  <!-- Second tier -->
+  <text x="420" y="895" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="32" fill="#fafafa" letter-spacing="1">
+    DEPRESSIVE WITCHES - LOCOMUERTE - KRAB BOCA
+  </text>
+  
+  <!-- Third tier -->
+  <text x="420" y="940" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="26" fill="#a3a3a3" letter-spacing="1">
+    POESIE ZERO - LE REPARATEUR - DOORSHAN
+  </text>
+  
+  <!-- Fourth tier -->
+  <text x="420" y="980" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="22" fill="#737373" letter-spacing="1">
+    IN OTHER CLIMES - GIANT FRAGMENTS - COLOSSUS OF DESTINY
+  </text>
+  
+  <!-- Fifth tier -->
+  <text x="420" y="1015" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="20" fill="#525252" letter-spacing="1">
+    MIND COLLAPSE - SCARLETTER - ET PLUS ENCORE...
+  </text>
+  
+  <!-- ============ BOTTOM SECTION ============ -->
+  
+  <!-- Separator -->
+  <line x1="150" y1="1050" x2="691" y2="1050" stroke="#dc2626" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Genre tags -->
+  <g>
+    <rect x="260" y="1065" width="100" height="32" fill="none" stroke="#ec4899" stroke-width="2"/>
+    <text x="310" y="1088" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="20" fill="#ec4899">
+      PUNK
+    </text>
+    
+    <text x="390" y="1088" text-anchor="middle" font-family="Arial Black" font-size="20" fill="#fafafa">/</text>
+    
+    <rect x="420" y="1065" width="100" height="32" fill="none" stroke="#a855f7" stroke-width="2"/>
+    <text x="470" y="1088" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="20" fill="#a855f7">
+      METAL
+    </text>
+    
+    <text x="550" y="1088" text-anchor="middle" font-family="Arial Black" font-size="20" fill="#fafafa">/</text>
+    
+    <rect x="580" y="1065" width="100" height="32" fill="none" stroke="#5bcefa" stroke-width="2"/>
+    <text x="630" y="1088" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="20" fill="#5bcefa">
+      ROCK
+    </text>
+  </g>
+  
+  <!-- 3 days info -->
+  <text x="420" y="1130" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#fafafa" letter-spacing="4">
+    3 JOURS DE MUSIQUE SANS COMPROMIS
+  </text>
+  
+  <!-- Website -->
+  <rect x="310" y="1145" width="221" height="32" fill="#dc2626"/>
+  <text x="420" y="1168" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="18" fill="#fafafa" letter-spacing="2">
+    BARBNROCK.FR
+  </text>
+  
+  <!-- Scanlines overlay -->
+  <rect width="841" height="1189" fill="url(#scanlines)" opacity="0.3"/>
+  
+  <!-- Vignette effect -->
+  <defs>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:0"/>
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.4"/>
+    </radialGradient>
+  </defs>
+  <rect width="841" height="1189" fill="url(#vignette)"/>
+  
+  <!-- Border frame -->
+  <rect x="15" y="15" width="811" height="1159" fill="none" stroke="#dc2626" stroke-width="2" opacity="0.4"/>
+  <rect x="25" y="25" width="791" height="1139" fill="none" stroke="#fafafa" stroke-width="1" opacity="0.2"/>
+</svg>

@@ -36,37 +36,55 @@ En tant qu'association, les dons des entreprises ouvrent droit à :
 - **60% de réduction d'impôt** sur le montant du don (dans la limite de 0,5% du CA)
 - **Un don de 500€ ne coûte réellement que 200€** à l'entreprise
 
+### ⚠️ RÈGLE IMPORTANTE : Les contreparties ≤ 25%
+
+Pour que le mécène conserve sa réduction fiscale, **les contreparties (avantages) ne doivent pas dépasser 25% du montant du don**.
+
+| Pack | Montant | Contreparties max | Exemple avec pass 3 jours (~60€) |
+|------|---------|-------------------|----------------------------------|
+| CHAOS | 2 000€ | 500€ max | 8 pass 3 jours (480€) |
+| HEADBANGER | 1 000€ | 250€ max | 4 pass 3 jours (240€) |
+| MOSH PIT | 500€ | 125€ max | 2 pass 3 jours (120€) |
+| SUPPORTER | 250€ | ~62€ max | 1 pass 3 jours (60€) |
+
+**💡 Note :** La répartition des contreparties peut varier selon les besoins du partenaire (ex : moins de pass mais plus de visibilité, ou pass journée au lieu de pass 3 jours, etc.). L'important est de ne pas dépasser 25% du montant total.
+
 ### Exemple concret à mettre dans vos pitchs :
 
 ```
-Pack Bronze : 500€
+Pack MOSH PIT : 500€
 Réduction fiscale : -300€ (60%)
 Coût réel pour l'entreprise : 200€
 
 Pour 200€, l'entreprise obtient :
 • Logo sur le site web (vu par X visiteurs)
-• 10 places offertes (valeur 360€)
+• 2 pass 3 jours (valeur 120€)
 • Mentions sur les réseaux (X followers)
 • Visibilité locale pendant 4 mois
 ```
 
 **C'est cadeau, en fait.**
 
+> 💡 Vous pouvez adapter les contreparties selon les besoins : par exemple remplacer 2 pass 3 jours par 4 pass journée, ou réduire les pass pour ajouter d'autres avantages. L'important est de rester sous 25% du don (125€ max pour un don de 500€).
+
 ---
 
 ## PACKS PARTENAIRES RÉVISÉS
 
-### Pack "CHAOS" (Mécène principal) - Sur devis (à partir de 2 000€)
+> ⚠️ **Rappel** : Les contreparties ne doivent pas dépasser 25% du don pour conserver l'avantage fiscal.
+> 
+> 💡 **Flexibilité** : La répartition peut être adaptée selon les besoins (ex : moins de pass mais plus de visibilité, pass journée au lieu de pass 3 jours, etc.)
 
-**Ce qu'on offre :**
-- Logo en position #1 sur TOUS les supports (site, affiches, flyers, scène)
-- **ESPACE VIP PRIVATISÉ** vendredi OU samedi soir (jusqu'à 20 personnes)
-- Stand/bannière sur le site du festival
-- **50 places offertes** (valeur 1 800€)
+### Pack "CHAOS" (Mécène principal) - À partir de 2 000€
+
+**Ce qu'on offre (contreparties ≤ 500€) :**
+- Logo sur tous les supports de communication (site, affiches, flyers)
+- **8 pass 3 jours** (valeur 480€)
+- Visite exclusive des backstages
+- Accès espace VIP
 - Mention vocale sur scène entre les groupes
-- Post dédié sur les réseaux sociaux (X followers)
-- Interview/portrait dans notre communication
-- **Naming possible** : "Scène [NOM ENTREPRISE]" ou "Bar [NOM]"
+- Post dédié sur les réseaux sociaux
+- Rencontre avec les artistes
 
 **Coût réel après réduction fiscale 60% :** À partir de 800€
 
@@ -76,20 +94,16 @@ Pour 200€, l'entreprise obtient :
 
 ### Pack "HEADBANGER" (Pack VIP Soirée) - 1 000€
 
-**Ce qu'on offre :**
+**Ce qu'on offre (contreparties ≤ 250€) :**
 - Logo sur le site web + réseaux sociaux
-- **ESPACE VIP pour 10 personnes** (vendredi OU samedi soir)
-  - Accès espace réservé avec vue sur scène
-  - Consommations incluses (X jetons/personne)
-  - Accueil personnalisé
-- **20 places offertes** (valeur 720€)
-- Parking prioritaire
-- Photo de groupe avec un artiste (si l'artiste accepte)
+- **4 pass 3 jours** (valeur 240€)
+- Visite des backstages
+- Accès espace VIP
 - Remerciements sur scène
 
 **Coût réel après réduction fiscale 60% :** 400€
 
-**Argument :** "Pour 400€ net, offrez une soirée inoubliable à vos équipes ou clients"
+**Argument :** "Pour 400€ net, offrez une expérience unique à vos équipes ou clients"
 
 **Cible :** PME 10-50 salariés, cabinets comptables, agences immo, garages, artisans qui marchent bien
 
@@ -97,12 +111,11 @@ Pour 200€, l'entreprise obtient :
 
 ### Pack "MOSH PIT" (Partenaire classique) - 500€
 
-**Ce qu'on offre :**
+**Ce qu'on offre (contreparties ≤ 125€) :**
 - Logo sur le site web
+- **2 pass 3 jours** (valeur 120€)
 - Mention sur les réseaux sociaux
-- **10 places offertes** (valeur 360€)
 - Remerciements officiels
-- Flyer/carte de visite dans les goodies bag (si applicable)
 
 **Coût réel après réduction fiscale 60% :** 200€
 
@@ -114,9 +127,9 @@ Pour 200€, l'entreprise obtient :
 
 ### Pack "SUPPORTER" - 250€
 
-**Ce qu'on offre :**
+**Ce qu'on offre (contreparties ≤ 62€) :**
 - Nom sur le site web (page partenaires)
-- **5 places offertes** (valeur 180€)
+- **1 pass 3 jours** (valeur 60€)
 - Remerciements sur les réseaux
 
 **Coût réel après réduction fiscale 60% :** 100€
@@ -247,9 +260,10 @@ POURQUOI [NOM ENTREPRISE] ?
 
 CE QU'ON PROPOSE :
 - Visibilité auprès de 3 000 festivaliers + X followers en ligne
-- Places offertes pour vos équipes ou clients
-- Possibilité d'espace VIP privatisé
+- Pass 3 jours pour vos équipes ou clients
+- Accès espace VIP + visite des backstages
 - Réduction fiscale de 60% (association loi 1901)
+- Contreparties adaptables selon vos besoins
 
 👉 Un pack partenaire à 500€ ne vous coûte réellement que 200€.
 
@@ -283,10 +297,12 @@ mais je voulais m'assurer que mon message ne s'était pas
 perdu dans vos emails.
 
 Pour rappel, nous proposons des packs partenaires à partir 
-de 200€ (après réduction fiscale) qui incluent :
+de 100€ (après réduction fiscale) qui incluent :
 • Visibilité locale pendant 4 mois
-• Places offertes pour vos équipes
+• Pass 3 jours pour vos équipes
 • Association à un événement culturel fédérateur
+
+La répartition des avantages peut être adaptée selon vos besoins.
 
 Je reste disponible pour un échange rapide (15 min) 
 si le projet vous intéresse.
@@ -329,7 +345,7 @@ moment idéal pour rejoindre l'aventure.
 
 ### EMAIL SPÉCIAL : Pack VIP entreprise
 
-**Objet :** Offrez une soirée mémorable à vos équipes - Barb'n'Rock Festival
+**Objet :** Offrez une expérience unique à vos équipes - Barb'n'Rock Festival
 
 ```
 Bonjour [Prénom],
@@ -337,21 +353,23 @@ Bonjour [Prénom],
 Et si vous offriez une expérience unique à vos collaborateurs 
 ou vos meilleurs clients ?
 
-Le Barb'n'Rock Festival propose un PACK VIP ENTREPRISE :
+Le Barb'n'Rock Festival propose un PACK HEADBANGER :
 
-🎸 SOIRÉE VIP PRIVATISÉE (vendredi ou samedi)
-• Espace réservé pour 10 personnes avec vue sur scène
-• Consommations incluses
-• Accueil personnalisé
-• 20 places offertes au total
-• Visibilité de votre entreprise pendant l'événement
+🎸 EXPÉRIENCE VIP
+• 4 pass 3 jours pour profiter de tout le festival
+• Visite exclusive des backstages
+• Accès espace VIP
+• Visibilité de votre entreprise sur le site web et réseaux
 
 💰 COÛT : 1 000€
 💰 APRÈS RÉDUCTION FISCALE (60%) : 400€
 
-Pour 400€ net, vous offrez une soirée inoubliable 
+Pour 400€ net, vous offrez une expérience inoubliable 
 à vos équipes et vous associez votre image à un 
 événement culturel local positif.
+
+La répartition peut être adaptée selon vos besoins 
+(ex : plus de pass journée, plus de visibilité, etc.)
 
 Intéressé(e) ? Je peux vous envoyer le détail complet 
 ou organiser un appel de 15 minutes.

@@ -92,28 +92,28 @@ export default function CTASection() {
 
         {/* Decorative elements - skulls and stuff */}
         <motion.div 
-          className="absolute -bottom-10 left-1/4 text-[150px] opacity-20 select-none"
+          className="absolute -bottom-10 left-1/4 text-[150px] opacity-20 select-none pointer-events-none"
           animate={{ rotate: [0, 10, 0], y: [0, -10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
           💀
         </motion.div>
         <motion.div 
-          className="absolute -top-10 right-1/4 text-[100px] opacity-20 select-none"
+          className="absolute -top-10 right-1/4 text-[100px] opacity-20 select-none pointer-events-none"
           animate={{ rotate: [0, -15, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
           ⚡
         </motion.div>
         <motion.div 
-          className="absolute top-1/2 left-10 text-[80px] opacity-30 select-none text-[var(--accent-cyan)]"
+          className="absolute top-1/2 left-10 text-[80px] opacity-30 select-none pointer-events-none text-[var(--accent-cyan)]"
           animate={{ scale: [1, 1.2, 1], rotate: [0, 10, 0] }}
           transition={{ duration: 1, repeat: Infinity }}
         >
           ⚡
         </motion.div>
         <motion.div 
-          className="absolute bottom-1/4 right-10 text-[60px] opacity-30 select-none text-[var(--accent-cyan)]"
+          className="absolute bottom-1/4 right-10 text-[60px] opacity-30 select-none pointer-events-none text-[var(--accent-cyan)]"
           animate={{ scale: [1, 1.3, 1], rotate: [0, -10, 0] }}
           transition={{ duration: 1.2, repeat: Infinity, delay: 0.3 }}
         >

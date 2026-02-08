@@ -210,6 +210,16 @@ export default function BecomePartnerPage() {
             ))}
           </div>
 
+          {/* Note flexibilité */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center text-sm text-[var(--muted-foreground)] mt-6"
+          >
+            💡 La répartition des contreparties peut être adaptée selon vos besoins (pass journée au lieu de pass 3 jours, plus de visibilité, etc.)
+          </motion.p>
+
           {/* Échange marchandise */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -231,6 +241,32 @@ export default function BecomePartnerPage() {
                 </div>
                 <Button href="mailto:partenaires@barbnrock-festival.fr" variant="outline" external>
                   Nous contacter
+                </Button>
+              </div>
+            </Card>
+          </motion.div>
+
+          {/* Offre CSE */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-6"
+          >
+            <Card className="p-6 bg-[var(--accent-cyan)]/10 border-[var(--accent-cyan)]/30">
+              <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
+                <span className="text-5xl">👥</span>
+                <div className="flex-1">
+                  <h3 className="text-xl font-display uppercase text-[var(--foreground)]">
+                    Vous êtes un CSE ?
+                  </h3>
+                  <p className="text-[var(--muted-foreground)] mt-2">
+                    Offrez une sortie originale à vos salariés ! Tarifs dégressifs jusqu&apos;à -40% 
+                    pour les comités d&apos;entreprise et les groupes à partir de 10 personnes.
+                  </p>
+                </div>
+                <Button href="/offre-cse">
+                  Voir les offres CSE
                 </Button>
               </div>
             </Card>

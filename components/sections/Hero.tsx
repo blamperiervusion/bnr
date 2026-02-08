@@ -9,7 +9,7 @@ import { useRef } from 'react';
 const LightningBolt = ({ className, delay = 0 }: { className?: string; delay?: number }) => (
   <motion.svg
     viewBox="0 0 100 200"
-    className={className}
+    className={`${className} pointer-events-none`}
     initial={{ opacity: 0 }}
     animate={{ 
       opacity: [0, 1, 1, 0],
@@ -47,7 +47,7 @@ export default function Hero() {
       className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background */}
-      <motion.div className="absolute inset-0 z-0" style={{ y }}>
+      <motion.div className="absolute inset-0 z-0 pointer-events-none" style={{ y }}>
         {/* Base background */}
         <div className="absolute inset-0 bg-[#0a0c0f]" />
         
@@ -193,7 +193,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}

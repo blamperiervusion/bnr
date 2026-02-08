@@ -264,8 +264,8 @@ Cordialement,
 
 | Type | Taille | Offre |
 |------|--------|-------|
-| **Associations metal/rock** | 10-50 | Tarif groupe -20% |
-| **Groupes d'amis** | 6-15 | Tarif groupe à partir de 6 |
+| **Associations metal/rock** | 10-50 | Tarif groupe -15% |
+| **Groupes d'amis** | 10-20 | Tarif groupe à partir de 10 |
 | **Clubs moto** | 10-30 | Tarif groupe + parking réservé |
 | **Auberges de jeunesse** | 10-30 | Pack hébergement + festival |
 | **Groupes scolaires (lycées)** | 20-50 | Dimanche, tarif éducatif |
@@ -274,7 +274,7 @@ Cordialement,
 
 ### Offre GROUPE STANDARD
 
-**À partir de 6 personnes :**
+**À partir de 10 personnes :**
 
 | Jour | Prix normal | Prix groupe (-15%) |
 |------|-------------|-------------------|
@@ -295,7 +295,7 @@ Cordialement,
 ```
 👥 VOUS VENEZ EN GROUPE ?
 
-À partir de 6 personnes, profitez de -15% sur tous les pass !
+À partir de 10 personnes, profitez de -15% sur tous les pass !
 
 📅 Dimanche 28 juin : 4€/personne
 📅 Samedi 27 juin : 23€/personne  

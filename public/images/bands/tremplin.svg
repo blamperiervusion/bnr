@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <rect width="400" height="400" fill="#1a1f25"/>
+  <!-- Trophy icon -->
+  <g transform="translate(150, 80)" fill="#E85D04">
+    <path d="M100 0H0v40c0 27.6 22.4 50 50 50s50-22.4 50-50V0zM10 10h80v30c0 22.1-17.9 40-40 40s-40-17.9-40-40V10z"/>
+    <rect x="20" y="90" width="60" height="10" rx="2"/>
+    <rect x="35" y="100" width="30" height="25"/>
+    <rect x="15" y="125" width="70" height="10" rx="3"/>
+  </g>
+  <text x="200" y="250" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#f0f0f0" text-anchor="middle">VAINQUEUR</text>
+  <text x="200" y="280" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#f0f0f0" text-anchor="middle">TREMPLIN</text>
+  <text x="200" y="320" font-family="Arial, sans-serif" font-size="14" fill="#00E5CC" text-anchor="middle">4 avril 2026</text>
+</svg>

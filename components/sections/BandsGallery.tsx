@@ -37,11 +37,13 @@ export default function BandsGallery() {
     'Udap',
     'Devon Duxe',
     'Saint Rock Station',
+    'Tremplin Samedi',
+    'Tremplin Dimanche',
   ];
   
   const confirmedBands = programme
     .flatMap(day => day.bands.map(band => ({ ...band, daySlug: day.slug, dayName: day.day })))
-    .filter(band => !band.name.includes('confirmer') && !band.name.includes('Tremplin'))
+    .filter(band => !band.name.includes('confirmer') && !band.name.includes('To Be Announced'))
     .sort((a, b) => {
       const indexA = customOrder.indexOf(a.name);
       const indexB = customOrder.indexOf(b.name);

@@ -10,13 +10,13 @@ export const faqItems: FAQItem[] = [
   {
     id: 'acces-1',
     question: 'Où se déroule le festival ?',
-    answer: 'Le Barb\'n\'Rock Festival se déroule à Crèvecœur-le-Grand, dans l\'Oise (60). À seulement 1h de Paris et 30 min de Beauvais. L\'adresse exacte et le plan d\'accès seront communiqués avec ton billet.',
+    answer: 'Le Barb\'n\'Rock Festival se déroule au Stade Municipal de Crèvecœur-le-Grand, dans l\'Oise (60). À seulement 1h de Paris et 30 min de Beauvais.',
     category: 'Accès',
   },
   {
     id: 'acces-2',
     question: 'Y a-t-il un parking sur place ?',
-    answer: 'Oui, un parking gratuit est mis à disposition des festivaliers. Nous encourageons également le covoiturage pour réduire notre empreinte carbone. Des navettes seront disponibles depuis les gares les plus proches.',
+    answer: 'Oui, un parking gratuit est mis à disposition des festivaliers. Attention : il n\'y a pas de navettes. Nous encourageons le covoiturage pour faciliter l\'accès au site.',
     category: 'Accès',
   },
   {
@@ -30,19 +30,19 @@ export const faqItems: FAQItem[] = [
   {
     id: 'billetterie-1',
     question: 'Où puis-je acheter mes billets ?',
-    answer: 'Les billets sont disponibles exclusivement sur notre billetterie en ligne. Nous vous recommandons de les acheter à l\'avance car les places sont limitées et les éditions précédentes se sont souvent jouées à guichets fermés !',
+    answer: 'Les billets sont disponibles sur notre site internet, dans le réseau Ticket Net, et via le Pass Culture. Nous vous recommandons de les acheter à l\'avance car les places sont limitées !',
     category: 'Billetterie',
   },
   {
     id: 'billetterie-2',
     question: 'Les billets sont-ils remboursables ?',
-    answer: 'Les billets ne sont ni remboursables ni échangeables, sauf en cas d\'annulation de l\'événement par l\'organisateur. En cas d\'impossibilité de vous rendre au festival, vous pouvez revendre votre billet via notre plateforme partenaire.',
+    answer: 'Non, les billets ne sont ni remboursables ni échangeables, sauf en cas d\'annulation de l\'événement par l\'organisateur. Nous ne disposons pas de plateforme de revente partenaire.',
     category: 'Billetterie',
   },
   {
     id: 'billetterie-3',
     question: 'Y a-t-il des tarifs réduits ?',
-    answer: 'Oui ! Nous proposons des tarifs réduits pour les moins de 16 ans (gratuit pour les moins de 10 ans accompagnés). Des pass 3 jours sont également disponibles à prix avantageux.',
+    answer: 'Oui ! L\'entrée est gratuite pour les moins de 12 ans accompagnés d\'un adulte. Des billets Early Bird à tarif réduit sont également disponibles en début de vente.',
     category: 'Billetterie',
   },
 
@@ -50,7 +50,7 @@ export const faqItems: FAQItem[] = [
   {
     id: 'camping-1',
     question: 'Y a-t-il un camping sur place ?',
-    answer: 'Oui, un espace camping est disponible pour les festivaliers souhaitant vivre l\'expérience complète ! L\'accès au camping est inclus dans le pass 3 jours ou disponible en option pour les pass journée.',
+    answer: 'Oui, un espace camping est disponible et gratuit pour tous les festivaliers ! Profitez de l\'expérience complète du festival en plantant votre tente sur place.',
     category: 'Camping',
   },
   {
@@ -64,7 +64,7 @@ export const faqItems: FAQItem[] = [
   {
     id: 'resto-1',
     question: 'Y a-t-il de la restauration sur place ?',
-    answer: 'Plusieurs food trucks et stands de restauration seront présents sur le site avec une offre variée : burgers, pizzas, plats végétariens et vegan, crêpes... De quoi satisfaire tous les appétits !',
+    answer: 'Oui ! Food trucks, bar avec une sélection de bières de qualité, et stands variés vous attendent. Découvrez toute l\'offre sur la page "Le Village".',
     category: 'Restauration',
   },
   {
@@ -76,7 +76,7 @@ export const faqItems: FAQItem[] = [
   {
     id: 'resto-3',
     question: 'Comment fonctionne le paiement sur place ?',
-    answer: 'Le festival fonctionne avec un système de cashless via un bracelet rechargeable. Vous pourrez le créditer à l\'entrée ou directement aux bornes présentes sur le site. Le remboursement du solde non utilisé est possible après le festival.',
+    answer: 'Le festival fonctionne en cashless avec un système de jetons. Vous pouvez précommander vos jetons en ligne ou les acheter sur place aux points de vente dédiés.',
     category: 'Restauration',
   },
 
@@ -104,7 +104,7 @@ export const faqItems: FAQItem[] = [
   {
     id: 'divers-2',
     question: 'Les enfants sont-ils acceptés ?',
-    answer: 'Les enfants sont les bienvenus ! Les moins de 10 ans entrent gratuitement accompagnés d\'un adulte. Nous recommandons toutefois des protections auditives adaptées compte tenu du volume sonore.',
+    answer: 'Les enfants sont les bienvenus ! L\'entrée est gratuite pour les moins de 12 ans accompagnés d\'un adulte. Important : l\'accès est interdit aux enfants de moins de 3 ans sans protection auditive adaptée. Nous recommandons des protections auditives pour tous les enfants compte tenu du volume sonore.',
     category: 'Divers',
   },
 ];

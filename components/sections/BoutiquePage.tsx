@@ -5,32 +5,11 @@ import { SectionTitle, Button, Card } from '@/components/ui';
 
 const products = [
   {
-    id: 'tshirt-2026',
-    name: 'T-shirt Festival 2026',
+    id: 'tshirt-2025',
+    name: 'T-shirt Festival 2025',
     price: '15€',
-    image: null,
-    description: 'Le t-shirt officiel du festival avec le logo Barb\'n\'Rock',
-  },
-  {
-    id: 'hoodie-2026',
-    name: 'Hoodie Barb\'n\'Rock',
-    price: '45€',
-    image: null,
-    description: 'Hoodie noir avec le logo brodé',
-  },
-  {
-    id: 'cap',
-    name: 'Casquette Trucker',
-    price: '20€',
-    image: null,
-    description: 'Casquette trucker avec logo',
-  },
-  {
-    id: 'patch',
-    name: 'Pack Écussons',
-    price: '10€',
-    image: null,
-    description: 'Set de 3 écussons à coudre',
+    image: '/images/boutique/tshirt-2025.jpg',
+    description: 'Le t-shirt officiel du festival - édition 2025 - est de retour ! Le grand classique (180 g/m²) 100 % coton',
   },
 ];
 
@@ -123,7 +102,7 @@ export default function BoutiquePage() {
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
-                  href="https://boutique.barbnrock-festival.fr"
+                  href="https://www.helloasso.com/associations/association-crepicordienne-pour-la-promotion-de-la-culture-acpc/boutiques/barb-n-shop"
                   external
                   size="lg"
                 >
@@ -132,7 +111,7 @@ export default function BoutiquePage() {
               </div>
 
               <p className="text-sm text-[var(--muted-foreground)] mt-6">
-                📦 Livraison gratuite à partir de 50€ d&apos;achat
+                🛒 Boutique hébergée sur HelloAsso
               </p>
             </div>
           </motion.div>

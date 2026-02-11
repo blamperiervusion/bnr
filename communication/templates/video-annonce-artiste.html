@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidéo Annonce Artiste - Barb'n'Rock 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap');
+
+        :root {
+            --bg-dark: #0a0c0f;
+            --text-light: #f0f0f0;
+            --text-muted: #8b9299;
+            --accent-cyan: #00E5CC;
+            --accent-orange: #E85D04;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #111;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* ==================== CONTROLS PANEL ==================== */
+        .controls {
+            width: 350px;
+            min-width: 350px;
+            background: #1a1a1a;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 1px solid #333;
+        }
+
+        .controls h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: var(--accent-cyan);
+        }
+
+        .control-section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        .control-section h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .control-group {
+            margin-bottom: 12px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        .control-group input,
+        .control-group select,
+        .control-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: #222;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: white;
+            font-size: 13px;
+        }
+
+        .control-group textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--accent-orange);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #ff6b1a;
+        }
+
+        .btn-secondary {
+            background: #333;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #444;
+        }
+
+        .btn-cyan {
+            background: var(--accent-cyan);
+            color: black;
+        }
+
+        .presets-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .preset-btn {
+            padding: 10px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #ccc;
+            font-size: 11px;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .preset-btn:hover {
+            background: #333;
+            border-color: var(--accent-cyan);
+        }
+
+        .preset-btn .name {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .preset-btn .meta {
+            font-size: 10px;
+            color: #666;
+        }
+
+        .help-text {
+            font-size: 11px;
+            color: #666;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        .timeline {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .timeline-step {
+            flex: 1;
+            padding: 8px;
+            background: #2a2a2a;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 10px;
+            color: #888;
+        }
+
+        .timeline-step.active {
+            background: var(--accent-cyan);
+            color: black;
+        }
+
+        /* ==================== VIDEO PREVIEW ==================== */
+        .preview-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            background: #0a0a0a;
+        }
+
+        .preview-info {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .preview-info h3 {
+            color: white;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .preview-info p {
+            color: #666;
+            font-size: 12px;
+        }
+
+        /* ==================== VIDEO CONTAINER ==================== */
+        .video-container {
+            width: 405px;  /* 1080 * 0.375 */
+            height: 720px; /* 1920 * 0.375 */
+            background: black;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        }
+
+        /* YouTube iframe background */
+        .video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180%;
+            height: 180%;
+            pointer-events: none;
+        }
+
+        .video-bg iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Dark overlay for readability */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(0,0,0,0.4) 0%,
+                rgba(0,0,0,0.2) 30%,
+                rgba(0,0,0,0.2) 60%,
+                rgba(0,0,0,0.8) 100%
+            );
+            pointer-events: none;
+        }
+
+        /* Vignette effect */
+        .video-vignette {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
+            pointer-events: none;
+        }
+
+        /* ==================== ANIMATED CONTENT ==================== */
+        .content-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 25px;
+            z-index: 10;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            opacity: 0;
+            animation: fadeSlideDown 0.6s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .badge {
+            background: var(--accent-orange);
+            color: white;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            padding: 8px 15px;
+            transform: rotate(-2deg);
+            animation: pulse 2s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        .logo {
+            width: 50px;
+            height: auto;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .artist-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 72px;
+            color: white;
+            letter-spacing: 6px;
+            line-height: 1;
+            text-shadow: 0 0 60px rgba(0, 229, 204, 0.6),
+                         0 4px 20px rgba(0,0,0,0.8);
+            opacity: 0;
+            transform: scale(1.5);
+            animation: zoomIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation-delay: 0.5s;
+        }
+
+        .artist-genre {
+            font-size: 16px;
+            color: var(--accent-cyan);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeSlideUp 0.6s ease forwards;
+            animation-delay: 1s;
+        }
+
+        .artist-day {
+            margin-top: 25px;
+            padding: 12px 30px;
+            border: 2px solid var(--accent-cyan);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            color: var(--accent-cyan);
+            letter-spacing: 3px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeSlideUp 0.6s ease forwards;
+            animation-delay: 1.3s;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            opacity: 0;
+            animation: fadeSlideUp 0.6s ease forwards;
+            animation-delay: 1.6s;
+        }
+
+        .footer-left {
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .date {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            color: white;
+            letter-spacing: 2px;
+        }
+
+        .location {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .footer-right {
+            text-align: right;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: var(--accent-orange);
+            animation: pulse 2s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+
+        .price-label {
+            font-size: 11px;
+            color: var(--accent-cyan);
+        }
+
+        /* Decorative corners */
+        .corner {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--accent-orange);
+            opacity: 0;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .corner-tl {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+            animation-delay: 1.8s;
+        }
+
+        .corner-br {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+            animation-delay: 2s;
+        }
+
+        /* Glitch effect on name (optional) */
+        .glitch {
+            animation: glitch 3s infinite;
+            animation-delay: 2s;
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes fadeSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(1.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 0.4; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% {
+                transform: translate(0);
+                text-shadow: 0 0 60px rgba(0, 229, 204, 0.6);
+            }
+            92% {
+                transform: translate(-3px, 2px);
+                text-shadow: -3px 0 var(--accent-cyan), 3px 0 var(--accent-orange);
+            }
+            94% {
+                transform: translate(3px, -2px);
+                text-shadow: 3px 0 var(--accent-cyan), -3px 0 var(--accent-orange);
+            }
+            96% {
+                transform: translate(-2px, -1px);
+                text-shadow: -2px 0 var(--accent-orange), 2px 0 var(--accent-cyan);
+            }
+            98% {
+                transform: translate(2px, 1px);
+                text-shadow: 2px 0 var(--accent-orange), -2px 0 var(--accent-cyan);
+            }
+        }
+
+        /* ==================== RECORDING INDICATOR ==================== */
+        .recording-indicator {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: rgba(255, 0, 0, 0.8);
+            border-radius: 20px;
+            font-size: 11px;
+            color: white;
+            z-index: 1000;
+            display: none;
+        }
+
+        .recording-indicator.active {
+            display: flex;
+        }
+
+        .recording-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Export notice */
+        .export-notice {
+            margin-top: 20px;
+            padding: 15px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .export-notice strong {
+            color: var(--accent-cyan);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Controls Panel -->
+    <div class="controls">
+        <h2>🎬 VIDÉO ANNONCE</h2>
+
+        <!-- Presets artistes -->
+        <div class="control-section">
+            <h3>Artiste</h3>
+            <div class="presets-grid">
+                <button class="preset-btn" onclick="loadPreset('psykup')">
+                    <div class="name">Psykup</div>
+                    <div class="meta">Vendredi</div>
+                </button>
+                <button class="preset-btn" onclick="loadPreset('loudblast')">
+                    <div class="name">Loudblast</div>
+                    <div class="meta">Samedi</div>
+                </button>
+                <button class="preset-btn" onclick="loadPreset('shaarghot')">
+                    <div class="name">Shaârghot</div>
+                    <div class="meta">Samedi</div>
+                </button>
+                <button class="preset-btn" onclick="loadPreset('cachemire')">
+                    <div class="name">Cachemire</div>
+                    <div class="meta">Vendredi</div>
+                </button>
+                <button class="preset-btn" onclick="loadPreset('akiavel')">
+                    <div class="name">Akiavel</div>
+                    <div class="meta">Samedi</div>
+                </button>
+                <button class="preset-btn" onclick="loadPreset('kravboca')">
+                    <div class="name">Krav Boca</div>
+                    <div class="meta">Samedi</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- YouTube URL -->
+        <div class="control-section">
+            <h3>Vidéo YouTube</h3>
+            <div class="control-group">
+                <label>URL ou ID de la vidéo</label>
+                <input type="text" id="youtube-url" placeholder="Ex: dQw4w9WgXcQ" oninput="updateVideo()">
+            </div>
+            <div class="control-group">
+                <label>Démarrer à (secondes)</label>
+                <input type="number" id="start-time" value="0" min="0" oninput="updateVideo()">
+            </div>
+            <p class="help-text">
+                Colle l'URL YouTube complète ou juste l'ID de la vidéo.<br>
+                La vidéo sera en boucle, muette (tu ajoutes le son au montage).
+            </p>
+        </div>
+
+        <!-- Personnalisation -->
+        <div class="control-section">
+            <h3>Personnalisation</h3>
+            <div class="control-group">
+                <label>Nom de l'artiste</label>
+                <input type="text" id="artist-name" value="PSYKUP" oninput="updateContent()">
+            </div>
+            <div class="control-group">
+                <label>Genre / Ville</label>
+                <input type="text" id="artist-genre" value="AutrucheCore • Toulouse" oninput="updateContent()">
+            </div>
+            <div class="control-group">
+                <label>Jour</label>
+                <select id="artist-day" onchange="updateContent()">
+                    <option value="VENDREDI 26 JUIN">Vendredi 26 Juin</option>
+                    <option value="SAMEDI 27 JUIN">Samedi 27 Juin</option>
+                    <option value="DIMANCHE 28 JUIN">Dimanche 28 Juin</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Animation -->
+        <div class="control-section">
+            <h3>Animation</h3>
+            <button class="btn btn-primary" onclick="replayAnimation()">🔄 Rejouer l'animation</button>
+            <div class="timeline">
+                <div class="timeline-step">0.2s<br>Badge</div>
+                <div class="timeline-step">0.5s<br>Nom</div>
+                <div class="timeline-step">1.0s<br>Genre</div>
+                <div class="timeline-step">1.3s<br>Jour</div>
+                <div class="timeline-step">1.6s<br>Footer</div>
+            </div>
+            <p class="help-text">Durée totale recommandée : 8-15 secondes</p>
+        </div>
+
+        <!-- Export -->
+        <div class="control-section">
+            <h3>Export</h3>
+            <button class="btn btn-cyan" onclick="startRecording()">⏺️ Commencer l'enregistrement</button>
+            <button class="btn btn-secondary" onclick="openFullscreen()">📺 Plein écran</button>
+            <p class="help-text">
+                1. Clique sur "Commencer"<br>
+                2. Utilise un screen recorder (OBS, QuickTime, etc.)<br>
+                3. Enregistre la zone de la vidéo<br>
+                4. Ajoute la musique au montage
+            </p>
+        </div>
+    </div>
+
+    <!-- Preview Area -->
+    <div class="preview-area">
+        <div class="preview-info">
+            <h3>Aperçu vidéo TikTok/Reel</h3>
+            <p>Format 1080×1920 (9:16) • Échelle 37.5%</p>
+        </div>
+
+        <div class="video-container" id="video-container">
+            <!-- Recording indicator -->
+            <div class="recording-indicator" id="recording-indicator">
+                <div class="recording-dot"></div>
+                REC
+            </div>
+
+            <!-- YouTube Background -->
+            <div class="video-bg" id="video-bg">
+                <iframe 
+                    id="youtube-iframe"
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&showinfo=0&rel=0&modestbranding=1&start=0"
+                    frameborder="0"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <!-- Overlays -->
+            <div class="video-overlay"></div>
+            <div class="video-vignette"></div>
+
+            <!-- Corners -->
+            <div class="corner corner-tl" id="corner-tl"></div>
+            <div class="corner corner-br" id="corner-br"></div>
+
+            <!-- Content -->
+            <div class="content-layer" id="content-layer">
+                <div class="header" id="header">
+                    <div class="badge" id="badge">🔥 NOUVEAU NOM</div>
+                    <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="logo">
+                </div>
+
+                <div class="main-content">
+                    <h1 class="artist-name glitch" id="artist-name-display">PSYKUP</h1>
+                    <p class="artist-genre" id="artist-genre-display">AutrucheCore • Toulouse</p>
+                    <div class="artist-day" id="artist-day-display">VENDREDI 26 JUIN</div>
+                </div>
+
+                <div class="footer" id="footer">
+                    <div class="footer-left">
+                        <div class="date">26-28 JUIN 2026</div>
+                        <div class="location">Crèvecœur-le-Grand (60)</div>
+                    </div>
+                    <div class="footer-right">
+                        <div class="price">36€</div>
+                        <div class="price-label">Pass 3 jours</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="export-notice">
+            <strong>💡 Astuce :</strong> Pour TikTok/Reel, ajoute ensuite un extrait audio du groupe (10-15s) dans CapCut ou ton éditeur préféré.
+        </div>
+    </div>
+
+    <script>
+        // Presets artistes avec leurs vidéos YouTube
+        const presets = {
+            psykup: {
+                name: 'PSYKUP',
+                genre: 'AutrucheCore • Toulouse',
+                day: 'VENDREDI 26 JUIN',
+                youtube: 'sLZQSPiuTfg', // Psykup - The Joke of Tomorrow
+                start: 30
+            },
+            loudblast: {
+                name: 'LOUDBLAST',
+                genre: 'Death Metal • Lille • Depuis 1985',
+                day: 'SAMEDI 27 JUIN',
+                youtube: 'k8K5GHlJd2E', // Loudblast
+                start: 15
+            },
+            shaarghot: {
+                name: 'SHAÂRGHOT',
+                genre: 'Cyber Metal • Paris',
+                day: 'SAMEDI 27 JUIN',
+                youtube: '2HBBB8vFqWU', // Shaârghot - Born to Burn
+                start: 20
+            },
+            cachemire: {
+                name: 'CACHEMIRE',
+                genre: "Rock'n'Roll • Nantes",
+                day: 'VENDREDI 26 JUIN',
+                youtube: 'oXr2HJpIVJU', // Cachemire
+                start: 10
+            },
+            akiavel: {
+                name: 'AKIAVEL',
+                genre: 'Death Metal Moderne • Sud-Est',
+                day: 'SAMEDI 27 JUIN',
+                youtube: 'nqZ_b2Rk8pE', // Akiavel
+                start: 15
+            },
+            kravboca: {
+                name: 'KRAV BOCA',
+                genre: 'Punk Rap Mandoline',
+                day: 'SAMEDI 27 JUIN',
+                youtube: 'dQw4w9WgXcQ', // Placeholder
+                start: 0
+            }
+        };
+
+        function loadPreset(key) {
+            const p = presets[key];
+            document.getElementById('artist-name').value = p.name;
+            document.getElementById('artist-genre').value = p.genre;
+            document.getElementById('artist-day').value = p.day;
+            document.getElementById('youtube-url').value = p.youtube;
+            document.getElementById('start-time').value = p.start;
+            updateContent();
+            updateVideo();
+            replayAnimation();
+        }
+
+        function updateContent() {
+            document.getElementById('artist-name-display').textContent = document.getElementById('artist-name').value;
+            document.getElementById('artist-genre-display').textContent = document.getElementById('artist-genre').value;
+            document.getElementById('artist-day-display').textContent = document.getElementById('artist-day').value;
+        }
+
+        function updateVideo() {
+            let url = document.getElementById('youtube-url').value.trim();
+            const start = document.getElementById('start-time').value || 0;
+
+            // Extract video ID from various URL formats
+            let videoId = url;
+            if (url.includes('youtube.com/watch')) {
+                const urlParams = new URLSearchParams(url.split('?')[1]);
+                videoId = urlParams.get('v');
+            } else if (url.includes('youtu.be/')) {
+                videoId = url.split('youtu.be/')[1].split('?')[0];
+            } else if (url.includes('youtube.com/embed/')) {
+                videoId = url.split('youtube.com/embed/')[1].split('?')[0];
+            }
+
+            if (videoId && videoId.length >= 11) {
+                videoId = videoId.substring(0, 11);
+                const iframe = document.getElementById('youtube-iframe');
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&start=${start}`;
+            }
+        }
+
+        function replayAnimation() {
+            const elements = ['header', 'artist-name-display', 'artist-genre-display', 'artist-day-display', 'footer', 'corner-tl', 'corner-br'];
+            
+            // Remove and re-add animation classes
+            elements.forEach(id => {
+                const el = document.getElementById(id);
+                const parent = el.parentNode;
+                const clone = el.cloneNode(true);
+                parent.replaceChild(clone, el);
+            });
+        }
+
+        function startRecording() {
+            const indicator = document.getElementById('recording-indicator');
+            indicator.classList.add('active');
+            replayAnimation();
+            
+            // Auto-hide after 10 seconds
+            setTimeout(() => {
+                indicator.classList.remove('active');
+            }, 10000);
+        }
+
+        function openFullscreen() {
+            const container = document.getElementById('video-container');
+            if (container.requestFullscreen) {
+                container.requestFullscreen();
+            } else if (container.webkitRequestFullscreen) {
+                container.webkitRequestFullscreen();
+            }
+            replayAnimation();
+        }
+
+        // Init with Psykup
+        loadPreset('psykup');
+    </script>
+
+</body>
+
+</html>

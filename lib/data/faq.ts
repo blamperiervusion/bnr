@@ -107,6 +107,38 @@ export const faqItems: FAQItem[] = [
     answer: 'Les enfants sont les bienvenus ! L\'entrée est gratuite pour les moins de 12 ans accompagnés d\'un adulte. Important : l\'accès est interdit aux enfants de moins de 3 ans sans protection auditive adaptée. Nous recommandons des protections auditives pour tous les enfants compte tenu du volume sonore.',
     category: 'Divers',
   },
+
+  // L'association
+  {
+    id: 'asso-1',
+    question: 'Qui organise le festival ?',
+    answer: 'Le festival est co-organisé par l\'ACPC (Association Crépicordienne pour la Promotion de la Culture), créée en 2023, BVFR Charity (l\'association des Bearded Villains France, à l\'origine du concept en 2017) et la commune de Crèvecœur-le-Grand. Le bureau de l\'ACPC est composé de Benjamin Lampérier (Président), Vincent Warnault (Trésorier) et Luc Pouilly (Secrétaire).',
+    category: 'L\'association',
+  },
+  {
+    id: 'asso-2',
+    question: 'Quelle est l\'histoire du Barb\'n\'Rock ?',
+    answer: 'Créé en 2017 par le groupe Bearded Villains France, le Barb\'n\'Rock était à l\'origine un festival 100% caritatif dans un gymnase parisien. Après 3 éditions, la crise sanitaire a stoppé le projet. Il renaît en 2023 à Crèvecœur-le-Grand, grâce à l\'union de BVFR Charity, l\'ACPC et la commune.',
+    category: 'L\'association',
+  },
+  {
+    id: 'asso-3',
+    question: 'Quels sont les engagements écologiques du festival ?',
+    answer: 'Nous agissons sur plusieurs fronts : tri des déchets avec écocups, produits consignés en verre livrés par Le Fourgon en véhicule électrique, réutilisation de nos bâches transformées en merchandising par la maroquinière Raev, et amélioration continue de notre mix énergétique (compteur Enedis, panneaux solaires).',
+    category: 'L\'association',
+  },
+  {
+    id: 'asso-4',
+    question: 'Comment le festival soutient-il la scène locale ?',
+    answer: '50% de notre programmation est composée de groupes des Hauts-de-France. Nous organisons également une soirée tremplin pour faire jouer des groupes émergents sur la grande scène. De plus, Hapiness Radio est présente pour interviewer les artistes et partager l\'ambiance du festival.',
+    category: 'L\'association',
+  },
+  {
+    id: 'asso-5',
+    question: 'Qu\'est-ce que l\'engagement solidaire du festival ?',
+    answer: 'Tous engagés ! Chaque année, tous les stands du village s\'engagent à reverser 10% de leurs ventes à une association caritative soutenue par le Barb\'n\'Rock. La musique nous rapproche, mais l\'entraide aussi !',
+    category: 'L\'association',
+  },
 ];
 
 export function getFAQByCategory(category: string): FAQItem[] {

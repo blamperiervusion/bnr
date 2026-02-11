@@ -20,13 +20,23 @@
 
 ---
 
+## L'ASSOCIATION ORGANISATRICE
+
+**Association Crépicordienne pour la Promotion de la Culture (ACPC)**
+- Association loi 1901, créée en 2023 à l'occasion de la 1ère édition Crépicordienne
+- **Bureau** : Benjamin Lampérier (Président), Vincent Warnault (Trésorier), Luc Pouilly (Secrétaire)
+- Co-organisé avec BVFR Charity (à l'origine du concept en 2017) et la commune de Crèvecœur-le-Grand
+
+---
+
 ## VOS ATOUTS (4ème édition)
 
-✅ **Crédibilité** : 4 ans d'existence, vous n'êtes pas des débutants
-✅ **Chiffres** : X festivaliers les années passées
-✅ **Local** : Événement ancré dans le territoire
+✅ **Crédibilité** : 4 ans d'existence, concept né en 2017
+✅ **Chiffres** : X festivaliers les années passées, éditions précédentes avec Dagoba, Black Bomb A, Sidilarsen
+✅ **Local** : Événement ancré dans le territoire, 50% de groupes des Hauts-de-France
 ✅ **Prix accessible** : Image positive, pas élitiste
 ✅ **Association loi 1901** : Réduction fiscale pour les mécènes (60%)
+✅ **Engagements** : Tri des déchets, produits consignés (Le Fourgon), 10% des ventes du village reversés à une association
 
 ---
 
@@ -40,12 +50,17 @@ En tant qu'association, les dons des entreprises ouvrent droit à :
 
 Pour que le mécène conserve sa réduction fiscale, **les contreparties (avantages) ne doivent pas dépasser 25% du montant du don**.
 
-| Pack | Montant | Contreparties max | Exemple avec pass 3 jours (~60€) |
-|------|---------|-------------------|----------------------------------|
-| CHAOS | 2 000€ | 500€ max | 8 pass 3 jours (480€) |
-| HEADBANGER | 1 000€ | 250€ max | 4 pass 3 jours (240€) |
-| MOSH PIT | 500€ | 125€ max | 2 pass 3 jours (120€) |
-| SUPPORTER | 250€ | ~62€ max | 1 pass 3 jours (60€) |
+**Tarifs des pass :**
+- Pass 3 jours : 42€
+- Pass Samedi : 27€
+- Pass Vendredi : 18€
+
+| Pack | Montant | Contreparties max | En pass 3 jours | OU en pass Samedi | OU en pass Vendredi |
+|------|---------|-------------------|-----------------|-------------------|---------------------|
+| CHAOS | 2 000€ | 500€ max | **11 pass** | **18 pass** | **27 pass** |
+| HEADBANGER | 1 000€ | 250€ max | **5 pass** | **9 pass** | **13 pass** |
+| MOSH PIT | 500€ | 125€ max | **2 pass** | **4 pass** | **6 pass** |
+| SUPPORTER | 250€ | ~62€ max | **1 pass** | **2 pass** | **3 pass** |
 
 **💡 Note :** La répartition des contreparties peut varier selon les besoins du partenaire (ex : moins de pass mais plus de visibilité, ou pass journée au lieu de pass 3 jours, etc.). L'important est de ne pas dépasser 25% du montant total.
 
@@ -79,7 +94,11 @@ Pour 200€, l'entreprise obtient :
 
 **Ce qu'on offre (contreparties ≤ 500€) :**
 - Logo sur tous les supports de communication (site, affiches, flyers)
-- **8 pass 3 jours** (valeur 480€)
+- **Pass festival au choix :**
+  - **11 pass 3 jours** OU
+  - **18 pass Samedi** OU
+  - **27 pass Vendredi** OU
+  - Mix personnalisé (valeur max 500€)
 - Visite exclusive des backstages
 - Accès espace VIP
 - Mention vocale sur scène entre les groupes
@@ -96,7 +115,11 @@ Pour 200€, l'entreprise obtient :
 
 **Ce qu'on offre (contreparties ≤ 250€) :**
 - Logo sur le site web + réseaux sociaux
-- **4 pass 3 jours** (valeur 240€)
+- **Pass festival au choix :**
+  - **5 pass 3 jours** OU
+  - **9 pass Samedi** OU
+  - **13 pass Vendredi** OU
+  - Mix personnalisé (valeur max 250€)
 - Visite des backstages
 - Accès espace VIP
 - Remerciements sur scène
@@ -113,7 +136,11 @@ Pour 200€, l'entreprise obtient :
 
 **Ce qu'on offre (contreparties ≤ 125€) :**
 - Logo sur le site web
-- **2 pass 3 jours** (valeur 120€)
+- **Pass festival au choix :**
+  - **2 pass 3 jours** OU
+  - **4 pass Samedi** OU
+  - **6 pass Vendredi** OU
+  - Mix personnalisé (valeur max 125€)
 - Mention sur les réseaux sociaux
 - Remerciements officiels
 
@@ -129,7 +156,11 @@ Pour 200€, l'entreprise obtient :
 
 **Ce qu'on offre (contreparties ≤ 62€) :**
 - Nom sur le site web (page partenaires)
-- **1 pass 3 jours** (valeur 60€)
+- **Pass festival au choix :**
+  - **1 pass 3 jours** OU
+  - **2 pass Samedi** OU
+  - **3 pass Vendredi** OU
+  - Mix personnalisé (valeur max 62€)
 - Remerciements sur les réseaux
 
 **Coût réel après réduction fiscale 60% :** 100€

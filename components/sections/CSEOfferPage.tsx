@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { SectionTitle, Button, Card } from '@/components/ui';
 
 const cseOffers = [
@@ -290,34 +291,201 @@ export default function CSEOfferPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl font-display text-[var(--foreground)] mb-4">
-              INTÉRESSÉ ?
-            </h2>
-            <p className="text-[var(--muted-foreground)] mb-8">
-              Contactez-nous pour recevoir votre offre personnalisée
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button href="mailto:cse@barbnrock-festival.fr" external size="lg">
-                Demander un devis
-              </Button>
-              <Button href="/devenir-partenaire" variant="outline">
-                Devenir partenaire
-              </Button>
-            </div>
-            <p className="text-sm text-[var(--muted-foreground)] mt-6">
-              📧 cse@barbnrock-festival.fr
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      {/* Contact Form */}
+      <CSEContactForm offers={cseOffers} />
     </div>
+  );
+}
+
+function CSEContactForm({ offers }: { offers: typeof cseOffers }) {
+  const [formData, setFormData] = useState({
+    company: '',
+    contact: '',
+    email: '',
+    phone: '',
+    employees: '',
+    pack: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'cse',
+          ...formData,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ company: '', contact: '', email: '', phone: '', employees: '', pack: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <section className="py-20 px-4" id="devis">
+      <div className="max-w-3xl mx-auto">
+        <SectionTitle subtitle="Recevez votre offre personnalisée">
+          Demander un devis
+        </SectionTitle>
+
+        <motion.form
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          onSubmit={handleSubmit}
+          className="mt-12 space-y-6"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+                Entreprise / Organisation *
+              </label>
+              <input
+                type="text"
+                required
+                value={formData.company}
+                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-lg text-[var(--foreground)] focus:border-[var(--accent-cyan)] focus:outline-none transition-colors"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+                Nom du contact *
+              </label>
+              <input
+                type="text"
+                required
+                value={formData.contact}
+                onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+                className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-lg text-[var(--foreground)] focus:border-[var(--accent-cyan)] focus:outline-none transition-colors"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+                Email *
+              </label>
+              <input
+                type="email"
+                required
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-lg text-[var(--foreground)] focus:border-[var(--accent-cyan)] focus:outline-none transition-colors"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+                Téléphone
+              </label>
+              <input
+                type="tel"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-lg text-[var(--foreground)] focus:border-[var(--accent-cyan)] focus:outline-none transition-colors"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+                Nombre de collaborateurs envisagé *
+              </label>
+              <input
+                type="text"
+                required
+                placeholder="ex: 25"
+                value={formData.employees}
+                onChange={(e) => setFormData({ ...formData, employees: e.target.value })}
+                className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-lg text-[var(--foreground)] focus:border-[var(--accent-cyan)] focus:outline-none transition-colors"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+                Pack souhaité
+              </label>
+              <select
+                value={formData.pack}
+                onChange={(e) => setFormData({ ...formData, pack: e.target.value })}
+                className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-lg text-[var(--foreground)] focus:border-[var(--accent-cyan)] focus:outline-none transition-colors"
+              >
+                <option value="">Je ne sais pas encore</option>
+                {offers.map((offer) => (
+                  <option key={offer.id} value={offer.id}>
+                    {offer.title} - {offer.day}
+                  </option>
+                ))}
+                <option value="vip">Pack VIP Team Building</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+              Message / Questions
+            </label>
+            <textarea
+              rows={4}
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              placeholder="Vos besoins spécifiques, questions..."
+              className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-lg text-[var(--foreground)] focus:border-[var(--accent-cyan)] focus:outline-none transition-colors resize-none"
+            />
+          </div>
+
+          {submitStatus === 'success' && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-green-500/20 border border-green-500/50 text-green-400 px-4 py-3 rounded-lg text-center"
+            >
+              ✅ Merci ! Nous vous enverrons un devis personnalisé dans les 48h.
+            </motion.div>
+          )}
+
+          {submitStatus === 'error' && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-red-500/20 border border-red-500/50 text-red-400 px-4 py-3 rounded-lg text-center"
+            >
+              ❌ Une erreur est survenue. Veuillez réessayer ou nous contacter par email.
+            </motion.div>
+          )}
+
+          <div className="text-center">
+            <Button type="submit" size="lg" disabled={isSubmitting}>
+              {isSubmitting ? '⏳ Envoi en cours...' : 'Demander un devis'}
+            </Button>
+          </div>
+        </motion.form>
+
+        <p className="text-center text-sm text-[var(--muted-foreground)] mt-8">
+          Vous pouvez également nous contacter directement à{' '}
+          <a href="mailto:cse@barbnrock-festival.fr" className="text-[var(--accent-cyan)] hover:underline">
+            cse@barbnrock-festival.fr
+          </a>
+        </p>
+      </div>
+    </section>
   );
 }

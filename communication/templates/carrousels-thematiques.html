@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrousels Thématiques - Barb'n'Rock 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap');
+
+        :root {
+            --bg-dark: #0a0c0f;
+            --bg-card: #1a1f25;
+            --text-light: #f0f0f0;
+            --text-muted: #8b9299;
+            --accent-cyan: #00E5CC;
+            --accent-orange: #E85D04;
+            --accent-gold: #FFD700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #111;
+            min-height: 100vh;
+            color: white;
+            padding: 40px;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            text-align: center;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--accent-cyan);
+            margin-bottom: 40px;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 30px;
+            color: #ccc;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: #3a3a3a;
+        }
+
+        .nav-btn.active {
+            background: var(--accent-cyan);
+            color: black;
+            font-weight: 600;
+        }
+
+        /* Carrousel container */
+        .carrousel-section {
+            display: none;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .carrousel-section.active {
+            display: block;
+        }
+
+        .carrousel-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            color: var(--accent-orange);
+        }
+
+        .slides-row {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+        }
+
+        /* Slide */
+        .slide {
+            width: 320px;
+            height: 400px;
+            min-width: 320px;
+            background: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: var(--accent-cyan);
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            z-index: 100;
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(10, 12, 15, 0.2) 0%,
+                rgba(10, 12, 15, 0.6) 50%,
+                rgba(10, 12, 15, 0.95) 100%
+            );
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-logo {
+            width: 40px;
+            margin-bottom: 15px;
+        }
+
+        .slide-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            color: var(--accent-orange);
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .slide-title.cyan { color: var(--accent-cyan); }
+        .slide-title.gold { color: var(--accent-gold); }
+
+        .slide-text {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .slide-emoji {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .slide-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .slide-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 13px;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slide-list li:last-child {
+            border-bottom: none;
+        }
+
+        .slide-cta {
+            margin-top: auto;
+            text-align: center;
+        }
+
+        .slide-cta-btn {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: white;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 16px;
+            letter-spacing: 2px;
+            padding: 12px 25px;
+            border-radius: 30px;
+        }
+
+        .slide-footer {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* Info box */
+        .info-box {
+            background: rgba(0, 229, 204, 0.1);
+            border-left: 3px solid var(--accent-cyan);
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 12px;
+            color: var(--accent-cyan);
+        }
+
+        /* Highlight */
+        .highlight {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .highlight-orange {
+            color: var(--accent-orange);
+            font-weight: 600;
+        }
+
+        /* Big number */
+        .big-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 64px;
+            color: var(--accent-cyan);
+            text-align: center;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .big-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>📸 CARROUSELS THÉMATIQUES</h1>
+    <p class="subtitle">Format Instagram 1080×1350 (portrait)</p>
+
+    <div class="nav">
+        <button class="nav-btn active" onclick="showCarrousel('village')">🍺 Village</button>
+        <button class="nav-btn" onclick="showCarrousel('animations')">🎸 Animations</button>
+        <button class="nav-btn" onclick="showCarrousel('acces')">🚗 Comment venir</button>
+        <button class="nav-btn" onclick="showCarrousel('bestof')">📷 Best-of</button>
+    </div>
+
+    <!-- ==================== CARROUSEL VILLAGE ==================== -->
+    <div class="carrousel-section active" id="carrousel-village">
+        <h2 class="carrousel-title">🍺 LE VILLAGE DU CHAOS</h2>
+        <div class="slides-row">
+            
+            <!-- Slide 1 - Accroche -->
+            <div class="slide">
+                <span class="slide-number">1/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content" style="justify-content: center; align-items: center; text-align: center;">
+                    <div class="slide-emoji">🍺</div>
+                    <div class="slide-title" style="font-size: 36px;">LE VILLAGE<br>DU CHAOS</div>
+                    <p class="slide-text" style="text-align: center;">Entre deux concerts,<br>y'a de quoi faire.</p>
+                    <p style="color: var(--text-muted); margin-top: 20px; font-size: 13px;">→ Swipe pour découvrir</p>
+                </div>
+            </div>
+
+            <!-- Slide 2 - Food -->
+            <div class="slide">
+                <span class="slide-number">2/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <img src="../../public/images/logo.png" alt="" class="slide-logo">
+                    <div class="slide-title">FOOD TRUCKS 🍔</div>
+                    <div class="slide-text">
+                        On a pensé à ton estomac.
+                        <ul class="slide-list">
+                            <li>🍔 Burgers</li>
+                            <li>🍕 Pizza artisanale</li>
+                            <li>🌱 Options vegan</li>
+                            <li>🍟 Frites maison</li>
+                            <li>🌮 Tacos</li>
+                        </ul>
+                    </div>
+                    <div class="info-box">Prix accessibles • Produits locaux privilégiés</div>
+                </div>
+            </div>
+
+            <!-- Slide 3 - Boissons -->
+            <div class="slide">
+                <span class="slide-number">3/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <img src="../../public/images/logo.png" alt="" class="slide-logo">
+                    <div class="slide-title cyan">BAR & CRAFT BEER 🍺</div>
+                    <div class="slide-text">
+                        Bières locales et artisanales.
+                        <ul class="slide-list">
+                            <li>🍺 Bières craft locales</li>
+                            <li>🍷 Vin</li>
+                            <li>🥤 Softs & jus</li>
+                            <li>☕ Café</li>
+                        </ul>
+                    </div>
+                    <div class="info-box">Paiement cashless • Recharge sur place</div>
+                </div>
+            </div>
+
+            <!-- Slide 4 - Stands -->
+            <div class="slide">
+                <span class="slide-number">4/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <img src="../../public/images/logo.png" alt="" class="slide-logo">
+                    <div class="slide-title gold">STANDS & EXPOS ⚒️</div>
+                    <div class="slide-text">
+                        Le paradis des metalleux.
+                        <ul class="slide-list">
+                            <li>📀 Vinyles & CDs</li>
+                            <li>👕 Merch groupes</li>
+                            <li>🖋️ Tattoo & piercing</li>
+                            <li>⚒️ Artisanat metal</li>
+                            <li>🎨 Expo photo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5 - CTA -->
+            <div class="slide">
+                <span class="slide-number">5/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content" style="justify-content: center; align-items: center; text-align: center;">
+                    <div class="slide-title" style="font-size: 28px;">TOUT ÇA<br><span style="color: var(--accent-cyan);">INCLUS</span></div>
+                    <div class="big-number" style="margin-top: 20px;">36€</div>
+                    <div class="big-label">Pass 3 jours • Camping gratuit</div>
+                    <div class="slide-cta" style="margin-top: 30px;">
+                        <div class="slide-cta-btn">→ LIEN EN BIO</div>
+                    </div>
+                    <div class="slide-footer">
+                        26-28 Juin 2026 • Crèvecœur-le-Grand
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==================== CARROUSEL ANIMATIONS ==================== -->
+    <div class="carrousel-section" id="carrousel-animations">
+        <h2 class="carrousel-title">🎸 ANIMATIONS</h2>
+        <div class="slides-row">
+            
+            <!-- Slide 1 -->
+            <div class="slide">
+                <span class="slide-number">1/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content" style="justify-content: center; align-items: center; text-align: center;">
+                    <div class="slide-emoji">🎸</div>
+                    <div class="slide-title" style="font-size: 32px;">PAS QUE<br>DES CONCERTS</div>
+                    <p class="slide-text" style="text-align: center;">Le Barb'n'Rock, c'est aussi<br>des animations déjantées.</p>
+                    <p style="color: var(--text-muted); margin-top: 20px; font-size: 13px;">→ Swipe</p>
+                </div>
+            </div>
+
+            <!-- Slide 2 - Barbe Contest -->
+            <div class="slide">
+                <span class="slide-number">2/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <img src="../../public/images/logo.png" alt="" class="slide-logo">
+                    <div class="slide-title">BARBE CONTEST 🧔</div>
+                    <div class="slide-text">
+                        <strong>Dimanche 14h</strong>
+                        <br><br>
+                        Montre ta plus belle barbe.<br>
+                        Jury impitoyable.<br>
+                        Lots à gagner.
+                        <br><br>
+                        <span class="highlight">Catégories :</span>
+                        <ul class="slide-list">
+                            <li>🥇 Plus longue</li>
+                            <li>🥈 Plus originale</li>
+                            <li>🥉 Plus soignée</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 - Air Guitar -->
+            <div class="slide">
+                <span class="slide-number">3/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <img src="../../public/images/logo.png" alt="" class="slide-logo">
+                    <div class="slide-title cyan">AIR GUITAR 🎸</div>
+                    <div class="slide-text">
+                        <strong>Samedi 20h</strong>
+                        <br><br>
+                        Lâche-toi comme si t'avais une vraie gratte.
+                        <br><br>
+                        <span class="highlight">Critères :</span>
+                        <ul class="slide-list">
+                            <li>⚡ Technique</li>
+                            <li>🔥 Énergie</li>
+                            <li>🎭 Show</li>
+                        </ul>
+                    </div>
+                    <div class="info-box">Inscription sur place • Gratuit</div>
+                </div>
+            </div>
+
+            <!-- Slide 4 - Autres -->
+            <div class="slide">
+                <span class="slide-number">4/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <img src="../../public/images/logo.png" alt="" class="slide-logo">
+                    <div class="slide-title gold">ET AUSSI... 🎵</div>
+                    <div class="slide-text">
+                        <ul class="slide-list">
+                            <li>🎵 <strong>Blind Test Metal</strong> - Samedi 17h</li>
+                            <li>💀 <strong>Wall of Death Workshop</strong> - Samedi 15h</li>
+                            <li>🎰 <strong>Tombola</strong> - Lots exclusifs</li>
+                            <li>📸 <strong>Photobooth</strong> - Déguisements fournis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5 - CTA -->
+            <div class="slide">
+                <span class="slide-number">5/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content" style="justify-content: center; align-items: center; text-align: center;">
+                    <div class="slide-title" style="font-size: 28px;">T'ATTENDS QUOI ?</div>
+                    <div class="big-number" style="margin-top: 20px;">36€</div>
+                    <div class="big-label">Pass 3 jours • Camping gratuit</div>
+                    <div class="slide-cta" style="margin-top: 30px;">
+                        <div class="slide-cta-btn">→ LIEN EN BIO</div>
+                    </div>
+                    <div class="slide-footer">
+                        26-28 Juin 2026 • Crèvecœur-le-Grand
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==================== CARROUSEL ACCÈS ==================== -->
+    <div class="carrousel-section" id="carrousel-acces">
+        <h2 class="carrousel-title">🚗 COMMENT VENIR</h2>
+        <div class="slides-row">
+            
+            <!-- Slide 1 -->
+            <div class="slide">
+                <span class="slide-number">1/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content" style="justify-content: center; align-items: center; text-align: center;">
+                    <div class="slide-emoji">📍</div>
+                    <div class="slide-title" style="font-size: 32px;">COMMENT<br>VENIR ?</div>
+                    <p class="slide-text" style="text-align: center;">Crèvecœur-le-Grand<br>Oise (60)</p>
+                    <p style="color: var(--text-muted); margin-top: 20px; font-size: 13px;">→ Swipe pour les infos</p>
+                </div>
+            </div>
+
+            <!-- Slide 2 - En voiture -->
+            <div class="slide">
+                <span class="slide-number">2/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <img src="../../public/images/logo.png" alt="" class="slide-logo">
+                    <div class="slide-title">EN VOITURE 🚗</div>
+                    <div class="slide-text">
+                        <ul class="slide-list">
+                            <li>📍 <strong>Depuis Paris :</strong> 1h15</li>
+                            <li>📍 <strong>Depuis Beauvais :</strong> 30 min</li>
+                            <li>📍 <strong>Depuis Amiens :</strong> 45 min</li>
+                            <li>📍 <strong>Depuis Lille :</strong> 1h30</li>
+                        </ul>
+                    </div>
+                    <div class="info-box">
+                        🅿️ Parking GRATUIT sur site<br>
+                        GPS : Crèvecœur-le-Grand, 60360
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 - En train -->
+            <div class="slide">
+                <span class="slide-number">3/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <img src="../../public/images/logo.png" alt="" class="slide-logo">
+                    <div class="slide-title cyan">EN TRAIN 🚆</div>
+                    <div class="slide-text">
+                        <strong>Gare de Beauvais</strong> (30km)
+                        <br><br>
+                        Depuis Paris Nord : ~1h15
+                        <br><br>
+                        <span class="highlight">Navettes prévues :</span>
+                        <ul class="slide-list">
+                            <li>🚌 Vendredi 16h</li>
+                            <li>🚌 Samedi 12h</li>
+                            <li>🚌 Retour dimanche 20h</li>
+                        </ul>
+                    </div>
+                    <div class="info-box">Infos navettes : voir site web</div>
+                </div>
+            </div>
+
+            <!-- Slide 4 - Covoiturage -->
+            <div class="slide">
+                <span class="slide-number">4/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <img src="../../public/images/logo.png" alt="" class="slide-logo">
+                    <div class="slide-title gold">COVOITURAGE 🚙</div>
+                    <div class="slide-text">
+                        <strong>Groupe Facebook</strong>
+                        <br><br>
+                        Rejoins le groupe "Covoit Barb'n'Rock 2026" pour :
+                        <ul class="slide-list">
+                            <li>🤝 Proposer des places</li>
+                            <li>🔍 Chercher un trajet</li>
+                            <li>💰 Partager les frais</li>
+                        </ul>
+                    </div>
+                    <div class="info-box">Économique • Écologique • Convivial</div>
+                </div>
+            </div>
+
+            <!-- Slide 5 - Camping -->
+            <div class="slide">
+                <span class="slide-number">5/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <img src="../../public/images/logo.png" alt="" class="slide-logo">
+                    <div class="slide-title">CAMPING 🏕️</div>
+                    <div class="slide-text">
+                        <div class="big-number" style="font-size: 48px;">GRATUIT</div>
+                        <div class="big-label">Inclus avec ton pass</div>
+                        <ul class="slide-list" style="margin-top: 20px;">
+                            <li>🚿 Douches</li>
+                            <li>🚽 Sanitaires</li>
+                            <li>💧 Points d'eau</li>
+                            <li>🔌 Recharge téléphone</li>
+                        </ul>
+                    </div>
+                    <div class="slide-cta">
+                        <div class="slide-cta-btn">→ LIEN EN BIO</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==================== CARROUSEL BEST-OF ==================== -->
+    <div class="carrousel-section" id="carrousel-bestof">
+        <h2 class="carrousel-title">📷 BEST-OF (Post-festival)</h2>
+        <div class="slides-row">
+            
+            <!-- Slide 1 -->
+            <div class="slide">
+                <span class="slide-number">1/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content" style="justify-content: center; align-items: center; text-align: center;">
+                    <div class="slide-emoji">📷</div>
+                    <div class="slide-title" style="font-size: 36px;">BEST-OF<br><span style="color: var(--accent-cyan);">2026</span></div>
+                    <p class="slide-text" style="text-align: center;">3 jours de chaos.<br>En images.</p>
+                    <p style="color: var(--text-muted); margin-top: 20px; font-size: 13px;">→ Swipe</p>
+                </div>
+            </div>
+
+            <!-- Slide 2-4 : Photos placeholder -->
+            <div class="slide">
+                <span class="slide-number">2/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg" style="opacity: 0.8;">
+                <div class="slide-overlay" style="background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.8) 100%);"></div>
+                <div class="slide-content" style="justify-content: flex-end;">
+                    <div class="slide-title" style="font-size: 24px;">VENDREDI 🔥</div>
+                    <p style="font-size: 12px; color: var(--text-muted);">[Photo à insérer]</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <span class="slide-number">3/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg" style="opacity: 0.8;">
+                <div class="slide-overlay" style="background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.8) 100%);"></div>
+                <div class="slide-content" style="justify-content: flex-end;">
+                    <div class="slide-title cyan" style="font-size: 24px;">SAMEDI 🔥</div>
+                    <p style="font-size: 12px; color: var(--text-muted);">[Photo à insérer]</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <span class="slide-number">4/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg" style="opacity: 0.8;">
+                <div class="slide-overlay" style="background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.8) 100%);"></div>
+                <div class="slide-content" style="justify-content: flex-end;">
+                    <div class="slide-title gold" style="font-size: 24px;">DIMANCHE 🔥</div>
+                    <p style="font-size: 12px; color: var(--text-muted);">[Photo à insérer]</p>
+                </div>
+            </div>
+
+            <!-- Slide 5 - Merci -->
+            <div class="slide">
+                <span class="slide-number">5/5</span>
+                <img src="../../public/images/hero-visual.jpg" alt="" class="slide-bg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content" style="justify-content: center; align-items: center; text-align: center;">
+                    <div class="slide-title" style="font-size: 48px;">MERCI 🖤</div>
+                    <p class="slide-text" style="text-align: center; margin-top: 20px;">
+                        [X] festivaliers<br>
+                        18 groupes<br>
+                        3 jours inoubliables
+                    </p>
+                    <div style="margin-top: 30px; font-family: 'Bebas Neue'; font-size: 24px; color: var(--accent-cyan); letter-spacing: 3px;">
+                        ON SE RETROUVE EN 2027 ?
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function showCarrousel(id) {
+            document.querySelectorAll('.carrousel-section').forEach(s => s.classList.remove('active'));
+            document.getElementById('carrousel-' + id).classList.add('active');
+            
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+
+</body>
+
+</html>

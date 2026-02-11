@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossier de Presse - Barb'n'Rock Festival 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+
+        :root {
+            --bg-dark: #0a0c0f;
+            --bg-card: #1a1f25;
+            --text-light: #f0f0f0;
+            --text-muted: #8b9299;
+            --accent-cyan: #00E5CC;
+            --accent-orange: #E85D04;
+            --accent-gold: #FFD700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.5;
+            font-size: 13px;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            padding: 12mm 15mm;
+            background: var(--bg-dark);
+            page-break-after: always;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page:last-child {
+            page-break-after: avoid;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        /* COVER */
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+        }
+
+        .cover-image-logo {
+            width: 180px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .cover-logo {
+            font-size: 72px;
+            font-family: 'Bebas Neue', sans-serif;
+            margin-bottom: 20px;
+        }
+
+        .cover-logo .barb { color: var(--text-light); }
+        .cover-logo .rock { color: var(--accent-cyan); }
+
+        .cover-subtitle {
+            font-size: 36px;
+            color: var(--accent-orange);
+            margin-bottom: 10px;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+
+        .cover-edition {
+            font-size: 24px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .cover-dates {
+            font-size: 28px;
+            color: var(--accent-cyan);
+            border: 2px solid var(--accent-cyan);
+            padding: 15px 40px;
+            margin-bottom: 40px;
+        }
+
+        .cover-tagline {
+            font-size: 18px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* SECTION HEADERS */
+        .section-title {
+            font-size: 28px;
+            color: var(--accent-cyan);
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent-orange);
+        }
+
+        .section-subtitle {
+            font-size: 17px;
+            color: var(--accent-orange);
+            margin-bottom: 12px;
+            margin-top: 15px;
+        }
+
+        /* CONTENT */
+        .content-block {
+            margin-bottom: 15px;
+        }
+
+        .content-block p {
+            margin-bottom: 10px;
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 229, 204, 0.1), rgba(232, 93, 4, 0.1));
+            border-left: 4px solid var(--accent-cyan);
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box h3 {
+            color: var(--accent-cyan);
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        .highlight-box p {
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* STATS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(0, 229, 204, 0.2);
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--accent-cyan);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* FEATURE LIST */
+        .feature-list {
+            list-style: none;
+            margin: 12px 0;
+        }
+
+        .feature-list li {
+            padding: 6px 0;
+            padding-left: 25px;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 12px;
+        }
+
+        .feature-list li::before {
+            content: "🎸";
+            position: absolute;
+            left: 0;
+            font-size: 11px;
+        }
+
+        /* BANDS GALLERY */
+        .headliners-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 12px 0;
+        }
+
+        .headliner-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .headliner-card img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .headliner-card .headliner-name {
+            padding: 6px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 13px;
+            letter-spacing: 1px;
+            background: var(--accent-orange);
+            color: white;
+            text-align: center;
+        }
+
+        .bands-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .band-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .band-card img {
+            width: 100%;
+            height: 55px;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .band-card .band-name {
+            padding: 5px 4px;
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+
+        /* TIMELINE */
+        .timeline {
+            margin: 15px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 12px;
+        }
+
+        .timeline-year {
+            width: 60px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            color: var(--accent-orange);
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding-left: 15px;
+            border-left: 2px solid var(--accent-cyan);
+        }
+
+        .timeline-content h4 {
+            color: var(--accent-cyan);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .timeline-content p {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* VILLAGE GRID */
+        .village-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .village-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 12px;
+            border-left: 3px solid var(--accent-orange);
+            text-align: center;
+        }
+
+        .village-card .icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .village-card h4 {
+            color: var(--accent-cyan);
+            font-size: 12px;
+            margin-bottom: 4px;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+
+        .village-card p {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* CONTACT BOX */
+        .contact-box {
+            background: linear-gradient(135deg, rgba(232, 93, 4, 0.2), rgba(0, 229, 204, 0.1));
+            border: 2px solid var(--accent-orange);
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+            margin: 18px 0;
+        }
+
+        .contact-box h3 {
+            color: var(--accent-orange);
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .contact-item {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .contact-item span {
+            color: var(--accent-cyan);
+            margin-right: 10px;
+        }
+
+        /* QUOTE */
+        .quote-box {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+            border: 1px solid rgba(0, 229, 204, 0.2);
+        }
+
+        .quote-box blockquote {
+            font-size: 16px;
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .quote-box cite {
+            font-size: 12px;
+            color: var(--accent-cyan);
+        }
+
+        /* FOOTER */
+        .page-footer {
+            position: absolute;
+            bottom: 8mm;
+            left: 15mm;
+            right: 15mm;
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+
+        /* PRINT */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+            html, body {
+                margin: 0 !important;
+                padding: 0 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .page {
+                margin: 0;
+                padding: 12mm 15mm;
+                box-shadow: none;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+            .page:last-child {
+                page-break-after: avoid;
+            }
+        }
+
+        /* INFO GRID */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .info-card h4 {
+            color: var(--accent-cyan);
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+
+        .info-card p {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PAGE 1 - COUVERTURE -->
+    <div class="page">
+        <div class="cover">
+            <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="cover-image-logo">
+            <div class="cover-logo">
+                <span class="barb">BARB'N'</span><span class="rock">ROCK</span>
+            </div>
+            <div class="cover-subtitle">DOSSIER DE PRESSE</div>
+            <div class="cover-edition">4ème édition</div>
+            <div class="cover-dates">26 • 27 • 28 JUIN 2026</div>
+            <div class="cover-tagline">"2 jours de chaos, 1 jour de repos"</div>
+        </div>
+        <div class="page-footer">
+            <span>Barb'n'Rock Festival 2026</span>
+            <span>barbnrock-festival.fr</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2 - LE FESTIVAL -->
+    <div class="page">
+        <h2 class="section-title">LE FESTIVAL EN BREF</h2>
+
+        <div class="content-block">
+            <p>Le <strong>Barb'n'Rock Festival</strong> est un événement musical dédié au rock, metal et punk, organisé chaque année à <strong>Crèvecœur-le-Grand</strong> dans l'Oise (60), à seulement 1h de Paris.</p>
+            <p>Créé en 2023 par une équipe de passionnés, le festival s'est rapidement imposé comme un rendez-vous incontournable pour les amateurs de musique amplifiée, avec une programmation 100% française et un concept unique.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h3>🎯 Le concept : "2 jours de chaos, 1 jour de repos"</h3>
+            <p><strong>Vendredi & Samedi :</strong> Concerts intenses avec les têtes d'affiche nationales<br>
+            <strong>Dimanche :</strong> Journée familiale et détendue, tarif réduit (5€), animations, concours de barbe</p>
+        </div>
+
+        <h3 class="section-subtitle">📊 CHIFFRES CLÉS 2026</h3>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">3 000</div>
+                <div class="stat-label">Festivaliers attendus</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">18</div>
+                <div class="stat-label">Groupes programmés</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Jours de festival</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Éditions depuis 2023</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Programmation française</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">42€</div>
+                <div class="stat-label">Pass 3 jours</div>
+            </div>
+        </div>
+
+        <h3 class="section-subtitle">📍 INFORMATIONS PRATIQUES</h3>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>📅 Dates</h4>
+                <p>Vendredi 26, Samedi 27 et Dimanche 28 Juin 2026</p>
+            </div>
+            <div class="info-card">
+                <h4>📍 Lieu</h4>
+                <p>Stade Municipal de Crèvecœur-le-Grand (60360)<br>À 1h de Paris, 30 min de Beauvais</p>
+            </div>
+            <div class="info-card">
+                <h4>🅿️ Accès</h4>
+                <p>Parking gratuit sur place<br>Camping gratuit pour les festivaliers</p>
+            </div>
+            <div class="info-card">
+                <h4>👶 Public</h4>
+                <p>Tout public - Gratuit pour les moins de 12 ans<br>Journée famille le dimanche</p>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Barb'n'Rock Festival 2026</span>
+            <span>Page 2</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3 - HISTORIQUE -->
+    <div class="page">
+        <h2 class="section-title">L'HISTOIRE DU FESTIVAL</h2>
+
+        <div class="content-block">
+            <p>Créé en <strong>2017</strong> par le groupe Instagram <strong>Bearded Villains France</strong> et son association BVFR Charity, le Barb'n'Rock était à l'origine un festival 100% caritatif organisé dans un gymnase de la région parisienne.</p>
+            <p>Concerts, artisanats, tatoueurs, barbiers, concours de barbe... <strong>Le concept Barb'n'Rock était né !</strong></p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">2017</div>
+                <div class="timeline-content">
+                    <h4>Naissance du concept</h4>
+                    <p>Création par Bearded Villains France. 3 éditions caritatives en région parisienne avant la crise sanitaire.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2023</div>
+                <div class="timeline-content">
+                    <h4>Renaissance à Crèvecœur</h4>
+                    <p>Le festival renaît grâce à 3 acteurs : BVFR Charity, l'ACPC et la commune. Création de l'édition Crépicordienne.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2024</div>
+                <div class="timeline-content">
+                    <h4>Confirmation</h4>
+                    <p>Le concept "2 jours de chaos, 1 jour de repos" séduit. Dagoba, Black Bomb A, Sidilarsen sur scène.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2026</div>
+                <div class="timeline-content">
+                    <h4>4ème édition - Objectif 3000</h4>
+                    <p>Programmation ambitieuse avec Shaârghot, Loudblast, Krav Boca, Psykup...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <blockquote>"La musique nous rapproche ! Au travers de cet événement, nous souhaitons transmettre des valeurs qui nous sont chères : le partage, l'entraide, la cohésion."</blockquote>
+            <cite>— L'équipe Barb'n'Rock</cite>
+        </div>
+
+        <h3 class="section-subtitle">🎯 NOS VALEURS</h3>
+        <ul class="feature-list">
+            <li><strong>Partage</strong> - La musique comme vecteur de rencontre et d'échange</li>
+            <li><strong>Entraide</strong> - 10% des ventes du village reversés à une association caritative</li>
+            <li><strong>Cohésion</strong> - Un festival qui rassemble, accessible à tous</li>
+            <li><strong>Scène locale</strong> - 50% des groupes issus des Hauts-de-France</li>
+            <li><strong>Engagement écologique</strong> - Tri, consignes, réutilisation, mix énergétique</li>
+        </ul>
+
+        <div class="page-footer">
+            <span>Barb'n'Rock Festival 2026</span>
+            <span>Page 3</span>
+        </div>
+    </div>
+
+    <!-- PAGE 4 - PROGRAMMATION -->
+    <div class="page">
+        <h2 class="section-title">PROGRAMMATION 2026</h2>
+
+        <p style="margin-bottom: 12px; font-size: 15px; color: var(--accent-cyan);">18 groupes • 100% Rock / Metal / Punk français</p>
+
+        <h3 class="section-subtitle">⭐ TÊTES D'AFFICHE</h3>
+        <div class="headliners-row">
+            <div class="headliner-card">
+                <img src="../../public/images/bands/shaarghot.jpg" alt="Shaârghot">
+                <div class="headliner-name">SHAÂRGHOT</div>
+            </div>
+            <div class="headliner-card">
+                <img src="../../public/images/bands/loudblast.jpg" alt="Loudblast">
+                <div class="headliner-name">LOUDBLAST</div>
+            </div>
+            <div class="headliner-card">
+                <img src="../../public/images/bands/krav-boca.jpg" alt="Krav Boca">
+                <div class="headliner-name">KRAV BOCA</div>
+            </div>
+        </div>
+        <div class="headliners-row">
+            <div class="headliner-card">
+                <img src="../../public/images/bands/cachemire.jpg" alt="Cachemire">
+                <div class="headliner-name">CACHEMIRE</div>
+            </div>
+            <div class="headliner-card">
+                <img src="../../public/images/bands/psykup.jpg" alt="Psykup">
+                <div class="headliner-name">PSYKUP</div>
+            </div>
+            <div class="headliner-card">
+                <img src="../../public/images/bands/mainkind.jpg" alt="Mainkind">
+                <div class="headliner-name">MAINKIND</div>
+            </div>
+        </div>
+
+        <h3 class="section-subtitle" style="margin-top: 12px;">🎸 ET AUSSI...</h3>
+        <div class="bands-gallery">
+            <div class="band-card">
+                <img src="../../public/images/bands/akiavel.jpg" alt="Akiavel">
+                <div class="band-name">Akiavel</div>
+            </div>
+            <div class="band-card">
+                <img src="../../public/images/bands/dirty-fonzy.jpg" alt="Dirty Fonzy">
+                <div class="band-name">Dirty Fonzy</div>
+            </div>
+            <div class="band-card">
+                <img src="../../public/images/bands/kami-no-ikari.jpg" alt="Kami No Ikari">
+                <div class="band-name">Kami No Ikari</div>
+            </div>
+            <div class="band-card">
+                <img src="../../public/images/bands/barabbas.jpg" alt="Barabbas">
+                <div class="band-name">Barabbas</div>
+            </div>
+            <div class="band-card">
+                <img src="../../public/images/bands/black-hazard.jpg" alt="Black Hazard">
+                <div class="band-name">Black Hazard</div>
+            </div>
+            <div class="band-card">
+                <img src="../../public/images/bands/breakout.jpg" alt="Breakout">
+                <div class="band-name">Breakout</div>
+            </div>
+            <div class="band-card">
+                <img src="../../public/images/bands/tremplin.svg" alt="Tremplin">
+                <div class="band-name">Tremplin Sam.</div>
+            </div>
+            <div class="band-card">
+                <img src="../../public/images/bands/tremplin.svg" alt="Tremplin">
+                <div class="band-name">Tremplin Dim.</div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h3>🏆 Soirée Tremplin - 4 avril 2026</h3>
+            <p>Deux groupes locaux seront sélectionnés lors de notre soirée tremplin pour se produire sur la scène du festival. Une opportunité unique pour les talents émergents de la région !</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Barb'n'Rock Festival 2026</span>
+            <span>Page 4</span>
+        </div>
+    </div>
+
+    <!-- PAGE 5 - LE VILLAGE -->
+    <div class="page">
+        <h2 class="section-title">LE VILLAGE : UNE EXPÉRIENCE COMPLÈTE</h2>
+
+        <div class="content-block">
+            <p>Le Barb'n'Rock, c'est bien plus qu'un festival de musique. C'est une <strong>immersion totale</strong> dans la culture rock et metal, avec un village qui vit au rythme des concerts.</p>
+        </div>
+
+        <div class="village-grid">
+            <div class="village-card">
+                <div class="icon">🍔</div>
+                <h4>FOOD TRUCKS</h4>
+                <p>3 food trucks variés</p>
+            </div>
+            <div class="village-card">
+                <div class="icon">🍺</div>
+                <h4>BAR</h4>
+                <p>Bières artisanales locales</p>
+            </div>
+            <div class="village-card">
+                <div class="icon">🖋️</div>
+                <h4>TATOUEURS</h4>
+                <p>Flash tattoo sur place</p>
+            </div>
+            <div class="village-card">
+                <div class="icon">✂️</div>
+                <h4>BARBERS</h4>
+                <p>Retouches barbe & coupe</p>
+            </div>
+            <div class="village-card">
+                <div class="icon">💀</div>
+                <h4>MERCH</h4>
+                <p>Stands des groupes</p>
+            </div>
+            <div class="village-card">
+                <div class="icon">🎨</div>
+                <h4>ARTISANS</h4>
+                <p>~20 stands créateurs</p>
+            </div>
+        </div>
+
+        <h3 class="section-subtitle">🎉 ANIMATIONS</h3>
+        <ul class="feature-list">
+            <li><strong>Air Guitar Contest</strong> - Montrez vos talents de guitar hero</li>
+            <li><strong>Blind Test Metal</strong> - Testez vos connaissances musicales</li>
+            <li><strong>Wall of Death Workshop</strong> - Initiation au pogo en sécurité</li>
+            <li><strong>Concours de Barbe</strong> - Dimanche : élection de la plus belle barbe</li>
+        </ul>
+
+        <h3 class="section-subtitle">🏕️ CAMPING GRATUIT</h3>
+        <div class="content-block">
+            <p>Espace camping mis à disposition gratuitement pour tous les festivaliers. Sanitaires et points d'eau disponibles. Vivez l'expérience festival complète, de jour comme de nuit, dans une ambiance conviviale et sécurisée.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h3>👨‍👩‍👧‍👦 Un festival familial</h3>
+            <p>Le dimanche est spécialement pensé pour les familles : tarif réduit (5€), gratuit pour les moins de 12 ans, programmation plus soft, animations pour tous les âges. Le metal, ça se partage !</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Barb'n'Rock Festival 2026</span>
+            <span>Page 5</span>
+        </div>
+    </div>
+
+    <!-- PAGE 6 - NOS ENGAGEMENTS -->
+    <div class="page">
+        <h2 class="section-title">NOS ENGAGEMENTS</h2>
+
+        <h3 class="section-subtitle">🌱 INITIATIVES ÉCOLOGIQUES</h3>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>♻️ Tri des déchets</h4>
+                <p>Le festival est accompagné par les services de l'agglomération : communication des écogestes, utilisation des écocups, tri sélectif.</p>
+            </div>
+            <div class="info-card">
+                <h4>🍾 Produits consignés</h4>
+                <p>Grâce à l'entreprise Le Fourgon, l'ensemble des consommations est inclus dans une boucle de produits consignés en verre, livrés en véhicule électrique.</p>
+            </div>
+            <div class="info-card">
+                <h4>👜 Réutilisation banderoles</h4>
+                <p>Nos anciennes bâches sont transformées en merchandising par la maroquinière Raev. Rien ne se perd !</p>
+            </div>
+            <div class="info-card">
+                <h4>⚡ Mix énergétique</h4>
+                <p>Amélioration continue : compteur Enedis, panneaux solaires, groupes électrogènes optimisés.</p>
+            </div>
+        </div>
+
+        <h3 class="section-subtitle">🎸 SCÈNE LOCALE</h3>
+        <div class="highlight-box">
+            <h3>50% des groupes issus des Hauts-de-France</h3>
+            <p>Les Hauts-de-France regorgent de groupes talentueux. Nous avons le privilège de les faire jouer sur nos scènes et de leur offrir une visibilité.</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>📻 Hapiness Radio</h4>
+                <p>La radio locale est présente sur le festival pour partager l'ambiance électrique et interviewer les groupes dès leur sortie de scène.</p>
+            </div>
+            <div class="info-card">
+                <h4>🏆 Soirée Tremplin</h4>
+                <p>Chaque année, deux groupes locaux sont sélectionnés lors de notre soirée tremplin pour se produire sur la grande scène.</p>
+            </div>
+        </div>
+
+        <h3 class="section-subtitle">💝 ENGAGEMENT SOLIDAIRE</h3>
+        <div class="highlight-box">
+            <h3>10% reversés à une association</h3>
+            <p>Tous engagés ! Chaque année, les stands présents sur le village s'engagent à reverser 10% de leurs ventes à l'association soutenue par le Barb'n'Rock.</p>
+        </div>
+
+        <div class="page-footer">
+            <span>Barb'n'Rock Festival 2026</span>
+            <span>Page 6</span>
+        </div>
+    </div>
+
+    <!-- PAGE 7 - CONTACT PRESSE -->
+    <div class="page">
+        <h2 class="section-title">CONTACT PRESSE</h2>
+
+        <div class="contact-box">
+            <h3>📞 RELATIONS PRESSE</h3>
+            <div class="contact-item">
+                <span>📧</span> presse@barbnrock-festival.fr
+            </div>
+            <div class="contact-item">
+                <span>📱</span> [Téléphone]
+            </div>
+            <div class="contact-item">
+                <span>🌐</span> barbnrock-festival.fr
+            </div>
+        </div>
+
+        <h3 class="section-subtitle">📸 RESSOURCES MÉDIAS</h3>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Photos HD</h4>
+                <p>Kit presse avec photos haute définition des éditions précédentes et visuels 2026 disponibles sur demande.</p>
+            </div>
+            <div class="info-card">
+                <h4>Logo & Charte</h4>
+                <p>Logo vectoriel, charte graphique et éléments visuels fournis pour vos publications.</p>
+            </div>
+            <div class="info-card">
+                <h4>Interviews</h4>
+                <p>Les organisateurs et artistes sont disponibles pour des interviews sur demande.</p>
+            </div>
+            <div class="info-card">
+                <h4>Accréditations</h4>
+                <p>Demandes d'accréditation presse à envoyer par email avant le 1er juin 2026.</p>
+            </div>
+        </div>
+
+        <h3 class="section-subtitle">📱 RÉSEAUX SOCIAUX</h3>
+        <div class="content-block">
+            <p style="font-size: 14px;">
+                <strong>Instagram :</strong> @barbnrock<br>
+                <strong>Facebook :</strong> /barbnrockfestival<br>
+                <strong>Site web :</strong> barbnrock-festival.fr
+            </p>
+        </div>
+
+        <div class="highlight-box">
+            <h3>🏛️ L'association organisatrice</h3>
+            <p><strong>Association Crépicordienne pour la Promotion de la Culture (ACPC)</strong><br>
+            Association loi 1901, créée en 2023 à l'occasion de la 1ère édition Crépicordienne.<br><br>
+            <strong>Bureau :</strong> Benjamin Lampérier (Président), Vincent Warnault (Trésorier), Luc Pouilly (Secrétaire)<br>
+            Ils sont rejoints par de nombreux bénévoles lors des événements.</p>
+        </div>
+
+        <div class="quote-box" style="margin-top: 15px;">
+            <blockquote>"Le festival metal le plus accessible de France"</blockquote>
+            <cite>— Barb'n'Rock Festival</cite>
+        </div>
+
+        <div class="page-footer">
+            <span>Barb'n'Rock Festival 2026</span>
+            <span>Page 7</span>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrousel Artiste - Barb'n'Rock 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap');
+
+        :root {
+            --bg-dark: #0a0c0f;
+            --bg-card: #1a1f25;
+            --text-light: #f0f0f0;
+            --text-muted: #8b9299;
+            --accent-cyan: #00E5CC;
+            --accent-orange: #E85D04;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1a1a;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            letter-spacing: 4px;
+        }
+
+        .subtitle {
+            color: var(--accent-cyan);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Layout */
+        .container {
+            display: flex;
+            gap: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* ========== SLIDES CONTAINER ========== */
+        .slides-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+            flex: 1;
+        }
+
+        /* ========== SLIDE ========== */
+        .slide {
+            width: 360px;
+            height: 450px;
+            min-width: 360px;
+            background: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: var(--accent-cyan);
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            z-index: 100;
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.65;
+            filter: grayscale(10%);
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(10, 12, 15, 0.1) 0%,
+                rgba(10, 12, 15, 0.5) 60%,
+                rgba(10, 12, 15, 0.9) 100%
+            );
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========== SLIDE 1 - ACCROCHE ========== */
+        .slide-1 .slide-content {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .slide-1 .artist-emoji {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .slide-1 .artist-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 64px;
+            color: var(--text-light);
+            letter-spacing: 6px;
+            text-shadow: 0 0 40px rgba(0, 229, 204, 0.5);
+            margin-bottom: 15px;
+        }
+
+        .slide-1 .artist-day {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            color: var(--accent-cyan);
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+        }
+
+        .swipe-cta {
+            color: var(--text-muted);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .swipe-arrow {
+            animation: swipe 1.5s ease-in-out infinite;
+        }
+
+        @keyframes swipe {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        /* ========== SLIDE 2 - BIO ========== */
+        .slide-2 .slide-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: var(--accent-orange);
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .slide-2 .slide-text {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-list li span {
+            color: var(--text-muted);
+        }
+
+        /* ========== SLIDE 3 - À ÉCOUTER ========== */
+        .slide-3 .slide-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: var(--accent-cyan);
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+        }
+
+        .album-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .album-list li {
+            color: var(--text-light);
+            font-size: 15px;
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .album-list li::before {
+            content: "💿";
+            position: absolute;
+            left: 0;
+        }
+
+        .listen-tip {
+            background: rgba(0, 229, 204, 0.1);
+            border-left: 3px solid var(--accent-cyan);
+            padding: 12px 15px;
+            font-size: 14px;
+            color: var(--accent-cyan);
+            margin-top: auto;
+        }
+
+        /* ========== SLIDE 4 - POURQUOI ========== */
+        .slide-4 .slide-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            color: var(--accent-orange);
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .reasons-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .reasons-list li {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .reasons-list li::before {
+            content: "•";
+            position: absolute;
+            left: 8px;
+            color: var(--accent-cyan);
+            font-size: 18px;
+        }
+
+        .quote {
+            font-style: italic;
+            color: var(--accent-cyan);
+            font-size: 15px;
+            padding: 15px;
+            border: 1px solid var(--accent-cyan);
+            border-radius: 8px;
+            margin-top: auto;
+        }
+
+        /* ========== SLIDE 5 - CTA ========== */
+        .slide-5 .slide-content {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .slide-5 .cta-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 42px;
+            color: var(--text-light);
+            letter-spacing: 4px;
+            margin-bottom: 30px;
+        }
+
+        .cta-info {
+            margin-bottom: 30px;
+        }
+
+        .cta-info p {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .cta-info .price {
+            color: var(--accent-orange);
+            font-weight: 700;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: white;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            letter-spacing: 3px;
+            padding: 15px 40px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+        }
+
+        .cta-footer {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+        }
+
+        .cta-location {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        /* Logo footer on slides */
+        .slide-logo {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 40px;
+            opacity: 0.7;
+        }
+
+        /* ========== CONTROLS ========== */
+        .controls {
+            width: 350px;
+            min-width: 350px;
+            background: #2a2a2a;
+            padding: 25px;
+            border-radius: 12px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .controls h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        .control-group label {
+            display: block;
+            color: #aaa;
+            font-size: 12px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .control-group select,
+        .control-group input,
+        .control-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 6px;
+            background: #333;
+            color: white;
+            font-size: 14px;
+        }
+
+        .control-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .artist-presets {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .preset-btn {
+            padding: 8px;
+            background: #333;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: white;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .preset-btn:hover {
+            background: var(--accent-cyan);
+            color: black;
+        }
+
+        .preset-btn.active {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+        }
+
+        .divider {
+            height: 1px;
+            background: #444;
+            margin: 20px 0;
+        }
+
+        .export-section h4 {
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+        }
+
+        .export-section p {
+            color: #888;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .export-section ol {
+            color: #888;
+            font-size: 12px;
+            margin-left: 15px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>📸 CARROUSEL ARTISTE</h1>
+    <p class="subtitle">5 slides • Format Instagram 1080x1350 (portrait)</p>
+
+    <div class="container">
+
+        <!-- SLIDES -->
+        <div class="slides-container">
+
+            <!-- SLIDE 1 - ACCROCHE -->
+            <div class="slide slide-1" id="slide1">
+                <span class="slide-number">1/5</span>
+                <img src="../../public/images/bands/psykup.jpg" alt="" class="slide-bg" id="slideBg">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="artist-emoji" id="artistEmoji">🎤</div>
+                    <h1 class="artist-name" id="artistName">PSYKUP</h1>
+                    <p class="artist-day" id="artistDay">VENDREDI 26 JUIN</p>
+                    <p class="swipe-cta">
+                        Swipe pour découvrir 
+                        <span class="swipe-arrow">→</span>
+                    </p>
+                </div>
+                <img src="../../public/images/logo.png" alt="" class="slide-logo">
+            </div>
+
+            <!-- SLIDE 2 - BIO -->
+            <div class="slide slide-2" id="slide2">
+                <span class="slide-number">2/5</span>
+                <img src="../../public/images/bands/psykup.jpg" alt="" class="slide-bg slide-bg-2">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h2 class="slide-title">QUI SONT-ILS ?</h2>
+                    <p class="slide-text" id="bioText">30 ans de carrière et toujours aussi déjantés. Psykup, c'est un shaker musical décomplexé où hardcore, jazz, death metal, funk, thrash et pop explosent ensemble.</p>
+                    <ul class="info-list">
+                        <li>📍 <span id="bioCity">Toulouse</span></li>
+                        <li>🎵 <span id="bioGenre">AutrucheCore (oui, c'est un genre)</span></li>
+                        <li>📅 <span id="bioSince">Depuis 1994</span></li>
+                    </ul>
+                </div>
+                <img src="../../public/images/logo.png" alt="" class="slide-logo">
+            </div>
+
+            <!-- SLIDE 3 - À ÉCOUTER -->
+            <div class="slide slide-3" id="slide3">
+                <span class="slide-number">3/5</span>
+                <img src="../../public/images/bands/psykup.jpg" alt="" class="slide-bg slide-bg-3">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h2 class="slide-title">À ÉCOUTER 🎧</h2>
+                    <ul class="album-list" id="albumList">
+                        <li>"The Joke Of Tomorrow" (2024)</li>
+                        <li>"Acousticophobia"</li>
+                        <li>"We Love You All"</li>
+                    </ul>
+                    <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 15px;" id="ytLink">🎥 YouTube : "Psykup - The Joke Of Tomorrow"</p>
+                    <div class="listen-tip" id="listenTip">Un conseil : monte le son. Fort.</div>
+                </div>
+                <img src="../../public/images/logo.png" alt="" class="slide-logo">
+            </div>
+
+            <!-- SLIDE 4 - POURQUOI LES VOIR -->
+            <div class="slide slide-4" id="slide4">
+                <span class="slide-number">4/5</span>
+                <img src="../../public/images/bands/psykup.jpg" alt="" class="slide-bg slide-bg-4">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h2 class="slide-title">POURQUOI LES VOIR ? 🔥</h2>
+                    <ul class="reasons-list" id="reasonsList">
+                        <li>30 ans de scène = show rodé au millimètre</li>
+                        <li>Énergie contagieuse garantie</li>
+                        <li>Le groupe le plus imprévisible de France</li>
+                        <li>Tu sais jamais ce qui va se passer</li>
+                    </ul>
+                    <div class="quote" id="quoteText">"Le live de Psykup, tu l'oublies pas."</div>
+                </div>
+                <img src="../../public/images/logo.png" alt="" class="slide-logo">
+            </div>
+
+            <!-- SLIDE 5 - CTA -->
+            <div class="slide slide-5" id="slide5">
+                <span class="slide-number">5/5</span>
+                <img src="../../public/images/bands/psykup.jpg" alt="" class="slide-bg slide-bg-5">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h2 class="cta-title">VIENS LES VOIR 🤘</h2>
+                    <div class="cta-info">
+                        <p>📍 <span id="ctaDay">Vendredi 26 Juin</span></p>
+                        <p>🎫 Pass jour : <span class="price" id="ctaDayPrice">13€</span></p>
+                        <p>🎫 Pass 3 jours : <span class="price">36€</span></p>
+                        <p style="color: var(--accent-cyan);">Camping GRATUIT inclus</p>
+                    </div>
+                    <div class="cta-button">→ LIEN EN BIO</div>
+                    <p class="cta-footer">BARB'N'ROCK 2026</p>
+                    <p class="cta-location">Crèvecœur-le-Grand</p>
+                </div>
+                <img src="../../public/images/logo.png" alt="" class="slide-logo">
+            </div>
+
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="controls">
+            <h3>🎨 Sélection rapide</h3>
+            
+            <div class="artist-presets">
+                <button class="preset-btn active" onclick="loadArtist('psykup')">Psykup</button>
+                <button class="preset-btn" onclick="loadArtist('cachemire')">Cachemire</button>
+                <button class="preset-btn" onclick="loadArtist('loudblast')">Loudblast</button>
+                <button class="preset-btn" onclick="loadArtist('shaarghot')">Shaârghot</button>
+                <button class="preset-btn" onclick="loadArtist('akiavel')">Akiavel</button>
+                <button class="preset-btn" onclick="loadArtist('kravboca')">Krav Boca</button>
+                <button class="preset-btn" onclick="loadArtist('dirtyfonzy')">Dirty Fonzy</button>
+                <button class="preset-btn" onclick="loadArtist('mainkind')">Mainkind</button>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="control-group">
+                <label>Nom de l'artiste</label>
+                <input type="text" id="inputName" value="PSYKUP" oninput="updateSlide1()">
+            </div>
+
+            <div class="control-group">
+                <label>Jour de passage</label>
+                <select id="inputDay" onchange="updateSlides()">
+                    <option value="VENDREDI 26 JUIN">Vendredi 26 Juin</option>
+                    <option value="SAMEDI 27 JUIN">Samedi 27 Juin</option>
+                    <option value="DIMANCHE 28 JUIN">Dimanche 28 Juin</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Bio (slide 2)</label>
+                <textarea id="inputBio" oninput="updateSlide2()">30 ans de carrière et toujours aussi déjantés. Psykup, c'est un shaker musical décomplexé où hardcore, jazz, death metal, funk, thrash et pop explosent ensemble.</textarea>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="export-section">
+                <h4>📋 Export des slides</h4>
+                <p>Pour exporter chaque slide en image :</p>
+                <ol>
+                    <li>Ouvrir DevTools (F12)</li>
+                    <li>Clic droit sur une slide → Inspecter</li>
+                    <li>Clic droit sur l'élément → <strong>Capture node screenshot</strong></li>
+                </ol>
+                <p style="margin-top: 10px;">
+                    <strong>Taille réelle :</strong> Modifier la CSS pour 1080x1350px avant export.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Base de données des artistes
+        const artistsDB = {
+            psykup: {
+                name: 'PSYKUP',
+                emoji: '🎤',
+                day: 'VENDREDI 26 JUIN',
+                dayPrice: '13€',
+                image: 'psykup.jpg',
+                bio: "30 ans de carrière et toujours aussi déjantés. Psykup, c'est un shaker musical décomplexé où hardcore, jazz, death metal, funk, thrash et pop explosent ensemble.",
+                city: 'Toulouse',
+                genre: 'AutrucheCore (oui, c\'est un genre)',
+                since: 'Depuis 1994',
+                albums: ['"The Joke Of Tomorrow" (2024)', '"Acousticophobia"', '"We Love You All"'],
+                ytLink: '🎥 YouTube : "Psykup - The Joke Of Tomorrow"',
+                tip: 'Un conseil : monte le son. Fort.',
+                reasons: ['30 ans de scène = show rodé au millimètre', 'Énergie contagieuse garantie', 'Le groupe le plus imprévisible de France', 'Tu sais jamais ce qui va se passer'],
+                quote: '"Le live de Psykup, tu l\'oublies pas."'
+            },
+            cachemire: {
+                name: 'CACHEMIRE',
+                emoji: '🎸',
+                day: 'VENDREDI 26 JUIN',
+                dayPrice: '13€',
+                image: 'cachemire.jpg',
+                bio: "Rock'n'roll français survitaminé venu de Nantes. Révélés au Hellfest 2025, Cachemire délivre des riffs énergiques et des textes en français percutants.",
+                city: 'Nantes',
+                genre: "Rock'n'roll français",
+                since: 'Révélation Hellfest 2025',
+                albums: ['"Que dalle" (2024)', '"Les vivants"', '"Cachemire" (EP)'],
+                ytLink: '🎥 YouTube : "Cachemire - Que dalle"',
+                tip: 'Le rock français a trouvé sa relève.',
+                reasons: ['Énergie punk + mélodies rock', 'Textes en français qui claquent', 'Révélation Hellfest 2025', 'Le nouveau souffle du rock hexagonal'],
+                quote: '"Cachemire, c\'est le rock français qu\'on attendait."'
+            },
+            loudblast: {
+                name: 'LOUDBLAST',
+                emoji: '💀',
+                day: 'SAMEDI 27 JUIN',
+                dayPrice: '18€',
+                image: 'loudblast.jpg',
+                bio: "Légende du death metal français depuis 1985. 40 ans de brutalité sonore et toujours au sommet. Loudblast, c'est l'histoire du metal extrême en France.",
+                city: 'Lille',
+                genre: 'Death Metal',
+                since: 'Depuis 1985',
+                albums: ['"Altering Fates And Destinies" (2021)', '"Burial Ground"', '"Disincarnate"'],
+                ytLink: '🎥 YouTube : "Loudblast - Licensed to Thrash"',
+                tip: 'Les pères fondateurs du death metal français.',
+                reasons: ['40 ans de carrière légendaire', 'Pionniers du death metal français', 'Puissance sonore intacte', 'Un morceau d\'histoire du metal'],
+                quote: '"Loudblast, c\'est le respect."'
+            },
+            shaarghot: {
+                name: 'SHAÂRGHOT',
+                emoji: '🤖',
+                day: 'SAMEDI 27 JUIN',
+                dayPrice: '18€',
+                image: 'shaarghot.jpg',
+                bio: "Cyber metal parisien. Mi-homme, mi-machine, Shaârghot fusionne metal industriel, électro et visuels cyberpunk dans un show total.",
+                city: 'Paris',
+                genre: 'Cyber Metal',
+                since: 'Projet unique',
+                albums: ['"Protocol X"', '"Toxicum"', '"S.E.C.T"'],
+                ytLink: '🎥 YouTube : "Shaârghot - Born To Burn"',
+                tip: 'Un concert = une expérience visuelle totale.',
+                reasons: ['Show visuel cyberpunk unique', 'Fusion metal/électro dévastatrice', 'Costumes et mise en scène hallucinants', 'Rien de comparable sur scène'],
+                quote: '"Shaârghot, c\'est pas un concert, c\'est un film."'
+            },
+            akiavel: {
+                name: 'AKIAVEL',
+                emoji: '⚔️',
+                day: 'SAMEDI 27 JUIN',
+                dayPrice: '18€',
+                image: 'akiavel.jpg',
+                bio: "Death metal moderne au féminin. Akiavel frappe fort avec une brutalité chirurgicale et une présence scénique explosive.",
+                city: 'Sud-Est',
+                genre: 'Death Metal Moderne',
+                since: 'En pleine ascension',
+                albums: ['"V" (2024)', '"Blacklist"', '"Hatred Anthem"'],
+                ytLink: '🎥 YouTube : "Akiavel - Machiavel"',
+                tip: 'La relève du death metal français.',
+                reasons: ['Puissance et technique au sommet', 'Frontwoman charismatique', 'Death metal moderne et efficace', 'Tournée européenne confirmée'],
+                quote: '"Akiavel, ça défonce."'
+            },
+            kravboca: {
+                name: 'KRAV BOCA',
+                emoji: '🎻',
+                day: 'SAMEDI 27 JUIN',
+                dayPrice: '18€',
+                image: 'krav-boca.jpg',
+                bio: "Punk, rap et mandoline. Krav Boca mixe les genres avec une énergie contagieuse et des textes engagés qui font mouche.",
+                city: 'France',
+                genre: 'Punk Rap Mandoline',
+                since: 'Inclassables',
+                albums: ['EP "Krav Boca"', 'Singles récents'],
+                ytLink: '🎥 YouTube : Krav Boca live',
+                tip: 'Impossible à catégoriser, impossible à oublier.',
+                reasons: ['Mélange unique punk/rap/folk', 'Énergie scénique dingue', 'Textes engagés et percutants', 'Le groupe qu\'on n\'attend pas'],
+                quote: '"Krav Boca, tu connais pas mais tu vas kiffer."'
+            },
+            dirtyfonzy: {
+                name: 'DIRTY FONZY',
+                emoji: '🍺',
+                day: 'SAMEDI 27 JUIN',
+                dayPrice: '18€',
+                image: 'dirty-fonzy.jpg',
+                bio: "Punk rock festif depuis plus de 20 ans. Dirty Fonzy, c'est la garantie d'un bon moment, bière en main et pogo assuré.",
+                city: 'France',
+                genre: 'Punk Rock',
+                since: 'Depuis 20+ ans',
+                albums: ['Discographie punk rock', 'Nombreux lives'],
+                ytLink: '🎥 YouTube : Dirty Fonzy live',
+                tip: 'La bande-son parfaite pour une bière entre potes.',
+                reasons: ['20 ans de punk rock festif', 'Ambiance garantie', 'Classiques qui font pogotter', 'Le groupe qu\'on revoit toujours avec plaisir'],
+                quote: '"Dirty Fonzy = bonne ambiance garantie."'
+            },
+            mainkind: {
+                name: 'MAINKIND',
+                emoji: '🔊',
+                day: 'DIMANCHE 28 JUIN',
+                dayPrice: '5€',
+                image: 'mainkind.jpg',
+                bio: "Metal alternatif moderne. Mainkind propose un son heavy mélodique qui plaît aux amateurs de gros riffs comme aux mélomanes.",
+                city: 'France',
+                genre: 'Metal Alternatif',
+                since: 'Nouvelle génération',
+                albums: ['Album récent', 'EP'],
+                ytLink: '🎥 YouTube : Mainkind',
+                tip: 'Le metal accessible qui reste heavy.',
+                reasons: ['Gros son moderne', 'Mélodies accrocheuses', 'Perfect pour découvrir le metal', 'Dimanche en douceur (mais pas trop)'],
+                quote: '"Mainkind, c\'est le bon compromis."'
+            }
+        };
+
+        function loadArtist(key) {
+            const artist = artistsDB[key];
+            if (!artist) return;
+
+            // Update presets buttons
+            document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update all images
+            const bgImages = document.querySelectorAll('.slide-bg');
+            bgImages.forEach(img => {
+                img.src = `../../public/images/bands/${artist.image}`;
+            });
+
+            // Slide 1
+            document.getElementById('artistEmoji').textContent = artist.emoji;
+            document.getElementById('artistName').textContent = artist.name;
+            document.getElementById('artistDay').textContent = artist.day;
+
+            // Slide 2
+            document.getElementById('bioText').textContent = artist.bio;
+            document.getElementById('bioCity').textContent = artist.city;
+            document.getElementById('bioGenre').textContent = artist.genre;
+            document.getElementById('bioSince').textContent = artist.since;
+
+            // Slide 3
+            const albumList = document.getElementById('albumList');
+            albumList.innerHTML = artist.albums.map(a => `<li>${a}</li>`).join('');
+            document.getElementById('ytLink').textContent = artist.ytLink;
+            document.getElementById('listenTip').textContent = artist.tip;
+
+            // Slide 4
+            const reasonsList = document.getElementById('reasonsList');
+            reasonsList.innerHTML = artist.reasons.map(r => `<li>${r}</li>`).join('');
+            document.getElementById('quoteText').textContent = artist.quote;
+
+            // Slide 5
+            document.getElementById('ctaDay').textContent = artist.day.replace('VENDREDI', 'Vendredi').replace('SAMEDI', 'Samedi').replace('DIMANCHE', 'Dimanche');
+            document.getElementById('ctaDayPrice').textContent = artist.dayPrice;
+
+            // Update form fields
+            document.getElementById('inputName').value = artist.name;
+            document.getElementById('inputDay').value = artist.day;
+            document.getElementById('inputBio').value = artist.bio;
+        }
+
+        function updateSlide1() {
+            document.getElementById('artistName').textContent = document.getElementById('inputName').value;
+        }
+
+        function updateSlide2() {
+            document.getElementById('bioText').textContent = document.getElementById('inputBio').value;
+        }
+
+        function updateSlides() {
+            const day = document.getElementById('inputDay').value;
+            document.getElementById('artistDay').textContent = day;
+            document.getElementById('ctaDay').textContent = day.replace('VENDREDI', 'Vendredi').replace('SAMEDI', 'Samedi').replace('DIMANCHE', 'Dimanche');
+            
+            // Update price based on day
+            const prices = {
+                'VENDREDI 26 JUIN': '13€',
+                'SAMEDI 27 JUIN': '18€',
+                'DIMANCHE 28 JUIN': '5€'
+            };
+            document.getElementById('ctaDayPrice').textContent = prices[day] || '18€';
+        }
+    </script>
+
+</body>
+
+</html>

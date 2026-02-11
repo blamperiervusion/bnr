@@ -374,6 +374,139 @@ Proposer aux bars rock de la région :
 
 ---
 
+### 11. 📸 "DOUBLE VIE" - L'expo photo Barb'n'Rock ⭐ COUP DE CŒUR
+
+**Concept :** *"La semaine en cravate, le week-end en battle jacket"*
+
+Deux photos côte à côte de la même personne :
+- **GAUCHE** : Version "Bureau" - chemise, cravate, sourire corporate, fond neutre
+- **DROITE** : Version "Metal" - battle jacket, maquillage, cornes du diable, fond flammes
+
+#### Comment ça marche
+
+**Option 1 : Studio photo sur place**
+- Un coin dédié au village avec :
+  - Fond blanc + ring light (mode business)
+  - Fond noir/flammes + éclairage dramatique (mode metal)
+- Accessoires fournis : cravate, lunettes, chemise VS perruque, faux tatouages, maquillage
+- Photographe bénévole ou automatique (type photomaton)
+- Impression immédiate du diptyque
+
+**Option 2 : Participatif avant le festival**
+- Les gens envoient leurs photos "business" avant
+- Ils se font photographier en mode "metal" sur place
+- Montage réalisé et affiché pendant le festival
+
+#### L'exposition
+
+**Pendant le festival :**
+- Grand mur/panneau avec toutes les photos imprimées
+- Vote du public pour la "Double Vie" la plus marquante
+- Prix : Pass VIP 2027, séance chez un photographe pro
+
+**Après le festival :**
+- Galerie en ligne sur le site
+- Post Instagram/Facebook avec les meilleures
+- Potentiel expo itinérante (bars, salles de concert partenaires)
+
+#### Déclinaisons possibles
+
+| Thème | Business | Metal |
+|-------|----------|-------|
+| **Classique** | Costume-cravate | Battle jacket + cornes |
+| **Parent** | Poussette + sourire | Bébé avec casque anti-bruit |
+| **Couple** | Photo de mariage | Couple mode festival |
+| **Avant/Après** | Arrivée vendredi (frais) | Départ dimanche (détruit) |
+
+#### Logistique & coûts estimés
+
+| Élément | Coût estimé |
+|---------|-------------|
+| Fond photo + structure | 100-200€ |
+| Éclairage (ring light + spot) | 50-100€ |
+| Accessoires (cravates, perruques) | 50€ |
+| Imprimante photo portable | 150€ (ou location) |
+| Papier photo (200 impressions) | 80€ |
+| Panneau d'exposition | 100€ |
+| **TOTAL** | **~500-700€** |
+
+*Alternative low-cost : QR code → les gens envoient leurs photos via formulaire, affichage digital sur écran*
+
+#### Pourquoi ça va cartonner
+
+1. **Relatable** - Tous les metalleux connaissent cette double vie
+2. **Partageable** - "Regarde ma photo !" sur les réseaux
+3. **Humour** - Le contraste fait rire
+4. **Inclusif** - Tout le monde peut participer
+5. **Mémorable** - Les gens gardent leur photo
+6. **Storytelling** - Chaque photo raconte une histoire
+
+#### Hashtags suggérés
+- #DoubleVieBarbnRock
+- #BusinessByDayMetalByNight
+- #BarbnRock2026
+
+#### Communication autour
+
+**Avant le festival :**
+```
+📸 NOUVELLE ANIMATION 2026 : "DOUBLE VIE"
+
+La semaine en cravate, le week-end en battle jacket.
+
+On lance l'expo photo la plus metal de France.
+
+Envoie-nous ta photo "mode bureau" à doublevie@barbnrock-festival.fr
+On te prend en photo "mode metal" au festival.
+Résultat : un diptyque collector exposé au village !
+
+Les meilleures "Double Vie" gagneront un pass VIP 2027 🏆
+
+#DoubleVieBarbnRock
+```
+
+**Pendant le festival :**
+```
+📸 L'EXPO "DOUBLE VIE" EST EN PLACE !
+
+Passe au stand photo du village pour créer ton diptyque.
+
+La semaine → costard
+Le week-end → battle jacket
+
+Vote pour ta "Double Vie" préférée !
+🏆 La plus votée gagne un pass VIP 2027
+
+#DoubleVieBarbnRock
+```
+
+**Après le festival :**
+```
+📸 BEST-OF "DOUBLE VIE" 2026
+
+Vous avez été [X] à participer !
+Voici les meilleures transformations 🤘
+
+[Carrousel des meilleures photos]
+
+🏆 Grand gagnant : @[pseudo]
+Tu repars avec un pass VIP 2027 !
+
+Merci à tous, on remet ça en 2027 ?
+```
+
+#### Planning de mise en place
+
+| Quand | Action |
+|-------|--------|
+| **Avril** | Définir le setup, acheter le matériel |
+| **Mai** | Teaser sur les réseaux, appel à photos "business" |
+| **Juin S1** | Préparer l'espace, tester le setup |
+| **Festival** | Studio opérationnel, expo visible |
+| **Juillet** | Publication du best-of, galerie en ligne |
+
+---
+
 ## 📧 NEWSLETTER
 
 Si vous ne l'avez pas encore, créer une newsletter :
@@ -468,9 +601,21 @@ Seriez-vous intéressé ?
 - [ ] Chercher des partenaires locaux
 - [ ] Préparer le merch (si budget)
 - [ ] Créer la série "Groupe du jour"
+- [ ] **DOUBLE VIE** : Acheter matériel photo (budget ~500€)
+- [ ] **DOUBLE VIE** : Teaser sur les réseaux + appel photos "business"
 
 ### Avant le festival (Juin)
 - [ ] Calendrier de l'Avent inversé
 - [ ] Posts "Derrière les coulisses"
 - [ ] FAQ vidéo
 - [ ] Témoignages festivaliers des années passées
+- [ ] **DOUBLE VIE** : Préparer l'espace expo + tester le setup
+
+### Pendant le festival
+- [ ] **DOUBLE VIE** : Studio photo opérationnel au village
+- [ ] **DOUBLE VIE** : Afficher les photos sur le mur d'expo
+- [ ] **DOUBLE VIE** : Vote du public + annonce gagnant
+
+### Après le festival (Juillet)
+- [ ] **DOUBLE VIE** : Publier le best-of sur les réseaux
+- [ ] **DOUBLE VIE** : Créer la galerie en ligne

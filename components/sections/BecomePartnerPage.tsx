@@ -14,11 +14,35 @@ export default function BecomePartnerPage() {
     tier: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send to an API or email service
-    alert('Merci pour votre intérêt ! Nous vous contacterons très bientôt.');
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'partenaire',
+          ...formData,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ company: '', contact: '', email: '', phone: '', tier: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -373,9 +397,29 @@ export default function BecomePartnerPage() {
               />
             </div>
 
+            {submitStatus === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-green-500/20 border border-green-500/50 text-green-400 px-4 py-3 rounded-lg text-center"
+              >
+                ✅ Merci ! Votre demande a bien été envoyée. Nous vous recontacterons rapidement.
+              </motion.div>
+            )}
+
+            {submitStatus === 'error' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-red-500/20 border border-red-500/50 text-red-400 px-4 py-3 rounded-lg text-center"
+              >
+                ❌ Une erreur est survenue. Veuillez réessayer ou nous contacter par email.
+              </motion.div>
+            )}
+
             <div className="text-center">
-              <Button type="submit" size="lg">
-                Envoyer ma demande
+              <Button type="submit" size="lg" disabled={isSubmitting}>
+                {isSubmitting ? '⏳ Envoi en cours...' : 'Envoyer ma demande'}
               </Button>
             </div>
           </motion.form>

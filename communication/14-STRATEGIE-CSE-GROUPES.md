@@ -1,5 +1,14 @@
 # STRATÉGIE CSE & GROUPES
 
+## L'ORGANISATEUR
+
+**Association Crépicordienne pour la Promotion de la Culture (ACPC)**
+- Association loi 1901, créée en 2023
+- Co-organisé avec BVFR Charity et la commune de Crèvecœur-le-Grand
+- Festival engagé : 50% de groupes locaux, tri des déchets, produits consignés, 10% des ventes du village reversés à une association
+
+---
+
 ## POURQUOI CIBLER LES CSE ?
 
 Les CSE (Comités Sociaux et Économiques) ont :

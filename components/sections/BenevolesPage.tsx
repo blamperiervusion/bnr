@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { SectionTitle, Button, Card } from '@/components/ui';
 
 const missions = [
@@ -51,7 +52,74 @@ const advantages = [
   { icon: '🤝', text: 'Une expérience humaine unique' },
 ];
 
+const disponibiliteOptions = [
+  { id: 'vendredi', label: 'Vendredi 26 juin' },
+  { id: 'samedi', label: 'Samedi 27 juin' },
+  { id: 'dimanche', label: 'Dimanche 28 juin' },
+  { id: 'montage', label: 'Montage (avant festival)' },
+  { id: 'demontage', label: 'Démontage (après festival)' },
+];
+
 export default function BenevolesPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    age: '',
+    disponibilites: [] as string[],
+    missions: [] as string[],
+    experience: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleDispoChange = (id: string) => {
+    setFormData(prev => ({
+      ...prev,
+      disponibilites: prev.disponibilites.includes(id)
+        ? prev.disponibilites.filter(d => d !== id)
+        : [...prev.disponibilites, id],
+    }));
+  };
+
+  const handleMissionChange = (id: string) => {
+    setFormData(prev => ({
+      ...prev,
+      missions: prev.missions.includes(id)
+        ? prev.missions.filter(m => m !== id)
+        : [...prev.missions, id],
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'benevole',
+          ...formData,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', phone: '', age: '', disponibilites: [], missions: [], experience: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="pt-24 pb-16">
       {/* Hero */}
@@ -225,44 +293,210 @@ export default function BenevolesPage() {
         </div>
       </section>
 
-      {/* CTA - Registration */}
-      <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="relative bg-gradient-to-r from-[var(--accent-purple)]/20 to-[var(--accent-pink)]/20 border border-[var(--border)] rounded-2xl p-12 text-center overflow-hidden"
-          >
-            {/* Decorative */}
-            <div className="absolute top-4 right-4 text-6xl opacity-20">🤘</div>
-            <div className="absolute bottom-4 left-4 text-6xl opacity-20">🎸</div>
-            
-            <div className="relative z-10">
-              <h2 className="font-display text-4xl md:text-5xl text-[var(--foreground)] mb-4">
-                PRÊT À NOUS REJOINDRE ?
-              </h2>
-              <p className="text-lg text-[var(--muted-foreground)] mb-8 max-w-xl mx-auto">
-                Inscris-toi dès maintenant via notre formulaire en ligne. 
-                Les places sont limitées, alors n&apos;attends pas !
-              </p>
-              
-              <Button
-                href="https://forms.gle/barbnrock-benevoles"
-                external
-                size="lg"
-              >
-                🙋 S&apos;inscrire comme bénévole
-              </Button>
+      {/* Registration Form */}
+      <section className="py-20 px-4" id="inscription">
+        <div className="max-w-3xl mx-auto">
+          <SectionTitle subtitle="Remplis le formulaire ci-dessous">
+            🙋 Inscription bénévole
+          </SectionTitle>
 
-              <p className="text-sm text-[var(--muted-foreground)] mt-6">
-                Questions ? Écris-nous à{' '}
-                <a href="mailto:benevoles@barbnrock-festival.fr" className="text-[var(--accent-red)] hover:underline">
-                  benevoles@barbnrock-festival.fr
-                </a>
-              </p>
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            onSubmit={handleSubmit}
+            className="mt-12 space-y-6"
+          >
+            {/* Infos personnelles */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+                  Nom & Prénom *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-lg text-[var(--foreground)] focus:border-[var(--accent-purple)] focus:outline-none transition-colors"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-lg text-[var(--foreground)] focus:border-[var(--accent-purple)] focus:outline-none transition-colors"
+                />
+              </div>
             </div>
-          </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+                  Téléphone *
+                </label>
+                <input
+                  type="tel"
+                  required
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-lg text-[var(--foreground)] focus:border-[var(--accent-purple)] focus:outline-none transition-colors"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+                  Âge *
+                </label>
+                <input
+                  type="number"
+                  required
+                  min="18"
+                  value={formData.age}
+                  onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+                  className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-lg text-[var(--foreground)] focus:border-[var(--accent-purple)] focus:outline-none transition-colors"
+                />
+              </div>
+            </div>
+
+            {/* Disponibilités */}
+            <div>
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-3">
+                Disponibilités *
+              </label>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {disponibiliteOptions.map((option) => (
+                  <label
+                    key={option.id}
+                    className={`flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-all ${
+                      formData.disponibilites.includes(option.id)
+                        ? 'bg-[var(--accent-purple)]/20 border-[var(--accent-purple)]'
+                        : 'bg-[var(--muted)] border-[var(--border)] hover:border-[var(--accent-purple)]/50'
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={formData.disponibilites.includes(option.id)}
+                      onChange={() => handleDispoChange(option.id)}
+                      className="sr-only"
+                    />
+                    <span className={`text-sm ${
+                      formData.disponibilites.includes(option.id)
+                        ? 'text-[var(--foreground)]'
+                        : 'text-[var(--muted-foreground)]'
+                    }`}>
+                      {option.label}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Missions souhaitées */}
+            <div>
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-3">
+                Missions souhaitées (plusieurs choix possibles) *
+              </label>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {missions.map((mission) => (
+                  <label
+                    key={mission.id}
+                    className={`flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-all ${
+                      formData.missions.includes(mission.id)
+                        ? 'bg-[var(--accent-cyan)]/20 border-[var(--accent-cyan)]'
+                        : 'bg-[var(--muted)] border-[var(--border)] hover:border-[var(--accent-cyan)]/50'
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={formData.missions.includes(mission.id)}
+                      onChange={() => handleMissionChange(mission.id)}
+                      className="sr-only"
+                    />
+                    <span className="text-xl">{mission.icon}</span>
+                    <span className={`text-sm ${
+                      formData.missions.includes(mission.id)
+                        ? 'text-[var(--foreground)]'
+                        : 'text-[var(--muted-foreground)]'
+                    }`}>
+                      {mission.title}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Expérience */}
+            <div>
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+                As-tu déjà été bénévole en festival ?
+              </label>
+              <textarea
+                rows={3}
+                value={formData.experience}
+                onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
+                placeholder="Si oui, dis-nous où et quand..."
+                className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-lg text-[var(--foreground)] focus:border-[var(--accent-purple)] focus:outline-none transition-colors resize-none"
+              />
+            </div>
+
+            {/* Message */}
+            <div>
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+                Un message pour nous ?
+              </label>
+              <textarea
+                rows={3}
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                placeholder="Motivations, questions, infos complémentaires..."
+                className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-lg text-[var(--foreground)] focus:border-[var(--accent-purple)] focus:outline-none transition-colors resize-none"
+              />
+            </div>
+
+            {/* Status messages */}
+            {submitStatus === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-green-500/20 border border-green-500/50 text-green-400 px-4 py-3 rounded-lg text-center"
+              >
+                ✅ Merci pour ta candidature ! Nous te recontacterons très bientôt.
+              </motion.div>
+            )}
+
+            {submitStatus === 'error' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-red-500/20 border border-red-500/50 text-red-400 px-4 py-3 rounded-lg text-center"
+              >
+                ❌ Une erreur est survenue. Réessaie ou contacte-nous par email.
+              </motion.div>
+            )}
+
+            {/* Submit */}
+            <div className="text-center">
+              <Button 
+                type="submit" 
+                size="lg" 
+                disabled={isSubmitting || formData.disponibilites.length === 0 || formData.missions.length === 0}
+              >
+                {isSubmitting ? '⏳ Envoi en cours...' : '🙋 Envoyer ma candidature'}
+              </Button>
+            </div>
+          </motion.form>
+
+          <p className="text-center text-sm text-[var(--muted-foreground)] mt-8">
+            Questions ? Écris-nous à{' '}
+            <a href="mailto:benevoles@barbnrock-festival.fr" className="text-[var(--accent-red)] hover:underline">
+              benevoles@barbnrock-festival.fr
+            </a>
+          </p>
         </div>
       </section>
     </div>

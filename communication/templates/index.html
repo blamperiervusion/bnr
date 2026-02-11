@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates Social Media - Barb'n'Rock 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap');
+
+        :root {
+            --bg-dark: #0a0c0f;
+            --text-light: #f0f0f0;
+            --text-muted: #8b9299;
+            --accent-cyan: #00E5CC;
+            --accent-orange: #E85D04;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0c0f, #1a1a2e);
+            min-height: 100vh;
+            color: white;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(180deg, rgba(0, 229, 204, 0.1) 0%, transparent 100%);
+        }
+
+        .header-logo {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 64px;
+            letter-spacing: 8px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 18px;
+        }
+
+        .header .highlight {
+            color: var(--accent-cyan);
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            color: var(--accent-orange);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Grid */
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Card */
+        .template-card {
+            background: #1a1f25;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 229, 204, 0.2);
+        }
+
+        .card-preview {
+            height: 200px;
+            background: linear-gradient(135deg, #2a2f35, #1a1f25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-preview::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(26, 31, 37, 1) 100%);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .card-description {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(0, 229, 204, 0.1);
+            color: var(--accent-cyan);
+        }
+
+        .tag.orange {
+            background: rgba(232, 93, 4, 0.1);
+            color: var(--accent-orange);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Export tips */
+        .tips-section {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .tips-box {
+            background: #1a1f25;
+            border-radius: 16px;
+            padding: 30px;
+            border-left: 4px solid var(--accent-cyan);
+        }
+
+        .tips-box h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: var(--accent-cyan);
+        }
+
+        .tips-box ol {
+            margin-left: 20px;
+            color: var(--text-muted);
+            line-height: 2;
+        }
+
+        .tips-box code {
+            background: rgba(0, 229, 204, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: var(--accent-cyan);
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="header-logo">
+        <h1>TEMPLATES SOCIAL MEDIA</h1>
+        <p>Tous les visuels pour la communication <span class="highlight">Barb'n'Rock 2026</span></p>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">36</div>
+                <div class="stat-label">Posts prévus</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">24</div>
+                <div class="stat-label">Carrousels</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">76</div>
+                <div class="stat-label">Stories</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">14</div>
+                <div class="stat-label">Reels</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Templates Grid -->
+    <div class="templates-grid">
+
+        <!-- Générateur Complet -->
+        <a href="generateur-complet.html" class="template-card" style="grid-column: span 2; border: 2px solid var(--accent-cyan);">
+            <div class="card-preview" style="background: linear-gradient(135deg, #E1306C, #1877F2, #00f2ea);">⭐</div>
+            <div class="card-content">
+                <h2 class="card-title">GÉNÉRATEUR COMPLET ⭐ RECOMMANDÉ</h2>
+                <p class="card-description">
+                    <strong>Tous les posts + textes associés en un seul endroit.</strong> 35+ posts prêts à l'emploi avec captions recommandées. Multi-plateforme (Instagram, Facebook, TikTok) et multi-format (carré, portrait, story).
+                </p>
+                <div class="card-tags">
+                    <span class="tag" style="background: rgba(225, 48, 108, 0.2); color: #E1306C;">Instagram</span>
+                    <span class="tag" style="background: rgba(24, 119, 242, 0.2); color: #1877F2;">Facebook</span>
+                    <span class="tag" style="background: rgba(0, 242, 234, 0.2); color: #00f2ea;">TikTok</span>
+                    <span class="tag orange">35+ posts</span>
+                    <span class="tag">Textes inclus</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Générateur Multi-Format -->
+        <a href="generateur-multiformat.html" class="template-card">
+            <div class="card-preview" style="background: linear-gradient(135deg, #2a2f35, #1a1f25);">🎯</div>
+            <div class="card-content">
+                <h2 class="card-title">GÉNÉRATEUR MULTI-FORMAT</h2>
+                <p class="card-description">
+                    Version simplifiée pour créer rapidement des visuels personnalisés. Tous les formats de plateformes disponibles.
+                </p>
+                <div class="card-tags">
+                    <span class="tag orange">8 formats</span>
+                    <span class="tag">Personnalisable</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Générateur de Posts -->
+        <a href="generateur-posts.html" class="template-card">
+            <div class="card-preview">🎨</div>
+            <div class="card-content">
+                <h2 class="card-title">GÉNÉRATEUR DE POSTS</h2>
+                <p class="card-description">
+                    Tous les types de posts en un seul endroit : Prix, Countdown, Urgence, Différenciation, Concours, Village, Post-Hellfest, Merci...
+                </p>
+                <div class="card-tags">
+                    <span class="tag">10 catégories</span>
+                    <span class="tag orange">1080×1080</span>
+                    <span class="tag">Stories incluses</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Post Annonce Artiste -->
+        <a href="post-annonce-artiste.html" class="template-card">
+            <div class="card-preview">🎤</div>
+            <div class="card-content">
+                <h2 class="card-title">POST ANNONCE ARTISTE</h2>
+                <p class="card-description">
+                    Template unitaire pour annoncer un nouvel artiste. Panneau de contrôle pour personnaliser nom, genre, jour et image.
+                </p>
+                <div class="card-tags">
+                    <span class="tag">12 artistes</span>
+                    <span class="tag orange">1080×1080</span>
+                    <span class="tag">Auto-remplissage</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Batch Posts Annonces -->
+        <a href="batch-posts-annonces.html" class="template-card">
+            <div class="card-preview">📋</div>
+            <div class="card-content">
+                <h2 class="card-title">BATCH ANNONCES ARTISTES</h2>
+                <p class="card-description">
+                    Vue de tous les posts d'annonce artistes en une seule page. Idéal pour comparer et exporter en lot.
+                </p>
+                <div class="card-tags">
+                    <span class="tag">12 posts</span>
+                    <span class="tag orange">Vue miniature</span>
+                    <span class="tag">Code couleur par jour</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Carrousel Artiste -->
+        <a href="carrousel-artiste.html" class="template-card">
+            <div class="card-preview">🎸</div>
+            <div class="card-content">
+                <h2 class="card-title">CARROUSEL ARTISTE</h2>
+                <p class="card-description">
+                    5 slides par artiste : Accroche, Bio, À écouter, Pourquoi les voir, CTA. Données pré-remplies pour 8 artistes.
+                </p>
+                <div class="card-tags">
+                    <span class="tag">5 slides</span>
+                    <span class="tag orange">1080×1350</span>
+                    <span class="tag">8 artistes</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Carrousels Thématiques -->
+        <a href="carrousels-thematiques.html" class="template-card">
+            <div class="card-preview">🍺</div>
+            <div class="card-content">
+                <h2 class="card-title">CARROUSELS THÉMATIQUES</h2>
+                <p class="card-description">
+                    Village du chaos, Animations (Barbe Contest, Air Guitar), Comment venir (accès), Best-of post-festival.
+                </p>
+                <div class="card-tags">
+                    <span class="tag">4 carrousels</span>
+                    <span class="tag orange">1080×1350</span>
+                    <span class="tag">5 slides chacun</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Vidéo Annonce Artiste -->
+        <a href="video-annonce-artiste.html" class="template-card" style="border: 2px solid var(--accent-orange);">
+            <div class="card-preview" style="background: linear-gradient(135deg, #E85D04, #ff6b1a);">🎬</div>
+            <div class="card-content">
+                <h2 class="card-title">VIDÉO ANNONCE ARTISTE 🆕</h2>
+                <p class="card-description">
+                    <strong>Animations + vidéo YouTube en fond.</strong> Crée des Reels/TikTok avec des effets animés (zoom, glitch, fade) sur un extrait de clip. Screen record et ajoute le son.
+                </p>
+                <div class="card-tags">
+                    <span class="tag" style="background: rgba(0, 242, 234, 0.2); color: #00f2ea;">TikTok</span>
+                    <span class="tag" style="background: rgba(225, 48, 108, 0.2); color: #E1306C;">Reels</span>
+                    <span class="tag orange">1080×1920</span>
+                    <span class="tag">6 presets artistes</span>
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+    <!-- Tips Section -->
+    <div class="tips-section">
+        <div class="tips-box">
+            <h3>📋 COMMENT EXPORTER LES VISUELS</h3>
+            <ol>
+                <li>Ouvrir le template dans Chrome/Firefox</li>
+                <li>Clic droit sur le visuel → <strong>Inspecter</strong></li>
+                <li>Dans le panneau DevTools, repérer l'élément <code>.post</code> ou <code>.slide</code></li>
+                <li>Clic droit sur l'élément → <strong>Capture node screenshot</strong></li>
+                <li>L'image est téléchargée automatiquement !</li>
+            </ol>
+            <p style="margin-top: 15px; color: var(--text-muted); font-size: 13px;">
+                <strong>Astuce :</strong> Pour avoir la taille réelle (1080px), utilisez le template unitaire plutôt que les vues batch/miniatures.
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>
+            Barb'n'Rock Festival 2026 • 26-28 Juin • Crèvecœur-le-Grand
+            <br>
+            <a href="../../public/images/">📁 Dossier images</a> • 
+            <a href="../02-PLANNING-POSTS.md">📅 Planning des posts</a> • 
+            <a href="../03-TEXTES-POSTS.md">📝 Textes des posts</a>
+        </p>
+    </div>
+
+</body>
+
+</html>

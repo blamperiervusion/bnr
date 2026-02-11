@@ -1,0 +1,2954 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur Complet - Barb'n'Rock 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap');
+
+        :root {
+            --bg-dark: #0a0c0f;
+            --bg-card: #1a1f25;
+            --text-light: #f0f0f0;
+            --text-muted: #8b9299;
+            --accent-cyan: #00E5CC;
+            --accent-orange: #E85D04;
+            --accent-gold: #FFD700;
+            --instagram: #E1306C;
+            --facebook: #1877F2;
+            --tiktok: #00f2ea;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0d0d0d;
+            min-height: 100vh;
+            color: white;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--bg-dark), #1a1a2e);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-cyan);
+        }
+
+        .header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 3px;
+        }
+
+        .header-platforms {
+            display: flex;
+            gap: 8px;
+        }
+
+        .platform-btn {
+            padding: 8px 16px;
+            background: #2a2a2a;
+            border: 2px solid #444;
+            border-radius: 20px;
+            color: #999;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .platform-btn:hover {
+            background: #3a3a3a;
+        }
+
+        .platform-btn.active {
+            border-color: var(--accent-cyan);
+            color: white;
+            background: rgba(0, 229, 204, 0.1);
+        }
+
+        .platform-btn.instagram.active {
+            border-color: var(--instagram);
+            background: rgba(225, 48, 108, 0.1);
+        }
+
+        .platform-btn.facebook.active {
+            border-color: var(--facebook);
+            background: rgba(24, 119, 242, 0.1);
+        }
+
+        .platform-btn.tiktok.active {
+            border-color: var(--tiktok);
+            background: rgba(0, 242, 234, 0.1);
+        }
+
+        /* Main Layout */
+        .main-layout {
+            display: flex;
+            height: calc(100vh - 70px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            min-width: 280px;
+            background: #151515;
+            border-right: 1px solid #2a2a2a;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 15px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .sidebar-search {
+            width: 100%;
+            padding: 10px 15px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: white;
+            font-size: 13px;
+        }
+
+        .sidebar-search::placeholder {
+            color: #666;
+        }
+
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .sidebar-section-title {
+            padding: 12px 15px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-section-title:hover {
+            background: #1a1a1a;
+        }
+
+        .sidebar-section-content {
+            display: none;
+        }
+
+        .sidebar-section.open .sidebar-section-content {
+            display: block;
+        }
+
+        .post-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .post-item:hover {
+            background: #1a1a1a;
+        }
+
+        .post-item.active {
+            background: rgba(0, 229, 204, 0.1);
+            border-left-color: var(--accent-cyan);
+        }
+
+        .post-item-title {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+
+        .post-item-meta {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* Center - Preview */
+        .preview-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: #111;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .format-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Slides selector (stories & carrousels) */
+        .slides-selector {
+            display: none;
+            gap: 8px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .slides-selector.visible {
+            display: flex;
+        }
+
+        .slides-selector-label {
+            font-size: 11px;
+            color: #666;
+            margin-right: 5px;
+        }
+
+        .slide-btn {
+            width: 36px;
+            height: 36px;
+            background: #222;
+            border: 2px solid #444;
+            border-radius: 50%;
+            color: #888;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .slide-btn:hover {
+            background: #333;
+        }
+
+        .slide-btn.active {
+            border-color: var(--accent-cyan);
+            color: white;
+            background: rgba(0, 229, 204, 0.2);
+        }
+
+        .slide-btn.carrousel.active {
+            border-color: var(--accent-orange);
+            background: rgba(232, 93, 4, 0.2);
+        }
+
+        .format-btn {
+            padding: 6px 14px;
+            background: #222;
+            border: 1px solid #444;
+            border-radius: 15px;
+            color: #888;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .format-btn:hover {
+            background: #333;
+        }
+
+        .format-btn.active {
+            border-color: var(--accent-orange);
+            color: white;
+            background: rgba(232, 93, 4, 0.1);
+        }
+
+        /* Post Container */
+        .post-container {
+            position: relative;
+        }
+
+        .post {
+            width: 400px;
+            height: 400px;
+            background: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --padding: 25px;
+            --badge-size: 14px;
+            --logo-size: 50px;
+            --main-size: 72px;
+            --sub-size: 14px;
+            --desc-size: 13px;
+            --date-size: 16px;
+            --location-size: 11px;
+            --cta-size: 14px;
+            --corner-size: 50px;
+        }
+
+        .post-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            filter: grayscale(10%);
+        }
+
+        .post-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(10, 12, 15, 0.1) 0%, rgba(10, 12, 15, 0.4) 50%, rgba(10, 12, 15, 0.9) 100%);
+        }
+
+        .post-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: var(--padding);
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .post-badge {
+            background: var(--accent-orange);
+            color: white;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: var(--badge-size);
+            letter-spacing: 2px;
+            padding: 6px 12px;
+            transform: rotate(-2deg);
+        }
+
+        .post-badge.cyan {
+            background: var(--accent-cyan);
+            color: black;
+        }
+
+        .post-badge.gold {
+            background: var(--accent-gold);
+            color: black;
+        }
+
+        .post-logo {
+            width: var(--logo-size);
+            height: auto;
+        }
+
+        .post-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .main-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: var(--main-size);
+            color: var(--text-light);
+            letter-spacing: 4px;
+            line-height: 1.1;
+            text-shadow: 0 0 40px rgba(0, 229, 204, 0.4);
+        }
+
+        .main-text.price {
+            color: var(--accent-orange);
+            text-shadow: 0 0 40px rgba(232, 93, 4, 0.5);
+        }
+
+        .main-text.countdown {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 60px rgba(0, 229, 204, 0.6);
+        }
+
+        .main-text .accent {
+            color: var(--accent-cyan);
+        }
+
+        .main-text .accent-orange {
+            color: var(--accent-orange);
+        }
+
+        .sub-text {
+            font-size: var(--sub-size);
+            color: var(--text-light);
+            margin-top: 8px;
+        }
+
+        .desc-text {
+            font-size: var(--desc-size);
+            color: var(--text-muted);
+            margin-top: 12px;
+            line-height: 1.4;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .post-date {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: var(--date-size);
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+
+        .post-location {
+            font-size: var(--location-size);
+            color: var(--text-muted);
+        }
+
+        .cta-box {
+            background: var(--accent-orange);
+            color: white;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: var(--cta-size);
+            letter-spacing: 2px;
+            padding: 8px 18px;
+            border-radius: 20px;
+        }
+
+        .corner-accent {
+            position: absolute;
+            width: var(--corner-size);
+            height: var(--corner-size);
+            border: 2px solid var(--accent-orange);
+            opacity: 0.3;
+        }
+
+        .corner-accent.top-left {
+            top: 12px;
+            left: 12px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-accent.bottom-right {
+            bottom: 12px;
+            right: 12px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* TikTok elements */
+        .tiktok-sidebar {
+            position: absolute;
+            bottom: 100px;
+            right: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .tiktok-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .tiktok-bottom {
+            position: absolute;
+            bottom: 15px;
+            left: 12px;
+            right: 60px;
+            z-index: 100;
+        }
+
+        .tiktok-user {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .tiktok-desc {
+            font-size: 12px;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        /* Right Panel - Text */
+        .text-panel {
+            width: 380px;
+            min-width: 380px;
+            background: #151515;
+            border-left: 1px solid #2a2a2a;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .text-panel-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #2a2a2a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .text-panel-header h3 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .copy-btn {
+            padding: 6px 12px;
+            background: var(--accent-cyan);
+            color: black;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            background: #00d4bd;
+        }
+
+        .text-panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .text-section {
+            margin-bottom: 25px;
+        }
+
+        .text-section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .text-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-light);
+            white-space: pre-wrap;
+        }
+
+        .text-box.caption {
+            min-height: 200px;
+        }
+
+        .hashtags {
+            color: var(--accent-cyan);
+            font-size: 12px;
+        }
+
+        .edit-btn {
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: #222;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #888;
+            font-size: 12px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .edit-btn:hover {
+            background: #333;
+            color: white;
+        }
+
+        /* Controls */
+        .controls-section {
+            padding: 15px 20px;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .control-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .control-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .control-group {
+            flex: 1;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .control-group select,
+        .control-group input {
+            width: 100%;
+            padding: 8px 10px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: white;
+            font-size: 12px;
+        }
+
+        /* Scale info */
+        .scale-info {
+            position: absolute;
+            bottom: 15px;
+            font-size: 11px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>🎨 GÉNÉRATEUR COMPLET</h1>
+        <div class="header-platforms">
+            <button class="platform-btn instagram active" onclick="setPlatform('instagram')">📸 Instagram</button>
+            <button class="platform-btn facebook" onclick="setPlatform('facebook')">📘 Facebook</button>
+            <button class="platform-btn tiktok" onclick="setPlatform('tiktok')">🎵 TikTok</button>
+        </div>
+    </div>
+
+    <div class="main-layout">
+
+        <!-- Sidebar - Liste des posts -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <input type="text" class="sidebar-search" placeholder="🔍 Rechercher un post..."
+                    oninput="filterPosts(this.value)">
+            </div>
+            <div class="sidebar-content" id="posts-list">
+                <!-- Généré par JS -->
+            </div>
+        </div>
+
+        <!-- Preview -->
+        <div class="preview-area">
+            <div class="format-selector" id="format-selector">
+                <button class="format-btn active" data-format="carre" onclick="setFormat('carre')">◼️ Carré
+                    1080²</button>
+                <button class="format-btn" data-format="portrait" onclick="setFormat('portrait')">▮ Portrait
+                    1080×1350</button>
+                <button class="format-btn" data-format="carrousel" onclick="setFormat('carrousel')">🎠
+                    Carrousel</button>
+                <button class="format-btn" data-format="story" onclick="setFormat('story')">📱 Story 1080×1920</button>
+            </div>
+
+            <!-- Slides selector (stories & carrousels) -->
+            <div class="slides-selector" id="slides-selector">
+                <span class="slides-selector-label" id="slides-label">Slide :</span>
+                <button class="slide-btn active" data-slide="1" onclick="setSlide(1)">1</button>
+                <button class="slide-btn" data-slide="2" onclick="setSlide(2)">2</button>
+                <button class="slide-btn" data-slide="3" onclick="setSlide(3)">3</button>
+                <button class="slide-btn" data-slide="4" onclick="setSlide(4)">4</button>
+                <button class="slide-btn" data-slide="5" onclick="setSlide(5)">5</button>
+            </div>
+
+            <div class="post-container">
+                <div class="post" id="post">
+                    <!-- TikTok elements -->
+                    <div class="tiktok-sidebar" id="tiktok-sidebar" style="display: none;">
+                        <div class="tiktok-icon">❤️</div>
+                        <div class="tiktok-icon">💬</div>
+                        <div class="tiktok-icon">↗️</div>
+                    </div>
+                    <div class="tiktok-bottom" id="tiktok-bottom" style="display: none;">
+                        <div class="tiktok-user">@barbnrock</div>
+                        <div class="tiktok-desc" id="tiktok-desc">🔥 Le chaos arrive</div>
+                    </div>
+
+                    <img src="../../public/images/hero-visual.jpg" alt="" class="post-bg" id="post-bg">
+                    <div class="post-overlay"></div>
+                    <div class="corner-accent top-left"></div>
+                    <div class="corner-accent bottom-right"></div>
+
+                    <div class="post-content">
+                        <div class="post-header">
+                            <div class="post-badge" id="post-badge">EARLY BIRD</div>
+                            <img src="../../public/images/logo.png" alt="" class="post-logo">
+                        </div>
+                        <div class="post-main">
+                            <div class="main-text" id="main-text">36€</div>
+                            <div class="sub-text" id="sub-text">Pass 3 jours</div>
+                            <div class="desc-text" id="desc-text">18 groupes • Camping GRATUIT</div>
+                        </div>
+                        <div class="post-footer">
+                            <div>
+                                <div class="post-date">26-28 JUIN 2026</div>
+                                <div class="post-location">Crèvecœur-le-Grand</div>
+                            </div>
+                            <div class="cta-box" id="cta-box">LIEN EN BIO</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scale-info" id="scale-info">Échelle 1:2.7 • 1080×1080px</div>
+        </div>
+
+        <!-- Text Panel -->
+        <div class="text-panel">
+            <div class="text-panel-header">
+                <h3>📝 Texte du post</h3>
+                <button class="copy-btn" onclick="copyText()">📋 Copier tout</button>
+            </div>
+            <div class="text-panel-content">
+                <div class="text-section">
+                    <div class="text-section-title">Caption recommandée</div>
+                    <div class="text-box caption" id="caption-text">36€.
+
+                        Pass 3 jours.
+                        Camping gratuit.
+                        18 GROUPES.
+
+                        On répète : TRENTE-SIX EUROS.
+
+                        2 jours de chaos, 1 jour de repos.
+                        26-28 Juin • Crèvecœur-le-Grand
+
+                        🎫 Lien en bio</div>
+                </div>
+                <div class="text-section">
+                    <div class="text-section-title">Hashtags</div>
+                    <div class="text-box hashtags" id="hashtags-text">#BarbnRock #BarbnRock2026 #FestivalMetal
+                        #MetalFrancais #PunkRock #DeathMetal #FestivalOise #Picardie #HautsDeFrance #Festival2026</div>
+                </div>
+            </div>
+            <div class="controls-section">
+                <div class="control-row">
+                    <div class="control-group">
+                        <label>Image de fond</label>
+                        <select id="bg-select" onchange="updateBg()">
+                            <option value="hero-visual.jpg">Hero Visual</option>
+                            <option value="bands/psykup.jpg">Psykup</option>
+                            <option value="bands/cachemire.jpg">Cachemire</option>
+                            <option value="bands/loudblast.jpg">Loudblast</option>
+                            <option value="bands/shaarghot.jpg">Shaârghot</option>
+                            <option value="bands/akiavel.jpg">Akiavel</option>
+                            <option value="bands/krav-boca.jpg">Krav Boca</option>
+                            <option value="bands/dirty-fonzy.jpg">Dirty Fonzy</option>
+                            <option value="bands/mainkind.jpg">Mainkind</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // ==================== BASE DE DONNÉES DES POSTS ====================
+        const postsDB = {
+            // BILLETTERIE
+            billetterie: {
+                title: "💰 Billetterie",
+                posts: [
+                    {
+                        id: "prix-choc",
+                        title: "Prix Choc 36€",
+                        badge: "EARLY BIRD",
+                        mainText: "36€",
+                        mainClass: "price",
+                        subText: "Pass 3 jours",
+                        descText: "18 groupes • Camping GRATUIT",
+                        bg: "hero-visual.jpg",
+                        caption: `36€.
+
+Pass 3 jours.
+Camping gratuit.
+18 GROUPES.
+
+On répète : TRENTE-SIX EUROS.
+
+2 jours de chaos, 1 jour de repos.
+26-28 Juin • Crèvecœur-le-Grand
+
+🎫 Lien en bio`
+                    },
+                    {
+                        id: "prix-comparatif",
+                        title: "Comparatif vie quotidienne",
+                        badge: "💰 LE CALCUL",
+                        mainText: "36€",
+                        mainClass: "price",
+                        subText: "= 3 pizzas = 2 ciné",
+                        descText: "Le choix est vite fait 🤘",
+                        bg: "hero-visual.jpg",
+                        caption: `🧮 Faisons les comptes :
+
+36€ = Pass 3 jours Barb'n'Rock
+36€ = 3 pizzas livrées
+36€ = 2 places de ciné + popcorn
+36€ = 4 pintes à Paris
+36€ = 1 plein de courses
+
+Le choix est vite fait non ? 🤘
+
+2 jours de chaos, 1 jour de repos.
+Camping GRATUIT.
+
+🎫 Lien en bio`
+                    },
+                    {
+                        id: "prix-detail",
+                        title: "Prix par jour",
+                        badge: "TARIFS",
+                        mainText: "13€",
+                        mainClass: "price",
+                        subText: "Vendredi",
+                        descText: "22€ Samedi • 33€ Ven+Sam • 36€ Pass 3j",
+                        bg: "hero-visual.jpg",
+                        caption: `Le détail qui tue 👇
+
+🔥 Vendredi (Psykup + Cachemire + ...) : 13€
+🔥 Samedi (Loudblast + Shaârghot + ...) : 22€
+🔥 Les deux jours de chaos : 33€
+🔥 Pass 3 jours complet : 36€
+
+Oui, c'est vraiment ces prix-là.
+Oui, le camping est gratuit.
+Non, y'a pas d'arnaque.
+
+26-28 Juin • Crèvecœur-le-Grand
+
+🎫 Lien en bio`
+                    },
+                    {
+                        id: "very-early-epuise",
+                        title: "Very Early Bird épuisés",
+                        badge: "🔥 SOLD OUT",
+                        badgeClass: "cyan",
+                        mainText: "VERY EARLY BIRD<br><span class='accent'>ÉPUISÉS</span>",
+                        subText: "Merci ! 🖤",
+                        descText: "Les EARLY BIRD sont ouverts : 36€",
+                        bg: "hero-visual.jpg",
+                        caption: `🔥 VERY EARLY BIRD ÉPUISÉS 🔥
+
+Merci ! Vous avez été rapides 💀
+
+Les EARLY BIRD sont ouverts :
+• Pass 3 jours : 36€
+• Samedi : 22€
+• Vendredi : 13€
+• Dimanche : 5€
+
+L'AFFICHE COMPLÈTE :
+18 groupes sur 3 jours !
+
+Psykup • Loudblast • Shaârghot • Akiavel • Cachemire • Krav Boca • Dirty Fonzy • Mainkind + 10 autres 🔥
+
+26-28 Juin | Crèvecœur-le-Grand
+Camping GRATUIT
+
+🎫 Lien en bio`
+                    }
+                ]
+            },
+            // ANNONCES ARTISTES
+            artistes: {
+                title: "🎤 Annonces Artistes",
+                posts: [
+                    {
+                        id: "annonce-psykup",
+                        title: "Annonce Psykup",
+                        badge: "🔥 NOUVEAU NOM",
+                        mainText: "PSYKUP",
+                        subText: "AutrucheCore • Toulouse",
+                        descText: "VENDREDI 26 JUIN",
+                        bg: "bands/psykup.jpg",
+                        caption: `🔥 NOUVEAU NOM 🔥
+
+PSYKUP rejoint l'affiche !
+
+📍 VENDREDI 26 JUIN
+
+30 ans de carrière et toujours aussi déjantés. Un shaker musical décomplexé où hardcore, jazz, death metal, funk, thrash et pop explosent ensemble.
+
+Déjà 6 groupes annoncés, et c'est pas fini...
+
+🎫 Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`
+                    },
+                    {
+                        id: "annonce-loudblast",
+                        title: "Annonce Loudblast",
+                        badge: "🔥 NOUVEAU NOM",
+                        mainText: "LOUDBLAST",
+                        subText: "Death Metal • Lille • Depuis 1985",
+                        descText: "SAMEDI 27 JUIN",
+                        bg: "bands/loudblast.jpg",
+                        caption: `1985.
+
+Loudblast inventait le death metal français.
+
+40 ans plus tard, les légendes montent sur notre scène.
+
+LOUDBLAST
+📍 Samedi 27 Juin
+🎫 22€ la journée / 36€ les 3 jours
+
+Tu vas pas rater ça.
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "annonce-shaarghot",
+                        title: "Annonce Shaârghot",
+                        badge: "🔥 NOUVEAU NOM",
+                        mainText: "SHAÂRGHOT",
+                        subText: "Cyber Metal • Paris",
+                        descText: "SAMEDI 27 JUIN",
+                        bg: "bands/shaarghot.jpg",
+                        caption: `🔥 NOUVEAU NOM 🔥
+
+SHAÂRGHOT rejoint l'affiche !
+
+📍 SAMEDI 27 JUIN
+
+Mi-homme, mi-machine. Cyber metal parisien avec un show visuel hallucinant. Un concert = une expérience totale.
+
+🎫 Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`
+                    },
+                    {
+                        id: "annonce-cachemire",
+                        title: "Annonce Cachemire",
+                        badge: "🔥 NOUVEAU NOM",
+                        mainText: "CACHEMIRE",
+                        subText: "Rock'n'Roll • Nantes",
+                        descText: "VENDREDI 26 JUIN",
+                        bg: "bands/cachemire.jpg",
+                        caption: `Révélés au Hellfest 2025.
+Chez nous en 2026. 🔥
+
+CACHEMIRE
+Rock'n'roll français survitaminé.
+Riffs qui tabassent, textes en français qui percutent.
+
+📍 Vendredi 26 Juin
+🎫 13€ la journée / 36€ les 3 jours
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "annonce-akiavel",
+                        title: "Annonce Akiavel",
+                        badge: "🔥 NOUVEAU NOM",
+                        mainText: "AKIAVEL",
+                        subText: "Death Metal Moderne • Sud-Est",
+                        descText: "SAMEDI 27 JUIN",
+                        bg: "bands/akiavel.jpg",
+                        caption: `🔥 NOUVEAU NOM 🔥
+
+AKIAVEL rejoint l'affiche !
+
+📍 SAMEDI 27 JUIN
+
+Death metal moderne au féminin. Brutalité chirurgicale et présence scénique explosive. La relève du death metal français.
+
+🎫 Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`
+                    },
+                    {
+                        id: "annonce-kravboca",
+                        title: "Annonce Krav Boca",
+                        badge: "🔥 NOUVEAU NOM",
+                        mainText: "KRAV BOCA",
+                        subText: "Punk Rap Mandoline",
+                        descText: "SAMEDI 27 JUIN",
+                        bg: "bands/krav-boca.jpg",
+                        caption: `🔥 NOUVEAU NOM 🔥
+
+KRAV BOCA rejoint l'affiche !
+
+📍 SAMEDI 27 JUIN
+
+Punk, rap et mandoline. Impossible à catégoriser, impossible à oublier. Énergie contagieuse et textes engagés.
+
+🎫 Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`
+                    },
+                    {
+                        id: "annonce-dirtyfonzy",
+                        title: "Annonce Dirty Fonzy",
+                        badge: "🔥 NOUVEAU NOM",
+                        mainText: "DIRTY FONZY",
+                        subText: "Punk Rock",
+                        descText: "SAMEDI 27 JUIN",
+                        bg: "bands/dirty-fonzy.jpg",
+                        caption: `🔥 NOUVEAU NOM 🔥
+
+DIRTY FONZY rejoint l'affiche !
+
+📍 SAMEDI 27 JUIN
+
+20 ans de punk rock festif. La garantie d'un bon moment, bière en main et pogo assuré.
+
+🎫 Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`
+                    },
+                    {
+                        id: "annonce-mainkind",
+                        title: "Annonce Mainkind",
+                        badge: "🔥 NOUVEAU NOM",
+                        mainText: "MAINKIND",
+                        subText: "Metal Alternatif",
+                        descText: "DIMANCHE 28 JUIN",
+                        bg: "bands/mainkind.jpg",
+                        caption: `🔥 NOUVEAU NOM 🔥
+
+MAINKIND rejoint l'affiche !
+
+📍 DIMANCHE 28 JUIN
+
+Metal alternatif moderne. Gros son, mélodies accrocheuses. Le dimanche en douceur (mais pas trop).
+
+🎫 Pass dimanche : 5€
+🎫 Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`
+                    }
+                ]
+            },
+            // COUNTDOWN
+            countdown: {
+                title: "⏱️ Countdown",
+                posts: [
+                    {
+                        id: "countdown-j60",
+                        title: "J-60",
+                        badge: "⏱️ COUNTDOWN",
+                        badgeClass: "cyan",
+                        mainText: "J-60",
+                        mainClass: "countdown",
+                        subText: "LE CHAOS APPROCHE",
+                        descText: "18 groupes • 36€ les 3 jours",
+                        bg: "hero-visual.jpg",
+                        caption: `J-60 ⏱️
+
+Dans 60 jours, le chaos commence.
+
+18 GROUPES dont :
+Psykup • Loudblast • Shaârghot • Akiavel • Cachemire • Krav Boca • Dirty Fonzy • Mainkind...
+
+26-28 Juin • Crèvecœur-le-Grand
+🎫 36€ les 3 jours
+
+Le compte à rebours est lancé.
+Et toi, t'as ta place ?
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "countdown-j30",
+                        title: "J-30",
+                        badge: "⏱️ COUNTDOWN",
+                        badgeClass: "cyan",
+                        mainText: "J-30",
+                        mainClass: "countdown",
+                        subText: "PLUS QU'UN MOIS",
+                        descText: "Le meilleur week-end de ton été",
+                        bg: "hero-visual.jpg",
+                        caption: `J-30 🔥
+
+Plus qu'un mois.
+
+Plus qu'un mois avant 2 jours de chaos et 1 jour de repos.
+Plus qu'un mois avant 18 groupes sur scène.
+Plus qu'un mois avant le meilleur week-end de ton été.
+
+🎫 36€ les 3 jours • Camping gratuit
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "countdown-j15",
+                        title: "J-15",
+                        badge: "⏱️ COUNTDOWN",
+                        badgeClass: "cyan",
+                        mainText: "J-15",
+                        mainClass: "countdown",
+                        subText: "DERNIÈRE LIGNE DROITE",
+                        descText: "Prépare tes affaires 🎒",
+                        bg: "hero-visual.jpg",
+                        caption: `J-15 🔥
+
+Dernière ligne droite !
+
+Dans 2 semaines, on y est.
+T'as ton billet ? T'as ta tente ?
+
+🎫 Dernières places : 36€ les 3 jours
+🏕️ Camping gratuit
+
+→ Lien en bio`
+                    }
+                ]
+            },
+            // URGENCE
+            urgence: {
+                title: "🚨 Urgence",
+                posts: [
+                    {
+                        id: "urgence-places",
+                        title: "Dernières places",
+                        badge: "🚨 ALERTE",
+                        mainText: "DERNIÈRES<br><span class='accent'>PLACES</span>",
+                        subText: "",
+                        descText: "Les Early Bird partent vite",
+                        bg: "hero-visual.jpg",
+                        caption: `⚠️ ALERTE ⚠️
+
+Les Very Early Bird sont ÉPUISÉS.
+Les Early Bird partent vite.
+
+Pass 3 jours : 36€ → bientôt 42€
+Vendredi : 13€ → bientôt 18€
+Samedi : 22€ → bientôt 27€
+
+Tu veux économiser ? C'est maintenant.
+
+🎫 Lien en bio`
+                    },
+                    {
+                        id: "urgence-final",
+                        title: "Billetterie ferme demain",
+                        badge: "🚨 FINAL",
+                        mainText: "DERNIÈRES<br><span class='accent-orange'>HEURES</span>",
+                        subText: "Billetterie ferme demain soir",
+                        descText: "Après = +5€ sur place",
+                        bg: "hero-visual.jpg",
+                        caption: `🚨 DERNIÈRES PLACES 🚨
+
+Billetterie ferme DEMAIN SOIR.
+
+Après, faudra venir sur place.
+Et ça sera 5€ de plus.
+
+Pass 3 jours : 36€ (demain : 42€)
+Pass Samedi : 22€ (demain : 27€)
+Pass Vendredi : 13€ (demain : 18€)
+
+C'est maintenant ou jamais.
+
+🎫 Lien en bio`
+                    }
+                ]
+            },
+            // DIFFÉRENCIATION
+            differenciation: {
+                title: "🎯 Différenciation",
+                posts: [
+                    {
+                        id: "diff-seul-metal",
+                        title: "Le seul festival metal",
+                        badge: "🎯 CE WEEK-END",
+                        mainText: "LE SEUL<br><span class='accent'>METAL</span>",
+                        subText: "Ce week-end du 26-28 juin",
+                        descText: "100% metal français • 100% chaos",
+                        bg: "hero-visual.jpg",
+                        caption: `Ce week-end du 26-28 juin, y'aura du rock vintage.
+Y'aura du rock gratuit.
+
+Mais y'aura qu'un seul festival METAL. 🤘
+
+18 GROUPES dont :
+Psykup • Loudblast • Shaârghot • Akiavel • Cachemire • Krav Boca • Dirty Fonzy • Mainkind...
+
+100% metal français.
+100% chaos.
+
+📍 Crèvecœur-le-Grand
+🎫 36€ les 3 jours, camping inclus
+
+Tu veux du bruit ? Tu sais où aller.
+→ Lien en bio`
+                    },
+                    {
+                        id: "diff-comparatif",
+                        title: "Pourquoi payer 150€ ?",
+                        badge: "🧮 COMPARATIF",
+                        mainText: "150€<br><span class='accent'>VS 36€</span>",
+                        subText: "Faisons les comptes",
+                        descText: "18 groupes • Camping GRATUIT",
+                        bg: "hero-visual.jpg",
+                        caption: `Faisons les comptes 🧮
+
+AILLEURS CE WEEK-END :
+💸 ~120-150€ le pass
+🎸 Quelques groupes metal au milieu du rock vintage
+
+BARB'N'ROCK :
+💰 36€ le pass 3 jours
+🔥 18 groupes 100% metal/punk/rock
+🏕️ Camping GRATUIT
+🍺 Village : tattoo, craft beer, food trucks
+
+On te laisse réfléchir.
+Ou pas.
+
+🎫 Lien en bio`
+                    }
+                ]
+            },
+            // CONCOURS
+            concours: {
+                title: "🎁 Concours",
+                posts: [
+                    {
+                        id: "concours-lancement",
+                        title: "Lancement concours",
+                        badge: "🎁 CONCOURS",
+                        badgeClass: "gold",
+                        mainText: "GAGNE<br><span class='accent'>2 PASS</span>",
+                        subText: "3 jours offerts !",
+                        descText: "Follow • Like • Tag 3 potes",
+                        bg: "hero-visual.jpg",
+                        caption: `🎁 CONCOURS 🎁
+
+On t'offre 2 PASS 3 JOURS pour le Barb'n'Rock 2026 !
+
+Pour participer :
+1️⃣ Follow @barbnrock
+2️⃣ Like ce post
+3️⃣ Tag 3 potes avec qui tu veux venir
+
+Tirage au sort le [DATE].
+Sinon, pass 3 jours à 36€ seulement 😏
+
+Bonne chance ! 🤘`
+                    },
+                    {
+                        id: "concours-gagnants",
+                        title: "Annonce gagnants",
+                        badge: "🎉 RÉSULTATS",
+                        badgeClass: "gold",
+                        mainText: "FÉLICITATIONS",
+                        subText: "@gagnant1 & @gagnant2",
+                        descText: "On vous attend le 26-28 Juin ! 🔥",
+                        bg: "hero-visual.jpg",
+                        caption: `🎉 ET LES GAGNANTS SONT... 🎉
+
+Félicitations à @[gagnant1] et @[gagnant2] !
+
+On vous attend le 26-28 Juin pour 2 jours de chaos et 1 jour de repos 🔥
+
+T'as pas gagné ? Pas grave.
+Pass 3 jours : 36€. Camping gratuit.
+
+On se voit là-bas 🤘
+
+🎫 Lien en bio`
+                    }
+                ]
+            },
+            // POST-HELLFEST
+            hellfest: {
+                title: "🔥 Post-Hellfest",
+                posts: [
+                    {
+                        id: "hellfest-rebond",
+                        title: "Le chaos continue",
+                        badge: "🔥 AFTER HELLFEST",
+                        mainText: "LE HELLFEST<br>C'EST FINI 🖤",
+                        subText: "Le chaos continue dans 4 jours",
+                        descText: "BARB'N'ROCK • 26-28 Juin",
+                        bg: "hero-visual.jpg",
+                        caption: `Le Hellfest c'est fini. 🖤
+
+Le chaos continue dans 4 jours.
+
+BARB'N'ROCK FESTIVAL
+📍 26-28 Juin • Crèvecœur-le-Grand
+
+18 GROUPES dont :
+Psykup • Loudblast • Shaârghot • Akiavel • Krav Boca • Dirty Fonzy • Mainkind...
+
+🎫 Pass 3 jours : 36€
+🎫 Samedi seul : 22€
+
+Prolonge ton week-end de metal.
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "hellfest-promo",
+                        title: "Code AFTERHELL -15%",
+                        badge: "⚡ FLASH 24H",
+                        mainText: "AFTERHELL",
+                        mainClass: "countdown",
+                        subText: "-15% sur tous les pass",
+                        descText: "Valable 24h seulement",
+                        bg: "hero-visual.jpg",
+                        caption: `🔥 OFFRE FLASH - 24H SEULEMENT 🔥
+
+Code : AFTERHELL
+-15% sur tous les pass
+
+Le Hellfest t'a mis en appétit ?
+On t'attend pour le dessert.
+
+⏰ Valable jusqu'à demain minuit
+
+🎫 Lien en bio`
+                    }
+                ]
+            },
+            // PROGRAMMATION
+            programmation: {
+                title: "📋 Programmation",
+                posts: [
+                    {
+                        id: "prog-complete",
+                        title: "Programmation complète",
+                        badge: "🔥 COMPLET",
+                        mainText: "PROG<br><span class='accent'>COMPLÈTE</span>",
+                        subText: "18 groupes sur 3 jours",
+                        descText: "L'affiche est bouclée !",
+                        bg: "hero-visual.jpg",
+                        caption: `🔥 PROGRAMMATION COMPLÈTE 🔥
+
+C'est officiel. L'affiche est bouclée.
+
+VENDREDI 26 JUIN
+Cachemire • Psykup • Kami No Ikari • Barabbas • Black Hazard
+
+SAMEDI 27 JUIN
+Shaârghot • Krav Boca • Loudblast • Akiavel • Dirty Fonzy • Breakout + Vainqueur Tremplin
+
+DIMANCHE 28 JUIN (jour de repos)
+Howlite • Udap • Devon Duxe • Saint Rock Station • MAINKIND ⭐
+
+2 jours de chaos, 1 jour de repos.
+18 groupes. 36€. Camping gratuit.
+
+26-28 Juin • Crèvecœur-le-Grand
+
+🎫 Lien en bio`
+                    }
+                ]
+            },
+            // VILLAGE
+            village: {
+                title: "🍺 Village",
+                posts: [
+                    {
+                        id: "village-chaos",
+                        title: "Le Village du Chaos",
+                        badge: "🍺 VILLAGE",
+                        badgeClass: "cyan",
+                        mainText: "LE VILLAGE<br><span class='accent'>DU CHAOS</span>",
+                        subText: "Entre deux concerts",
+                        descText: "Food trucks • Craft beer • Tattoo • Merch",
+                        bg: "hero-visual.jpg",
+                        caption: `LE VILLAGE DU CHAOS 🍺
+
+Entre deux concerts, y'a de quoi faire :
+
+🍔 Food trucks (burgers, pizza, vegan, frites...)
+🍺 Craft beer locale
+🖋️ Tattoo & piercing
+📀 Stands vinyles & merch
+⚒️ Artisanat metal
+
+Et tout ça pour 36€ les 3 jours. Camping inclus.
+
+Tu viens pour la musique, tu restes pour l'ambiance.
+
+🎫 Lien en bio`
+                    },
+                    {
+                        id: "village-animations",
+                        title: "Animations",
+                        badge: "🎸 ANIMATIONS",
+                        mainText: "PAS QUE<br><span class='accent'>DES CONCERTS</span>",
+                        subText: "",
+                        descText: "Barbe Contest • Air Guitar • Blind Test",
+                        bg: "hero-visual.jpg",
+                        caption: `Le Barb'n'Rock c'est pas que des concerts 🤘
+
+🧔 BARBE CONTEST - Dimanche 14h
+Montre ta plus belle barbe. Jury impitoyable.
+
+🎸 AIR GUITAR CHAMPIONSHIP - Samedi 20h
+Lâche-toi comme si t'avais une vraie gratte.
+
+🎵 BLIND TEST METAL - Samedi 17h
+Tu connais vraiment tes classiques ?
+
+💀 WALL OF DEATH WORKSHOP - Samedi 15h
+Apprends les règles du pit avec les anciens.
+
+36€ les 3 jours. Camping gratuit.
+Y'a pas d'excuse.
+
+🎫 Lien en bio`
+                    }
+                ]
+            },
+            // MERCI
+            merci: {
+                title: "🖤 Post-Festival",
+                posts: [
+                    {
+                        id: "merci",
+                        title: "Merci",
+                        badge: "",
+                        mainText: "MERCI<br><span class='accent'>🖤</span>",
+                        subText: "3 jours de chaos",
+                        descText: "On se retrouve en 2027 ?",
+                        bg: "hero-visual.jpg",
+                        caption: `🖤 MERCI 🖤
+
+3 jours de chaos.
+[X] festivaliers.
+18 groupes sur scène.
+Des souvenirs pour toute une vie.
+
+MERCI à vous tous d'avoir fait de cette édition un moment incroyable.
+
+Merci aux artistes.
+Merci aux bénévoles.
+Merci à notre équipe.
+Merci à VOUS.
+
+On se retrouve en 2027 ? 🤘
+
+📸 Photos à venir...`
+                    }
+                ]
+            },
+            // STORIES
+            stories: {
+                title: "📱 Stories",
+                posts: [
+                    {
+                        id: "story-teasing",
+                        title: "Teasing nouveau nom",
+                        badge: "👀 BIENTÔT",
+                        mainText: "NOUVEAU NOM<br><span class='accent'>DEMAIN</span>",
+                        subText: "",
+                        descText: "👀",
+                        bg: "hero-visual.jpg",
+                        format: "story",
+                        caption: `👀 DEMAIN...
+
+Un nouveau nom rejoint l'affiche.
+
+À ton avis, c'est qui ?
+
+↑ Lien en haut pour les billets`
+                    },
+                    {
+                        id: "story-countdown-j3",
+                        title: "Story J-3",
+                        badge: "⏱️ J-3",
+                        badgeClass: "cyan",
+                        mainText: "J-3",
+                        mainClass: "countdown",
+                        subText: "LE CHAOS ARRIVE",
+                        descText: "26-28 Juin • Crèvecœur",
+                        bg: "hero-visual.jpg",
+                        format: "story",
+                        caption: `J-3 🔥
+
+Dans 3 jours, le chaos commence !
+
+Tu as ton billet ?
+Tu as ta tente ?
+Tu es PRÊT ?
+
+↑ Dernières places en haut`
+                    },
+                    {
+                        id: "story-faq",
+                        title: "Story FAQ Camping",
+                        badge: "❓ FAQ",
+                        mainText: "CAMPING",
+                        subText: "GRATUIT",
+                        descText: "Douches • Sanitaires • Points d'eau",
+                        bg: "hero-visual.jpg",
+                        format: "story",
+                        caption: `❓ FAQ CAMPING
+
+Le camping est GRATUIT et inclus avec ton pass !
+
+✅ Douches
+✅ Sanitaires
+✅ Points d'eau
+✅ Recharge téléphone
+
+Tu peux arriver dès le vendredi matin.
+
+↑ Billets en haut`
+                    }
+                ]
+            },
+            // CARROUSELS ARTISTES
+            carrousels: {
+                title: "🎠 Carrousels Artistes",
+                posts: [
+                    {
+                        id: "carrousel-psykup",
+                        title: "Carrousel Psykup",
+                        badge: "🎤 NOUVEAU",
+                        mainText: "PSYKUP",
+                        subText: "AutrucheCore • Toulouse",
+                        descText: "VENDREDI 26 JUIN",
+                        bg: "bands/psykup.jpg",
+                        format: "carrousel",
+                        slides: {
+                            1: { badge: '🎤 NOUVEAU NOM', main: 'PSYKUP', sub: 'AutrucheCore • Toulouse', desc: 'VENDREDI 26 JUIN', bg: 'bands/psykup.jpg' },
+                            2: { badge: '📖 QUI SONT-ILS ?', main: '30 ANS<br><span class="accent">DE FOLIE</span>', sub: 'Hardcore + Jazz + Death + Funk + Pop', desc: '📍 Toulouse • Depuis 1994', bg: 'bands/psykup.jpg' },
+                            3: { badge: '🎧 À ÉCOUTER', main: '🎵', mainClass: 'price', sub: '"The Joke Of Tomorrow" (2024)', desc: 'Monte le son. Fort.', bg: 'bands/psykup.jpg' },
+                            4: { badge: '🔥 POURQUOI LES VOIR', main: 'SHOW<br><span class="accent">IMPRÉVISIBLE</span>', sub: 'Énergie contagieuse garantie', desc: 'Tu sais jamais ce qui va se passer', bg: 'bands/psykup.jpg' },
+                            5: { badge: '🎫 BILLETS', main: '36€', mainClass: 'price', sub: 'Pass 3 jours • Camping GRATUIT', desc: '26-28 Juin • Crèvecœur-le-Grand', bg: 'hero-visual.jpg' }
+                        },
+                        caption: `🎤 PSYKUP REJOINT L'AFFICHE ! 🤘
+
+30 ans de carrière et toujours aussi déjantés.
+
+Psykup c'est un shaker musical décomplexé : hardcore, jazz, death metal, funk, thrash et pop explosent ensemble.
+
+📍 Vendredi 26 Juin
+🎫 Pass vendredi : 13€ | Pass 3 jours : 36€
+Camping GRATUIT inclus
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "carrousel-cachemire",
+                        title: "Carrousel Cachemire",
+                        badge: "🎸 NOUVEAU",
+                        mainText: "CACHEMIRE",
+                        subText: "Rock'n'roll français • Nantes",
+                        descText: "VENDREDI 26 JUIN",
+                        bg: "bands/cachemire.jpg",
+                        format: "carrousel",
+                        slides: {
+                            1: { badge: '🎸 NOUVEAU NOM', main: 'CACHEMIRE', sub: 'Rock\'n\'roll français • Nantes', desc: 'VENDREDI 26 JUIN', bg: 'bands/cachemire.jpg' },
+                            2: { badge: '📖 QUI SONT-ILS ?', main: 'ROCK<br><span class="accent">SURVITAMINÉ</span>', sub: 'Révélation Hellfest 2025', desc: '📍 Nantes • Textes en français', bg: 'bands/cachemire.jpg' },
+                            3: { badge: '🎧 À ÉCOUTER', main: '🎵', mainClass: 'price', sub: '"Suffit juste d\'une seconde"', desc: 'Du rock français comme on en fait plus', bg: 'bands/cachemire.jpg' },
+                            4: { badge: '🔥 POURQUOI LES VOIR', main: 'LA RELÈVE<br><span class="accent">DU ROCK FR</span>', sub: 'Validés par le Hellfest', desc: 'Live qui envoie du pâté', bg: 'bands/cachemire.jpg' },
+                            5: { badge: '🎫 BILLETS', main: '36€', mainClass: 'price', sub: 'Pass 3 jours • Camping GRATUIT', desc: '26-28 Juin • Crèvecœur-le-Grand', bg: 'hero-visual.jpg' }
+                        },
+                        caption: `🎸 CACHEMIRE REJOINT L'AFFICHE ! 🤘
+
+La nouvelle sensation rock française, révélée au Hellfest 2025.
+
+Rock'n'roll français survitaminé avec des textes qui claquent.
+
+📍 Vendredi 26 Juin
+🎫 Pass vendredi : 13€ | Pass 3 jours : 36€
+Camping GRATUIT inclus
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "carrousel-loudblast",
+                        title: "Carrousel Loudblast",
+                        badge: "💀 LÉGENDE",
+                        mainText: "LOUDBLAST",
+                        subText: "Death/Thrash Metal • Lille",
+                        descText: "SAMEDI 27 JUIN",
+                        bg: "bands/loudblast.jpg",
+                        format: "carrousel",
+                        slides: {
+                            1: { badge: '💀 LÉGENDE', main: 'LOUDBLAST', sub: 'Death/Thrash Metal • Lille', desc: 'SAMEDI 27 JUIN', bg: 'bands/loudblast.jpg' },
+                            2: { badge: '📖 QUI SONT-ILS ?', main: '40 ANS<br><span class="accent">DE DEATH</span>', sub: 'Pionniers death metal français', desc: '📍 Lille • Depuis 1985 (!!)', bg: 'bands/loudblast.jpg' },
+                            3: { badge: '🎧 À ÉCOUTER', main: '🎵', mainClass: 'price', sub: '"Altering Fates and Destinies" (2024)', desc: 'Sans eux, pas de Gojira.', bg: 'bands/loudblast.jpg' },
+                            4: { badge: '🔥 POURQUOI LES VOIR', main: 'UN PAN<br><span class="accent">D\'HISTOIRE</span>', sub: 'Les pionniers, les légendes', desc: 'Technique irréprochable', bg: 'bands/loudblast.jpg' },
+                            5: { badge: '🎫 BILLETS', main: '36€', mainClass: 'price', sub: 'Pass 3 jours • Camping GRATUIT', desc: '26-28 Juin • Crèvecœur-le-Grand', bg: 'hero-visual.jpg' }
+                        },
+                        caption: `💀 LOUDBLAST - LÉGENDE DU DEATH METAL FRANÇAIS 🤘
+
+40 ans de carrière. Les pionniers. Sans eux, pas de Gojira.
+
+Un pan d'histoire du metal français sur notre scène.
+
+📍 Samedi 27 Juin
+🎫 Pass samedi : 22€ | Pass 3 jours : 36€
+Camping GRATUIT inclus
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "carrousel-shaârghot",
+                        title: "Carrousel Shaârghot",
+                        badge: "⚡ CYBER",
+                        mainText: "SHAÂRGHOT",
+                        subText: "Cyber Metal • Paris",
+                        descText: "SAMEDI 27 JUIN",
+                        bg: "bands/shaârghot.jpg",
+                        format: "carrousel",
+                        slides: {
+                            1: { badge: '⚡ NOUVEAU NOM', main: 'SHAÂRGHOT', sub: 'Cyber Metal • Paris', desc: 'SAMEDI 27 JUIN', bg: 'bands/shaârghot.jpg' },
+                            2: { badge: '📖 QUI SONT-ILS ?', main: 'CYBER<br><span class="accent">METAL</span>', sub: 'Électro industrielle + Metal extrême', desc: '📍 Paris • Univers dystopique', bg: 'bands/shaârghot.jpg' },
+                            3: { badge: '🎧 À ÉCOUTER', main: '🎵', mainClass: 'price', sub: '"Vol. III: Let Me Out" (2023)', desc: '⚠️ Attention : addiction possible', bg: 'bands/shaârghot.jpg' },
+                            4: { badge: '🔥 POURQUOI LES VOIR', main: 'UN<br><span class="accent">VOYAGE</span>', sub: 'Show VISUEL de fou', desc: 'Costumes et mise en scène', bg: 'bands/shaârghot.jpg' },
+                            5: { badge: '🎫 BILLETS', main: '36€', mainClass: 'price', sub: 'Pass 3 jours • Camping GRATUIT', desc: '26-28 Juin • Crèvecœur-le-Grand', bg: 'hero-visual.jpg' }
+                        },
+                        caption: `⚡ SHAÂRGHOT - LE FUTUR DU METAL 🤘
+
+Cyber metal français : électro industrielle + metal extrême.
+
+Un univers dystopique. C'est pas un concert, c'est un voyage.
+
+📍 Samedi 27 Juin
+🎫 Pass samedi : 22€ | Pass 3 jours : 36€
+Camping GRATUIT inclus
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "carrousel-akiavel",
+                        title: "Carrousel Akiavel",
+                        badge: "🔥 DEATH",
+                        mainText: "AKIAVEL",
+                        subText: "Death Metal Moderne • Sud-Est",
+                        descText: "SAMEDI 27 JUIN",
+                        bg: "bands/akiavel.jpg",
+                        format: "carrousel",
+                        slides: {
+                            1: { badge: '🔥 NOUVEAU NOM', main: 'AKIAVEL', sub: 'Death Metal Moderne', desc: 'SAMEDI 27 JUIN', bg: 'bands/akiavel.jpg' },
+                            2: { badge: '📖 QUI SONT-ILS ?', main: 'DEATH<br><span class="accent">MODERNE</span>', sub: 'Menés par la charismatique Auré', desc: '📍 Sud-Est • Depuis 2018', bg: 'bands/akiavel.jpg' },
+                            3: { badge: '🎧 À ÉCOUTER', main: '🎵', mainClass: 'price', sub: '"InVictus" (2025)', desc: 'Prépare tes cervicales.', bg: 'bands/akiavel.jpg' },
+                            4: { badge: '🔥 POURQUOI LES VOIR', main: 'ÉNERGIE<br><span class="accent">BRUTE</span>', sub: 'Frontwoman charismatique', desc: 'La relève du metal français', bg: 'bands/akiavel.jpg' },
+                            5: { badge: '🎫 BILLETS', main: '36€', mainClass: 'price', sub: 'Pass 3 jours • Camping GRATUIT', desc: '26-28 Juin • Crèvecœur-le-Grand', bg: 'hero-visual.jpg' }
+                        },
+                        caption: `🔥 AKIAVEL - DEATH METAL MODERNE 🤘
+
+Menés par la charismatique Auré, une des voix les plus puissantes du metal actuel.
+
+Le death metal qu'on attendait.
+
+📍 Samedi 27 Juin
+🎫 Pass samedi : 22€ | Pass 3 jours : 36€
+Camping GRATUIT inclus
+
+→ Lien en bio`
+                    }
+                ]
+            },
+            // TREMPLIN
+            tremplin: {
+                title: "🎸 Tremplin 4 Avril",
+                posts: [
+                    {
+                        id: "tremplin-appel",
+                        title: "Appel à candidatures",
+                        badge: "🎸 TREMPLIN",
+                        badgeClass: "cyan",
+                        mainText: "TREMPLIN<br><span class='accent'>2026</span>",
+                        subText: "Tu veux jouer au festival ?",
+                        descText: "Candidatures jusqu'au 28 février",
+                        bg: "hero-visual.jpg",
+                        caption: `🎸 TREMPLIN BARB'N'ROCK 2026 🎸
+
+Tu fais partie d'un groupe local ?
+Tu veux jouer au festival cet été ?
+
+On cherche 2-3 groupes pour compléter l'affiche !
+
+📋 COMMENT PARTICIPER :
+1. Être un groupe de la région (Hauts-de-France / IDF)
+2. Jouer du metal, punk, rock ou dérivés
+3. Envoyer ta candidature avant le 28 février
+
+📍 TREMPLIN : Samedi 4 Avril
+📍 FESTIVAL : 26-28 Juin
+
+Les gagnants joueront sur la scène du Barb'n'Rock !
+
+📧 Candidatures : tremplin@barbnrock.fr
+
+Montre-nous ce que t'as dans le ventre 🤘`
+                    },
+                    {
+                        id: "tremplin-cloture",
+                        title: "Clôture candidatures",
+                        badge: "⏰ J-7",
+                        mainText: "PLUS QUE<br><span class='accent'>7 JOURS</span>",
+                        subText: "Pour candidater au tremplin",
+                        descText: "Date limite : 28 février",
+                        bg: "hero-visual.jpg",
+                        caption: `⏰ PLUS QUE 7 JOURS ⏰
+
+L'appel à candidatures pour le tremplin 
+Barb'n'Rock ferme le 28 février.
+
+Tu veux jouer au festival cet été ?
+C'est maintenant ou jamais.
+
+📧 tremplin@barbnrock.fr
+
+On a déjà reçu plusieurs candidatures...
+Et toi, t'attends quoi ?`
+                    },
+                    {
+                        id: "tremplin-selection",
+                        title: "Groupes sélectionnés",
+                        badge: "🔥 TREMPLIN",
+                        mainText: "5 GROUPES<br><span class='accent'>EN LICE</span>",
+                        subText: "Qui jouera au festival ?",
+                        descText: "RDV le 4 avril pour les départager",
+                        bg: "hero-visual.jpg",
+                        caption: `🔥 TREMPLIN BARB'N'ROCK 2026 🔥
+
+[X] groupes ont candidaté.
+5 ont été sélectionnés pour le tremplin.
+
+Le 4 avril, ils s'affronteront pour décrocher 
+leur place sur l'affiche du festival !
+
+📍 Samedi 4 Avril
+🎫 Entrée gratuite
+
+Viens voter pour ton favori !`
+                    },
+                    {
+                        id: "tremplin-resultats",
+                        title: "Résultats tremplin",
+                        badge: "🏆 GAGNANTS",
+                        badgeClass: "cyan",
+                        mainText: "ET LES<br><span class='accent'>GAGNANTS</span>",
+                        subText: "SONT...",
+                        descText: "Ils rejoignent l'affiche 2026 !",
+                        bg: "hero-visual.jpg",
+                        caption: `🏆 ET LES GAGNANTS SONT... 🏆
+
+Merci à tous d'être venus au tremplin !
+
+🥇 [GROUPE GAGNANT 1]
+🥈 [GROUPE GAGNANT 2]
+
+Ils rejoignent l'affiche du Barb'n'Rock 2026 
+aux côtés de Psykup, Loudblast, Shaârghot...
+
+ON SE RETROUVE LE 26-28 JUIN ! 🔥
+
+🎫 Pass 3 jours : 36€
+→ Lien en bio
+
+Merci à tous les groupes participants 🖤`
+                    }
+                ]
+            },
+            // CONCOURS
+            concours: {
+                title: "🎁 Concours",
+                posts: [
+                    {
+                        id: "concours-lancement",
+                        title: "Lancement concours",
+                        badge: "🎁 CONCOURS",
+                        badgeClass: "cyan",
+                        mainText: "GAGNE<br><span class='accent'>2 PASS</span>",
+                        subText: "3 jours pour toi + 1 pote",
+                        descText: "Follow • Like • Tag 3 amis",
+                        bg: "hero-visual.jpg",
+                        caption: `🎁 CONCOURS 🎁
+
+On t'offre 2 PASS 3 JOURS pour le Barb'n'Rock 2026 !
+
+Pour participer :
+1️⃣ Follow @barbnrock
+2️⃣ Like ce post
+3️⃣ Tag 3 potes avec qui tu veux venir
+
+Tirage au sort le [DATE].
+Sinon, pass 3 jours à 36€ seulement 😏
+
+Bonne chance ! 🤘`
+                    },
+                    {
+                        id: "concours-gagnants",
+                        title: "Annonce gagnants",
+                        badge: "🎉 GAGNANTS",
+                        mainText: "FÉLICITATIONS<br><span class='accent'>🎉</span>",
+                        subText: "@gagnant1 & @gagnant2",
+                        descText: "On vous attend le 26-28 Juin !",
+                        bg: "hero-visual.jpg",
+                        caption: `🎉 ET LES GAGNANTS SONT... 🎉
+
+Félicitations à @[gagnant1] et @[gagnant2] !
+
+On vous attend le 26-28 Juin pour 2 jours de chaos et 1 jour de repos 🔥
+
+T'as pas gagné ? Pas grave.
+Pass 3 jours : 36€. Camping gratuit.
+
+On se voit là-bas 🤘
+
+🎫 Lien en bio`
+                    }
+                ]
+            },
+            // COUNTDOWN
+            countdown: {
+                title: "⏱️ Countdown",
+                posts: [
+                    {
+                        id: "countdown-j60",
+                        title: "J-60",
+                        badge: "⏱️ COUNTDOWN",
+                        mainText: "J-60",
+                        mainClass: "countdown",
+                        subText: "Le chaos approche",
+                        descText: "26-28 Juin • 18 groupes",
+                        bg: "hero-visual.jpg",
+                        caption: `J-60 ⏱️
+
+Dans 60 jours, le chaos commence.
+
+18 GROUPES dont :
+Psykup • Loudblast • Shaârghot • Akiavel • Cachemire • Krav Boca • Dirty Fonzy • Mainkind...
+
+26-28 Juin • Crèvecœur-le-Grand
+🎫 36€ les 3 jours
+
+Le compte à rebours est lancé.
+Et toi, t'as ta place ?
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "countdown-j30",
+                        title: "J-30",
+                        badge: "🔥 J-30",
+                        mainText: "J-30",
+                        mainClass: "countdown",
+                        subText: "Plus qu'un mois",
+                        descText: "T'as ta place ?",
+                        bg: "hero-visual.jpg",
+                        caption: `J-30 🔥
+
+Plus qu'un mois.
+
+Plus qu'un mois avant 2 jours de chaos et 1 jour de repos.
+Plus qu'un mois avant 18 groupes sur scène.
+Plus qu'un mois avant le meilleur week-end de ton été.
+
+🎫 36€ les 3 jours • Camping gratuit
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "countdown-j20",
+                        title: "J-20",
+                        badge: "⚡ J-20",
+                        mainText: "J-20",
+                        mainClass: "countdown",
+                        subText: "20 jours",
+                        descText: "Ça approche 🔥",
+                        bg: "hero-visual.jpg",
+                        caption: `J-20 ⚡
+
+Plus que 20 jours.
+Le chaos est à nos portes.
+
+🎫 Dernières places dispo
+→ Lien en bio`
+                    },
+                    {
+                        id: "countdown-j15",
+                        title: "J-15",
+                        badge: "🔥 J-15",
+                        mainText: "J-15",
+                        mainClass: "countdown",
+                        subText: "2 semaines",
+                        descText: "Dernière ligne droite",
+                        bg: "hero-visual.jpg",
+                        caption: `J-15 🔥
+
+2 semaines.
+Plus que 2 semaines avant le chaos.
+
+T'as préparé tes affaires ?
+T'as ta place ?
+
+🎫 Lien en bio`
+                    },
+                    {
+                        id: "countdown-j3",
+                        title: "J-3",
+                        badge: "⏱️ J-3",
+                        badgeClass: "cyan",
+                        mainText: "J-3",
+                        mainClass: "countdown",
+                        subText: "LE CHAOS ARRIVE",
+                        descText: "26-28 Juin • Crèvecœur",
+                        bg: "hero-visual.jpg",
+                        format: "story",
+                        caption: `J-3 🔥
+
+Dans 3 jours, le chaos commence !
+
+Tu viens ?
+
+↑ Lien en haut`
+                    }
+                ]
+            },
+            // URGENCE
+            urgence: {
+                title: "🚨 Urgence",
+                posts: [
+                    {
+                        id: "urgence-early-bird",
+                        title: "Early Bird - Places limitées",
+                        badge: "⚠️ ALERTE",
+                        mainText: "36€<br><span class='accent'>→ BIENTÔT 42€</span>",
+                        subText: "Les Early Bird partent vite",
+                        descText: "Tu veux économiser ? C'est maintenant.",
+                        bg: "hero-visual.jpg",
+                        caption: `⚠️ ALERTE ⚠️
+
+Les Very Early Bird sont ÉPUISÉS.
+Les Early Bird partent vite.
+
+Pass 3 jours : 36€ → bientôt 42€
+Vendredi : 13€ → bientôt 18€
+Samedi : 22€ → bientôt 27€
+
+Tu veux économiser ? C'est maintenant.
+
+🎫 Lien en bio`
+                    },
+                    {
+                        id: "urgence-dernieres-places",
+                        title: "Dernières places",
+                        badge: "🚨 URGENT",
+                        mainText: "DERNIÈRES<br><span class='accent'>PLACES</span>",
+                        subText: "Maintenant ou jamais",
+                        descText: "Pas de peut-être. Pas de on verra.",
+                        bg: "hero-visual.jpg",
+                        caption: `🚨 DERNIÈRE LIGNE DROITE 🚨
+
+Plus que quelques places disponibles.
+
+Après, c'est fini.
+Pas de "peut-être".
+Pas de "on verra".
+
+2 jours de chaos, 1 jour de repos.
+36€. Camping gratuit.
+
+🎫 Lien en bio - Maintenant ou jamais.`
+                    },
+                    {
+                        id: "urgence-final",
+                        title: "Billetterie ferme demain",
+                        badge: "🚨 FINAL",
+                        mainText: "BILLETTERIE<br><span class='accent'>FERME DEMAIN</span>",
+                        subText: "Dernière chance",
+                        descText: "Après, +5€ sur place",
+                        bg: "hero-visual.jpg",
+                        caption: `🚨 DERNIÈRES PLACES 🚨
+
+Billetterie ferme DEMAIN SOIR.
+
+Après, faudra venir sur place.
+Et ça sera 5€ de plus.
+
+Pass 3 jours : 36€ (demain : 42€)
+Pass Samedi : 22€ (demain : 27€)
+Pass Vendredi : 13€ (demain : 18€)
+
+C'est maintenant ou jamais.
+
+🎫 Lien en bio`
+                    }
+                ]
+            },
+            // DIFFÉRENCIATION
+            differenciation: {
+                title: "🎯 Différenciation",
+                posts: [
+                    {
+                        id: "diff-seul-metal",
+                        title: "Le seul festival metal",
+                        badge: "🤘 100% METAL",
+                        mainText: "LE SEUL<br><span class='accent'>FESTIVAL METAL</span>",
+                        subText: "Ce week-end là",
+                        descText: "100% metal français • 100% chaos",
+                        bg: "hero-visual.jpg",
+                        caption: `Ce week-end du 26-28 juin, y'aura du rock vintage.
+Y'aura du rock gratuit.
+
+Mais y'aura qu'un seul festival METAL. 🤘
+
+18 GROUPES dont :
+Psykup • Loudblast • Shaârghot • Akiavel • Cachemire • Krav Boca • Dirty Fonzy • Mainkind...
+
+100% metal français.
+100% chaos.
+
+📍 Crèvecœur-le-Grand
+🎫 36€ les 3 jours, camping inclus
+
+Tu veux du bruit ? Tu sais où aller.
+→ Lien en bio`
+                    },
+                    {
+                        id: "diff-pas-rock-papa",
+                        title: "Pas du rock de papa",
+                        badge: "🔥 2026",
+                        mainText: "PAS DU ROCK<br><span class='accent'>DE PAPA</span>",
+                        subText: "Le futur du metal",
+                        descText: "Metal • Punk • Death • Cyber",
+                        bg: "hero-visual.jpg",
+                        caption: `Y'en a qui vont écouter les hits des années 80.
+Nous on préfère faire trembler les murs en 2026.
+
+BARB'N'ROCK FESTIVAL
+🔥 Metal • Punk • Death • Cyber
+🇫🇷 100% artistes français
+💰 36€ les 3 jours
+
+2 jours de chaos, 1 jour de repos.
+
+Le futur du metal, c'est maintenant.`
+                    },
+                    {
+                        id: "diff-comparatif-prix",
+                        title: "Pourquoi payer 150€ ?",
+                        badge: "🧮 CALCUL",
+                        mainText: "POURQUOI<br><span class='accent'>PAYER 150€ ?</span>",
+                        subText: "Quand t'as le chaos pour 36€",
+                        descText: "On te laisse réfléchir. Ou pas.",
+                        bg: "hero-visual.jpg",
+                        caption: `Faisons les comptes 🧮
+
+AILLEURS CE WEEK-END :
+💸 ~120-150€ le pass
+🎸 Quelques groupes metal au milieu du rock vintage
+
+BARB'N'ROCK :
+💰 36€ le pass 3 jours
+🔥 18 groupes 100% metal/punk/rock
+🏕️ Camping GRATUIT
+🍺 Village : tattoo, craft beer, food trucks
+
+On te laisse réfléchir.
+Ou pas.
+
+🎫 Lien en bio`
+                    },
+                    {
+                        id: "diff-acces",
+                        title: "À 1h de Paris",
+                        badge: "📍 ACCÈS",
+                        mainText: "À 1H<br><span class='accent'>DE PARIS</span>",
+                        subText: "30 min de Beauvais",
+                        descText: "Crèvecœur-le-Grand • Facile d'accès",
+                        bg: "hero-visual.jpg",
+                        caption: `📍 À 1h de Paris
+📍 30 min de Beauvais
+📍 Accès autoroute A16
+
+Crèvecœur-le-Grand, c'est facile d'accès.
+Parking gratuit sur place.
+
+26-28 Juin 2026
+🎫 36€ les 3 jours
+🏕️ Camping GRATUIT
+
+→ Lien en bio`
+                    }
+                ]
+            },
+            // PROMOS
+            promos: {
+                title: "⚡ Promos",
+                posts: [
+                    {
+                        id: "promo-lastchance",
+                        title: "Code LASTCHANCE -10%",
+                        badge: "⚡ PROMO",
+                        mainText: "LASTCHANCE<br><span class='accent'>-10%</span>",
+                        subText: "Code promo 48h",
+                        descText: "Valable sur tous les pass",
+                        bg: "hero-visual.jpg",
+                        caption: `⚡ CODE PROMO - 48H SEULEMENT ⚡
+
+Code : LASTCHANCE
+-10% sur tous les pass
+
+⏰ Valable jusqu'à [DATE]
+
+🎫 Lien en bio`
+                    },
+                    {
+                        id: "promo-afterhell",
+                        title: "Code AFTERHELL -15%",
+                        badge: "⚡ FLASH 24H",
+                        mainText: "AFTERHELL<br><span class='accent'>-15%</span>",
+                        subText: "24h seulement",
+                        descText: "Le Hellfest t'a mis en appétit ?",
+                        bg: "hero-visual.jpg",
+                        caption: `🔥 OFFRE FLASH - 24H SEULEMENT 🔥
+
+Code : AFTERHELL
+-15% sur tous les pass
+
+Le Hellfest t'a mis en appétit ?
+On t'attend pour le dessert.
+
+⏰ Valable jusqu'à demain minuit
+
+🎫 Lien en bio`
+                    }
+                ]
+            },
+            // STANDS VILLAGE
+            stands: {
+                title: "🏪 Stands Village",
+                posts: [
+                    {
+                        id: "stand-food-general",
+                        title: "Food Trucks",
+                        badge: "🍔 FOOD",
+                        mainText: "FOOD<br><span class='accent'>TRUCKS</span>",
+                        subText: "Burgers • Pizza • Vegan • Frites",
+                        descText: "De quoi reprendre des forces",
+                        bg: "hero-visual.jpg",
+                        caption: `🍔 FOOD TRUCKS - LE LINEUP 🍔
+
+Entre deux pits, faut reprendre des forces.
+
+Au Barb'n'Rock tu trouveras :
+🍔 Burgers artisanaux
+🍕 Pizza au feu de bois
+🌱 Options vegan
+🍟 Frites maison
+🌮 Tex-mex
+
+Tout ça sur place, à prix festivalier.
+
+26-28 Juin • Crèvecœur-le-Grand
+🎫 36€ les 3 jours
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "stand-burger",
+                        title: "Stand Burgers",
+                        badge: "🍔 BURGERS",
+                        mainText: "[NOM DU<br><span class='accent'>FOOD TRUCK]</span>",
+                        subText: "Burgers artisanaux",
+                        descText: "Viande locale • Fait maison",
+                        bg: "hero-visual.jpg",
+                        caption: `🍔 [NOM DU FOOD TRUCK] SERA LÀ ! 🍔
+
+On vous présente un de nos food trucks :
+
+[Nom] - Burgers artisanaux
+📍 [Ville d'origine]
+
+• Viande locale
+• Pain maison
+• Sauces secrètes
+• Options végé dispo
+
+Retrouvez-les dans le Village du Chaos !
+
+26-28 Juin • Crèvecœur-le-Grand
+🎫 36€ les 3 jours
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "stand-pizza",
+                        title: "Stand Pizza",
+                        badge: "🍕 PIZZA",
+                        mainText: "[NOM DU<br><span class='accent'>PIZZAIOLO]</span>",
+                        subText: "Pizza au feu de bois",
+                        descText: "Four mobile • Fait minute",
+                        bg: "hero-visual.jpg",
+                        caption: `🍕 [NOM] - PIZZA AU FEU DE BOIS 🍕
+
+La vraie pizza napolitaine au festival !
+
+[Nom du stand]
+📍 [Ville]
+
+• Four mobile à 400°C
+• Pâte fraîche
+• Produits italiens
+• Cuisson en 90 secondes
+
+Le combo metal + pizza, on valide 🤘
+
+26-28 Juin • Village du Chaos
+🎫 36€ les 3 jours
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "stand-vegan",
+                        title: "Stand Vegan",
+                        badge: "🌱 VEGAN",
+                        mainText: "[NOM DU<br><span class='accent'>STAND]</span>",
+                        subText: "100% végétal",
+                        descText: "Gourmand et sans compromis",
+                        bg: "hero-visual.jpg",
+                        caption: `🌱 OPTIONS VEGAN AU BARB'N'ROCK 🌱
+
+Le metal c'est pour tout le monde.
+La bouffe aussi.
+
+[Nom du stand vegan]
+📍 [Ville]
+
+• Burgers végétaux
+• Bowls protéinés
+• Desserts sans produits animaux
+• Gourmand ET éthique
+
+Metal vegan, c'est possible 🤘
+
+26-28 Juin • Village du Chaos
+🎫 36€ les 3 jours
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "stand-biere",
+                        title: "Bar Craft Beer",
+                        badge: "🍺 CRAFT BEER",
+                        badgeClass: "cyan",
+                        mainText: "CRAFT<br><span class='accent'>BEER</span>",
+                        subText: "Bières artisanales locales",
+                        descText: "IPA • Stout • Blonde • Ambrée",
+                        bg: "hero-visual.jpg",
+                        caption: `🍺 CRAFT BEER - BIÈRES LOCALES 🍺
+
+Pas de bière industrielle au Barb'n'Rock.
+Que du local, que de l'artisanal.
+
+Au programme :
+🍺 IPA houblonnées
+🍺 Stout bien noires
+🍺 Blondes rafraîchissantes
+🍺 Ambrées maltées
+🍺 Bières locales Hauts-de-France
+
+Brasseries partenaires :
+• [Brasserie 1]
+• [Brasserie 2]
+• [Brasserie 3]
+
+26-28 Juin • Village du Chaos
+🎫 36€ les 3 jours
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "stand-brasserie",
+                        title: "Brasserie partenaire",
+                        badge: "🍺 BRASSERIE",
+                        mainText: "[NOM<br><span class='accent'>BRASSERIE]</span>",
+                        subText: "Brasserie artisanale",
+                        descText: "📍 [Ville] • Depuis [année]",
+                        bg: "hero-visual.jpg",
+                        caption: `🍺 [NOM DE LA BRASSERIE] 🍺
+
+On vous présente une de nos brasseries partenaires !
+
+[Nom de la brasserie]
+📍 [Ville] • Depuis [année]
+
+"[Citation ou devise de la brasserie]"
+
+Leurs bières seront au bar du festival :
+• [Bière 1] - [style]
+• [Bière 2] - [style]
+• [Bière 3] - [style]
+
+Retrouvez-les dans le Village du Chaos !
+
+26-28 Juin • Crèvecœur-le-Grand
+🎫 36€ les 3 jours
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "stand-tattoo",
+                        title: "Stand Tattoo",
+                        badge: "🖋️ TATTOO",
+                        mainText: "TATTOO<br><span class='accent'>& PIERCING</span>",
+                        subText: "Artistes sur place",
+                        descText: "Repars avec un souvenir définitif",
+                        bg: "hero-visual.jpg",
+                        caption: `🖋️ TATTOO & PIERCING AU FESTIVAL 🖋️
+
+Envie d'un souvenir permanent ?
+
+Des tatoueurs et pierceurs professionnels 
+seront présents tout le week-end !
+
+• Flash tattoos festival
+• Pièces personnalisées (sur RDV)
+• Piercing
+• Matériel stérile, artistes certifiés
+
+Artistes présents :
+• [Tatoueur 1] - @[insta]
+• [Tatoueur 2] - @[insta]
+
+📍 Village du Chaos
+26-28 Juin
+
+Repars marqué à vie 🤘
+
+🎫 36€ les 3 jours
+→ Lien en bio`
+                    },
+                    {
+                        id: "stand-tatoueur",
+                        title: "Tatoueur partenaire",
+                        badge: "🖋️ ARTISTE",
+                        mainText: "[NOM<br><span class='accent'>TATOUEUR]</span>",
+                        subText: "@[instagram]",
+                        descText: "📍 [Ville] • [Style]",
+                        bg: "hero-visual.jpg",
+                        caption: `🖋️ [NOM DU TATOUEUR] SERA AU FESTIVAL 🖋️
+
+On vous présente un des artistes présents !
+
+[Nom]
+📍 [Ville]
+🎨 Style : [Blackwork / Trad / Neo-trad / etc.]
+📸 @[instagram]
+
+"[Citation de l'artiste]"
+
+Flash tattoos disponibles sur place
+Pièces perso sur RDV (contactez-le en DM)
+
+📍 Village du Chaos
+26-28 Juin • Crèvecœur-le-Grand
+
+🎫 36€ les 3 jours
+→ Lien en bio`
+                    },
+                    {
+                        id: "stand-merch",
+                        title: "Stands Merch",
+                        badge: "👕 MERCH",
+                        mainText: "STANDS<br><span class='accent'>MERCH</span>",
+                        subText: "T-shirts • Vinyles • Patches",
+                        descText: "Repars avec du lourd",
+                        bg: "hero-visual.jpg",
+                        caption: `👕 STANDS MERCH AU VILLAGE 👕
+
+Le festival c'est aussi l'occasion de 
+repartir avec du matos !
+
+Au Village du Chaos :
+👕 T-shirts des groupes
+📀 Vinyles & CDs
+🎸 Patches & écussons
+⛓️ Bijoux & accessoires
+🖼️ Prints & affiches
+
++ Le MERCH OFFICIEL Barb'n'Rock !
+
+📍 26-28 Juin • Crèvecœur-le-Grand
+🎫 36€ les 3 jours
+
+→ Lien en bio`
+                    },
+                    {
+                        id: "stand-vinyles",
+                        title: "Stand Vinyles",
+                        badge: "📀 VINYLES",
+                        mainText: "STAND<br><span class='accent'>VINYLES</span>",
+                        subText: "Disquaire sur place",
+                        descText: "Raretés • Occasions • Neufs",
+                        bg: "hero-visual.jpg",
+                        caption: `📀 STAND VINYLES 📀
+
+Pour les collectionneurs et les curieux !
+
+[Nom du disquaire]
+📍 [Ville]
+
+Au programme :
+• Vinyles neufs
+• Occasions & raretés
+• Metal français & international
+• Prix festival
+
+Fais péter ta collec' 🤘
+
+📍 Village du Chaos
+26-28 Juin • Crèvecœur-le-Grand
+
+🎫 36€ les 3 jours
+→ Lien en bio`
+                    },
+                    {
+                        id: "stand-artisanat",
+                        title: "Artisanat Metal",
+                        badge: "⚒️ ARTISANAT",
+                        mainText: "ARTISANAT<br><span class='accent'>METAL</span>",
+                        subText: "Créations uniques",
+                        descText: "Bijoux • Cuir • Forge",
+                        bg: "hero-visual.jpg",
+                        caption: `⚒️ ARTISANAT METAL ⚒️
+
+Des créateurs locaux seront au Village !
+
+• Bijoux forgés à la main
+• Travail du cuir
+• Accessoires uniques
+• Créations sur-mesure
+
+Artisans présents :
+• [Artisan 1] - [spécialité]
+• [Artisan 2] - [spécialité]
+
+Chaque pièce est unique, 
+comme ton week-end au Barb'n'Rock 🤘
+
+📍 26-28 Juin • Crèvecœur-le-Grand
+🎫 36€ les 3 jours
+
+→ Lien en bio`
+                    }
+                ]
+            },
+            // CARROUSELS THÉMATIQUES
+            carrousels_thematiques: {
+                title: "🎠 Carrousels Thématiques",
+                posts: [
+                    {
+                        id: "carrousel-village",
+                        title: "Carrousel Village",
+                        badge: "🍺 VILLAGE",
+                        badgeClass: "cyan",
+                        mainText: "LE VILLAGE<br><span class='accent'>DU CHAOS</span>",
+                        subText: "Entre deux concerts",
+                        descText: "Food • Beer • Tattoo • Merch",
+                        bg: "hero-visual.jpg",
+                        format: "carrousel",
+                        slides: {
+                            1: { badge: '🍺 VILLAGE', main: 'LE VILLAGE<br><span class="accent">DU CHAOS</span>', sub: 'Entre deux concerts', desc: 'Swipe pour découvrir →', bg: 'hero-visual.jpg' },
+                            2: { badge: '🍔 FOOD', main: 'FOOD<br><span class="accent">TRUCKS</span>', sub: 'Burgers • Pizza • Vegan • Frites', desc: 'De quoi reprendre des forces', bg: 'hero-visual.jpg' },
+                            3: { badge: '🍺 BOISSONS', main: 'CRAFT<br><span class="accent">BEER</span>', sub: 'Bières locales', desc: 'Bar à bières artisanales', bg: 'hero-visual.jpg' },
+                            4: { badge: '🖋️ TATTOO', main: 'TATTOO<br><span class="accent">& PIERCING</span>', sub: 'Artistes sur place', desc: 'Repars avec un souvenir définitif', bg: 'hero-visual.jpg' },
+                            5: { badge: '🎫 BILLETS', main: '36€', mainClass: 'price', sub: 'Pass 3 jours • Tout inclus', desc: '26-28 Juin • Crèvecœur', bg: 'hero-visual.jpg' }
+                        },
+                        caption: `LE VILLAGE DU CHAOS 🍺
+
+Entre deux concerts, y'a de quoi faire :
+
+🍔 Food trucks (burgers, pizza, vegan, frites...)
+🍺 Craft beer locale
+🖋️ Tattoo & piercing
+📀 Stands vinyles & merch
+⚒️ Artisanat metal
+
+Et tout ça pour 36€ les 3 jours. Camping inclus.
+
+Tu viens pour la musique, tu restes pour l'ambiance.
+
+🎫 Lien en bio`
+                    },
+                    {
+                        id: "carrousel-animations",
+                        title: "Carrousel Animations",
+                        badge: "🎸 ANIMATIONS",
+                        mainText: "PAS QUE<br><span class='accent'>DES CONCERTS</span>",
+                        subText: "Barbe Contest • Air Guitar • Blind Test",
+                        descText: "Il se passe toujours un truc",
+                        bg: "hero-visual.jpg",
+                        format: "carrousel",
+                        slides: {
+                            1: { badge: '🎸 ANIMATIONS', main: 'PAS QUE<br><span class="accent">DES CONCERTS</span>', sub: '', desc: 'Swipe pour découvrir →', bg: 'hero-visual.jpg' },
+                            2: { badge: '🧔 DIMANCHE 14H', main: 'BARBE<br><span class="accent">CONTEST</span>', sub: 'Montre ta plus belle barbe', desc: 'Jury impitoyable', bg: 'hero-visual.jpg' },
+                            3: { badge: '🎸 SAMEDI 20H', main: 'AIR GUITAR<br><span class="accent">CHAMPIONSHIP</span>', sub: 'Lâche-toi', desc: 'Comme si t\'avais une vraie gratte', bg: 'hero-visual.jpg' },
+                            4: { badge: '🎵 SAMEDI 17H', main: 'BLIND<br><span class="accent">TEST METAL</span>', sub: 'Tu connais tes classiques ?', desc: 'Prouve-le.', bg: 'hero-visual.jpg' },
+                            5: { badge: '🎫 BILLETS', main: '36€', mainClass: 'price', sub: 'Pass 3 jours • Tout inclus', desc: '26-28 Juin • Crèvecœur', bg: 'hero-visual.jpg' }
+                        },
+                        caption: `Le Barb'n'Rock c'est pas que des concerts 🤘
+
+🧔 BARBE CONTEST - Dimanche 14h
+Montre ta plus belle barbe. Jury impitoyable.
+
+🎸 AIR GUITAR CHAMPIONSHIP - Samedi 20h
+Lâche-toi comme si t'avais une vraie gratte.
+
+🎵 BLIND TEST METAL - Samedi 17h
+Tu connais vraiment tes classiques ?
+
+💀 WALL OF DEATH WORKSHOP - Samedi 15h
+Apprends les règles du pit avec les anciens.
+
+36€ les 3 jours. Camping gratuit.
+Y'a pas d'excuse.
+
+🎫 Lien en bio`
+                    },
+                    {
+                        id: "carrousel-acces",
+                        title: "Carrousel Comment venir",
+                        badge: "📍 ACCÈS",
+                        mainText: "COMMENT<br><span class='accent'>VENIR</span>",
+                        subText: "C'est facile",
+                        descText: "1h de Paris • 30min de Beauvais",
+                        bg: "hero-visual.jpg",
+                        format: "carrousel",
+                        slides: {
+                            1: { badge: '📍 ACCÈS', main: 'COMMENT<br><span class="accent">VENIR</span>', sub: 'C\'est facile', desc: 'Swipe →', bg: 'hero-visual.jpg' },
+                            2: { badge: '🚗 VOITURE', main: 'A16<br><span class="accent">SORTIE 14</span>', sub: 'Paris → 1h • Beauvais → 30min', desc: 'Parking GRATUIT sur place', bg: 'hero-visual.jpg' },
+                            3: { badge: '🚂 TRAIN', main: 'GARE<br><span class="accent">BEAUVAIS</span>', sub: 'Puis navette festival', desc: 'Infos navettes à venir', bg: 'hero-visual.jpg' },
+                            4: { badge: '🏕️ CAMPING', main: 'CAMPING<br><span class="accent">GRATUIT</span>', sub: 'Inclus avec tous les pass', desc: 'Arrivée dès vendredi matin', bg: 'hero-visual.jpg' },
+                            5: { badge: '🎫 BILLETS', main: '36€', mainClass: 'price', sub: 'Pass 3 jours • Camping inclus', desc: '26-28 Juin • Crèvecœur-le-Grand', bg: 'hero-visual.jpg' }
+                        },
+                        caption: `📍 COMMENT VENIR
+
+🚗 EN VOITURE
+A16 sortie 14 - Crèvecœur-le-Grand
+• Paris : 1h
+• Beauvais : 30 min
+• Lille : 1h30
+Parking GRATUIT sur place
+
+🚂 EN TRAIN
+Gare de Beauvais puis navette festival
+(infos navettes à venir)
+
+🏕️ CAMPING
+Gratuit et inclus avec tous les pass
+Arrivée possible dès vendredi matin
+
+🎫 Pass 3 jours : 36€
+→ Lien en bio`
+                    }
+                ]
+            }
+        };
+
+        // Hashtags standard
+        const defaultHashtags = "#BarbnRock #BarbnRock2026 #FestivalMetal #MetalFrancais #PunkRock #DeathMetal #FestivalOise #Picardie #HautsDeFrance #Festival2026";
+
+        // État
+        let currentPlatform = 'instagram';
+        let currentFormat = 'carre';
+        let currentPost = postsDB.billetterie.posts[0];
+
+        // ==================== INITIALISATION ====================
+        function init() {
+            renderPostsList();
+            applyFormat();
+            applyPost(currentPost);
+        }
+
+        // ==================== RENDU LISTE DES POSTS ====================
+        function renderPostsList() {
+            const container = document.getElementById('posts-list');
+            container.innerHTML = '';
+
+            Object.keys(postsDB).forEach(categoryKey => {
+                const category = postsDB[categoryKey];
+                const section = document.createElement('div');
+                section.className = 'sidebar-section open';
+                section.innerHTML = `
+                    <div class="sidebar-section-title" onclick="toggleSection(this)">
+                        ${category.title}
+                        <span>▼</span>
+                    </div>
+                    <div class="sidebar-section-content">
+                        ${category.posts.map(post => `
+                            <div class="post-item ${post.id === currentPost.id ? 'active' : ''}" 
+                                 onclick="selectPost('${categoryKey}', '${post.id}')">
+                                <div class="post-item-title">${post.title}</div>
+                                <div class="post-item-meta">${post.format === 'story' ? '📱 Story' : post.format === 'carrousel' ? '🎠 Carrousel' : '📸 Post'}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(section);
+            });
+        }
+
+        function toggleSection(el) {
+            el.parentElement.classList.toggle('open');
+        }
+
+        function filterPosts(query) {
+            const items = document.querySelectorAll('.post-item');
+            query = query.toLowerCase();
+            items.forEach(item => {
+                const title = item.querySelector('.post-item-title').textContent.toLowerCase();
+                item.style.display = title.includes(query) ? 'block' : 'none';
+            });
+        }
+
+        // ==================== SÉLECTION POST ====================
+        function selectPost(categoryKey, postId) {
+            const post = postsDB[categoryKey].posts.find(p => p.id === postId);
+            if (post) {
+                currentPost = post;
+
+                // Update active state
+                document.querySelectorAll('.post-item').forEach(item => item.classList.remove('active'));
+                event.target.closest('.post-item').classList.add('active');
+
+                // Si le post a un format préféré, l'appliquer
+                if (post.format === 'story') {
+                    setFormat('story');
+                } else if (post.format === 'carrousel') {
+                    setFormat('carrousel');
+                }
+
+                applyPost(post);
+            }
+        }
+
+        // ==================== APPLIQUER LE POST ====================
+        function applyPost(post) {
+            // Si c'est un carrousel avec slides, utiliser les données du slide 1
+            const isCarrouselWithSlides = currentFormat === 'carrousel' && post.slides;
+            const displayData = isCarrouselWithSlides ? post.slides[1] : post;
+            
+            // Badge
+            const badgeEl = document.getElementById('post-badge');
+            badgeEl.textContent = displayData.badge || '';
+            badgeEl.className = 'post-badge ' + (displayData.badgeClass || post.badgeClass || '');
+            badgeEl.style.display = displayData.badge ? 'block' : 'none';
+
+            // Main text
+            const mainEl = document.getElementById('main-text');
+            mainEl.innerHTML = displayData.main || displayData.mainText || '';
+            mainEl.className = 'main-text ' + (displayData.mainClass || post.mainClass || '');
+
+            // Sub & desc
+            document.getElementById('sub-text').textContent = displayData.sub || displayData.subText || '';
+            document.getElementById('desc-text').textContent = displayData.desc || displayData.descText || '';
+
+            // Background
+            const bgImage = displayData.bg || post.bg;
+            document.getElementById('post-bg').src = '../../public/images/' + bgImage;
+            document.getElementById('bg-select').value = bgImage;
+
+            // Caption (toujours celle du post)
+            document.getElementById('caption-text').textContent = post.caption;
+            document.getElementById('hashtags-text').textContent = defaultHashtags;
+
+            // TikTok desc
+            document.getElementById('tiktok-desc').textContent = (displayData.sub || displayData.subText) || (displayData.desc || displayData.descText);
+            
+            // Reset slide selector to 1 if carrousel
+            if (isCarrouselWithSlides) {
+                document.querySelectorAll('.slide-btn').forEach(b => b.classList.remove('active'));
+                document.querySelector('.slide-btn[data-slide="1"]')?.classList.add('active');
+                currentSlide = 1;
+            }
+        }
+
+        // ==================== PLATEFORME ====================
+        function setPlatform(platform) {
+            currentPlatform = platform;
+
+            document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.platform-btn.${platform}`).classList.add('active');
+
+            // Update format options
+            updateFormatOptions();
+            applyFormat();
+        }
+
+        function updateFormatOptions() {
+            const selector = document.getElementById('format-selector');
+            
+            // Formats disponibles par plateforme
+            const platformFormats = {
+                instagram: [
+                    { id: 'carre', label: '◼️ Carré 1080²', desc: 'Feed classique' },
+                    { id: 'portrait', label: '▮ Portrait 1080×1350', desc: 'Feed optimisé' },
+                    { id: 'carrousel', label: '🎠 Carrousel', desc: '5 slides 1080×1350' },
+                    { id: 'story', label: '📱 Story/Reel', desc: '1080×1920' }
+                ],
+                facebook: [
+                    { id: 'carre', label: '◼️ Carré 1080²', desc: 'Post standard' },
+                    { id: 'paysage', label: '🖼️ Paysage 1200×630', desc: 'Lien / Partage' },
+                    { id: 'story', label: '📱 Story', desc: '1080×1920' }
+                ],
+                tiktok: [
+                    { id: 'story', label: '📱 Vidéo verticale', desc: '1080×1920' }
+                ]
+            };
+            
+            const formats = platformFormats[currentPlatform] || platformFormats.instagram;
+            
+            // Si le format actuel n'est pas dispo sur cette plateforme, prendre le premier
+            const availableIds = formats.map(f => f.id);
+            if (!availableIds.includes(currentFormat)) {
+                currentFormat = formats[0].id;
+            }
+            
+            selector.innerHTML = formats.map(f => `
+                <button class="format-btn ${currentFormat === f.id ? 'active' : ''}" 
+                        data-format="${f.id}" 
+                        onclick="setFormat('${f.id}')"
+                        title="${f.desc}">
+                    ${f.label}
+                </button>
+            `).join('');
+            
+            applyFormat();
+        }
+
+        // ==================== FORMAT ====================
+        function setFormat(format) {
+            currentFormat = format;
+
+            document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.format-btn[data-format="${format}"]`)?.classList.add('active');
+
+            applyFormat();
+        }
+
+        function applyFormat() {
+            const post = document.getElementById('post');
+            const scale = 0.37;
+
+            const dimensions = {
+                carre: { w: 1080, h: 1080 },
+                portrait: { w: 1080, h: 1350 },
+                carrousel: { w: 1080, h: 1350 },
+                story: { w: 1080, h: 1920 },
+                paysage: { w: 1200, h: 630 }
+            };
+
+            const dim = dimensions[currentFormat];
+            post.style.width = (dim.w * scale) + 'px';
+            post.style.height = (dim.h * scale) + 'px';
+
+            // CSS variables selon format
+            const isStory = currentFormat === 'story';
+            const isPortrait = currentFormat === 'portrait' || currentFormat === 'carrousel';
+
+            post.style.setProperty('--padding', isStory ? '15px' : '25px');
+            post.style.setProperty('--badge-size', isStory ? '11px' : '14px');
+            post.style.setProperty('--logo-size', isStory ? '35px' : '50px');
+            post.style.setProperty('--main-size', isStory ? '48px' : (isPortrait ? '64px' : '72px'));
+            post.style.setProperty('--sub-size', isStory ? '12px' : '14px');
+            post.style.setProperty('--desc-size', isStory ? '11px' : '13px');
+            post.style.setProperty('--date-size', isStory ? '12px' : '16px');
+            post.style.setProperty('--location-size', isStory ? '9px' : '11px');
+            post.style.setProperty('--cta-size', isStory ? '12px' : '14px');
+            post.style.setProperty('--corner-size', isStory ? '35px' : '50px');
+
+            // TikTok elements
+            const isTikTok = currentPlatform === 'tiktok';
+            document.getElementById('tiktok-sidebar').style.display = isTikTok ? 'flex' : 'none';
+            document.getElementById('tiktok-bottom').style.display = isTikTok ? 'block' : 'none';
+
+            // Slides selector (story & carrousel)
+            const slidesSelector = document.getElementById('slides-selector');
+            const isCarrousel = currentFormat === 'carrousel';
+            const hasCarrouselSlides = currentPost && currentPost.slides;
+            
+            // N'afficher le sélecteur carrousel QUE si le post a des slides définis
+            const showCarrouselSlides = isCarrousel && hasCarrouselSlides;
+            const showStorySlides = isStory && !isTikTok;
+            const showSlides = showCarrouselSlides || showStorySlides;
+
+            if (showSlides) {
+                slidesSelector.classList.add('visible');
+
+                // Adapter le nombre de slides et le label
+                const slide5Btn = document.querySelector('.slide-btn[data-slide="5"]');
+                const slidesLabel = document.getElementById('slides-label');
+
+                if (showCarrouselSlides) {
+                    slide5Btn.style.display = 'inline-flex';
+                    slidesLabel.textContent = 'Slide Carrousel :';
+                    // Ajouter classe carrousel aux boutons actifs
+                    document.querySelectorAll('.slide-btn').forEach(b => b.classList.add('carrousel'));
+                } else {
+                    slide5Btn.style.display = 'none';
+                    slidesLabel.textContent = 'Slide Story :';
+                    document.querySelectorAll('.slide-btn').forEach(b => b.classList.remove('carrousel'));
+                }
+                
+                // Reset to slide 1
+                setSlide(1);
+            } else {
+                slidesSelector.classList.remove('visible');
+            }
+
+            // Scale info
+            document.getElementById('scale-info').textContent = `Échelle 1:${(1 / scale).toFixed(1)} • ${dim.w}×${dim.h}px`;
+        }
+
+        // ==================== SLIDES (STORY & CARROUSEL) ====================
+        let currentSlide = 1;
+
+        function setSlide(num) {
+            currentSlide = num;
+
+            // Update buttons
+            document.querySelectorAll('.slide-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.slide-btn[data-slide="${num}"]`)?.classList.add('active');
+
+            const isCarrousel = currentFormat === 'carrousel';
+
+            // Contenu par défaut story
+            const storySlides = {
+                1: { badge: '🔥 ANNONCE', main: 'NOUVEAU NOM', sub: 'DEMAIN', desc: '👀' },
+                2: { badge: '', main: 'PSYKUP', sub: 'AutrucheCore • Toulouse', desc: 'VENDREDI 26 JUIN' },
+                3: { badge: '🎫 BILLETS', main: '36€', sub: 'Pass 3 jours', desc: 'Camping GRATUIT • 18 groupes' },
+                4: { badge: '↑ LIEN', main: 'RÉSERVE', sub: 'TA PLACE', desc: '26-28 Juin • Crèvecœur' }
+            };
+
+            // Contenu carrousel (basé sur le post actuel si c'est un artiste)
+            const carrouselSlides = getCarrouselSlides();
+
+            const slides = isCarrousel ? carrouselSlides : storySlides;
+            const slide = slides[num] || slides[1];
+
+            document.getElementById('post-badge').textContent = slide.badge || '';
+            document.getElementById('post-badge').style.display = slide.badge ? 'block' : 'none';
+            document.getElementById('main-text').innerHTML = slide.main;
+            document.getElementById('main-text').className = 'main-text' + (slide.mainClass ? ' ' + slide.mainClass : '');
+            document.getElementById('sub-text').textContent = slide.sub || '';
+            document.getElementById('desc-text').textContent = slide.desc || '';
+
+            // Changer l'image de fond pour les carrousels si spécifié
+            if (isCarrousel && slide.bg) {
+                document.getElementById('post-bg').src = '../../public/images/' + slide.bg;
+            }
+        }
+
+        // Données carrousel selon le post actuel
+        function getCarrouselSlides() {
+            // Si le post actuel a des slides définis, les utiliser
+            if (currentPost.slides) {
+                return currentPost.slides;
+            }
+
+            // Sinon, générer des slides par défaut basés sur le post
+            const artistName = currentPost.mainText?.replace(/<[^>]*>/g, '') || 'ARTISTE';
+            const artistGenre = currentPost.subText || 'Metal';
+            const artistDay = currentPost.descText || 'VENDREDI';
+            const artistBg = currentPost.bg || 'hero-visual.jpg';
+
+            // 5 slides carrousel artiste par défaut
+            return {
+                1: {
+                    badge: '🔥 NOUVEAU NOM',
+                    main: artistName,
+                    sub: artistGenre,
+                    desc: artistDay,
+                    bg: artistBg
+                },
+                2: {
+                    badge: '📖 BIO',
+                    main: artistName,
+                    sub: 'Depuis 20 ans sur scène',
+                    desc: 'Une référence du metal français',
+                    bg: artistBg
+                },
+                3: {
+                    badge: '🎧 À ÉCOUTER',
+                    main: '🎵',
+                    mainClass: 'price',
+                    sub: 'Single recommandé',
+                    desc: 'Dispo sur Spotify / YouTube',
+                    bg: artistBg
+                },
+                4: {
+                    badge: '🤘 POURQUOI',
+                    main: 'À NE PAS<br><span class="accent">RATER</span>',
+                    sub: 'Un live légendaire',
+                    desc: 'Énergie brute garantie',
+                    bg: artistBg
+                },
+                5: {
+                    badge: '🎫 BILLETS',
+                    main: '36€',
+                    mainClass: 'price',
+                    sub: 'Pass 3 jours',
+                    desc: '26-28 Juin • Crèvecœur',
+                    bg: 'hero-visual.jpg'
+                }
+            };
+        }
+
+        // ==================== AUTRES ====================
+        function updateBg() {
+            const bg = document.getElementById('bg-select').value;
+            document.getElementById('post-bg').src = '../../public/images/' + bg;
+        }
+
+        function copyText() {
+            const caption = document.getElementById('caption-text').textContent;
+            const hashtags = document.getElementById('hashtags-text').textContent;
+            const fullText = caption + '\n\n' + hashtags;
+
+            navigator.clipboard.writeText(fullText).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✅ Copié !';
+                setTimeout(() => btn.textContent = '📋 Copier tout', 2000);
+            });
+        }
+
+        // Init
+        init();
+    </script>
+
+</body>
+
+</html>

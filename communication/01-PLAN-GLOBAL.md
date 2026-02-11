@@ -1,5 +1,14 @@
 # PLAN DE COMMUNICATION GLOBAL - BARB'N'ROCK 2026
 
+## L'ASSOCIATION
+
+**Association Crépicordienne pour la Promotion de la Culture (ACPC)**
+- Association loi 1901, créée en 2023
+- **Bureau** : Benjamin Lampérier (Président), Vincent Warnault (Trésorier), Luc Pouilly (Secrétaire)
+- Co-organisé avec BVFR Charity (créateurs du concept en 2017) et la commune de Crèvecœur-le-Grand
+
+---
+
 ## INFORMATIONS CLÉS
 
 | Élément | Détail |
@@ -9,6 +18,7 @@
 | **Objectif** | 3 000 festivaliers |
 | **Budget com** | 3 000€ |
 | **Concept** | "2 jours de chaos, 1 jour de repos" |
+| **Éditions précédentes** | Dagoba, Black Bomb A, Sidilarsen, Darcy, Guerilla Poubelle |
 
 ---
 
@@ -82,6 +92,13 @@
 3. **100% français** : "Le meilleur du metal hexagonal"
 4. **Taille humaine** : "Tu croises les artistes au bar"
 5. **Après le Hellfest** : "Prolonge ton week-end de chaos"
+
+### Nos valeurs
+- **Partage** : La musique nous rapproche
+- **Entraide** : 10% des ventes du village reversés à une association
+- **Cohésion** : Un festival qui rassemble
+- **Scène locale** : 50% des groupes des Hauts-de-France
+- **Engagement écologique** : Tri, consignes Le Fourgon, réutilisation bâches (Raev)
 
 ### Ce qu'on NE dit PAS
 - On n'attaque pas le dimanche (jour de repos assumé)

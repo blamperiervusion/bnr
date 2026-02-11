@@ -347,6 +347,87 @@ export default function VillagePage() {
         </div>
       </section>
 
+      {/* Engagements Section */}
+      <section className="py-20 px-4 bg-[var(--muted)]/30">
+        <div className="max-w-6xl mx-auto">
+          <SectionTitle subtitle="Un festival responsable et solidaire">
+            🌱 NOS ENGAGEMENTS
+          </SectionTitle>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <Card className="p-6 h-full border-l-4 border-l-[var(--accent-cyan)]">
+                <span className="text-4xl mb-4 block">♻️</span>
+                <h3 className="font-display text-xl text-[var(--foreground)] uppercase mb-2">
+                  Tri & Consigne
+                </h3>
+                <p className="text-[var(--muted-foreground)] text-sm">
+                  Écocups, tri sélectif, et grâce au Fourgon, toutes nos boissons sont en verre consigné, 
+                  livrées et reprises en véhicule électrique.
+                </p>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              <Card className="p-6 h-full border-l-4 border-l-[var(--accent-orange)]">
+                <span className="text-4xl mb-4 block">👜</span>
+                <h3 className="font-display text-xl text-[var(--foreground)] uppercase mb-2">
+                  Réutilisation
+                </h3>
+                <p className="text-[var(--muted-foreground)] text-sm">
+                  Nos anciennes bâches sont transformées en merchandising par la maroquinière Raev. 
+                  Rien ne se perd !
+                </p>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <Card className="p-6 h-full border-l-4 border-l-[var(--accent-red)]">
+                <span className="text-4xl mb-4 block">💝</span>
+                <h3 className="font-display text-xl text-[var(--foreground)] uppercase mb-2">
+                  10% Solidaires
+                </h3>
+                <p className="text-[var(--muted-foreground)] text-sm">
+                  Tous engagés ! Chaque année, les stands du village reversent 10% de leurs ventes 
+                  à une association caritative.
+                </p>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              <Card className="p-6 h-full border-l-4 border-l-[var(--accent-cyan)]">
+                <span className="text-4xl mb-4 block">🎸</span>
+                <h3 className="font-display text-xl text-[var(--foreground)] uppercase mb-2">
+                  50% Hauts-de-France
+                </h3>
+                <p className="text-[var(--muted-foreground)] text-sm">
+                  La moitié de notre programmation vient de la région. On soutient la scène locale !
+                </p>
+              </Card>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Warning / Rules */}
       <section className="py-12 px-4">
         <div className="max-w-3xl mx-auto">

@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur Multi-Format - Barb'n'Rock 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap');
+
+        :root {
+            --bg-dark: #0a0c0f;
+            --bg-card: #1a1f25;
+            --text-light: #f0f0f0;
+            --text-muted: #8b9299;
+            --accent-cyan: #00E5CC;
+            --accent-orange: #E85D04;
+            --accent-gold: #FFD700;
+            --instagram: #E1306C;
+            --facebook: #1877F2;
+            --tiktok: #00f2ea;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #111;
+            min-height: 100vh;
+            color: white;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--bg-dark), #1a1a2e);
+            padding: 25px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-cyan);
+        }
+
+        .header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            letter-spacing: 4px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Main layout */
+        .main-layout {
+            display: flex;
+            min-height: calc(100vh - 100px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 320px;
+            min-width: 320px;
+            background: #1a1a1a;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 1px solid #333;
+        }
+
+        .sidebar-section {
+            margin-bottom: 25px;
+        }
+
+        .sidebar-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #333;
+        }
+
+        /* Platform selector */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .platform-btn {
+            padding: 12px 8px;
+            background: #2a2a2a;
+            border: 2px solid #444;
+            border-radius: 8px;
+            color: #ccc;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .platform-btn:hover {
+            background: #3a3a3a;
+        }
+
+        .platform-btn.active {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 229, 204, 0.1);
+        }
+
+        .platform-btn.instagram.active {
+            border-color: var(--instagram);
+            background: rgba(225, 48, 108, 0.1);
+        }
+
+        .platform-btn.facebook.active {
+            border-color: var(--facebook);
+            background: rgba(24, 119, 242, 0.1);
+        }
+
+        .platform-btn.tiktok.active {
+            border-color: var(--tiktok);
+            background: rgba(0, 242, 234, 0.1);
+        }
+
+        .platform-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        /* Format selector */
+        .format-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .format-btn {
+            padding: 12px 15px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: #ccc;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .format-btn:hover {
+            background: #3a3a3a;
+        }
+
+        .format-btn.active {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 229, 204, 0.1);
+            color: white;
+        }
+
+        .format-size {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-family: monospace;
+        }
+
+        /* Content type */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .content-btn {
+            padding: 10px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: #ccc;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .content-btn:hover {
+            background: #3a3a3a;
+        }
+
+        .content-btn.active {
+            border-color: var(--accent-orange);
+            background: rgba(232, 93, 4, 0.1);
+            color: white;
+        }
+
+        /* Form controls */
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        .control-group label {
+            display: block;
+            color: #888;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .control-group input,
+        .control-group select,
+        .control-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            background: #222;
+            color: white;
+            font-size: 13px;
+        }
+
+        .control-group textarea {
+            min-height: 70px;
+            resize: vertical;
+        }
+
+        /* Preview area */
+        .preview-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            background: #1a1a1a;
+            overflow: auto;
+        }
+
+        .preview-info {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .preview-badge {
+            padding: 8px 15px;
+            background: #2a2a2a;
+            border-radius: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preview-badge.instagram { border: 1px solid var(--instagram); }
+        .preview-badge.facebook { border: 1px solid var(--facebook); }
+        .preview-badge.tiktok { border: 1px solid var(--tiktok); }
+
+        /* Post container - dimensions dynamiques */
+        .post-container {
+            position: relative;
+            background: #333;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .post {
+            background: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            /* Dimensions définies par JS */
+        }
+
+        .post-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            filter: grayscale(10%);
+        }
+
+        .post-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(10, 12, 15, 0.1) 0%,
+                rgba(10, 12, 15, 0.4) 50%,
+                rgba(10, 12, 15, 0.9) 100%
+            );
+        }
+
+        .post-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: var(--post-padding, 25px);
+        }
+
+        /* Post elements */
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .post-badge {
+            background: var(--accent-orange);
+            color: white;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: var(--badge-size, 14px);
+            letter-spacing: 2px;
+            padding: 8px 15px;
+            transform: rotate(-2deg);
+        }
+
+        .post-badge.cyan { background: var(--accent-cyan); color: black; }
+
+        .post-logo {
+            width: var(--logo-size, 50px);
+            height: auto;
+        }
+
+        .post-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .price-big {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: var(--price-size, 80px);
+            color: var(--accent-orange);
+            line-height: 1;
+            text-shadow: 0 0 40px rgba(232, 93, 4, 0.5);
+        }
+
+        .price-label {
+            font-size: var(--label-size, 14px);
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        .title-big {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: var(--title-size, 48px);
+            color: var(--text-light);
+            letter-spacing: 4px;
+            line-height: 1.1;
+            text-shadow: 0 0 30px rgba(0, 229, 204, 0.4);
+        }
+
+        .title-accent {
+            color: var(--accent-cyan);
+        }
+
+        .subtitle {
+            font-size: var(--subtitle-size, 14px);
+            color: var(--text-muted);
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+
+        .countdown-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: var(--countdown-size, 120px);
+            color: var(--accent-cyan);
+            line-height: 1;
+            text-shadow: 0 0 60px rgba(0, 229, 204, 0.6);
+        }
+
+        .countdown-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: var(--countdown-label-size, 36px);
+            color: var(--text-light);
+            letter-spacing: 4px;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .post-date {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: var(--date-size, 16px);
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+
+        .post-location {
+            font-size: var(--location-size, 11px);
+            color: var(--text-muted);
+        }
+
+        .cta-box {
+            background: var(--accent-orange);
+            color: white;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: var(--cta-size, 16px);
+            letter-spacing: 2px;
+            padding: 10px 20px;
+            border-radius: 30px;
+        }
+
+        .corner-accent {
+            position: absolute;
+            width: var(--corner-size, 50px);
+            height: var(--corner-size, 50px);
+            border: 2px solid var(--accent-orange);
+            opacity: 0.3;
+        }
+
+        .corner-accent.top-left {
+            top: 15px;
+            left: 15px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-accent.bottom-right {
+            bottom: 15px;
+            right: 15px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* TikTok specific */
+        .tiktok-watermark {
+            position: absolute;
+            bottom: 80px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .tiktok-icon {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .tiktok-text {
+            position: absolute;
+            bottom: 20px;
+            left: 15px;
+            right: 70px;
+            z-index: 100;
+        }
+
+        .tiktok-username {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .tiktok-description {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        .tiktok-hashtags {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        /* Story specific */
+        .story-top-bar {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            gap: 4px;
+            z-index: 100;
+        }
+
+        .story-progress {
+            flex: 1;
+            height: 3px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+        }
+
+        .story-progress.active {
+            background: white;
+        }
+
+        .story-user {
+            position: absolute;
+            top: 25px;
+            left: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .story-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-cyan);
+            overflow: hidden;
+        }
+
+        .story-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-username {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .story-time {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Export info */
+        .export-info {
+            margin-top: 20px;
+            padding: 15px 25px;
+            background: #2a2a2a;
+            border-radius: 8px;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .export-info strong {
+            color: var(--accent-cyan);
+        }
+
+        /* Scale indicator */
+        .scale-indicator {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>🎨 GÉNÉRATEUR MULTI-FORMAT</h1>
+        <p>Instagram • Facebook • TikTok • Stories • Posts • Vidéos</p>
+    </div>
+
+    <div class="main-layout">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+
+            <!-- Plateforme -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">📱 Plateforme</div>
+                <div class="platform-grid">
+                    <button class="platform-btn instagram active" onclick="setPlatform('instagram')">
+                        <div class="platform-icon">📸</div>
+                        Instagram
+                    </button>
+                    <button class="platform-btn facebook" onclick="setPlatform('facebook')">
+                        <div class="platform-icon">📘</div>
+                        Facebook
+                    </button>
+                    <button class="platform-btn tiktok" onclick="setPlatform('tiktok')">
+                        <div class="platform-icon">🎵</div>
+                        TikTok
+                    </button>
+                </div>
+            </div>
+
+            <!-- Format -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">📐 Format</div>
+                <div class="format-list" id="format-list">
+                    <button class="format-btn active" data-format="post-carre" onclick="setFormat('post-carre')">
+                        <span>Post Carré</span>
+                        <span class="format-size">1080×1080</span>
+                    </button>
+                    <button class="format-btn" data-format="post-portrait" onclick="setFormat('post-portrait')">
+                        <span>Post Portrait</span>
+                        <span class="format-size">1080×1350</span>
+                    </button>
+                    <button class="format-btn" data-format="story" onclick="setFormat('story')">
+                        <span>Story</span>
+                        <span class="format-size">1080×1920</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Type de contenu -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">📝 Type de contenu</div>
+                <div class="content-grid">
+                    <button class="content-btn active" onclick="setContent('prix')">💰 Prix</button>
+                    <button class="content-btn" onclick="setContent('countdown')">⏱️ Countdown</button>
+                    <button class="content-btn" onclick="setContent('annonce')">🎤 Annonce</button>
+                    <button class="content-btn" onclick="setContent('urgence')">🚨 Urgence</button>
+                    <button class="content-btn" onclick="setContent('concours')">🎁 Concours</button>
+                    <button class="content-btn" onclick="setContent('teasing')">👀 Teasing</button>
+                </div>
+            </div>
+
+            <!-- Personnalisation -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">✏️ Personnalisation</div>
+                
+                <div class="control-group">
+                    <label>Texte principal</label>
+                    <input type="text" id="input-main" value="36€" oninput="updatePost()">
+                </div>
+                
+                <div class="control-group">
+                    <label>Sous-texte</label>
+                    <input type="text" id="input-sub" value="Pass 3 jours" oninput="updatePost()">
+                </div>
+                
+                <div class="control-group">
+                    <label>Description</label>
+                    <textarea id="input-desc" oninput="updatePost()">18 groupes • Camping GRATUIT</textarea>
+                </div>
+
+                <div class="control-group">
+                    <label>Badge</label>
+                    <select id="input-badge" onchange="updatePost()">
+                        <option value="EARLY BIRD">EARLY BIRD</option>
+                        <option value="🔥 NOUVEAU NOM">🔥 NOUVEAU NOM</option>
+                        <option value="🚨 ALERTE">🚨 ALERTE</option>
+                        <option value="⏱️ COUNTDOWN">⏱️ COUNTDOWN</option>
+                        <option value="🎁 CONCOURS">🎁 CONCOURS</option>
+                        <option value="👀 BIENTÔT">👀 BIENTÔT</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>Image de fond</label>
+                    <select id="input-bg" onchange="updatePost()">
+                        <option value="hero-visual.jpg">Hero Visual</option>
+                        <option value="bands/psykup.jpg">Psykup</option>
+                        <option value="bands/loudblast.jpg">Loudblast</option>
+                        <option value="bands/shaarghot.jpg">Shaârghot</option>
+                        <option value="bands/cachemire.jpg">Cachemire</option>
+                        <option value="bands/akiavel.jpg">Akiavel</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Preview -->
+        <div class="preview-area">
+            
+            <div class="preview-info">
+                <div class="preview-badge instagram" id="platform-badge">
+                    <span>📸</span>
+                    <span id="platform-name">Instagram</span>
+                </div>
+                <div class="preview-badge" style="border: 1px solid #666;">
+                    <span id="format-name">Post Carré</span>
+                    <span style="color: var(--accent-cyan);" id="format-size">1080×1080</span>
+                </div>
+            </div>
+
+            <div class="post-container">
+                <div class="post" id="post">
+                    
+                    <!-- Story elements (hidden by default) -->
+                    <div class="story-top-bar" id="story-bar" style="display: none;">
+                        <div class="story-progress active"></div>
+                        <div class="story-progress"></div>
+                        <div class="story-progress"></div>
+                    </div>
+                    <div class="story-user" id="story-user" style="display: none;">
+                        <div class="story-avatar">
+                            <img src="../../public/images/logo.png" alt="">
+                        </div>
+                        <div>
+                            <div class="story-username">barbnrock</div>
+                            <div class="story-time">Il y a 2h</div>
+                        </div>
+                    </div>
+
+                    <!-- TikTok elements (hidden by default) -->
+                    <div class="tiktok-watermark" id="tiktok-watermark" style="display: none;">
+                        <div class="tiktok-icon">❤️</div>
+                        <div class="tiktok-icon">💬</div>
+                        <div class="tiktok-icon">↗️</div>
+                        <div class="tiktok-icon">💾</div>
+                    </div>
+                    <div class="tiktok-text" id="tiktok-text" style="display: none;">
+                        <div class="tiktok-username">@barbnrock</div>
+                        <div class="tiktok-description">Le chaos arrive 🔥 26-28 Juin</div>
+                        <div class="tiktok-hashtags">#BarbnRock #Festival #Metal</div>
+                    </div>
+
+                    <!-- Background -->
+                    <img src="../../public/images/hero-visual.jpg" alt="" class="post-bg" id="post-bg">
+                    <div class="post-overlay"></div>
+                    
+                    <!-- Corners -->
+                    <div class="corner-accent top-left"></div>
+                    <div class="corner-accent bottom-right"></div>
+
+                    <!-- Content -->
+                    <div class="post-content">
+                        <div class="post-header">
+                            <div class="post-badge" id="post-badge">EARLY BIRD</div>
+                            <img src="../../public/images/logo.png" alt="" class="post-logo">
+                        </div>
+                        
+                        <div class="post-main" id="post-main">
+                            <div class="price-big" id="main-text">36€</div>
+                            <p class="price-label" id="sub-text">Pass 3 jours</p>
+                            <p class="subtitle" id="desc-text">18 groupes • Camping GRATUIT</p>
+                        </div>
+                        
+                        <div class="post-footer">
+                            <div>
+                                <div class="post-date">26-28 JUIN 2026</div>
+                                <div class="post-location">Crèvecœur-le-Grand</div>
+                            </div>
+                            <div class="cta-box">LIEN EN BIO</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scale-indicator" id="scale-indicator">
+                Aperçu à l'échelle 1:2.7 • Taille réelle : 1080×1080px
+            </div>
+
+            <div class="export-info">
+                <strong>Export :</strong> Clic droit sur le post → Inspecter → Sélectionner <code>#post</code> → Clic droit → Capture node screenshot
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // Configuration des formats par plateforme
+        const formats = {
+            instagram: [
+                { id: 'post-carre', name: 'Post Carré', width: 1080, height: 1080 },
+                { id: 'post-portrait', name: 'Post Portrait', width: 1080, height: 1350 },
+                { id: 'story', name: 'Story / Reel', width: 1080, height: 1920 }
+            ],
+            facebook: [
+                { id: 'post-carre', name: 'Post Carré', width: 1080, height: 1080 },
+                { id: 'post-paysage', name: 'Post Paysage', width: 1200, height: 630 },
+                { id: 'story', name: 'Story', width: 1080, height: 1920 }
+            ],
+            tiktok: [
+                { id: 'video', name: 'Vidéo TikTok', width: 1080, height: 1920 },
+                { id: 'photo', name: 'Photo TikTok', width: 1080, height: 1920 }
+            ]
+        };
+
+        // État actuel
+        let currentPlatform = 'instagram';
+        let currentFormat = 'post-carre';
+        let currentContent = 'prix';
+
+        // Échelle d'affichage
+        const displayScale = 0.37;
+
+        // Initialisation
+        function init() {
+            updateFormatList();
+            applyFormat();
+        }
+
+        // Changer de plateforme
+        function setPlatform(platform) {
+            currentPlatform = platform;
+            
+            // Update buttons
+            document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
+            event.target.closest('.platform-btn').classList.add('active');
+            
+            // Update badge
+            const badge = document.getElementById('platform-badge');
+            badge.className = 'preview-badge ' + platform;
+            
+            const icons = { instagram: '📸', facebook: '📘', tiktok: '🎵' };
+            const names = { instagram: 'Instagram', facebook: 'Facebook', tiktok: 'TikTok' };
+            document.getElementById('platform-name').textContent = names[platform];
+            badge.querySelector('span').textContent = icons[platform];
+            
+            // Update format list
+            updateFormatList();
+            
+            // Select first format
+            currentFormat = formats[platform][0].id;
+            applyFormat();
+        }
+
+        // Mettre à jour la liste des formats
+        function updateFormatList() {
+            const list = document.getElementById('format-list');
+            list.innerHTML = '';
+            
+            formats[currentPlatform].forEach((f, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'format-btn' + (i === 0 ? ' active' : '');
+                btn.dataset.format = f.id;
+                btn.onclick = () => setFormat(f.id);
+                btn.innerHTML = `
+                    <span>${f.name}</span>
+                    <span class="format-size">${f.width}×${f.height}</span>
+                `;
+                list.appendChild(btn);
+            });
+        }
+
+        // Changer de format
+        function setFormat(formatId) {
+            currentFormat = formatId;
+            
+            // Update buttons
+            document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.format-btn[data-format="${formatId}"]`).classList.add('active');
+            
+            applyFormat();
+        }
+
+        // Appliquer le format
+        function applyFormat() {
+            const formatData = formats[currentPlatform].find(f => f.id === currentFormat);
+            const post = document.getElementById('post');
+            
+            // Appliquer dimensions
+            const displayWidth = formatData.width * displayScale;
+            const displayHeight = formatData.height * displayScale;
+            
+            post.style.width = displayWidth + 'px';
+            post.style.height = displayHeight + 'px';
+            
+            // Adapter les tailles des éléments selon le format
+            const isVertical = formatData.height > formatData.width;
+            const isStory = formatData.height >= 1920;
+            const isTikTok = currentPlatform === 'tiktok';
+            
+            // Variables CSS
+            if (isStory) {
+                post.style.setProperty('--post-padding', '20px');
+                post.style.setProperty('--badge-size', '12px');
+                post.style.setProperty('--logo-size', '40px');
+                post.style.setProperty('--price-size', '64px');
+                post.style.setProperty('--title-size', '40px');
+                post.style.setProperty('--label-size', '12px');
+                post.style.setProperty('--subtitle-size', '12px');
+                post.style.setProperty('--countdown-size', '80px');
+                post.style.setProperty('--countdown-label-size', '28px');
+                post.style.setProperty('--date-size', '14px');
+                post.style.setProperty('--location-size', '10px');
+                post.style.setProperty('--cta-size', '14px');
+                post.style.setProperty('--corner-size', '40px');
+            } else if (isVertical) {
+                post.style.setProperty('--post-padding', '22px');
+                post.style.setProperty('--badge-size', '13px');
+                post.style.setProperty('--logo-size', '45px');
+                post.style.setProperty('--price-size', '72px');
+                post.style.setProperty('--title-size', '44px');
+                post.style.setProperty('--label-size', '13px');
+                post.style.setProperty('--subtitle-size', '13px');
+                post.style.setProperty('--countdown-size', '100px');
+                post.style.setProperty('--countdown-label-size', '32px');
+                post.style.setProperty('--date-size', '15px');
+                post.style.setProperty('--location-size', '11px');
+                post.style.setProperty('--cta-size', '15px');
+                post.style.setProperty('--corner-size', '45px');
+            } else {
+                post.style.setProperty('--post-padding', '25px');
+                post.style.setProperty('--badge-size', '14px');
+                post.style.setProperty('--logo-size', '50px');
+                post.style.setProperty('--price-size', '80px');
+                post.style.setProperty('--title-size', '48px');
+                post.style.setProperty('--label-size', '14px');
+                post.style.setProperty('--subtitle-size', '14px');
+                post.style.setProperty('--countdown-size', '120px');
+                post.style.setProperty('--countdown-label-size', '36px');
+                post.style.setProperty('--date-size', '16px');
+                post.style.setProperty('--location-size', '11px');
+                post.style.setProperty('--cta-size', '16px');
+                post.style.setProperty('--corner-size', '50px');
+            }
+            
+            // Éléments spécifiques
+            document.getElementById('story-bar').style.display = (isStory && !isTikTok) ? 'flex' : 'none';
+            document.getElementById('story-user').style.display = (isStory && !isTikTok) ? 'flex' : 'none';
+            document.getElementById('tiktok-watermark').style.display = isTikTok ? 'flex' : 'none';
+            document.getElementById('tiktok-text').style.display = isTikTok ? 'block' : 'none';
+            
+            // Update info
+            document.getElementById('format-name').textContent = formatData.name;
+            document.getElementById('format-size').textContent = `${formatData.width}×${formatData.height}`;
+            document.getElementById('scale-indicator').textContent = 
+                `Aperçu à l'échelle 1:${(1/displayScale).toFixed(1)} • Taille réelle : ${formatData.width}×${formatData.height}px`;
+        }
+
+        // Changer le type de contenu
+        function setContent(content) {
+            currentContent = content;
+            
+            // Update buttons
+            document.querySelectorAll('.content-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Preset values
+            const presets = {
+                prix: { main: '36€', sub: 'Pass 3 jours', desc: '18 groupes • Camping GRATUIT', badge: 'EARLY BIRD' },
+                countdown: { main: 'J-60', sub: 'LE CHAOS APPROCHE', desc: '26-28 Juin 2026', badge: '⏱️ COUNTDOWN' },
+                annonce: { main: 'PSYKUP', sub: 'AutrucheCore • Toulouse', desc: 'VENDREDI 26 JUIN', badge: '🔥 NOUVEAU NOM' },
+                urgence: { main: 'DERNIÈRES PLACES', sub: '', desc: 'Pass 3 jours : 36€ → bientôt 42€', badge: '🚨 ALERTE' },
+                concours: { main: 'GAGNE 2 PASS', sub: '3 JOURS', desc: 'Follow • Like • Tag 3 potes', badge: '🎁 CONCOURS' },
+                teasing: { main: 'NOUVEAU NOM', sub: 'DEMAIN', desc: '👀', badge: '👀 BIENTÔT' }
+            };
+            
+            const p = presets[content];
+            document.getElementById('input-main').value = p.main;
+            document.getElementById('input-sub').value = p.sub;
+            document.getElementById('input-desc').value = p.desc;
+            document.getElementById('input-badge').value = p.badge;
+            
+            updatePost();
+            updateMainStyle(content);
+        }
+
+        // Mettre à jour le style du contenu principal
+        function updateMainStyle(content) {
+            const mainEl = document.getElementById('main-text');
+            
+            if (content === 'countdown') {
+                mainEl.className = 'countdown-number';
+            } else if (content === 'prix') {
+                mainEl.className = 'price-big';
+            } else {
+                mainEl.className = 'title-big';
+            }
+        }
+
+        // Mettre à jour le post
+        function updatePost() {
+            document.getElementById('main-text').textContent = document.getElementById('input-main').value;
+            document.getElementById('sub-text').textContent = document.getElementById('input-sub').value;
+            document.getElementById('desc-text').textContent = document.getElementById('input-desc').value;
+            document.getElementById('post-badge').textContent = document.getElementById('input-badge').value;
+            document.getElementById('post-bg').src = '../../public/images/' + document.getElementById('input-bg').value;
+        }
+
+        // Init
+        init();
+    </script>
+
+</body>
+
+</html>

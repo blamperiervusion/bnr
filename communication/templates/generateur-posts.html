@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Posts - Barb'n'Rock 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap');
+
+        :root {
+            --bg-dark: #0a0c0f;
+            --bg-card: #1a1f25;
+            --text-light: #f0f0f0;
+            --text-muted: #8b9299;
+            --accent-cyan: #00E5CC;
+            --accent-orange: #E85D04;
+            --accent-gold: #FFD700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #111;
+            min-height: 100vh;
+            color: white;
+        }
+
+        /* ========== HEADER ========== */
+        .header {
+            background: linear-gradient(135deg, var(--bg-dark), #1a1a2e);
+            padding: 30px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-cyan);
+        }
+
+        .header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            letter-spacing: 6px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+        }
+
+        /* ========== NAV TABS ========== */
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            padding: 20px;
+            background: #1a1a1a;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-tab {
+            padding: 10px 20px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 25px;
+            color: #ccc;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-tab:hover {
+            background: #3a3a3a;
+            color: white;
+        }
+
+        .nav-tab.active {
+            background: var(--accent-cyan);
+            color: black;
+            border-color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        .main-content {
+            display: flex;
+            gap: 30px;
+            padding: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* ========== PREVIEW AREA ========== */
+        .preview-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .preview-label {
+            color: var(--text-muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        /* ========== POST CONTAINER ========== */
+        .post {
+            width: 400px;
+            height: 400px;
+            background: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .post.story {
+            width: 270px;
+            height: 480px;
+        }
+
+        .post-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            filter: grayscale(10%);
+        }
+
+        .post-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(10, 12, 15, 0.1) 0%,
+                rgba(10, 12, 15, 0.4) 50%,
+                rgba(10, 12, 15, 0.9) 100%
+            );
+        }
+
+        .post-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 25px;
+        }
+
+        /* ========== COMMON ELEMENTS ========== */
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .post-badge {
+            background: var(--accent-orange);
+            color: white;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            padding: 8px 15px;
+            transform: rotate(-2deg);
+        }
+
+        .post-badge.cyan {
+            background: var(--accent-cyan);
+            color: black;
+        }
+
+        .post-badge.gold {
+            background: var(--accent-gold);
+            color: black;
+        }
+
+        .post-logo {
+            width: 50px;
+            height: auto;
+        }
+
+        .post-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .post-date {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 16px;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+
+        .post-location {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .price-big {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 80px;
+            color: var(--accent-orange);
+            line-height: 1;
+            text-shadow: 0 0 40px rgba(232, 93, 4, 0.5);
+        }
+
+        .price-label {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        .title-big {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            color: var(--text-light);
+            letter-spacing: 4px;
+            line-height: 1.1;
+            text-shadow: 0 0 30px rgba(0, 229, 204, 0.4);
+        }
+
+        .title-accent {
+            color: var(--accent-cyan);
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+
+        .cta-box {
+            background: var(--accent-orange);
+            color: white;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            padding: 12px 25px;
+            border-radius: 30px;
+            margin-top: 20px;
+        }
+
+        .corner-accent {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--accent-orange);
+            opacity: 0.3;
+        }
+
+        .corner-accent.top-left {
+            top: 15px;
+            left: 15px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-accent.bottom-right {
+            bottom: 15px;
+            right: 15px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* ========== COUNTDOWN SPECIFIC ========== */
+        .countdown-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 120px;
+            color: var(--accent-cyan);
+            line-height: 1;
+            text-shadow: 0 0 60px rgba(0, 229, 204, 0.6);
+        }
+
+        .countdown-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: var(--text-light);
+            letter-spacing: 4px;
+        }
+
+        /* ========== COMPARATIF SPECIFIC ========== */
+        .compare-list {
+            text-align: left;
+            width: 100%;
+        }
+
+        .compare-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 13px;
+        }
+
+        .compare-item .label {
+            color: var(--text-muted);
+        }
+
+        .compare-item .value {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .compare-item.highlight {
+            background: rgba(0, 229, 204, 0.1);
+            margin: 0 -15px;
+            padding: 8px 15px;
+            border-radius: 6px;
+            border: none;
+        }
+
+        .compare-item.highlight .value {
+            color: var(--accent-cyan);
+        }
+
+        /* ========== URGENCE SPECIFIC ========== */
+        .urgence-flash {
+            animation: flash 1s ease-in-out infinite;
+        }
+
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ========== CONTROLS PANEL ========== */
+        .controls-panel {
+            width: 400px;
+            min-width: 400px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .controls-header {
+            background: #2a2a2a;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        .controls-header h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .controls-header p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .controls-body {
+            padding: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            color: #888;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .control-group input,
+        .control-group select,
+        .control-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: #222;
+            color: white;
+            font-size: 14px;
+        }
+
+        .control-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .control-group input:focus,
+        .control-group select:focus,
+        .control-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+
+        .variant-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .variant-btn {
+            padding: 10px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #ccc;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .variant-btn:hover {
+            background: #3a3a3a;
+        }
+
+        .variant-btn.active {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+            color: white;
+        }
+
+        .divider {
+            height: 1px;
+            background: #333;
+            margin: 20px 0;
+        }
+
+        .export-tip {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .export-tip strong {
+            color: var(--accent-cyan);
+        }
+
+        /* ========== SECTIONS (hidden by default) ========== */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: flex;
+        }
+
+        /* ========== LINEUP GRID ========== */
+        .lineup-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .lineup-day {
+            background: rgba(0,0,0,0.3);
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-orange);
+        }
+
+        .lineup-day.samedi {
+            border-left-color: var(--accent-cyan);
+        }
+
+        .lineup-day.dimanche {
+            border-left-color: var(--accent-gold);
+        }
+
+        .lineup-day-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14px;
+            color: var(--accent-orange);
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .lineup-day.samedi .lineup-day-title {
+            color: var(--accent-cyan);
+        }
+
+        .lineup-day.dimanche .lineup-day-title {
+            color: var(--accent-gold);
+        }
+
+        .lineup-bands {
+            font-size: 11px;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        /* ========== CONCOURS ========== */
+        .steps-list {
+            text-align: left;
+            width: 100%;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: var(--accent-cyan);
+            color: black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .step-text {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>🎨 GÉNÉRATEUR DE POSTS</h1>
+        <p>Barb'n'Rock Festival 2026 • Tous les templates en un seul endroit</p>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showSection('prix')">💰 Prix</button>
+        <button class="nav-tab" onclick="showSection('countdown')">⏱️ Countdown</button>
+        <button class="nav-tab" onclick="showSection('urgence')">🚨 Urgence</button>
+        <button class="nav-tab" onclick="showSection('diff')">🎯 Différenciation</button>
+        <button class="nav-tab" onclick="showSection('concours')">🎁 Concours</button>
+        <button class="nav-tab" onclick="showSection('prog')">📋 Prog Complète</button>
+        <button class="nav-tab" onclick="showSection('village')">🍺 Village</button>
+        <button class="nav-tab" onclick="showSection('hellfest')">🔥 Post-Hellfest</button>
+        <button class="nav-tab" onclick="showSection('merci')">🖤 Merci</button>
+        <button class="nav-tab" onclick="showSection('story')">📱 Stories</button>
+    </div>
+
+    <!-- ==================== SECTION PRIX ==================== -->
+    <div class="main-content section active" id="section-prix">
+        <div class="preview-area">
+            <div class="preview-label">Aperçu Post 1080×1080</div>
+            <div class="post" id="post-prix">
+                <img src="../../public/images/hero-visual.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge" id="prix-badge">EARLY BIRD</div>
+                        <img src="../../public/images/logo.png" alt="" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <div class="price-big" id="prix-value">36€</div>
+                        <p class="price-label" id="prix-label">Pass 3 jours</p>
+                        <p class="subtitle" id="prix-subtitle">18 groupes • Camping GRATUIT</p>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div class="cta-box">LIEN EN BIO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="controls-panel">
+            <div class="controls-header">
+                <h3>💰 Posts Prix</h3>
+                <p>4 variantes disponibles</p>
+            </div>
+            <div class="controls-body">
+                <div class="control-group">
+                    <label>Variante</label>
+                    <div class="variant-buttons">
+                        <button class="variant-btn active" onclick="setPrixVariant('choc')">Prix Choc</button>
+                        <button class="variant-btn" onclick="setPrixVariant('comparatif')">Comparatif</button>
+                        <button class="variant-btn" onclick="setPrixVariant('detail')">Par Jour</button>
+                        <button class="variant-btn" onclick="setPrixVariant('samedi')">Samedi</button>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="control-group">
+                    <label>Prix principal</label>
+                    <input type="text" id="input-prix" value="36€" oninput="updatePrix()">
+                </div>
+                <div class="control-group">
+                    <label>Label</label>
+                    <input type="text" id="input-prix-label" value="Pass 3 jours" oninput="updatePrix()">
+                </div>
+                <div class="control-group">
+                    <label>Sous-titre</label>
+                    <input type="text" id="input-prix-subtitle" value="18 groupes • Camping GRATUIT" oninput="updatePrix()">
+                </div>
+                <div class="control-group">
+                    <label>Badge</label>
+                    <select id="input-prix-badge" onchange="updatePrix()">
+                        <option value="EARLY BIRD">Early Bird</option>
+                        <option value="TARIF NORMAL">Tarif Normal</option>
+                        <option value="DERNIÈRE CHANCE">Dernière Chance</option>
+                    </select>
+                </div>
+                <div class="divider"></div>
+                <div class="export-tip">
+                    <strong>Export :</strong> Clic droit sur le post → Inspecter → Clic droit sur .post → Capture node screenshot
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SECTION COUNTDOWN ==================== -->
+    <div class="main-content section" id="section-countdown">
+        <div class="preview-area">
+            <div class="preview-label">Aperçu Post 1080×1080</div>
+            <div class="post" id="post-countdown">
+                <img src="../../public/images/hero-visual.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge cyan">⏱️ COUNTDOWN</div>
+                        <img src="../../public/images/logo.png" alt="" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <div class="countdown-number" id="countdown-number">J-60</div>
+                        <div class="countdown-label">LE CHAOS APPROCHE</div>
+                        <p class="subtitle">18 groupes • 36€ les 3 jours</p>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div class="cta-box">LIEN EN BIO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="controls-panel">
+            <div class="controls-header">
+                <h3>⏱️ Posts Countdown</h3>
+                <p>J-60, J-30, J-20, J-15...</p>
+            </div>
+            <div class="controls-body">
+                <div class="control-group">
+                    <label>Jour</label>
+                    <div class="variant-buttons">
+                        <button class="variant-btn active" onclick="setCountdown('J-60')">J-60</button>
+                        <button class="variant-btn" onclick="setCountdown('J-30')">J-30</button>
+                        <button class="variant-btn" onclick="setCountdown('J-20')">J-20</button>
+                        <button class="variant-btn" onclick="setCountdown('J-15')">J-15</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label>Valeur personnalisée</label>
+                    <input type="text" id="input-countdown" value="J-60" oninput="document.getElementById('countdown-number').textContent = this.value">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SECTION URGENCE ==================== -->
+    <div class="main-content section" id="section-urgence">
+        <div class="preview-area">
+            <div class="preview-label">Aperçu Post 1080×1080</div>
+            <div class="post" id="post-urgence">
+                <img src="../../public/images/hero-visual.jpg" alt="" class="post-bg">
+                <div class="post-overlay" style="background: linear-gradient(180deg, rgba(232, 93, 4, 0.3) 0%, rgba(10, 12, 15, 0.9) 100%);"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge urgence-flash">🚨 ALERTE</div>
+                        <img src="../../public/images/logo.png" alt="" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <div class="title-big" id="urgence-title">DERNIÈRES<br><span class="title-accent">PLACES</span></div>
+                        <p class="subtitle" id="urgence-subtitle">Les Early Bird partent vite.<br>Pass 3 jours : 36€ → bientôt 42€</p>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div class="cta-box">MAINTENANT</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="controls-panel">
+            <div class="controls-header">
+                <h3>🚨 Posts Urgence</h3>
+                <p>Créer le sentiment d'urgence</p>
+            </div>
+            <div class="controls-body">
+                <div class="control-group">
+                    <label>Variante</label>
+                    <div class="variant-buttons">
+                        <button class="variant-btn active" onclick="setUrgence('places')">Dernières Places</button>
+                        <button class="variant-btn" onclick="setUrgence('prix')">Prix qui augmente</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label>Titre</label>
+                    <textarea id="input-urgence-title" oninput="updateUrgence()">DERNIÈRES
+PLACES</textarea>
+                </div>
+                <div class="control-group">
+                    <label>Sous-titre</label>
+                    <textarea id="input-urgence-subtitle" oninput="updateUrgence()">Les Early Bird partent vite.
+Pass 3 jours : 36€ → bientôt 42€</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SECTION DIFFÉRENCIATION ==================== -->
+    <div class="main-content section" id="section-diff">
+        <div class="preview-area">
+            <div class="preview-label">Aperçu Post 1080×1080</div>
+            <div class="post" id="post-diff">
+                <img src="../../public/images/hero-visual.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge">🎯 CE WEEK-END</div>
+                        <img src="../../public/images/logo.png" alt="" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <div class="title-big" style="font-size: 36px;">LE SEUL FESTIVAL<br><span class="title-accent">METAL</span></div>
+                        <p class="subtitle">Y'aura du rock vintage. Y'aura du rock gratuit.<br>Mais y'aura qu'un seul festival METAL. 🤘</p>
+                        <div style="margin-top: 15px; font-size: 12px; color: var(--text-muted);">18 groupes • 100% metal français</div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-family: 'Bebas Neue'; font-size: 28px; color: var(--accent-orange);">36€</div>
+                            <div style="font-size: 10px; color: var(--accent-cyan);">3 jours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="controls-panel">
+            <div class="controls-header">
+                <h3>🎯 Posts Différenciation</h3>
+                <p>Se démarquer de la concurrence</p>
+            </div>
+            <div class="controls-body">
+                <div class="control-group">
+                    <label>Variante</label>
+                    <div class="variant-buttons">
+                        <button class="variant-btn active" onclick="setDiff('seul')">Seul festival metal</button>
+                        <button class="variant-btn" onclick="setDiff('comparatif')">Comparatif prix</button>
+                        <button class="variant-btn" onclick="setDiff('papa')">Pas du rock de papa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SECTION CONCOURS ==================== -->
+    <div class="main-content section" id="section-concours">
+        <div class="preview-area">
+            <div class="preview-label">Aperçu Post 1080×1080</div>
+            <div class="post" id="post-concours">
+                <img src="../../public/images/hero-visual.jpg" alt="" class="post-bg">
+                <div class="post-overlay" style="background: linear-gradient(180deg, rgba(255, 215, 0, 0.2) 0%, rgba(10, 12, 15, 0.9) 100%);"></div>
+                <div class="corner-accent top-left" style="border-color: var(--accent-gold);"></div>
+                <div class="corner-accent bottom-right" style="border-color: var(--accent-gold);"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge gold">🎁 CONCOURS</div>
+                        <img src="../../public/images/logo.png" alt="" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <div class="title-big" style="font-size: 32px;">GAGNE<br><span style="color: var(--accent-gold);">2 PASS 3 JOURS</span></div>
+                        <div class="steps-list" style="margin-top: 20px;">
+                            <div class="step-item">
+                                <div class="step-number">1</div>
+                                <div class="step-text">Follow @barbnrock</div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">2</div>
+                                <div class="step-text">Like ce post</div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-text">Tag 3 potes</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">TIRAGE LE [DATE]</div>
+                            <div class="post-location">Bonne chance ! 🤘</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="controls-panel">
+            <div class="controls-header">
+                <h3>🎁 Posts Concours</h3>
+                <p>Lancement et annonce gagnants</p>
+            </div>
+            <div class="controls-body">
+                <div class="control-group">
+                    <label>Variante</label>
+                    <div class="variant-buttons">
+                        <button class="variant-btn active" onclick="setConcours('lancement')">Lancement</button>
+                        <button class="variant-btn" onclick="setConcours('gagnants')">Annonce gagnants</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label>Date du tirage</label>
+                    <input type="text" value="15 AVRIL" id="input-concours-date">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SECTION PROG COMPLETE ==================== -->
+    <div class="main-content section" id="section-prog">
+        <div class="preview-area">
+            <div class="preview-label">Aperçu Post 1080×1080</div>
+            <div class="post" id="post-prog">
+                <img src="../../public/images/hero-visual.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge">🔥 COMPLET</div>
+                        <img src="../../public/images/logo.png" alt="" class="post-logo">
+                    </div>
+                    <div class="post-main" style="justify-content: flex-start; padding-top: 10px;">
+                        <div class="title-big" style="font-size: 28px; margin-bottom: 15px;">PROGRAMMATION<br><span class="title-accent">COMPLÈTE</span></div>
+                        <div class="lineup-grid">
+                            <div class="lineup-day">
+                                <div class="lineup-day-title">VENDREDI 26</div>
+                                <div class="lineup-bands">Psykup • Cachemire • Kami No Ikari • Barabbas • Black Hazard</div>
+                            </div>
+                            <div class="lineup-day samedi">
+                                <div class="lineup-day-title">SAMEDI 27</div>
+                                <div class="lineup-bands">Shaârghot • Loudblast • Akiavel • Krav Boca • Dirty Fonzy • Breakout</div>
+                            </div>
+                            <div class="lineup-day dimanche">
+                                <div class="lineup-day-title">DIMANCHE 28</div>
+                                <div class="lineup-bands">Mainkind • Saint Rock Station • Devon Duxe • Udap • Howlite</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">18 GROUPES</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-family: 'Bebas Neue'; font-size: 28px; color: var(--accent-orange);">36€</div>
+                            <div style="font-size: 10px; color: var(--accent-cyan);">Camping inclus</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="controls-panel">
+            <div class="controls-header">
+                <h3>📋 Programmation Complète</h3>
+                <p>Affiche avec tous les groupes</p>
+            </div>
+            <div class="controls-body">
+                <div class="export-tip">
+                    Ce template affiche la programmation complète par jour. Idéal pour l'annonce de la prog finale.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SECTION VILLAGE ==================== -->
+    <div class="main-content section" id="section-village">
+        <div class="preview-area">
+            <div class="preview-label">Aperçu Post 1080×1080</div>
+            <div class="post" id="post-village">
+                <img src="../../public/images/hero-visual.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge cyan">🍺 VILLAGE</div>
+                        <img src="../../public/images/logo.png" alt="" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <div class="title-big" style="font-size: 36px;">LE VILLAGE<br><span class="title-accent">DU CHAOS</span></div>
+                        <div class="compare-list" style="margin-top: 20px;">
+                            <div class="compare-item">
+                                <span class="label">🍔</span>
+                                <span class="value">Food trucks</span>
+                            </div>
+                            <div class="compare-item">
+                                <span class="label">🍺</span>
+                                <span class="value">Craft beer locale</span>
+                            </div>
+                            <div class="compare-item">
+                                <span class="label">🖋️</span>
+                                <span class="value">Tattoo & piercing</span>
+                            </div>
+                            <div class="compare-item">
+                                <span class="label">📀</span>
+                                <span class="value">Stands vinyles & merch</span>
+                            </div>
+                            <div class="compare-item">
+                                <span class="label">⚒️</span>
+                                <span class="value">Artisanat metal</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-family: 'Bebas Neue'; font-size: 28px; color: var(--accent-orange);">36€</div>
+                            <div style="font-size: 10px; color: var(--accent-cyan);">3 jours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="controls-panel">
+            <div class="controls-header">
+                <h3>🍺 Posts Village</h3>
+                <p>Présentation du village et animations</p>
+            </div>
+            <div class="controls-body">
+                <div class="control-group">
+                    <label>Variante</label>
+                    <div class="variant-buttons">
+                        <button class="variant-btn active" onclick="setVillage('village')">Village du chaos</button>
+                        <button class="variant-btn" onclick="setVillage('animations')">Animations</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SECTION POST-HELLFEST ==================== -->
+    <div class="main-content section" id="section-hellfest">
+        <div class="preview-area">
+            <div class="preview-label">Aperçu Post 1080×1080</div>
+            <div class="post" id="post-hellfest">
+                <img src="../../public/images/hero-visual.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge">🔥 AFTER HELLFEST</div>
+                        <img src="../../public/images/logo.png" alt="" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <div class="title-big" style="font-size: 32px;">LE HELLFEST<br>C'EST FINI 🖤</div>
+                        <p class="subtitle" style="font-size: 16px; margin-top: 15px;">Le chaos continue<br>dans <span style="color: var(--accent-cyan); font-weight: 700;">4 JOURS</span></p>
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(0,229,204,0.1); border-radius: 8px;">
+                            <div style="font-size: 12px; color: var(--text-muted);">Code promo 24h</div>
+                            <div style="font-family: 'Bebas Neue'; font-size: 32px; color: var(--accent-cyan); letter-spacing: 4px;">AFTERHELL</div>
+                            <div style="font-size: 14px; color: var(--accent-orange);">-15% sur tous les pass</div>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div class="cta-box">LIEN EN BIO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="controls-panel">
+            <div class="controls-header">
+                <h3>🔥 Posts Post-Hellfest</h3>
+                <p>Rebond après le Hellfest</p>
+            </div>
+            <div class="controls-body">
+                <div class="control-group">
+                    <label>Variante</label>
+                    <div class="variant-buttons">
+                        <button class="variant-btn active" onclick="setHellfest('promo')">Avec promo</button>
+                        <button class="variant-btn" onclick="setHellfest('simple')">Sans promo</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label>Code promo</label>
+                    <input type="text" value="AFTERHELL" id="input-hellfest-code">
+                </div>
+                <div class="control-group">
+                    <label>Réduction</label>
+                    <input type="text" value="-15%" id="input-hellfest-reduc">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SECTION MERCI ==================== -->
+    <div class="main-content section" id="section-merci">
+        <div class="preview-area">
+            <div class="preview-label">Aperçu Post 1080×1080</div>
+            <div class="post" id="post-merci">
+                <img src="../../public/images/hero-visual.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <img src="../../public/images/logo.png" alt="" class="post-logo" style="width: 80px;">
+                    </div>
+                    <div class="post-main">
+                        <div class="title-big" style="font-size: 72px;">MERCI<br><span style="color: var(--accent-cyan);">🖤</span></div>
+                        <p class="subtitle" style="font-size: 16px; margin-top: 20px;">3 jours de chaos<br>[X] festivaliers • 18 groupes</p>
+                        <p style="color: var(--text-muted); font-size: 14px; margin-top: 20px;">Merci aux artistes. Merci aux bénévoles.<br>Merci à VOUS.</p>
+                    </div>
+                    <div class="post-footer" style="justify-content: center;">
+                        <div style="text-align: center;">
+                            <div style="font-family: 'Bebas Neue'; font-size: 24px; color: var(--accent-cyan); letter-spacing: 3px;">ON SE RETROUVE EN 2027 ? 🤘</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="controls-panel">
+            <div class="controls-header">
+                <h3>🖤 Post Merci</h3>
+                <p>Remerciements post-festival</p>
+            </div>
+            <div class="controls-body">
+                <div class="control-group">
+                    <label>Nombre de festivaliers</label>
+                    <input type="text" value="3000" id="input-merci-festivaliers">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SECTION STORIES ==================== -->
+    <div class="main-content section" id="section-story">
+        <div class="preview-area">
+            <div class="preview-label">Aperçu Story 1080×1920</div>
+            <div class="post story" id="post-story">
+                <img src="../../public/images/hero-visual.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="post-content" style="padding: 30px 20px;">
+                    <div class="post-header">
+                        <img src="../../public/images/logo.png" alt="" class="post-logo" style="width: 40px;">
+                    </div>
+                    <div class="post-main">
+                        <div class="title-big" style="font-size: 42px;" id="story-title">NOUVEAU NOM<br><span class="title-accent">DEMAIN</span></div>
+                        <p class="subtitle" id="story-subtitle">👀</p>
+                    </div>
+                    <div class="post-footer" style="justify-content: center;">
+                        <div style="font-size: 12px; color: var(--text-muted);">↑ Lien en haut</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="controls-panel">
+            <div class="controls-header">
+                <h3>📱 Stories</h3>
+                <p>Format vertical 1080×1920</p>
+            </div>
+            <div class="controls-body">
+                <div class="control-group">
+                    <label>Type de story</label>
+                    <div class="variant-buttons">
+                        <button class="variant-btn active" onclick="setStory('teasing')">Teasing</button>
+                        <button class="variant-btn" onclick="setStory('countdown')">Countdown</button>
+                        <button class="variant-btn" onclick="setStory('faq')">FAQ</button>
+                        <button class="variant-btn" onclick="setStory('soldout')">Sold Out</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label>Titre</label>
+                    <textarea id="input-story-title" oninput="updateStory()">NOUVEAU NOM
+DEMAIN</textarea>
+                </div>
+                <div class="control-group">
+                    <label>Sous-titre</label>
+                    <input type="text" id="input-story-subtitle" value="👀" oninput="updateStory()">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== NAVIGATION ====================
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            // Show selected
+            document.getElementById('section-' + sectionId).classList.add('active');
+            // Update tabs
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // ==================== PRIX ====================
+        function updatePrix() {
+            document.getElementById('prix-value').textContent = document.getElementById('input-prix').value;
+            document.getElementById('prix-label').textContent = document.getElementById('input-prix-label').value;
+            document.getElementById('prix-subtitle').textContent = document.getElementById('input-prix-subtitle').value;
+            document.getElementById('prix-badge').textContent = document.getElementById('input-prix-badge').value;
+        }
+
+        function setPrixVariant(variant) {
+            document.querySelectorAll('#section-prix .variant-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const variants = {
+                choc: { prix: '36€', label: 'Pass 3 jours', subtitle: '18 groupes • Camping GRATUIT' },
+                comparatif: { prix: '36€', label: '= 3 pizzas = 2 ciné = 4 pintes', subtitle: 'Le choix est vite fait 🤘' },
+                detail: { prix: '13€', label: 'Vendredi', subtitle: '22€ Samedi • 33€ Ven+Sam • 36€ Pass 3j' },
+                samedi: { prix: '22€', label: 'Samedi 27 Juin', subtitle: 'Loudblast + Shaârghot + ...' }
+            };
+            
+            const v = variants[variant];
+            document.getElementById('input-prix').value = v.prix;
+            document.getElementById('input-prix-label').value = v.label;
+            document.getElementById('input-prix-subtitle').value = v.subtitle;
+            updatePrix();
+        }
+
+        // ==================== COUNTDOWN ====================
+        function setCountdown(value) {
+            document.querySelectorAll('#section-countdown .variant-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('countdown-number').textContent = value;
+            document.getElementById('input-countdown').value = value;
+        }
+
+        // ==================== URGENCE ====================
+        function updateUrgence() {
+            document.getElementById('urgence-title').innerHTML = document.getElementById('input-urgence-title').value.replace('\n', '<br>').replace('PLACES', '<span class="title-accent">PLACES</span>');
+            document.getElementById('urgence-subtitle').innerHTML = document.getElementById('input-urgence-subtitle').value.replace('\n', '<br>');
+        }
+
+        function setUrgence(variant) {
+            document.querySelectorAll('#section-urgence .variant-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (variant === 'places') {
+                document.getElementById('input-urgence-title').value = 'DERNIÈRES\nPLACES';
+                document.getElementById('input-urgence-subtitle').value = 'Les Early Bird partent vite.\nPass 3 jours : 36€ → bientôt 42€';
+            } else {
+                document.getElementById('input-urgence-title').value = 'PRIX QUI\nAUGMENTE';
+                document.getElementById('input-urgence-subtitle').value = 'Dans 48h, les tarifs changent.\nC\'est maintenant ou jamais.';
+            }
+            updateUrgence();
+        }
+
+        // ==================== STORY ====================
+        function updateStory() {
+            document.getElementById('story-title').innerHTML = document.getElementById('input-story-title').value.replace('\n', '<br>').replace(/DEMAIN|J-\d+|ÉPUISÉS?/g, '<span class="title-accent">$&</span>');
+            document.getElementById('story-subtitle').textContent = document.getElementById('input-story-subtitle').value;
+        }
+
+        function setStory(variant) {
+            document.querySelectorAll('#section-story .variant-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const variants = {
+                teasing: { title: 'NOUVEAU NOM\nDEMAIN', subtitle: '👀' },
+                countdown: { title: 'J-3\nLE CHAOS APPROCHE', subtitle: '26-28 Juin • Crèvecœur' },
+                faq: { title: 'FAQ\nCAMPING', subtitle: 'Swipe pour les infos →' },
+                soldout: { title: 'SOLD OUT\nVERY EARLY BIRD', subtitle: '🚨 ÉPUISÉS' }
+            };
+            
+            const v = variants[variant];
+            document.getElementById('input-story-title').value = v.title;
+            document.getElementById('input-story-subtitle').value = v.subtitle;
+            updateStory();
+        }
+
+        // ==================== AUTRES FONCTIONS ====================
+        function setDiff(variant) {
+            document.querySelectorAll('#section-diff .variant-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function setConcours(variant) {
+            document.querySelectorAll('#section-concours .variant-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function setVillage(variant) {
+            document.querySelectorAll('#section-village .variant-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function setHellfest(variant) {
+            document.querySelectorAll('#section-hellfest .variant-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+
+</body>
+
+</html>

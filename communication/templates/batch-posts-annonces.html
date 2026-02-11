@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch Posts Annonces - Barb'n'Rock 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap');
+
+        :root {
+            --bg-dark: #0a0c0f;
+            --bg-card: #1a1f25;
+            --text-light: #f0f0f0;
+            --text-muted: #8b9299;
+            --accent-cyan: #00E5CC;
+            --accent-orange: #E85D04;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1a1a;
+            padding: 40px;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            letter-spacing: 4px;
+        }
+
+        .subtitle {
+            color: var(--accent-cyan);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .post-wrapper {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .post-title {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-day-badge {
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .day-vendredi { background: #E85D04; color: white; }
+        .day-samedi { background: #00E5CC; color: black; }
+        .day-dimanche { background: #FFD700; color: black; }
+
+        /* ========== POST CONTAINER ========== */
+        .post {
+            width: 400px;
+            height: 400px;
+            background: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .post-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            filter: grayscale(10%);
+        }
+
+        .post-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(10, 12, 15, 0.1) 0%,
+                rgba(10, 12, 15, 0.4) 50%,
+                rgba(10, 12, 15, 0.85) 100%
+            );
+        }
+
+        .post-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .post-badge {
+            background: var(--accent-orange);
+            color: white;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+            padding: 6px 12px;
+            transform: rotate(-2deg);
+        }
+
+        .post-logo {
+            width: 50px;
+            height: auto;
+        }
+
+        .post-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .artist-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 52px;
+            color: var(--text-light);
+            letter-spacing: 4px;
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(0, 229, 204, 0.5);
+            margin-bottom: 8px;
+        }
+
+        .artist-genre {
+            font-size: 12px;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .artist-day {
+            display: inline-block;
+            border: 2px solid var(--accent-cyan);
+            padding: 8px 20px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .post-date {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14px;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+
+        .post-location {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .price-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            color: var(--accent-orange);
+        }
+
+        .price-detail {
+            font-size: 10px;
+            color: var(--accent-cyan);
+        }
+
+        .corner-accent {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--accent-orange);
+            opacity: 0.3;
+        }
+
+        .corner-accent.top-left {
+            top: 15px;
+            left: 15px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-accent.bottom-right {
+            bottom: 15px;
+            right: 15px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* Instructions */
+        .instructions {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 12px;
+            color: #ccc;
+        }
+
+        .instructions h2 {
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+        }
+
+        .instructions code {
+            background: #3a3a3a;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🎸 POSTS ANNONCES ARTISTES</h1>
+    <p class="subtitle">12 visuels prêts à exporter • Format Instagram 1080x1080</p>
+
+    <div class="posts-grid">
+
+        <!-- PSYKUP -->
+        <div class="post-wrapper">
+            <div class="post-title">
+                PSYKUP
+                <span class="post-day-badge day-vendredi">Vendredi</span>
+            </div>
+            <div class="post">
+                <img src="../../public/images/bands/psykup.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge">🔥 NOUVEAU NOM</div>
+                        <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <h1 class="artist-name">PSYKUP</h1>
+                        <p class="artist-genre">AutrucheCore • Toulouse</p>
+                        <div class="artist-day">VENDREDI 26 JUIN</div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="price-value">36€</div>
+                            <div class="price-detail">Pass 3 jours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CACHEMIRE -->
+        <div class="post-wrapper">
+            <div class="post-title">
+                CACHEMIRE
+                <span class="post-day-badge day-vendredi">Vendredi</span>
+            </div>
+            <div class="post">
+                <img src="../../public/images/bands/cachemire.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge">🔥 NOUVEAU NOM</div>
+                        <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <h1 class="artist-name">CACHEMIRE</h1>
+                        <p class="artist-genre">Rock'n'Roll • Nantes</p>
+                        <div class="artist-day">VENDREDI 26 JUIN</div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="price-value">36€</div>
+                            <div class="price-detail">Pass 3 jours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOUDBLAST -->
+        <div class="post-wrapper">
+            <div class="post-title">
+                LOUDBLAST
+                <span class="post-day-badge day-samedi">Samedi</span>
+            </div>
+            <div class="post">
+                <img src="../../public/images/bands/loudblast.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge">🔥 NOUVEAU NOM</div>
+                        <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <h1 class="artist-name">LOUDBLAST</h1>
+                        <p class="artist-genre">Death Metal • Lille • Depuis 1985</p>
+                        <div class="artist-day">SAMEDI 27 JUIN</div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="price-value">36€</div>
+                            <div class="price-detail">Pass 3 jours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SHAÂRGHOT -->
+        <div class="post-wrapper">
+            <div class="post-title">
+                SHAÂRGHOT
+                <span class="post-day-badge day-samedi">Samedi</span>
+            </div>
+            <div class="post">
+                <img src="../../public/images/bands/shaarghot.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge">🔥 NOUVEAU NOM</div>
+                        <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <h1 class="artist-name">SHAÂRGHOT</h1>
+                        <p class="artist-genre">Cyber Metal • Paris</p>
+                        <div class="artist-day">SAMEDI 27 JUIN</div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="price-value">36€</div>
+                            <div class="price-detail">Pass 3 jours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AKIAVEL -->
+        <div class="post-wrapper">
+            <div class="post-title">
+                AKIAVEL
+                <span class="post-day-badge day-samedi">Samedi</span>
+            </div>
+            <div class="post">
+                <img src="../../public/images/bands/akiavel.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge">🔥 NOUVEAU NOM</div>
+                        <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <h1 class="artist-name">AKIAVEL</h1>
+                        <p class="artist-genre">Death Metal Moderne • Sud-Est</p>
+                        <div class="artist-day">SAMEDI 27 JUIN</div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="price-value">36€</div>
+                            <div class="price-detail">Pass 3 jours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KRAV BOCA -->
+        <div class="post-wrapper">
+            <div class="post-title">
+                KRAV BOCA
+                <span class="post-day-badge day-samedi">Samedi</span>
+            </div>
+            <div class="post">
+                <img src="../../public/images/bands/krav-boca.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge">🔥 NOUVEAU NOM</div>
+                        <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <h1 class="artist-name">KRAV BOCA</h1>
+                        <p class="artist-genre">Punk Rap Mandoline</p>
+                        <div class="artist-day">SAMEDI 27 JUIN</div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="price-value">36€</div>
+                            <div class="price-detail">Pass 3 jours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DIRTY FONZY -->
+        <div class="post-wrapper">
+            <div class="post-title">
+                DIRTY FONZY
+                <span class="post-day-badge day-samedi">Samedi</span>
+            </div>
+            <div class="post">
+                <img src="../../public/images/bands/dirty-fonzy.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge">🔥 NOUVEAU NOM</div>
+                        <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <h1 class="artist-name">DIRTY FONZY</h1>
+                        <p class="artist-genre">Punk Rock</p>
+                        <div class="artist-day">SAMEDI 27 JUIN</div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="price-value">36€</div>
+                            <div class="price-detail">Pass 3 jours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAINKIND -->
+        <div class="post-wrapper">
+            <div class="post-title">
+                MAINKIND
+                <span class="post-day-badge day-dimanche">Dimanche</span>
+            </div>
+            <div class="post">
+                <img src="../../public/images/bands/mainkind.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge">🔥 NOUVEAU NOM</div>
+                        <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <h1 class="artist-name">MAINKIND</h1>
+                        <p class="artist-genre">Metal Alternatif</p>
+                        <div class="artist-day">DIMANCHE 28 JUIN</div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="price-value">5€</div>
+                            <div class="price-detail">Dimanche seul</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KAMI NO IKARI -->
+        <div class="post-wrapper">
+            <div class="post-title">
+                KAMI NO IKARI
+                <span class="post-day-badge day-vendredi">Vendredi</span>
+            </div>
+            <div class="post">
+                <img src="../../public/images/bands/kami-no-ikari.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge">🔥 NOUVEAU NOM</div>
+                        <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <h1 class="artist-name" style="font-size: 40px;">KAMI NO IKARI</h1>
+                        <p class="artist-genre">J-Metal</p>
+                        <div class="artist-day">VENDREDI 26 JUIN</div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="price-value">36€</div>
+                            <div class="price-detail">Pass 3 jours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BARABBAS -->
+        <div class="post-wrapper">
+            <div class="post-title">
+                BARABBAS
+                <span class="post-day-badge day-vendredi">Vendredi</span>
+            </div>
+            <div class="post">
+                <img src="../../public/images/bands/barabbas.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge">🔥 NOUVEAU NOM</div>
+                        <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <h1 class="artist-name">BARABBAS</h1>
+                        <p class="artist-genre">Doom Metal</p>
+                        <div class="artist-day">VENDREDI 26 JUIN</div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="price-value">36€</div>
+                            <div class="price-detail">Pass 3 jours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLACK HAZARD -->
+        <div class="post-wrapper">
+            <div class="post-title">
+                BLACK HAZARD
+                <span class="post-day-badge day-vendredi">Vendredi</span>
+            </div>
+            <div class="post">
+                <img src="../../public/images/bands/black-hazard.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge">🔥 NOUVEAU NOM</div>
+                        <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <h1 class="artist-name">BLACK HAZARD</h1>
+                        <p class="artist-genre">Heavy Metal</p>
+                        <div class="artist-day">VENDREDI 26 JUIN</div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="price-value">36€</div>
+                            <div class="price-detail">Pass 3 jours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BREAKOUT -->
+        <div class="post-wrapper">
+            <div class="post-title">
+                BREAKOUT
+                <span class="post-day-badge day-samedi">Samedi</span>
+            </div>
+            <div class="post">
+                <img src="../../public/images/bands/breakout.jpg" alt="" class="post-bg">
+                <div class="post-overlay"></div>
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-badge">🔥 NOUVEAU NOM</div>
+                        <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="post-logo">
+                    </div>
+                    <div class="post-main">
+                        <h1 class="artist-name">BREAKOUT</h1>
+                        <p class="artist-genre">Rock</p>
+                        <div class="artist-day">SAMEDI 27 JUIN</div>
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <div class="post-date">26-28 JUIN 2026</div>
+                            <div class="post-location">Crèvecœur-le-Grand</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="price-value">36€</div>
+                            <div class="price-detail">Pass 3 jours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions">
+        <h2>📋 Comment exporter ces visuels ?</h2>
+        <ol>
+            <li>Ouvrez ce fichier dans votre navigateur</li>
+            <li>Pour chaque post, faites un <strong>clic droit → Inspecter</strong> sur le carré noir</li>
+            <li>Dans les DevTools, clic droit sur l'élément <code>.post</code> → <strong>Capture node screenshot</strong></li>
+            <li>L'image sera téléchargée automatiquement !</li>
+        </ol>
+        <p style="margin-top: 15px; color: var(--accent-cyan);">
+            <strong>Astuce :</strong> Pour avoir la taille réelle 1080x1080, ouvrez le fichier 
+            <code>post-annonce-artiste.html</code> et utilisez le panneau de contrôle.
+        </p>
+    </div>
+
+</body>
+
+</html>

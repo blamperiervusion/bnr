@@ -274,6 +274,264 @@
 
 ---
 
+## 🎸 ACTIONS TERRAIN - ÉVÉNEMENTS METAL RÉGIONAUX
+
+**Objectif :** Être présent (flyers, affiches, stand) sur les événements metal de la région en amont du festival pour toucher directement notre cible.
+
+### Festivals & événements identifiés
+
+| Événement | Lieu | Date 2026 | Distance | Statut | Contact |
+|-----------|------|-----------|----------|--------|---------|
+| **La Nuit du Métal** | Beauvais (60) | 📅 ___ | ~30 km | ⬜ À contacter | |
+| **Chaulnes Metal Fest** | Chaulnes (80) | 📅 ___ | ~50 km | ⬜ À contacter | |
+| **Furious Cirkus** | Amiens (80) | 📅 ___ | ~45 km | ⬜ À contacter | |
+| **Gisors Metal Fest** | Gisors (27) | 📅 ___ | ~60 km | ⬜ À contacter | |
+| **Evil Fest** | À confirmer | 📅 ___ | | ⬜ À contacter | |
+| **Heavy Week-end** | Compiègne (60) | 📅 ___ | ~40 km | ⬜ À rechercher | |
+| **Arsenal Rock Festival** | Val d'Oise (95) | 📅 ___ | ~70 km | ⬜ À contacter | |
+| **Motocultor** | Brittany | Mi-août | Loin | ❌ Après notre festival | |
+
+**⚠️ ACTION : Rechercher les dates 2026 de chaque événement (Facebook, sites, contacts directs)**
+
+**Sources pour trouver les dates :**
+- Pages Facebook des événements
+- Groupes Facebook metal locaux (Metal Picardie, Metal Oise, etc.)
+- Agenda Infoconcert / Shotgun
+- Contact direct des organisateurs
+
+---
+
+### 🎤 Concerts des têtes d'affiche dans la région
+
+**Objectif :** Si un de nos groupes joue dans la région avant le festival, y être présent pour distribuer des flyers et rencontrer leur public (= notre public cible).
+
+#### Shaârghot
+| Date | Lieu | Ville | Distance | Présence ? |
+|------|------|-------|----------|------------|
+| 📅 ___ | | | | ⬜ |
+| 📅 ___ | | | | ⬜ |
+
+🔗 **Suivre :** [Facebook](https://facebook.com/shaarghot) | [Bandsintown](https://bandsintown.com/artist/shaarghot) | [Songkick](https://songkick.com)
+
+#### Loudblast
+| Date | Lieu | Ville | Distance | Présence ? |
+|------|------|-------|----------|------------|
+| 📅 ___ | | | | ⬜ |
+| 📅 ___ | | | | ⬜ |
+
+🔗 **Suivre :** [Facebook](https://facebook.com/loudblast.official) | [Site officiel](https://loudblast-music.com)
+
+#### Krav Boca
+| Date | Lieu | Ville | Distance | Présence ? |
+|------|------|-------|----------|------------|
+| 📅 ___ | | | | ⬜ |
+| 📅 ___ | | | | ⬜ |
+
+🔗 **Suivre :** [Facebook](https://facebook.com/kravboca) | [Site officiel](https://kravboca.com)
+
+#### Psykup
+| Date | Lieu | Ville | Distance | Présence ? |
+|------|------|-------|----------|------------|
+| 📅 ___ | | | | ⬜ |
+| 📅 ___ | | | | ⬜ |
+
+🔗 **Suivre :** Facebook | Bandsintown
+
+#### Akiavel
+| Date | Lieu | Ville | Distance | Présence ? |
+|------|------|-------|----------|------------|
+| 📅 ___ | | | | ⬜ |
+| 📅 ___ | | | | ⬜ |
+
+🔗 **Suivre :** [Facebook](https://facebook.com/Akiavel) | [Site officiel](https://akiavel.com)
+
+#### Cachemire
+| Date | Lieu | Ville | Distance | Présence ? |
+|------|------|-------|----------|------------|
+| 📅 ___ | | | | ⬜ |
+| 📅 ___ | | | | ⬜ |
+
+🔗 **Suivre :** Facebook | Bandsintown
+
+#### Dirty Fonzy
+| Date | Lieu | Ville | Distance | Présence ? |
+|------|------|-------|----------|------------|
+| 📅 ___ | | | | ⬜ |
+| 📅 ___ | | | | ⬜ |
+
+🔗 **Suivre :** Facebook | Bandsintown
+
+**💡 Actions :**
+- [ ] S'abonner aux newsletters de chaque groupe
+- [ ] Activer les alertes Bandsintown/Songkick
+- [ ] Checker les Facebook des groupes chaque mois
+- [ ] Contacter les groupes pour demander leur planning de tournée
+
+**💡 Idée partenariat :**
+Proposer aux groupes : "On vient distribuer des flyers à ton concert de [ville], en échange tu mentionnes le Barb'n'Rock sur scène"
+
+---
+
+### 🖋️ Salons du Tatouage
+
+| Événement | Lieu | Date 2026 | Distance | Statut | Contact |
+|-----------|------|-----------|----------|--------|---------|
+| **Mondial du Tatouage** | Paris (Grande Halle Villette) | Mars (habituellement) | ~80 km | ⬜ À contacter | mondialdutatouage.com |
+| **Lille Tattoo Convention** | Lille (59) | 📅 ___ | ~150 km | ⬜ À contacter | |
+| **Amiens Tattoo Convention** | Amiens (80) | 📅 ___ | ~45 km | ⬜ À rechercher | |
+| **Tattoo Convention Rouen** | Rouen (76) | 📅 ___ | ~100 km | ⬜ À rechercher | |
+| **Chalon Tattoo Show** | Chalon (51) | 📅 ___ | ~150 km | ⬜ À rechercher | |
+| **Convention locale Beauvais** | Beauvais (60) | 📅 ___ | ~30 km | ⬜ À rechercher | |
+
+**💡 Idée :** Proposer un partenariat avec un tatoueur présent sur ces salons → il distribue nos flyers, on lui offre un stand au festival.
+
+---
+
+### 🧔 Salons & Événements Barbe
+
+| Événement | Lieu | Date 2026 | Distance | Statut | Contact |
+|-----------|------|-----------|----------|--------|---------|
+| **Championnat de France de Barbe** | Variable | 📅 ___ | | ⬜ À rechercher | frenchbeard.fr |
+| **Barber Connect** | Paris | 📅 ___ | ~80 km | ⬜ À rechercher | |
+| **Salon barbiers / coiffure homme** | Régional | 📅 ___ | | ⬜ À rechercher | |
+
+**💡 Idée :** 
+- Contacter les barbershops locaux pour affichage
+- Proposer au champion de France de barbe d'être jury du Barbe Contest
+- Partenariat avec un barbier → stand au festival
+
+### Barbershops à contacter (affichage + partenariat)
+
+| Barbershop | Ville | Contact | Partenariat ? |
+|------------|-------|---------|---------------|
+| | Beauvais | | ⬜ |
+| | Crèvecœur | | ⬜ |
+| | Amiens | | ⬜ |
+| | Compiègne | | ⬜ |
+| | Paris (si connexion) | | ⬜ |
+
+---
+
+### 🔍 Où trouver ces événements ?
+
+**Tatouage :**
+- tattooconventions.eu (calendrier européen)
+- Facebook : groupes "Tattoo Convention France"
+- Instagram : #tattooconvention #salontatouage
+
+**Barbe :**
+- frenchbeard.fr (asso française de barbe)
+- Facebook : French Beard Community
+- Instagram : #beardcontest #barberconnect
+
+### Autres événements potentiels à rechercher
+
+**Dans l'Oise (60) :**
+- [ ] Concerts au Forum de Vauréal
+- [ ] Événements MJC Beauvais
+- [ ] Concerts à La Baie des Singes (Cournon)
+
+**Dans la Somme (80) :**
+- [ ] Concerts au Hangar 23 (Rouen)
+- [ ] Événements à La Lune des Pirates (Amiens)
+- [ ] Concerts métal bars Amiens
+
+**Dans l'Aisne (02) :**
+- [ ] Concerts à La Maison de la Culture de Gauchy
+- [ ] Événements Saint-Quentin
+
+**En Île-de-France (proche) :**
+- [ ] Concerts au Gibus (Paris)
+- [ ] Événements au Backstage (Paris)
+- [ ] Concerts Petit Bain / Trabendo
+
+**Bars rock/metal de la région :**
+| Bar | Ville | Concerts ? | Contact |
+|-----|-------|------------|---------|
+| | | | |
+| | | | |
+| | | | |
+
+### Kit de présence terrain
+
+**À préparer :**
+- [ ] Flyers A6 (500-1000 exemplaires)
+- [ ] Affiches A3 (50-100 exemplaires)
+- [ ] Stickers (200-500)
+- [ ] QR code vers billetterie
+- [ ] Éventuellement : roll-up ou kakemono
+
+**Message à adapter selon l'événement :**
+```
+🎸 BARB'N'ROCK FESTIVAL 2026
+26-27-28 Juin | Crèvecœur-le-Grand (60)
+
+SHAÂRGHOT • LOUDBLAST • KRAV BOCA
+PSYKUP • AKIAVEL • CACHEMIRE
++ 12 groupes
+
+Pass 3 jours : 42€ | Camping GRATUIT
+À 1h de Paris
+
+barbnrock-festival.fr
+@barbnrock
+```
+
+### Email type - Demande de partenariat événement
+
+```
+Objet : Partenariat - Barb'n'Rock Festival / [Nom événement]
+
+Bonjour,
+
+Je me permets de vous contacter au sujet de [Nom événement].
+
+Nous organisons le Barb'n'Rock Festival les 26-28 juin 2026 
+à Crèvecœur-le-Grand (60), avec Shaârghot, Loudblast, Krav Boca, 
+Psykup et 14 autres groupes.
+
+Nous serions intéressés par une présence sur votre événement 
+(distribution flyers, affichage, ou petit stand si possible).
+
+En échange, nous pouvons :
+- Relayer votre événement sur nos réseaux (3000+ abonnés)
+- Offrir des entrées gratuites Barb'n'Rock
+- Vous mentionner comme partenaire
+
+Seriez-vous ouverts à ce type d'échange ?
+
+Cordialement,
+[Signature]
+```
+
+### Planning actions terrain
+
+| Mois | Action |
+|------|--------|
+| **Février** | Lister tous les événements + contacts |
+| **Mars** | Contacter les organisateurs, confirmer présences |
+| **Avril** | Préparer le matériel (flyers, affiches) |
+| **Mai** | Être présent sur les événements avant le 26 juin |
+| **Juin S1-2** | Derniers événements avant le festival |
+
+### Suivi présence événements
+
+| Événement | Date | Présence | Flyers distribués | Retours |
+|-----------|------|----------|-------------------|---------|
+| | | ⬜ | | |
+| | | ⬜ | | |
+| | | ⬜ | | |
+| | | ⬜ | | |
+
+### Retour sur investissement
+
+À chaque événement, noter :
+- Nombre de flyers distribués
+- Nombre de personnes intéressées (discussions)
+- Éventuellement : code promo dédié pour tracker les ventes
+
+---
+
 ## SUIVI VENTES
 
 | Date | Objectif | Réel | Écart |

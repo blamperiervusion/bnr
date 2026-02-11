@@ -45,7 +45,7 @@ export const partnershipTiers: PartnershipTier[] = [
     color: '#E85D04',
     benefits: [
       'Logo sur tous les supports de communication',
-      '8 pass 3 jours',
+      '11 pass 3 jours OU 18 pass Samedi OU 27 pass Vendredi',
       'Visite exclusive des backstages',
       'Accès espace VIP',
       'Mention vocale sur scène',
@@ -62,7 +62,7 @@ export const partnershipTiers: PartnershipTier[] = [
     color: '#00E5CC',
     benefits: [
       'Logo sur le site web + réseaux sociaux',
-      '4 pass 3 jours',
+      '5 pass 3 jours OU 9 pass Samedi OU 13 pass Vendredi',
       'Visite des backstages',
       'Accès espace VIP',
       'Remerciements sur scène',
@@ -77,7 +77,7 @@ export const partnershipTiers: PartnershipTier[] = [
     color: '#FFD700',
     benefits: [
       'Logo sur le site web',
-      '2 pass 3 jours',
+      '2 pass 3 jours OU 4 pass Samedi OU 6 pass Vendredi',
       'Mention sur les réseaux sociaux',
       'Remerciements officiels',
     ],
@@ -91,7 +91,7 @@ export const partnershipTiers: PartnershipTier[] = [
     color: '#C0C0C0',
     benefits: [
       'Nom sur le site web (page partenaires)',
-      '1 pass 3 jours',
+      '1 pass 3 jours OU 2 pass Samedi OU 3 pass Vendredi',
       'Remerciements sur les réseaux',
     ],
   },

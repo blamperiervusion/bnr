@@ -89,8 +89,11 @@ export default function Footer() {
                 <span className="text-[var(--accent-red)]">ROCK</span>
               </motion.div>
             </Link>
-            <p className="text-[var(--muted-foreground)] mb-6">
-              Le festival Punk & Metal qui fait trembler les murs depuis 2023. No compromise.
+            <p className="text-[var(--muted-foreground)] mb-4">
+              Le festival rock & metal qui fait trembler l&apos;Oise depuis 2023.
+            </p>
+            <p className="text-xs text-[var(--muted-foreground)] mb-4">
+              Organisé par l&apos;ACPC (Association Crépicordienne pour la Promotion de la Culture) - Loi 1901
             </p>
             <p className="text-2xl font-display text-[var(--accent-red)]">
               26-28 JUIN 2026

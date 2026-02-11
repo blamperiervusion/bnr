@@ -107,7 +107,7 @@ export default function FAQPage() {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                href="mailto:contact@barbnrock-festival.fr"
+                href="mailto:barbnrock.festival@gmail.com"
                 variant="primary"
               >
                 📧 Nous contacter

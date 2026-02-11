@@ -222,20 +222,22 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.8);
         }
 
-        /* YouTube iframe background */
+        /* YouTube iframe background - scaled to fill full height */
         .video-bg {
             position: absolute;
-            top: 50%;
+            top: 0;
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 180%;
-            height: 180%;
+            transform: translateX(-50%);
+            /* Dimensions calculées pour qu'une vidéo 16:9 remplisse la hauteur 720px */
+            width: 1280px; /* 720 * 16/9 */
+            height: 720px;
             pointer-events: none;
         }
 
         .video-bg iframe {
             width: 100%;
             height: 100%;
+            border: none;
         }
 
         /* Dark overlay for readability */
@@ -307,6 +309,36 @@
             filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
         }
 
+        .festival-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 3px;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            line-height: 1;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .festival-name span {
+            font-family: 'Bebas Neue', sans-serif !important;
+            font-size: 28px !important;
+            letter-spacing: 3px !important;
+        }
+
+        .festival-name .orange {
+            color: #e85d04 !important;
+            font-size: 30px !important;
+            position: relative;
+            top: 1px;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
         /* Main content */
         .main-content {
             flex: 1;
@@ -327,7 +359,8 @@
                          0 4px 20px rgba(0,0,0,0.8);
             opacity: 0;
             transform: scale(1.5);
-            animation: zoomIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation: zoomIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+                       glitch 3s infinite 2s;
             animation-delay: 0.5s;
         }
 
@@ -429,11 +462,8 @@
             animation-delay: 2s;
         }
 
-        /* Glitch effect on name (optional) */
-        .glitch {
-            animation: glitch 3s infinite;
-            animation-delay: 2s;
-        }
+        /* Glitch effect on name - now combined in .artist-name animation */
+        /* .glitch class no longer needed as animation is built into .artist-name */
 
         /* ==================== ANIMATIONS ==================== */
         @keyframes fadeSlideDown {
@@ -693,12 +723,14 @@
             <!-- Content -->
             <div class="content-layer" id="content-layer">
                 <div class="header" id="header">
-                    <div class="badge" id="badge">🔥 NOUVEAU NOM</div>
-                    <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="logo">
+                    <div class="header-brand">
+                        <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="logo">
+                        <div class="festival-name"><span>BARB'N'</span><span class="orange">ROCK</span></div>
+                    </div>
                 </div>
 
                 <div class="main-content">
-                    <h1 class="artist-name glitch" id="artist-name-display">PSYKUP</h1>
+                    <h1 class="artist-name" id="artist-name-display">PSYKUP</h1>
                     <p class="artist-genre" id="artist-genre-display">AutrucheCore • Toulouse</p>
                     <div class="artist-day" id="artist-day-display">VENDREDI 26 JUIN</div>
                 </div>
@@ -775,8 +807,8 @@
             document.getElementById('artist-day').value = p.day;
             document.getElementById('youtube-url').value = p.youtube;
             document.getElementById('start-time').value = p.start;
-            updateContent();
             updateVideo();
+            updateContent();
             replayAnimation();
         }
 
@@ -814,10 +846,17 @@
             // Remove and re-add animation classes
             elements.forEach(id => {
                 const el = document.getElementById(id);
-                const parent = el.parentNode;
-                const clone = el.cloneNode(true);
-                parent.replaceChild(clone, el);
+                if (el) {
+                    const parent = el.parentNode;
+                    const clone = el.cloneNode(true);
+                    parent.replaceChild(clone, el);
+                }
             });
+            
+            // Re-apply content after clone to ensure it's visible
+            setTimeout(() => {
+                updateContent();
+            }, 50);
         }
 
         function startRecording() {
@@ -843,6 +882,22 @@
 
         // Init with Psykup
         loadPreset('psykup');
+        
+        // Ensure content is visible after animations
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                // Force visibility if animations didn't work
+                const elements = ['artist-name-display', 'artist-genre-display', 'artist-day-display', 'header', 'footer'];
+                elements.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el && getComputedStyle(el).opacity === '0') {
+                        el.style.opacity = '1';
+                        el.style.transform = 'none';
+                    }
+                });
+                updateContent();
+            }, 2500);
+        });
     </script>
 
 </body>

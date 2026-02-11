@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post Annonce Artiste - Barb'n'Rock 2026</title>
+    <!-- html2canvas pour l'export PNG -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap');
 
@@ -249,17 +251,26 @@
         .btn-export {
             width: 100%;
             padding: 12px;
-            background: var(--accent-orange);
+            background: linear-gradient(135deg, var(--accent-orange), #ff7b2e);
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             font-weight: 600;
+            font-size: 14px;
             cursor: pointer;
             margin-top: 10px;
+            transition: all 0.2s;
         }
 
         .btn-export:hover {
-            background: #ff6b1a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(232, 93, 4, 0.4);
+        }
+
+        .btn-export:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .instructions {
@@ -268,6 +279,13 @@
             border-top: 1px solid #eee;
             font-size: 12px;
             color: #777;
+        }
+
+        .export-info {
+            margin-top: 8px;
+            font-size: 11px;
+            color: #888;
+            text-align: center;
         }
     </style>
 </head>
@@ -357,15 +375,13 @@
             </select>
         </div>
 
-        <button class="btn-export" onclick="exportInfo()">📋 Instructions d'export</button>
+        <button class="btn-export" onclick="exportPNG()" id="btn-export">📥 Exporter PNG</button>
+        <div class="export-info">Haute résolution 1080×1080px</div>
 
         <div class="instructions">
-            <strong>Pour exporter en image :</strong><br>
-            1. Masquer ce panneau (F12 → clic droit → Hide element)<br>
-            2. Zoomer à 100% (Cmd+0)<br>
-            3. Capture d'écran du post (1080x1080px)<br>
-            <br>
-            <em>Ou utilisez un outil comme html2canvas / Puppeteer</em>
+            <strong>Autres options :</strong><br>
+            • Capture d'écran : F12 → Clic droit sur .post → "Capture node screenshot"<br>
+            • Script : Utilisez Puppeteer pour une qualité parfaite
         </div>
     </div>
 
@@ -406,13 +422,43 @@
             }
         }
 
-        function exportInfo() {
-            alert('Pour exporter ce post en image :\n\n' +
-                '1. Appuyez sur F12 pour ouvrir les DevTools\n' +
-                '2. Cliquez droit sur le panneau de contrôle → "Hide element"\n' +
-                '3. Redimensionnez la fenêtre pour voir uniquement le post\n' +
-                '4. Faites une capture d\'écran (Cmd+Shift+4 sur Mac)\n\n' +
-                'Le post fait 1080x1080px (format Instagram carré)');
+        async function exportPNG() {
+            const post = document.querySelector('.post');
+            const btn = document.getElementById('btn-export');
+            const originalText = btn.innerHTML;
+            
+            btn.disabled = true;
+            btn.innerHTML = '⏳ Export en cours...';
+            
+            try {
+                const canvas = await html2canvas(post, {
+                    scale: 1, // Déjà à 1080px
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#0a0c0f',
+                    logging: false
+                });
+                
+                const link = document.createElement('a');
+                const artistName = document.getElementById('inputName').value || 'artiste';
+                const fileName = `barbnrock-${artistName.toLowerCase().replace(/[^a-z0-9]/g, '-')}.png`;
+                link.download = fileName;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                
+                btn.innerHTML = '✅ Exporté !';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }, 2000);
+            } catch (error) {
+                console.error('Erreur export:', error);
+                btn.innerHTML = '❌ Erreur';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }, 2000);
+            }
         }
     </script>
 

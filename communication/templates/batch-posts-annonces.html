@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Batch Posts Annonces - Barb'n'Rock 2026</title>
+    <!-- html2canvas pour l'export PNG -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap');
 
@@ -260,6 +262,61 @@
             padding: 2px 8px;
             border-radius: 4px;
             font-size: 14px;
+        }
+
+        /* Export buttons */
+        .post-export-btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--accent-orange), #ff7b2e);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .post-export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(232, 93, 4, 0.4);
+        }
+
+        .post-export-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .export-all-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .export-all-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #333, #444);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .export-all-btn:hover {
+            background: var(--accent-cyan);
+            color: black;
+            transform: translateY(-2px);
+        }
+
+        .export-all-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
     </style>
 </head>
@@ -693,20 +750,114 @@
 
     </div>
 
+    <div class="export-all-container">
+        <button class="export-all-btn" onclick="exportAllPosts()" id="btn-export-all">📦 Exporter tous les posts (12 PNG)</button>
+    </div>
+
     <!-- Instructions -->
     <div class="instructions">
-        <h2>📋 Comment exporter ces visuels ?</h2>
+        <h2>📋 Export des visuels</h2>
         <ol>
-            <li>Ouvrez ce fichier dans votre navigateur</li>
-            <li>Pour chaque post, faites un <strong>clic droit → Inspecter</strong> sur le carré noir</li>
-            <li>Dans les DevTools, clic droit sur l'élément <code>.post</code> → <strong>Capture node screenshot</strong></li>
-            <li>L'image sera téléchargée automatiquement !</li>
+            <li><strong>Export individuel :</strong> Cliquez sur le bouton sous chaque post</li>
+            <li><strong>Export en lot :</strong> Utilisez le bouton "Exporter tout" ci-dessus</li>
+            <li><strong>Taille :</strong> Les images exportées font 1080×1080px (haute résolution)</li>
         </ol>
         <p style="margin-top: 15px; color: var(--accent-cyan);">
-            <strong>Astuce :</strong> Pour avoir la taille réelle 1080x1080, ouvrez le fichier 
-            <code>post-annonce-artiste.html</code> et utilisez le panneau de contrôle.
+            <strong>Astuce :</strong> Pour personnaliser un post, utilisez le fichier 
+            <code>post-annonce-artiste.html</code>
         </p>
     </div>
+
+    <script>
+        // Données des artistes pour le nom de fichier
+        const artistsData = ['psykup', 'cachemire', 'loudblast', 'shaarghot', 'akiavel', 'krav-boca', 
+                            'dirty-fonzy', 'mainkind', 'kami-no-ikari', 'barabbas', 'black-hazard', 'breakout'];
+
+        // Ajouter les boutons d'export à chaque post au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            const wrappers = document.querySelectorAll('.post-wrapper');
+            wrappers.forEach((wrapper, index) => {
+                const post = wrapper.querySelector('.post');
+                const artistName = artistsData[index] || `artiste-${index + 1}`;
+                
+                const btn = document.createElement('button');
+                btn.className = 'post-export-btn';
+                btn.innerHTML = '📥 Exporter PNG';
+                btn.onclick = () => exportPost(post, artistName, btn);
+                wrapper.appendChild(btn);
+            });
+        });
+
+        async function exportPost(postElement, artistName, btn) {
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '⏳ Export...';
+            
+            try {
+                const canvas = await html2canvas(postElement, {
+                    scale: 2.7, // 400 * 2.7 = 1080
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#0a0c0f',
+                    logging: false
+                });
+                
+                const link = document.createElement('a');
+                link.download = `barbnrock-${artistName}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                
+                btn.innerHTML = '✅ Exporté !';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }, 1500);
+            } catch (error) {
+                console.error('Erreur export:', error);
+                btn.innerHTML = '❌ Erreur';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }, 1500);
+            }
+        }
+
+        async function exportAllPosts() {
+            const btn = document.getElementById('btn-export-all');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            
+            const wrappers = document.querySelectorAll('.post-wrapper');
+            
+            for (let i = 0; i < wrappers.length; i++) {
+                btn.innerHTML = `⏳ Export ${i + 1}/${wrappers.length}...`;
+                
+                const post = wrappers[i].querySelector('.post');
+                const artistName = artistsData[i] || `artiste-${i + 1}`;
+                
+                const canvas = await html2canvas(post, {
+                    scale: 2.7,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#0a0c0f',
+                    logging: false
+                });
+                
+                const link = document.createElement('a');
+                link.download = `barbnrock-${artistName}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            btn.innerHTML = '✅ Tout exporté !';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 2000);
+        }
+    </script>
 
 </body>
 

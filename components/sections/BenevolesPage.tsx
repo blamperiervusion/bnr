@@ -493,8 +493,8 @@ export default function BenevolesPage() {
 
           <p className="text-center text-sm text-[var(--muted-foreground)] mt-8">
             Questions ? Écris-nous à{' '}
-            <a href="mailto:benevoles@barbnrock-festival.fr" className="text-[var(--accent-red)] hover:underline">
-              benevoles@barbnrock-festival.fr
+            <a href="mailto:barbnrock.festival@gmail.com" className="text-[var(--accent-red)] hover:underline">
+              barbnrock.festival@gmail.com
             </a>
           </p>
         </div>

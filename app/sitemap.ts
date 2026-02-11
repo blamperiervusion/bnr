@@ -52,12 +52,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
-    {
-      url: `${baseUrl}/offre-cse`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
+    // Offre CSE temporairement masquée
+    // {
+    //   url: `${baseUrl}/offre-cse`,
+    //   lastModified: new Date(),
+    //   changeFrequency: 'monthly',
+    //   priority: 0.7,
+    // },
     {
       url: `${baseUrl}/village`,
       lastModified: new Date(),

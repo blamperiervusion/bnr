@@ -1,10 +1,6 @@
-import CSEOfferPage from '@/components/sections/CSEOfferPage';
+import { redirect } from 'next/navigation';
 
-export const metadata = {
-  title: 'Offres CSE & Groupes | Barb\'n\'Rock Festival',
-  description: 'Tarifs préférentiels pour les comités d\'entreprise et les groupes. Offrez une sortie originale à vos salariés !',
-};
-
+// Page temporairement masquée - redirection vers la page partenaires
 export default function Page() {
-  return <CSEOfferPage />;
+  redirect('/devenir-partenaire');
 }

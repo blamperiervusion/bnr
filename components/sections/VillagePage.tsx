@@ -6,30 +6,16 @@ import { SectionTitle, Card } from '@/components/ui';
 const foodTrucks = [
   {
     id: 'ft-1',
-    name: 'Food Truck #1',
-    type: 'Burgers & Grillades',
-    description: 'Des burgers qui tabassent. Viande fumée, cheddar coulant, sauce maison qui arrache. Végé welcome aussi, on discrimine pas.',
+    name: 'Food Trucks',
+    type: 'Cuisine variée',
+    description: 'Plusieurs food trucks seront présents pour vous proposer une cuisine variée. De quoi reprendre des forces entre deux concerts !',
     emoji: '🍔',
-  },
-  {
-    id: 'ft-2',
-    name: 'Food Truck #2',
-    type: 'Pizza au feu de bois',
-    description: 'Pizza cuite devant toi, pâte qui croustille, garnitures généreuses. Anti-establishment mais pro-mozzarella.',
-    emoji: '🍕',
-  },
-  {
-    id: 'ft-3',
-    name: 'Food Truck #3',
-    type: 'Street food',
-    description: 'De la bouffe de qualité pour reprendre des forces entre deux concerts. Options végé disponibles.',
-    emoji: '🌯',
   },
 ];
 
 const bar = {
   name: 'Le Bar du Festival',
-  description: 'Une sélection de bières ultra quali ! Craft beers locales et internationales, IPA, Stout, Lager... De quoi se rafraîchir avec style entre deux pits.',
+  description: 'Une sélection de bières belges. De quoi se rafraîchir avec style entre deux pits.',
   emoji: '🍺',
 };
 
@@ -74,31 +60,10 @@ const standCategories = [
 const activities = [
   {
     id: 'act-1',
-    name: 'Wall of Death Workshop',
-    description: 'Apprends les règles du pit avec les anciens. Sécurité et respect avant tout.',
-    time: 'Sam 15h',
-    emoji: '💀',
-  },
-  {
-    id: 'act-2',
-    name: 'Blind Test Metal',
-    description: 'Tu connais vraiment tes classiques ? Prouve-le et gagne des lots.',
-    time: 'Sam 17h',
-    emoji: '🎵',
-  },
-  {
-    id: 'act-3',
-    name: 'Barbe Contest',
-    description: 'La plus belle barbe du festival ! Inscription sur place, jury impitoyable.',
-    time: 'Dim 14h',
-    emoji: '🧔',
-  },
-  {
-    id: 'act-4',
-    name: 'Air Guitar Championship',
-    description: 'Lâche-toi comme si t\'avais une vraie gratte. Le ridicule ne tue pas (normalement).',
-    time: 'Sam 20h',
-    emoji: '🎸',
+    name: 'Animations',
+    description: 'Des animations variées rythmeront les trois jours du festival. Programme détaillé à venir !',
+    time: 'Tout le week-end',
+    emoji: '🎉',
   },
 ];
 
@@ -173,7 +138,7 @@ export default function VillagePage() {
                     {bar.name}
                   </h3>
                   <p className="text-[var(--accent-orange)] text-sm font-bold uppercase tracking-wider mb-2">
-                    Bières artisanales & sélection premium
+                    Bières belges
                   </p>
                   <p className="text-[var(--muted-foreground)] leading-relaxed">
                     {bar.description}

@@ -332,16 +332,13 @@ TARIFS IMBATTABLES
 LE VILLAGE
 ═══════════════════════════════════════════════════════════════
 
-• 3 food trucks (burgers, pizza, options végé...)
-• Bar avec sélection de bières artisanales
+• Food trucks (cuisine variée)
+• Bar à bières belges
 • ~20 stands : tattoo, piercing, merchandising, vinyles, 
   artisanat metal
 
 ANIMATIONS :
-• Barbe Contest (Dimanche 14h)
-• Air Guitar Championship (Samedi 20h)
-• Blind Test Metal (Samedi 17h)
-• Wall of Death Workshop (Samedi 15h)
+• Animations variées (programme à venir)
 
 ═══════════════════════════════════════════════════════════════
 INFOS PRATIQUES
@@ -378,8 +375,8 @@ CONTACT PRESSE
 ═══════════════════════════════════════════════════════════════
 
 [Nom du contact]
-📧 presse@barbnrock-festival.fr
-📱 [téléphone]
+📧 barbnrock.festival@gmail.com
+📱 Luc Pouilly - 06 27 81 62 03
 
 ═══════════════════════════════════════════════════════════════
 
@@ -451,7 +448,7 @@ CHIFFRES CLÉS
 • Pass 3 jours : 42€ (early bird épuisé !)
 • Camping GRATUIT
 • Gratuit pour les -12 ans
-• 3 food trucks + 1 bar + ~20 stands
+• Food trucks + 1 bar + ~20 stands
 • À 1h de Paris
 
 ═══════════════════════════════════════════════════════════════
@@ -468,8 +465,8 @@ CONTACT PRESSE
 ═══════════════════════════════════════════════════════════════
 
 [Nom] 
-📧 presse@barbnrock-festival.fr
-📱 [téléphone]
+📧 barbnrock.festival@gmail.com
+📱 Luc Pouilly - 06 27 81 62 03
 
 Visuels HD disponibles sur demande.
 
@@ -656,11 +653,10 @@ DIMANCHE 28 JUIN :
   Devon Duxe, + vainqueur tremplin
 
 Page 5 : Le village
-- 3 food trucks
-- Bar avec sélection bières artisanales
+- Food trucks (cuisine variée)
+- Bar à bières belges
 - ~20 stands (tattoo, piercing, merch, vinyles, artisanat)
-- Animations : Barbe Contest, Air Guitar, Blind Test, 
-  Wall of Death Workshop
+- Animations variées
 
 Page 6 : Infos pratiques
 - Tarifs : Pass 3j 42€, Ven 18€, Sam 27€, Dim 5€, -12 ans gratuit

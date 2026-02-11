@@ -456,7 +456,7 @@ La semaine en cravate, le week-end en battle jacket.
 
 On lance l'expo photo la plus metal de France.
 
-Envoie-nous ta photo "mode bureau" à doublevie@barbnrock-festival.fr
+Envoie-nous ta photo "mode bureau" à barbnrock.festival@gmail.com
 On te prend en photo "mode metal" au festival.
 Résultat : un diptyque collector exposé au village !
 
@@ -555,8 +555,8 @@ Si pas encore fait, le merch peut :
 | Type | Exemple | Ce qu'ils apportent | Ce qu'on leur donne |
 |------|---------|---------------------|---------------------|
 | **Brasserie locale** | [Brasserie du coin] | Bière, visibilité | Stand, logo sur supports |
-| **Tatoueur local** | [Studio tattoo] | Stand tattoo, buzz | Visibilité, passes |
-| **Bar rock** | [Bar de la ville] | Relais, affichage | Passes, réductions |
+| **Tatoueur local** | [Studio tattoo] | Stand tattoo, buzz | Visibilité, pass |
+| **Bar rock** | [Bar de la ville] | Relais, affichage | Pass, réductions |
 | **Magasin musique** | [Magasin instruments] | Affichage, lots | Visibilité |
 | **Food truck** | [Nom] | Restauration | Emplacement |
 

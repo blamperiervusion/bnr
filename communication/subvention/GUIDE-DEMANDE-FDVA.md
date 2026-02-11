@@ -155,8 +155,8 @@ CONCEPT : "2 jours de chaos, 1 jour de repos"
 PROGRAMMATION : 18 groupes dont Shaârghot, Loudblast, Krav Boca, 
 Cachemire, Psykup, Mainkind, Akiavel, Dirty Fonzy...
 
-VILLAGE : Food trucks, bar à bières artisanales, tatoueurs, barbiers, 
-~20 stands d'artisanat, animations (Air Guitar, Blind Test, Concours de Barbe)
+VILLAGE : Food trucks, bar à bières belges, tatoueurs, barbiers, 
+~20 stands d'artisanat, animations
 
 CAMPING : Gratuit pour tous les festivaliers
 ```

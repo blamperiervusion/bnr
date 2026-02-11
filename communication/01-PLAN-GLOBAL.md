@@ -18,7 +18,7 @@
 | **Objectif** | 3 000 festivaliers |
 | **Budget com** | 3 000€ |
 | **Concept** | "2 jours de chaos, 1 jour de repos" |
-| **Éditions précédentes** | Dagoba, Black Bomb A, Sidilarsen, Darcy, Guerilla Poubelle |
+| **Éditions précédentes** | Dagoba, Black Bomb A, Sidilarsen, Darcy, Guerilla Poubelle, Lofofora, Les Garçons Bouchers, Poezie Zero |
 
 ---
 

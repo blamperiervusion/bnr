@@ -481,8 +481,8 @@ function CSEContactForm({ offers }: { offers: typeof cseOffers }) {
 
         <p className="text-center text-sm text-[var(--muted-foreground)] mt-8">
           Vous pouvez également nous contacter directement à{' '}
-          <a href="mailto:cse@barbnrock-festival.fr" className="text-[var(--accent-cyan)] hover:underline">
-            cse@barbnrock-festival.fr
+          <a href="mailto:barbnrock.festival@gmail.com" className="text-[var(--accent-cyan)] hover:underline">
+            barbnrock.festival@gmail.com
           </a>
         </p>
       </div>

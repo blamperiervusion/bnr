@@ -263,14 +263,14 @@ export default function BecomePartnerPage() {
                     imprimeur (impression contre logo), traiteur (repas bénévoles contre emplacement), etc.
                   </p>
                 </div>
-                <Button href="mailto:partenaires@barbnrock-festival.fr" variant="outline" external>
+                <Button href="mailto:barbnrock.festival@gmail.com" variant="outline" external>
                   Nous contacter
                 </Button>
               </div>
             </Card>
           </motion.div>
 
-          {/* Offre CSE */}
+          {/* Offre CSE - Temporairement masquée
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -295,6 +295,7 @@ export default function BecomePartnerPage() {
               </div>
             </Card>
           </motion.div>
+          */}
         </div>
       </section>
 
@@ -426,8 +427,8 @@ export default function BecomePartnerPage() {
 
           <p className="text-center text-sm text-[var(--muted-foreground)] mt-8">
             Vous pouvez également nous contacter directement à{' '}
-            <a href="mailto:partenaires@barbnrock-festival.fr" className="text-[var(--accent-red)] hover:underline">
-              partenaires@barbnrock-festival.fr
+            <a href="mailto:barbnrock.festival@gmail.com" className="text-[var(--accent-red)] hover:underline">
+              barbnrock.festival@gmail.com
             </a>
           </p>
         </div>

@@ -201,7 +201,7 @@ export default function Footer() {
               Confidentialité
             </Link>
             <Link
-              href="mailto:contact@barbnrock-festival.fr"
+              href="mailto:barbnrock.festival@gmail.com"
               className="text-[var(--muted-foreground)] hover:text-[var(--accent-red)] transition-colors"
             >
               Contact

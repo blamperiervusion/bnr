@@ -32,7 +32,7 @@
 ## VOS ATOUTS (4ème édition)
 
 ✅ **Crédibilité** : 4 ans d'existence, concept né en 2017
-✅ **Chiffres** : X festivaliers les années passées, éditions précédentes avec Dagoba, Black Bomb A, Sidilarsen
+✅ **Chiffres** : X festivaliers les années passées, éditions précédentes avec Dagoba, Black Bomb A, Sidilarsen, Lofofora, Les Garçons Bouchers, Poezie Zero
 ✅ **Local** : Événement ancré dans le territoire, 50% de groupes des Hauts-de-France
 ✅ **Prix accessible** : Image positive, pas élitiste
 ✅ **Association loi 1901** : Réduction fiscale pour les mécènes (60%)

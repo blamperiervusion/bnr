@@ -52,10 +52,10 @@ type FormData = PartenaireFormData | BenevoleFormData | CSEFormData | ContactFor
 
 // Email de destination selon le type de formulaire
 const RECIPIENT_EMAILS: Record<FormType, string> = {
-  partenaire: process.env.EMAIL_PARTENAIRES || 'partenaires@barbnrock-festival.fr',
-  benevole: process.env.EMAIL_BENEVOLES || 'benevoles@barbnrock-festival.fr',
-  cse: process.env.EMAIL_CSE || 'cse@barbnrock-festival.fr',
-  contact: process.env.EMAIL_CONTACT || 'contact@barbnrock-festival.fr',
+  partenaire: process.env.EMAIL_PARTENAIRES || 'barbnrock.festival@gmail.com',
+  benevole: process.env.EMAIL_BENEVOLES || 'barbnrock.festival@gmail.com',
+  cse: process.env.EMAIL_CSE || 'barbnrock.festival@gmail.com',
+  contact: process.env.EMAIL_CONTACT || 'barbnrock.festival@gmail.com',
 };
 
 // Génère le contenu HTML de l'email selon le type

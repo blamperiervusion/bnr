@@ -64,7 +64,7 @@ export const faqItems: FAQItem[] = [
   {
     id: 'resto-1',
     question: 'Y a-t-il de la restauration sur place ?',
-    answer: 'Oui ! Food trucks, bar avec une sélection de bières de qualité, et stands variés vous attendent. Découvrez toute l\'offre sur la page "Le Village".',
+    answer: 'Oui ! Food trucks avec cuisine variée, bar à bières belges, et stands variés vous attendent. Découvrez toute l\'offre sur la page "Le Village".',
     category: 'Restauration',
   },
   {

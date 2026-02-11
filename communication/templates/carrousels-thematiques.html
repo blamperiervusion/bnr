@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrousels Thématiques - Barb'n'Rock 2026</title>
+    <!-- html2canvas pour l'export PNG -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap');
 
@@ -267,6 +269,64 @@
             color: var(--text-muted);
             text-align: center;
         }
+
+        /* Export buttons */
+        .slide {
+            position: relative;
+        }
+
+        .slide-export-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            padding: 8px 14px;
+            background: var(--accent-orange);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.2s;
+            z-index: 100;
+        }
+
+        .slide:hover .slide-export-btn {
+            opacity: 1;
+        }
+
+        .slide-export-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(232, 93, 4, 0.5);
+        }
+
+        .export-all-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--accent-orange), #ff7b2e);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.2s;
+        }
+
+        .export-all-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(232, 93, 4, 0.4);
+        }
+
+        .export-all-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
     </style>
 </head>
 
@@ -285,6 +345,7 @@
     <!-- ==================== CARROUSEL VILLAGE ==================== -->
     <div class="carrousel-section active" id="carrousel-village">
         <h2 class="carrousel-title">🍺 LE VILLAGE DU CHAOS</h2>
+        <button class="export-all-btn" onclick="exportAllCarrousel('village', 'village')">📦 Exporter tout le carrousel</button>
         <div class="slides-row">
             
             <!-- Slide 1 - Accroche -->
@@ -331,7 +392,7 @@
                     <img src="../../public/images/logo.png" alt="" class="slide-logo">
                     <div class="slide-title cyan">BAR & CRAFT BEER 🍺</div>
                     <div class="slide-text">
-                        Bières locales et artisanales.
+                        Bières belges.
                         <ul class="slide-list">
                             <li>🍺 Bières craft locales</li>
                             <li>🍷 Vin</li>
@@ -388,6 +449,7 @@
     <!-- ==================== CARROUSEL ANIMATIONS ==================== -->
     <div class="carrousel-section" id="carrousel-animations">
         <h2 class="carrousel-title">🎸 ANIMATIONS</h2>
+        <button class="export-all-btn" onclick="exportAllCarrousel('animations', 'animations')">📦 Exporter tout le carrousel</button>
         <div class="slides-row">
             
             <!-- Slide 1 -->
@@ -495,6 +557,7 @@
     <!-- ==================== CARROUSEL ACCÈS ==================== -->
     <div class="carrousel-section" id="carrousel-acces">
         <h2 class="carrousel-title">🚗 COMMENT VENIR</h2>
+        <button class="export-all-btn" onclick="exportAllCarrousel('acces', 'acces')">📦 Exporter tout le carrousel</button>
         <div class="slides-row">
             
             <!-- Slide 1 -->
@@ -609,6 +672,7 @@
     <!-- ==================== CARROUSEL BEST-OF ==================== -->
     <div class="carrousel-section" id="carrousel-bestof">
         <h2 class="carrousel-title">📷 BEST-OF (Post-festival)</h2>
+        <button class="export-all-btn" onclick="exportAllCarrousel('bestof', 'bestof')">📦 Exporter tout le carrousel</button>
         <div class="slides-row">
             
             <!-- Slide 1 -->
@@ -684,6 +748,98 @@
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
         }
+
+        // ==================== EXPORT PNG ====================
+        async function exportSlide(slideElement, carrouselName, slideNum) {
+            const btn = slideElement.querySelector('.slide-export-btn');
+            const originalText = btn ? btn.innerHTML : '';
+            
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '⏳...';
+            }
+            
+            try {
+                const canvas = await html2canvas(slideElement, {
+                    scale: 3.375, // 1080 / 320 pour obtenir 1080px de large
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#0a0c0f',
+                    logging: false
+                });
+                
+                const link = document.createElement('a');
+                const fileName = `barbnrock-carrousel-${carrouselName}-slide-${slideNum}.png`;
+                link.download = fileName;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                
+                if (btn) {
+                    btn.innerHTML = '✅';
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    }, 1500);
+                }
+            } catch (error) {
+                console.error('Erreur export:', error);
+                if (btn) {
+                    btn.innerHTML = '❌';
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    }, 1500);
+                }
+            }
+        }
+
+        async function exportAllCarrousel(carrouselId, carrouselName) {
+            const section = document.getElementById('carrousel-' + carrouselId);
+            const slides = section.querySelectorAll('.slide');
+            const btn = section.querySelector('.export-all-btn');
+            const originalText = btn.innerHTML;
+            
+            btn.disabled = true;
+            
+            for (let i = 0; i < slides.length; i++) {
+                btn.innerHTML = `⏳ Slide ${i + 1}/${slides.length}...`;
+                await exportSlide(slides[i], carrouselName, i + 1);
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            btn.innerHTML = '✅ Exporté !';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 2000);
+        }
+
+        // Ajouter les boutons d'export à chaque slide au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            const carrousels = {
+                'village': 'village',
+                'animations': 'animations',
+                'acces': 'acces',
+                'bestof': 'bestof'
+            };
+            
+            Object.entries(carrousels).forEach(([id, name]) => {
+                const section = document.getElementById('carrousel-' + id);
+                if (!section) return;
+                
+                const slides = section.querySelectorAll('.slide');
+                slides.forEach((slide, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'slide-export-btn';
+                    btn.innerHTML = '📥 PNG';
+                    btn.onclick = (e) => {
+                        e.stopPropagation();
+                        exportSlide(slide, name, index + 1);
+                    };
+                    slide.appendChild(btn);
+                });
+            });
+        });
     </script>
 
 </body>

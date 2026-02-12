@@ -12,6 +12,7 @@ interface ButtonProps {
   onClick?: () => void;
   className?: string;
   type?: 'button' | 'submit';
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -23,13 +24,14 @@ export default function Button({
   onClick,
   className = '',
   type = 'button',
+  disabled = false,
 }: ButtonProps) {
   const baseStyles = `
     inline-flex items-center justify-center gap-2
     font-bold uppercase tracking-wider
     transition-all duration-300 ease-out
     relative overflow-hidden
-    cursor-pointer
+    ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}
   `;
 
   const variants = {
@@ -101,9 +103,10 @@ export default function Button({
     <MotionComponent
       type={type}
       onClick={onClick}
+      disabled={disabled}
       className={`${buttonClasses} group`}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={disabled ? {} : { scale: 1.05 }}
+      whileTap={disabled ? {} : { scale: 0.95 }}
     >
       {content}
     </MotionComponent>

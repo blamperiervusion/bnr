@@ -1,7 +1,18 @@
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialisation lazy de Resend pour éviter les erreurs au build
+let resend: Resend | null = null;
+
+function getResend(): Resend {
+  if (!resend) {
+    if (!process.env.RESEND_API_KEY) {
+      throw new Error('RESEND_API_KEY is not configured');
+    }
+    resend = new Resend(process.env.RESEND_API_KEY);
+  }
+  return resend;
+}
 
 // Types de formulaires supportés
 type FormType = 'partenaire' | 'benevole' | 'contact' | 'cse';
@@ -233,7 +244,7 @@ export async function POST(request: NextRequest) {
     const recipient = RECIPIENT_EMAILS[data.type];
 
     // Envoyer l'email
-    const { error } = await resend.emails.send({
+    const { error } = await getResend().emails.send({
       from: 'Barb\'n\'Rock Festival <noreply@barbnrock-festival.fr>',
       to: recipient,
       replyTo: data.email,
@@ -250,7 +261,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Envoyer un email de confirmation au demandeur
-    await resend.emails.send({
+    await getResend().emails.send({
       from: 'Barb\'n\'Rock Festival <noreply@barbnrock-festival.fr>',
       to: data.email,
       subject: '✅ Nous avons bien reçu votre message - Barb\'n\'Rock Festival',

@@ -1,5 +1,6 @@
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
+import prisma from '@/lib/prisma';
 
 // Initialisation lazy de Resend pour éviter les erreurs au build
 let resend: Resend | null = null;
@@ -36,6 +37,7 @@ interface BenevoleFormData extends BaseFormData {
   name: string;
   phone?: string;
   age?: string;
+  profileImage?: string;
   disponibilites: string[];
   missions: string[];
   experience?: string;
@@ -219,6 +221,44 @@ function generateEmailContent(data: FormData): { subject: string; html: string }
   }
 }
 
+// Sauvegarde en base de données selon le type
+async function saveToDatabase(data: FormData): Promise<void> {
+  try {
+    if (data.type === 'benevole') {
+      await prisma.volunteer.create({
+        data: {
+          name: data.name,
+          email: data.email,
+          phone: data.phone || null,
+          age: data.age ? parseInt(data.age) : null,
+          profileImage: data.profileImage || null,
+          disponibilites: data.disponibilites,
+          missions: data.missions,
+          experience: data.experience || null,
+          message: data.message || null,
+          status: 'PENDING',
+        },
+      });
+    } else if (data.type === 'partenaire') {
+      await prisma.partner.create({
+        data: {
+          company: data.company,
+          contact: data.contact,
+          email: data.email,
+          phone: data.phone || null,
+          tier: data.tier || null,
+          message: data.message || null,
+          status: 'PENDING',
+        },
+      });
+    }
+    // CSE et contact ne sont pas sauvegardés en base (juste email)
+  } catch (error) {
+    console.error('Erreur sauvegarde base de données:', error);
+    // On ne bloque pas l'envoi d'email en cas d'erreur DB
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const data: FormData = await request.json();
@@ -231,9 +271,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Sauvegarder en base de données (bénévoles et partenaires uniquement)
+    if (data.type === 'benevole' || data.type === 'partenaire') {
+      await saveToDatabase(data);
+    }
+
     // Vérifier que la clé API est configurée
     if (!process.env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY non configurée');
+      console.warn('RESEND_API_KEY non configurée - email non envoyé');
+      // Pour les bénévoles et partenaires, on retourne succès car ils sont sauvegardés en base
+      if (data.type === 'benevole' || data.type === 'partenaire') {
+        return NextResponse.json({ success: true, emailSent: false });
+      }
+      // Pour les autres types (contact, cse), on a besoin de l'email
       return NextResponse.json(
         { error: 'Configuration email manquante' },
         { status: 500 }

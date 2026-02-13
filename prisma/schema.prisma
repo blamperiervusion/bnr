@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // directUrl est utilisé par Vercel Postgres pour les migrations
+  // Décommentez la ligne suivante en production avec Vercel Postgres:
+  // directUrl = env("DIRECT_URL")
+}
+
+enum VolunteerStatus {
+  PENDING
+  VALIDATED
+  REFUSED
+}
+
+enum PartnerStatus {
+  PENDING
+  CONTACTED
+  VALIDATED
+  REFUSED
+}
+
+model Volunteer {
+  id             String          @id @default(cuid())
+  name           String
+  email          String
+  phone          String?
+  age            Int?
+  profileImage   String?         // URL de la photo de profil
+  disponibilites String[]        // ["vendredi", "samedi", ...]
+  missions       String[]        // ["accueil", "bar", ...]
+  experience     String?
+  message        String?
+  status         VolunteerStatus @default(PENDING)
+  team           String?         // Equipe attribuee
+  notes          String?         // Notes internes
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+model Partner {
+  id             String        @id @default(cuid())
+  company        String
+  contact        String
+  email          String
+  phone          String?
+  tier           String?       // chaos, headbanger, moshpit, supporter
+  message        String?
+  status         PartnerStatus @default(PENDING)
+  logo           String?       // URL du logo uploade
+  siret          String?
+  address        String?
+  donationAmount Float?        // Montant du don
+  donationDate   DateTime?
+  receiptNumber  String?       // Numero du recu fiscal
+  receiptDate    DateTime?
+  notes          String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+}

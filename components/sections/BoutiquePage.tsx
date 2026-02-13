@@ -8,7 +8,7 @@ const products = [
     id: 'tshirt-2025',
     name: 'T-shirt Festival 2025',
     price: '15€',
-    image: '/images/boutique/tshirt-2025.jpg',
+    image: null, // Image à venir
     description: 'Le t-shirt officiel du festival - édition 2025 - est de retour ! Le grand classique (180 g/m²) 100 % coton',
   },
 ];

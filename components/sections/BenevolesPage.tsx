@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import Image from 'next/image';
 import { SectionTitle, Button, Card } from '@/components/ui';
 
 const missions = [
@@ -13,9 +14,9 @@ const missions = [
   },
   {
     id: 'bar',
-    title: 'Bars & Restauration',
+    title: 'Bars',
     icon: '🍺',
-    description: 'Service au bar, aide en cuisine, gestion des stocks.',
+    description: 'Service au bar, gestion des stocks, conseil sur les bières.',
   },
   {
     id: 'securite',
@@ -41,6 +42,24 @@ const missions = [
     icon: '🎭',
     description: 'Animer les espaces, activités pour le public, ambiance.',
   },
+  {
+    id: 'merchandising',
+    title: 'Merchandising',
+    icon: '👕',
+    description: 'Vente des produits officiels du festival, gestion du stand merch.',
+  },
+  {
+    id: 'artistes',
+    title: 'Artistes (Catering & Loges)',
+    icon: '🎸',
+    description: 'Accueil des artistes, service catering, gestion des loges.',
+  },
+  {
+    id: 'cashless',
+    title: 'Cashless',
+    icon: '💳',
+    description: 'Gestion des rechargements, assistance aux festivaliers, résolution de problèmes.',
+  },
 ];
 
 const advantages = [
@@ -61,18 +80,63 @@ const disponibiliteOptions = [
 ];
 
 export default function BenevolesPage() {
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     age: '',
+    profileImage: '',
     disponibilites: [] as string[],
     missions: [] as string[],
     experience: '',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validation côté client
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    if (!allowedTypes.includes(file.type)) {
+      alert('Seules les images JPG, PNG, GIF ou WebP sont acceptées.');
+      return;
+    }
+
+    const maxSize = 2 * 1024 * 1024; // 2MB
+    if (file.size > maxSize) {
+      alert('L\'image est trop volumineuse (max 2MB).');
+      return;
+    }
+
+    setIsUploading(true);
+
+    try {
+      const uploadFormData = new FormData();
+      uploadFormData.append('file', file);
+
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: uploadFormData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setFormData(prev => ({ ...prev, profileImage: data.url }));
+      } else {
+        const error = await response.json();
+        alert(error.error || 'Erreur lors de l\'upload de la photo.');
+      }
+    } catch {
+      alert('Erreur de connexion. Réessaie plus tard.');
+    } finally {
+      setIsUploading(false);
+    }
+  };
 
   const handleDispoChange = (id: string) => {
     setFormData(prev => ({
@@ -109,7 +173,7 @@ export default function BenevolesPage() {
 
       if (response.ok) {
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', phone: '', age: '', disponibilites: [], missions: [], experience: '', message: '' });
+        setFormData({ name: '', email: '', phone: '', age: '', profileImage: '', disponibilites: [], missions: [], experience: '', message: '' });
       } else {
         setSubmitStatus('error');
       }
@@ -363,6 +427,60 @@ export default function BenevolesPage() {
               </div>
             </div>
 
+            {/* Photo de profil */}
+            <div>
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+                Photo de profil *
+              </label>
+              <p className="text-sm text-[var(--muted-foreground)] mb-3">
+                Une photo de toi pour qu&apos;on puisse te reconnaître pendant le festival !
+              </p>
+              <div className="flex items-center gap-4">
+                {formData.profileImage ? (
+                  <div className="relative">
+                    <Image
+                      src={formData.profileImage}
+                      alt="Photo de profil"
+                      width={80}
+                      height={80}
+                      className="w-20 h-20 rounded-full object-cover border-2 border-[var(--accent-purple)]"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setFormData({ ...formData, profileImage: '' })}
+                      className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 text-white rounded-full text-xs flex items-center justify-center hover:bg-red-600 transition-colors"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ) : (
+                  <div className="w-20 h-20 rounded-full bg-[var(--muted)] border-2 border-dashed border-[var(--border)] flex items-center justify-center">
+                    <span className="text-2xl text-[var(--muted-foreground)]">📷</span>
+                  </div>
+                )}
+                <div>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/jpeg,image/png,image/gif,image/webp"
+                    onChange={handlePhotoUpload}
+                    className="hidden"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isUploading}
+                    className="px-4 py-2 bg-[var(--muted)] border border-[var(--border)] rounded-lg text-[var(--foreground)] hover:border-[var(--accent-purple)] transition-colors disabled:opacity-50"
+                  >
+                    {isUploading ? '⏳ Upload...' : formData.profileImage ? 'Changer la photo' : 'Ajouter une photo'}
+                  </button>
+                  <p className="text-xs text-[var(--muted-foreground)] mt-1">
+                    JPG, PNG, GIF ou WebP. Max 2MB.
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* Disponibilités */}
             <div>
               <label className="block text-sm font-medium text-[var(--foreground)] mb-3">
@@ -484,10 +602,15 @@ export default function BenevolesPage() {
               <Button 
                 type="submit" 
                 size="lg" 
-                disabled={isSubmitting || formData.disponibilites.length === 0 || formData.missions.length === 0}
+                disabled={isSubmitting || isUploading || formData.disponibilites.length === 0 || formData.missions.length === 0 || !formData.profileImage}
               >
                 {isSubmitting ? '⏳ Envoi en cours...' : '🙋 Envoyer ma candidature'}
               </Button>
+              {!formData.profileImage && formData.name && (
+                <p className="text-sm text-[var(--accent-red)] mt-2">
+                  N&apos;oublie pas d&apos;ajouter ta photo de profil !
+                </p>
+              )}
             </div>
           </motion.form>
 

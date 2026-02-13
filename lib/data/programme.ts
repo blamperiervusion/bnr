@@ -36,6 +36,9 @@ export const programme: DayProgramme[] = [
         description: 'Cachemire est un groupe de rock français qui, depuis 10 ans, secoue la scène avec un son puissant fait de guitares corrosives, de batteries claquées et de textes caustiques. Leur « fibre cachemirienne » mêle énergie brute et sueur, avec une musique taillée pour faire taper la tête et les talons. Après 4 albums et de nombreux shows, le groupe refuse les zones de confort et continue de réveiller le public.',
         imageUrl: '/images/bands/cachemire.jpg',
         videoUrl: 'https://www.youtube.com/watch?v=PjQw3HI2LJo',
+        socialLinks: {
+          facebook: 'https://www.facebook.com/cachemiremusic/',
+        },
       },
       {
         id: 'ven-2',
@@ -57,6 +60,13 @@ export const programme: DayProgramme[] = [
         order: 3,
         description: 'Groupe français de deathcore mélodique fondé en 2020, basé à Paris. L\'univers de Kami no Ikari (« La colère des dieux ») est fortement influencé par la culture japonaise : esthétique, utilisation du koto et paroles. Leur point de vue est celui d\'un être divin démoniaque observant les humains pour juger leurs péchés, puis déchaîner sa colère sur eux.',
         imageUrl: '/images/bands/kami-no-ikari.jpg',
+        videoUrl: 'https://www.youtube.com/watch?v=lNGYQ8-bDN8',
+        socialLinks: {
+          website: 'https://www.kaminoikari.com/',
+          facebook: 'https://www.facebook.com/kaminoikari.music',
+          instagram: 'https://www.instagram.com/kaminoikari_music/',
+          spotify: 'https://open.spotify.com/artist/50w6So1pU1erYm1J3cGxXY',
+        },
       },
       {
         id: 'ven-4',
@@ -65,6 +75,9 @@ export const programme: DayProgramme[] = [
         description: 'Apôtre d\'un doom chanté en français, Barabbas prodigue réconfort moral, paix de l\'esprit et acouphènes irréversibles aux brebis métalliques égarées qui poussent les portes de leur Église Sonique du Saint Riff Rédempteur.',
         imageUrl: '/images/bands/barabbas.jpg',
         videoUrl: 'https://www.youtube.com/watch?v=6jTbEDdEtBU',
+        socialLinks: {
+          facebook: 'https://www.facebook.com/BarabbasMusic/',
+        },
       },
       {
         id: 'ven-5',
@@ -72,6 +85,10 @@ export const programme: DayProgramme[] = [
         order: 5,
         description: 'Black Hazard est un groupe de heavy rock stoner originaire du Cambrésis dans les Hauts de France. Leur objectif est très clair : envoyer des riffs bien lourds et incisifs accompagnés d\'une rythmique à la fois puissante et groovy.',
         imageUrl: '/images/bands/black-hazard.jpg',
+        videoUrl: 'https://www.youtube.com/watch?v=52OamIrdesU',
+        socialLinks: {
+          facebook: 'https://www.facebook.com/BLACKHAZARDBAND/',
+        },
       },
     ],
   },
@@ -87,7 +104,7 @@ export const programme: DayProgramme[] = [
         order: 1,
         description: 'SHAÂRGHOT nous provient tout droit d\'une dimension parallèle, cyber-punk et cauchemardesque. Armé de ses « Shadows » il ravage la scène dans une ambiance post apocalyptique délirante. Une des grandes révélations de la scène indus-electro/punk, la créature a fait ses armes auprès des pointures : Little Big, Punish Yourself, Hocico, Ministry, Les Tambours du Bronx, Front 242.',
         imageUrl: '/images/bands/shaarghot.jpg',
-        videoUrl: 'https://www.youtube.com/watch?v=6cDw0K1p9Ws',
+        videoUrl: 'https://www.youtube.com/watch?v=yn4X-OtYOx0',
         socialLinks: {
           facebook: 'https://www.facebook.com/shaarghot/',
           instagram: 'https://www.instagram.com/shaarghot/',
@@ -114,7 +131,7 @@ export const programme: DayProgramme[] = [
         order: 3,
         description: 'LOUDBLAST est le pionnier du Death Metal en France et en Europe depuis 1985. 41 ans de carrière pour un groupe de metal extrême qui traverse toutes les évolutions musicales et du business, qui sonne toujours aussi fort, aussi bien. Il est plus féroce que jamais !',
         imageUrl: '/images/bands/loudblast.jpg',
-        videoUrl: 'https://www.youtube.com/watch?v=QkT9UyX1BYE',
+        videoUrl: 'https://www.youtube.com/watch?v=uc6khaqWNV4',
         socialLinks: {
           website: 'https://loudblast-music.com/',
           facebook: 'https://www.facebook.com/Loudblast.official/',
@@ -142,6 +159,11 @@ export const programme: DayProgramme[] = [
         description: 'Groupe français de punk rock mélodique originaire d\'Albi, formé au début des années 2000. Porté par une énergie très punk et des influences comme The Clash, Rancid ou les Ramones, le groupe enchaîne albums et tournées. Leur dernier album "Full Speed Ahead" et le clip "Mindless Game" confirment leur statut de pilier du punk rock français.',
         imageUrl: '/images/bands/dirty-fonzy.jpg',
         videoUrl: 'https://www.youtube.com/watch?v=75ji6wfbVZw',
+        socialLinks: {
+          website: 'https://linktr.ee/DirtyFonzy',
+          facebook: 'https://www.facebook.com/dirtyfonzy/',
+          instagram: 'https://www.instagram.com/dirty_fonzy/',
+        },
       },
       {
         id: 'sam-6',
@@ -149,6 +171,11 @@ export const programme: DayProgramme[] = [
         order: 6,
         description: 'BREAKOUT est un groupe parisien formé fin 2009, qui compte parmi les fers de lance européens d\'un punk fortement influencé par les scènes américaine et anglaise. Les concerts du groupe se distinguent par un punk rapide et agressif, sans jamais oublier d\'y mêler de la mélodie et une bonne dose de chœurs pour faire chanter la fosse, le tout porté par une passion sans faille. BREAKOUT a acquis une reconnaissance internationale bien au-delà des frontières françaises, comme en témoignent ses nombreuses tournées à travers l\'Europe et le reste du monde.',
         imageUrl: '/images/bands/breakout.jpg',
+        videoUrl: 'https://www.youtube.com/watch?v=0iPry24IYuE',
+        socialLinks: {
+          facebook: 'https://www.facebook.com/breakoutpunx/',
+          instagram: 'https://www.instagram.com/breakout_punk_band/',
+        },
       },
       {
         id: 'sam-7',

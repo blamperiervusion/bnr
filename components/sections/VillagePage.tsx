@@ -3,15 +3,12 @@
 import { motion } from 'framer-motion';
 import { SectionTitle, Card } from '@/components/ui';
 
-const foodTrucks = [
-  {
-    id: 'ft-1',
-    name: 'Food Trucks',
-    type: 'Cuisine variée',
-    description: 'Plusieurs food trucks seront présents pour vous proposer une cuisine variée. De quoi reprendre des forces entre deux concerts !',
-    emoji: '🍔',
-  },
-];
+const foodTrucks = {
+  name: 'Food Trucks',
+  type: 'Cuisine variée',
+  description: 'Plusieurs food trucks seront présents pour vous proposer une cuisine variée. De quoi reprendre des forces entre deux concerts !',
+  emoji: '🍔',
+};
 
 const bar = {
   name: 'Le Bar du Festival',
@@ -43,13 +40,20 @@ const standCategories = [
   },
   {
     id: 'cat-4',
+    name: 'Barbiers',
+    count: '3 barbiers',
+    description: 'Besoin d\'une coupe fresh ou d\'une barbe taillée au carré ? Nos barbiers sont là pour te refaire une beauté.',
+    emoji: '💈',
+  },
+  {
+    id: 'cat-5',
     name: 'Associations',
     count: '3+ stands',
     description: 'Associations locales, culturelles et caritatives. Viens découvrir et soutenir leurs actions.',
     emoji: '🤝',
   },
   {
-    id: 'cat-5',
+    id: 'cat-6',
     name: 'Divers & Curiosités',
     count: '5+ stands',
     description: 'Stands insolites et découvertes en tout genre. Laisse-toi surprendre !',
@@ -149,35 +153,28 @@ export default function VillagePage() {
           </motion.div>
 
           {/* Food trucks */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {foodTrucks.map((truck, index) => (
-              <motion.div
-                key={truck.id}
-                initial={{ opacity: 0, y: 30, rotate: -1 }}
-                whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.03, rotate: 1 }}
-              >
-                <Card className="p-6 h-full border-2 border-transparent hover:border-[var(--accent-cyan)] transition-all">
-                  <div className="flex items-start gap-4">
-                    <span className="text-5xl">{truck.emoji}</span>
-                    <div>
-                      <h3 className="font-display text-2xl text-[var(--foreground)] uppercase">
-                        {truck.name}
-                      </h3>
-                      <p className="text-[var(--accent-cyan)] text-sm font-bold uppercase tracking-wider">
-                        {truck.type}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-[var(--muted-foreground)] mt-4 text-sm leading-relaxed">
-                    {truck.description}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Card className="p-8 border-2 border-[var(--accent-cyan)] bg-[var(--accent-cyan)]/5">
+              <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
+                <span className="text-7xl">{foodTrucks.emoji}</span>
+                <div>
+                  <h3 className="font-display text-3xl text-[var(--foreground)] uppercase">
+                    {foodTrucks.name}
+                  </h3>
+                  <p className="text-[var(--accent-cyan)] text-sm font-bold uppercase tracking-wider mb-2">
+                    {foodTrucks.type}
                   </p>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                  <p className="text-[var(--muted-foreground)] leading-relaxed">
+                    {foodTrucks.description}
+                  </p>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
         </div>
       </section>
 

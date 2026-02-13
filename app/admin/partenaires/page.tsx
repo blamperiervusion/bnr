@@ -1,0 +1,168 @@
+import prisma from '@/lib/prisma';
+import Link from 'next/link';
+import Image from 'next/image';
+import FilterSelect from './FilterSelect';
+
+const statusLabels: Record<string, { label: string; color: string }> = {
+  PENDING: { label: 'En attente', color: 'bg-yellow-500/20 text-yellow-500' },
+  CONTACTED: { label: 'Contacté', color: 'bg-blue-500/20 text-blue-500' },
+  VALIDATED: { label: 'Validé', color: 'bg-green-500/20 text-green-500' },
+  REFUSED: { label: 'Refusé', color: 'bg-red-500/20 text-red-500' },
+};
+
+const tierLabels: Record<string, { label: string; color: string }> = {
+  chaos: { label: 'CHAOS', color: '#E85D04' },
+  headbanger: { label: 'HEADBANGER', color: '#00E5CC' },
+  moshpit: { label: 'MOSH PIT', color: '#FFD700' },
+  supporter: { label: 'SUPPORTER', color: '#C0C0C0' },
+  echange: { label: 'ÉCHANGE', color: '#ec4899' },
+};
+
+async function getPartners(searchParams: { status?: string; tier?: string }) {
+  const where: Record<string, unknown> = {};
+  
+  if (searchParams.status) {
+    where.status = searchParams.status;
+  }
+  if (searchParams.tier) {
+    where.tier = searchParams.tier;
+  }
+
+  return prisma.partner.findMany({
+    where,
+    orderBy: { createdAt: 'desc' },
+  });
+}
+
+export default async function PartenairesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ status?: string; tier?: string }>;
+}) {
+  const params = await searchParams;
+  const partners = await getPartners(params);
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-3xl font-bold text-white">Partenaires</h1>
+        <span className="text-gray-500">{partners.length} demande(s)</span>
+      </div>
+
+      {/* Filters */}
+      <div className="bg-[#111] border border-[#222] rounded-lg p-4 mb-6">
+        <div className="flex flex-wrap gap-4">
+          <FilterSelect
+            name="status"
+            label="Statut"
+            options={[
+              { value: 'PENDING', label: 'En attente' },
+              { value: 'CONTACTED', label: 'Contactés' },
+              { value: 'VALIDATED', label: 'Validés' },
+              { value: 'REFUSED', label: 'Refusés' },
+            ]}
+          />
+          <FilterSelect
+            name="tier"
+            label="Niveau"
+            options={[
+              { value: 'chaos', label: 'CHAOS' },
+              { value: 'headbanger', label: 'HEADBANGER' },
+              { value: 'moshpit', label: 'MOSH PIT' },
+              { value: 'supporter', label: 'SUPPORTER' },
+              { value: 'echange', label: 'ÉCHANGE' },
+            ]}
+          />
+        </div>
+      </div>
+
+      {/* Partners list */}
+      {partners.length === 0 ? (
+        <div className="bg-[#111] border border-[#222] rounded-lg p-12 text-center">
+          <p className="text-gray-500">Aucune demande pour le moment</p>
+        </div>
+      ) : (
+        <div className="bg-[#111] border border-[#222] rounded-lg overflow-hidden">
+          <table className="w-full">
+            <thead className="bg-[#0a0a0a] border-b border-[#222]">
+              <tr>
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-400">Logo</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-400">Entreprise</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-400">Contact</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-400">Niveau</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-400">Montant</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-400">Statut</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-400">Date</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#222]">
+              {partners.map((partner) => (
+                <tr key={partner.id} className="hover:bg-[#1a1a1a] transition-colors">
+                  <td className="px-4 py-3">
+                    {partner.logo ? (
+                      <Image
+                        src={partner.logo}
+                        alt={partner.company}
+                        width={40}
+                        height={40}
+                        className="w-10 h-10 rounded object-contain bg-white"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 rounded bg-[#333] flex items-center justify-center text-white font-bold">
+                        {partner.company.charAt(0).toUpperCase()}
+                      </div>
+                    )}
+                  </td>
+                  <td className="px-4 py-3">
+                    <Link
+                      href={`/admin/partenaires/${partner.id}`}
+                      className="text-white font-medium hover:text-[#e53e3e] transition-colors"
+                    >
+                      {partner.company}
+                    </Link>
+                  </td>
+                  <td className="px-4 py-3">
+                    <p className="text-white text-sm">{partner.contact}</p>
+                    <p className="text-gray-500 text-sm">{partner.email}</p>
+                  </td>
+                  <td className="px-4 py-3">
+                    {partner.tier ? (
+                      <span
+                        className="px-2 py-1 text-xs rounded font-medium"
+                        style={{
+                          backgroundColor: `${tierLabels[partner.tier]?.color}20`,
+                          color: tierLabels[partner.tier]?.color,
+                        }}
+                      >
+                        {tierLabels[partner.tier]?.label}
+                      </span>
+                    ) : (
+                      <span className="text-gray-500 text-sm">Non défini</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3">
+                    {partner.donationAmount ? (
+                      <span className="text-white">
+                        {partner.donationAmount.toLocaleString('fr-FR')}€
+                      </span>
+                    ) : (
+                      <span className="text-gray-500 text-sm">-</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3">
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusLabels[partner.status]?.color}`}>
+                      {statusLabels[partner.status]?.label}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 text-gray-500 text-sm">
+                    {new Date(partner.createdAt).toLocaleDateString('fr-FR')}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+}

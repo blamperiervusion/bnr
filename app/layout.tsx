@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, DM_Sans } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { NoiseOverlay } from "@/components/ui";
-import Loader from "@/components/Loader";
 import JsonLd, { organizationSchema } from "@/components/JsonLd";
+import Providers from "@/components/Providers";
+import LayoutWrapper from "@/components/LayoutWrapper";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
@@ -102,13 +100,11 @@ export default function RootLayout({
         className={`${bebasNeue.variable} ${dmSans.variable} font-body antialiased bg-[var(--background)] text-[var(--foreground)] min-h-screen`}
       >
         <JsonLd data={organizationSchema} />
-        <Loader />
-        <NoiseOverlay />
-        <Navbar />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+        <Providers>
+          <LayoutWrapper>
+            {children}
+          </LayoutWrapper>
+        </Providers>
       </body>
     </html>
   );

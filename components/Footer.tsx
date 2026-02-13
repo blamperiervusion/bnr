@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { HELLOASSO_URL } from '@/lib/constants';
 
 const footerLinks = {
   festival: [
@@ -13,7 +14,7 @@ const footerLinks = {
     { href: '/faq', label: 'FAQ' },
   ],
   pratique: [
-    { href: '/billetterie', label: 'Billetterie' },
+    { href: HELLOASSO_URL, label: 'Billetterie', external: true },
     { href: '/boutique', label: 'Boutique' },
     { href: '/benevoles', label: 'Devenir bénévole' },
   ],
@@ -130,12 +131,23 @@ export default function Footer() {
             <ul className="space-y-3">
               {footerLinks.pratique.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-[var(--muted-foreground)] hover:text-[var(--accent-red)] transition-colors"
-                  >
-                    {link.label}
-                  </Link>
+                  {'external' in link && link.external ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[var(--muted-foreground)] hover:text-[var(--accent-red)] transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className="text-[var(--muted-foreground)] hover:text-[var(--accent-red)] transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { SectionTitle, Accordion, Button } from '@/components/ui';
 import { faqItems, getAllCategories } from '@/lib/data/faq';
+import { HELLOASSO_URL } from '@/lib/constants';
 
 export default function FAQPage() {
   const categories = getAllCategories();
@@ -136,8 +137,9 @@ export default function FAQPage() {
               {
                 title: 'Billetterie',
                 description: 'Réserve tes places pour le festival',
-                href: '/billetterie',
+                href: HELLOASSO_URL,
                 emoji: '🎫',
+                external: true,
               },
               {
                 title: 'Programme',
@@ -153,8 +155,10 @@ export default function FAQPage() {
               },
             ].map((link, index) => (
               <motion.a
-                key={link.href}
+                key={link.title}
                 href={link.href}
+                target={'external' in link && link.external ? '_blank' : undefined}
+                rel={'external' in link && link.external ? 'noopener noreferrer' : undefined}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

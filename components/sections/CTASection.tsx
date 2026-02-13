@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui';
+import { HELLOASSO_URL } from '@/lib/constants';
 
 export default function CTASection() {
   return (
@@ -73,7 +74,8 @@ export default function CTASection() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              href="/billetterie"
+              href={HELLOASSO_URL}
+              external
               size="lg"
               className="bg-white text-black font-black hover:bg-[var(--accent-cyan)] hover:text-black hover:shadow-[0_0_40px_var(--accent-cyan)] transition-all uppercase"
             >

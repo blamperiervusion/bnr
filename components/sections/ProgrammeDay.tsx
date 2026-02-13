@@ -4,6 +4,7 @@ import { BandCard, Button, SectionTitle } from '@/components/ui';
 import { DayProgramme, programme } from '@/lib/data/programme';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { HELLOASSO_URL } from '@/lib/constants';
 
 interface ProgrammeDayProps {
     dayData: DayProgramme;
@@ -136,7 +137,7 @@ export default function ProgrammeDay({ dayData }: ProgrammeDayProps) {
                         <div />
                     )}
 
-                    <Button href="/billetterie" size="sm">
+                    <Button href={HELLOASSO_URL} external size="sm">
                         Réserver
                     </Button>
 

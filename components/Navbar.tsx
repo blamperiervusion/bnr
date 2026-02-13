@@ -23,9 +23,11 @@ const navLinks = [
   { href: '/jeu', label: '🎮 Jouer' },
 ];
 
+import { HELLOASSO_URL } from '@/lib/constants';
+
 const ctaLinks = [
   { href: '/boutique', label: 'Boutique' },
-  { href: '/billetterie', label: 'Billetterie', primary: true },
+  { href: HELLOASSO_URL, label: 'Billetterie', primary: true, external: true },
 ];
 
 export default function Navbar() {
@@ -173,19 +175,35 @@ export default function Navbar() {
 
               {/* CTA Buttons */}
               <div className="flex items-center gap-4 ml-4">
-                {ctaLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`text-sm font-bold uppercase tracking-wide px-4 py-2 rounded transition-all ${
-                      link.primary
-                        ? 'bg-[var(--accent-red)] text-white hover:bg-[var(--accent-red-dark)] hover:shadow-[0_0_20px_var(--accent-red)]'
-                        : 'border border-[var(--foreground)] text-[var(--foreground)] hover:border-[var(--accent-red)] hover:text-[var(--accent-red)]'
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {ctaLinks.map((link) =>
+                  link.external ? (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`text-sm font-bold uppercase tracking-wide px-4 py-2 rounded transition-all ${
+                        link.primary
+                          ? 'bg-[var(--accent-red)] text-white hover:bg-[var(--accent-red-dark)] hover:shadow-[0_0_20px_var(--accent-red)]'
+                          : 'border border-[var(--foreground)] text-[var(--foreground)] hover:border-[var(--accent-red)] hover:text-[var(--accent-red)]'
+                      }`}
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`text-sm font-bold uppercase tracking-wide px-4 py-2 rounded transition-all ${
+                        link.primary
+                          ? 'bg-[var(--accent-red)] text-white hover:bg-[var(--accent-red-dark)] hover:shadow-[0_0_20px_var(--accent-red)]'
+                          : 'border border-[var(--foreground)] text-[var(--foreground)] hover:border-[var(--accent-red)] hover:text-[var(--accent-red)]'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
               </div>
             </div>
 
@@ -287,19 +305,35 @@ export default function Navbar() {
                 animate="open"
                 className="flex flex-col gap-4 mt-8"
               >
-                {ctaLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`text-xl font-bold uppercase tracking-wide px-8 py-3 rounded text-center ${
-                      link.primary
-                        ? 'bg-[var(--accent-red)] text-white'
-                        : 'border-2 border-[var(--foreground)] text-[var(--foreground)]'
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {ctaLinks.map((link) =>
+                  link.external ? (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`text-xl font-bold uppercase tracking-wide px-8 py-3 rounded text-center ${
+                        link.primary
+                          ? 'bg-[var(--accent-red)] text-white'
+                          : 'border-2 border-[var(--foreground)] text-[var(--foreground)]'
+                      }`}
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`text-xl font-bold uppercase tracking-wide px-8 py-3 rounded text-center ${
+                        link.primary
+                          ? 'bg-[var(--accent-red)] text-white'
+                          : 'border-2 border-[var(--foreground)] text-[var(--foreground)]'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
               </motion.div>
             </div>
 

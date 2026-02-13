@@ -4,6 +4,7 @@ import { Button } from '@/components/ui';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { useRef } from 'react';
+import { HELLOASSO_URL } from '@/lib/constants';
 
 // Lightning bolt SVG component
 const LightningBolt = ({ className, delay = 0 }: { className?: string; delay?: number }) => (
@@ -182,7 +183,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
         >
-          <Button href="/billetterie" size="lg">
+          <Button href={HELLOASSO_URL} external size="lg">
             Réserver mes places 🎫
           </Button>
           <Button href="/programme/samedi" variant="outline" size="lg">

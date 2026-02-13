@@ -74,7 +74,6 @@ export const programme: DayProgramme[] = [
         order: 4,
         description: 'Apôtre d\'un doom chanté en français, Barabbas prodigue réconfort moral, paix de l\'esprit et acouphènes irréversibles aux brebis métalliques égarées qui poussent les portes de leur Église Sonique du Saint Riff Rédempteur.',
         imageUrl: '/images/bands/barabbas.jpg',
-        videoUrl: 'https://www.youtube.com/watch?v=6jTbEDdEtBU',
         socialLinks: {
           facebook: 'https://www.facebook.com/BarabbasMusic/',
         },
@@ -211,7 +210,7 @@ export const programme: DayProgramme[] = [
         id: 'dim-2',
         name: 'Saint Rock Station',
         order: 2,
-        description: 'Quintet rock d\'Amiens mené par la chanteuse Cindy, formée au Conservatoire. Avec François (batterie), Claire (guitare), Stéphane (basse) et Nico (guitare), le groupe propose un répertoire rock/hard-rock couvrant des années 70 aux 2000, transportant le public dans un univers 100% rock.',
+        description: 'Saint Rock Station est composé de deux guitaristes, d\'un batteur, d\'un bassiste et d\'une chanteuse, et fait bouger les foules sur des reprises rock connues de tous. Le groupe mêle différentes générations qui se rassemblent autour d\'une passion commune : la musique qui vibre fort. Dans leur répertoire, vous trouverez des classiques du rock et hard rock des années 70 à 2000. Ils sont « On Air » pour vous faire danser et bouger !',
         imageUrl: '/images/bands/tba.svg',
         socialLinks: {
           website: 'https://saintrockstation.fr/',

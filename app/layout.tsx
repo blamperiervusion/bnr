@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, DM_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import JsonLd, { organizationSchema } from "@/components/JsonLd";
 import Providers from "@/components/Providers";
@@ -105,6 +106,7 @@ export default function RootLayout({
             {children}
           </LayoutWrapper>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );

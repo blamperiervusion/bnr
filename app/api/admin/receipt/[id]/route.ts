@@ -429,7 +429,7 @@ export async function POST(
     await browser.close();
 
     // Retourner le PDF
-    return new NextResponse(pdfBuffer, {
+    return new NextResponse(Buffer.from(pdfBuffer), {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': `attachment; filename="recu-fiscal-${partner.company.replace(/\s+/g, '-')}-${receiptNumber}.pdf"`,

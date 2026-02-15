@@ -27,8 +27,8 @@ VENDREDI 26 JUIN (5 groupes)
 SAMEDI 27 JUIN (7 groupes)
 🎸 Shaârghot • Krav Boca • Loudblast • Akiavel • Dirty Fonzy • Breakout + Vainqueur Tremplin
 
-DIMANCHE 28 JUIN (5 groupes - jour de repos)
-🎸 Howlite • Udap • Devon Duxe • Saint Rock Station • MAINKIND ⭐
+DIMANCHE 28 JUIN (6 groupes - jour de repos)
+🎸 Mainkind ⭐ • Saint Rock Station • Howlite • Udap • Devon Duxe • Vainqueur Tremplin
 
 18 GROUPES pour 36€ !
 
@@ -91,8 +91,8 @@ VENDREDI - 5 groupes :
 SAMEDI - 7 groupes :
 ⚡ Shaârghot • Loudblast • Akiavel • Krav Boca • Dirty Fonzy • Breakout + Vainqueur Tremplin
 
-DIMANCHE - 5 groupes (jour de repos) :
-⚡ Mainkind ⭐ • Saint Rock Station • Devon Duxe • Udap • Howlite
+DIMANCHE - 6 groupes (jour de repos) :
+⚡ Mainkind ⭐ • Saint Rock Station • Howlite • Udap • Devon Duxe • Vainqueur Tremplin
 
 👀 Le tremplin du 4 avril
 👀 Le running order arrive bientôt
@@ -140,7 +140,7 @@ VENDREDI : Psykup • Cachemire • Kami No Ikari • Barabbas • Black Hazard
 
 SAMEDI : Shaârghot • Loudblast • Akiavel • Krav Boca • Dirty Fonzy • Breakout
 
-DIMANCHE : Mainkind ⭐ • Saint Rock Station • Devon Duxe • Udap • Howlite
+DIMANCHE : Mainkind ⭐ • Saint Rock Station • Howlite • Udap • Devon Duxe • Vainqueur Tremplin
 
 18 GROUPES ! 🔥
 ```
@@ -547,7 +547,7 @@ SAMEDI 27 JUIN
 Shaârghot • Krav Boca • Loudblast • Akiavel • Dirty Fonzy • Breakout + Vainqueur Tremplin
 
 DIMANCHE 28 JUIN (jour de repos)
-Howlite • Udap • Devon Duxe • Saint Rock Station • MAINKIND ⭐
+Mainkind ⭐ • Saint Rock Station • Howlite • Udap • Devon Duxe • Vainqueur Tremplin
 
 2 jours de chaos, 1 jour de repos.
 18 groupes. 36€. Camping gratuit.

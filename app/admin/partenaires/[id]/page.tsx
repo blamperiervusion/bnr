@@ -3,10 +3,23 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import PartnerForm from './PartnerForm';
+import FormattedDate from '../../components/FormattedDate';
 
 async function getPartner(id: string) {
   return prisma.partner.findUnique({
     where: { id },
+    include: {
+      assignedTo: {
+        select: { id: true, name: true }
+      }
+    }
+  });
+}
+
+async function getAdminUsers() {
+  return prisma.adminUser.findMany({
+    select: { id: true, name: true },
+    orderBy: { name: 'asc' }
   });
 }
 
@@ -16,7 +29,10 @@ export default async function PartnerDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const partner = await getPartner(id);
+  const [partner, adminUsers] = await Promise.all([
+    getPartner(id),
+    getAdminUsers()
+  ]);
 
   if (!partner) {
     notFound();
@@ -24,24 +40,24 @@ export default async function PartnerDetailPage({
 
   return (
     <div>
-      <div className="flex items-center gap-4 mb-8">
+      <div className="flex items-center gap-4 mb-6">
         <Link
           href="/admin/partenaires"
           className="text-gray-400 hover:text-white transition-colors"
         >
-          &larr; Retour
+          ← Retour
         </Link>
-        <h1 className="text-3xl font-bold text-white">{partner.company}</h1>
+        <h1 className="text-xl lg:text-3xl font-bold text-white truncate">{partner.company}</h1>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Info panel */}
-        <div className="lg:col-span-1">
-          <div className="bg-[#111] border border-[#222] rounded-lg p-6">
+        <div className="lg:col-span-1 order-2 lg:order-1">
+          <div className="bg-[#111] border border-[#222] rounded-lg p-4 lg:p-6">
             {/* Logo */}
             <div className="flex justify-center mb-6">
               {partner.logo ? (
-                <div className="w-32 h-32 rounded-lg bg-white flex items-center justify-center p-2">
+                <div className="w-24 h-24 lg:w-32 lg:h-32 rounded-lg bg-white flex items-center justify-center p-2">
                   <Image
                     src={partner.logo}
                     alt={partner.company}
@@ -51,7 +67,7 @@ export default async function PartnerDetailPage({
                   />
                 </div>
               ) : (
-                <div className="w-32 h-32 rounded-lg bg-[#333] flex items-center justify-center text-4xl text-white font-bold">
+                <div className="w-24 h-24 lg:w-32 lg:h-32 rounded-lg bg-[#333] flex items-center justify-center text-3xl lg:text-4xl text-white font-bold">
                   {partner.company.charAt(0).toUpperCase()}
                 </div>
               )}
@@ -65,7 +81,7 @@ export default async function PartnerDetailPage({
               </div>
               <div>
                 <label className="text-sm text-gray-500">Email</label>
-                <p className="text-white">
+                <p className="text-white break-all">
                   <a href={`mailto:${partner.email}`} className="hover:text-[#e53e3e]">
                     {partner.email}
                   </a>
@@ -81,14 +97,16 @@ export default async function PartnerDetailPage({
                   </p>
                 </div>
               )}
+              {partner.assignedTo && (
+                <div>
+                  <label className="text-sm text-gray-500">Géré par</label>
+                  <p className="text-white">{partner.assignedTo.name}</p>
+                </div>
+              )}
               <div>
                 <label className="text-sm text-gray-500">Demande reçue le</label>
                 <p className="text-white">
-                  {new Date(partner.createdAt).toLocaleDateString('fr-FR', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric',
-                  })}
+                  <FormattedDate date={partner.createdAt} format="long" />
                 </p>
               </div>
             </div>
@@ -110,7 +128,7 @@ export default async function PartnerDetailPage({
                 <p className="text-white font-mono">N° {partner.receiptNumber}</p>
                 {partner.receiptDate && (
                   <p className="text-gray-400 text-sm">
-                    {new Date(partner.receiptDate).toLocaleDateString('fr-FR')}
+                    <FormattedDate date={partner.receiptDate} />
                   </p>
                 )}
               </div>
@@ -119,8 +137,8 @@ export default async function PartnerDetailPage({
         </div>
 
         {/* Edit form */}
-        <div className="lg:col-span-2">
-          <PartnerForm partner={partner} />
+        <div className="lg:col-span-2 order-1 lg:order-2">
+          <PartnerForm partner={partner} adminUsers={adminUsers} />
         </div>
       </div>
     </div>

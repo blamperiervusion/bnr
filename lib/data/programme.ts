@@ -211,7 +211,7 @@ export const programme: DayProgramme[] = [
         name: 'Saint Rock Station',
         order: 2,
         description: 'Saint Rock Station est composé de deux guitaristes, d\'un batteur, d\'un bassiste et d\'une chanteuse, et fait bouger les foules sur des reprises rock connues de tous. Le groupe mêle différentes générations qui se rassemblent autour d\'une passion commune : la musique qui vibre fort. Dans leur répertoire, vous trouverez des classiques du rock et hard rock des années 70 à 2000. Ils sont « On Air » pour vous faire danser et bouger !',
-        imageUrl: '/images/bands/tba.svg',
+        imageUrl: '/images/bands/saint-rock-station.jpeg',
         socialLinks: {
           website: 'https://saintrockstation.fr/',
         },
@@ -227,15 +227,15 @@ export const programme: DayProgramme[] = [
         id: 'dim-4',
         name: 'Udap',
         order: 4,
-        description: 'Rock indépendant aux influences variées. Udap mélange les genres pour créer un son unique et accessible.',
-        imageUrl: '/images/bands/tba.svg',
+        description: 'Une Dernière Avant de Partir (UDAP) est un groupe de reprises rock/pop rock à l\'énergie communicative. Sur scène, le groupe propose un set dynamique et entraînant, porté par un chanteur à la présence scénique affirmée. Habitué des formats multi-plateaux, UDAP s\'adapte facilement aux configurations de concert et embarque le public dès les premiers titres.',
+        imageUrl: '/images/bands/udap.jpeg',
       },
       {
         id: 'dim-5',
         name: 'Devon Duxe',
         order: 5,
-        description: 'Rock/pop moderne et mélodique. Devon Duxe séduit par ses compositions accrocheuses et son énergie positive.',
-        imageUrl: '/images/bands/tba.svg',
+        description: 'Devon Duxe démarre en 2023 après une dizaine d\'années à écumer les scènes. Leur premier album "JUST A SECOND" rencontre un réel succès auprès des radios US underground, suivi du second album "STONY ROAD". Après quatorze scènes en 2025, 2026 marque l\'enregistrement de leur troisième album. Devon Duxe a été qualifié de "groupe rock aux vibes modernes et à l\'énergie brute... un rock qui claque."',
+        imageUrl: '/images/bands/devon-duxe.jpeg',
       },
       {
         id: 'dim-6',

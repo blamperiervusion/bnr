@@ -3,7 +3,7 @@ export interface Partner {
   name: string;
   logo?: string;
   website?: string;
-  category: 'chaos' | 'headbanger' | 'moshpit' | 'supporter' | 'media' | 'institutional';
+  category: 'chaos' | 'headbanger' | 'moshpit' | 'supporter' | 'echange' | 'institutional' | 'media' | 'technical';
   description?: string;
 }
 
@@ -27,8 +27,10 @@ export const partnerCategories: Record<Partner['category'], { name: string; colo
   headbanger: { name: 'Partenaires HEADBANGER', color: '#00E5CC' },
   moshpit: { name: 'Partenaires MOSH PIT', color: '#FFD700' },
   supporter: { name: 'Supporters', color: '#C0C0C0' },
-  media: { name: 'Partenaires Média', color: '#ec4899' },
+  echange: { name: 'Partenaires Échange', color: '#ec4899' },
   institutional: { name: 'Partenaires Institutionnels', color: '#3b82f6' },
+  media: { name: 'Partenaires Média', color: '#8b5cf6' },
+  technical: { name: 'Partenaires Techniques', color: '#06b6d4' },
 };
 
 export function getPartnersByCategory(category: Partner['category']): Partner[] {

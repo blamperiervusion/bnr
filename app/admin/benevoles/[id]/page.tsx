@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import VolunteerForm from './VolunteerForm';
+import FormattedDate from '../../components/FormattedDate';
 
 const missionLabels: Record<string, string> = {
   accueil: 'Accueil & Billetterie',
@@ -101,11 +102,7 @@ export default async function VolunteerDetailPage({
               <div>
                 <label className="text-sm text-gray-500">Inscrit le</label>
                 <p className="text-white">
-                  {new Date(volunteer.createdAt).toLocaleDateString('fr-FR', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric',
-                  })}
+                  <FormattedDate date={volunteer.createdAt} format="long" />
                 </p>
               </div>
             </div>

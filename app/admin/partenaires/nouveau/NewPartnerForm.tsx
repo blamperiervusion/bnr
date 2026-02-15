@@ -3,10 +3,9 @@
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import type { Partner } from '@prisma/client';
 
 const tierOptions = [
-  // Partenaires financiers (visibles dans le formulaire public)
+  // Partenaires financiers
   { value: 'chaos', label: 'CHAOS (2000€+)', color: '#E85D04', group: 'financial' },
   { value: 'headbanger', label: 'HEADBANGER (1000€)', color: '#00E5CC', group: 'financial' },
   { value: 'moshpit', label: 'MOSH PIT (500€)', color: '#FFD700', group: 'financial' },
@@ -25,17 +24,7 @@ const statusOptions = [
   { value: 'REFUSED', label: 'Refusé', color: 'bg-red-500/20 text-red-500' },
 ];
 
-interface AdminUser {
-  id: string;
-  name: string;
-}
-
-interface PartnerFormProps {
-  partner: Partner & { assignedTo?: AdminUser | null };
-  adminUsers: AdminUser[];
-}
-
-export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
+export default function NewPartnerForm() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -43,15 +32,19 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   
   const [formData, setFormData] = useState({
-    status: partner.status,
-    tier: partner.tier || '',
-    logo: partner.logo || '',
-    siret: partner.siret || '',
-    address: partner.address || '',
-    donationAmount: partner.donationAmount?.toString() || '',
-    donationDate: partner.donationDate ? new Date(partner.donationDate).toISOString().split('T')[0] : '',
-    notes: partner.notes || '',
-    assignedToId: partner.assignedToId || '',
+    company: '',
+    contact: '',
+    email: '',
+    phone: '',
+    tier: '',
+    status: 'VALIDATED',
+    logo: '',
+    siret: '',
+    address: '',
+    donationAmount: '',
+    donationDate: '',
+    notes: '',
+    website: '',
   });
 
   const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,13 +55,13 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
     setMessage(null);
 
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('type', 'partner-logo');
+      const uploadData = new FormData();
+      uploadData.append('file', file);
+      uploadData.append('type', 'partner-logo');
 
       const response = await fetch('/api/admin/upload', {
         method: 'POST',
-        body: formData,
+        body: uploadData,
         credentials: 'include',
       });
 
@@ -92,91 +85,33 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
     setIsLoading(true);
     setMessage(null);
 
+    if (!formData.company || !formData.contact || !formData.email) {
+      setMessage({ type: 'error', text: 'Entreprise, contact et email sont requis' });
+      setIsLoading(false);
+      return;
+    }
+
     try {
-      const response = await fetch(`/api/admin/partners/${partner.id}`, {
-        method: 'PATCH',
+      const response = await fetch('/api/admin/partners', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify({
           ...formData,
-          donationAmount: formData.donationAmount ? parseFloat(formData.donationAmount) : null,
+          donationAmount: formData.donationAmount || null,
           donationDate: formData.donationDate || null,
         }),
       });
 
       if (response.ok) {
-        setMessage({ type: 'success', text: 'Modifications enregistrées' });
+        const partner = await response.json();
+        router.push(`/admin/partenaires/${partner.id}`);
         router.refresh();
       } else {
         const data = await response.json();
-        setMessage({ type: 'error', text: data.error || 'Erreur lors de la sauvegarde' });
+        setMessage({ type: 'error', text: data.error || 'Erreur lors de la création' });
       }
     } catch {
-      setMessage({ type: 'error', text: 'Erreur de connexion' });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleGenerateReceipt = async () => {
-    if (!formData.donationAmount || !formData.siret || !formData.address) {
-      setMessage({ type: 'error', text: 'SIRET, adresse et montant requis pour le reçu' });
-      return;
-    }
-
-    setIsLoading(true);
-    try {
-      const response = await fetch(`/api/admin/receipt/${partner.id}`, {
-        method: 'POST',
-        credentials: 'include',
-      });
-
-      if (response.ok) {
-        // Télécharger le PDF
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `recu-fiscal-${partner.company.replace(/\s+/g, '-')}.pdf`;
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-        
-        router.refresh();
-        setMessage({ type: 'success', text: 'Reçu fiscal généré' });
-      } else {
-        const data = await response.json();
-        setMessage({ type: 'error', text: data.error || 'Erreur génération reçu' });
-      }
-    } catch {
-      setMessage({ type: 'error', text: 'Erreur de connexion' });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleDelete = async () => {
-    if (!confirm('Êtes-vous sûr de vouloir supprimer ce partenaire ?')) {
-      return;
-    }
-
-    setIsLoading(true);
-    try {
-      const response = await fetch(`/api/admin/partners/${partner.id}`, {
-        method: 'DELETE',
-        credentials: 'include',
-      });
-
-      if (response.ok) {
-        router.push('/admin/partenaires');
-        router.refresh();
-      } else {
-        const data = await response.json();
-        setMessage({ type: 'error', text: data.error || 'Erreur lors de la suppression' });
-      }
-    } catch (error) {
-      console.error('Erreur suppression:', error);
       setMessage({ type: 'error', text: 'Erreur de connexion' });
     } finally {
       setIsLoading(false);
@@ -218,7 +153,7 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
               disabled={isUploading}
               className="px-4 py-2 bg-[#222] text-white rounded-lg hover:bg-[#333] transition-colors disabled:opacity-50"
             >
-              {isUploading ? 'Upload...' : 'Changer le logo'}
+              {isUploading ? 'Upload...' : 'Ajouter un logo'}
             </button>
             <p className="text-gray-500 text-sm mt-2">PNG, JPG ou SVG. Max 2MB.</p>
           </div>
@@ -227,7 +162,7 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
 
       {/* Main form */}
       <div className="bg-[#111] border border-[#222] rounded-lg p-6">
-        <h2 className="text-xl font-semibold text-white mb-6">Informations partenariat</h2>
+        <h2 className="text-xl font-semibold text-white mb-6">Informations du partenaire</h2>
 
         {message && (
           <div
@@ -242,6 +177,73 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Basic info */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-400 mb-2">
+                Entreprise <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                value={formData.company}
+                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                placeholder="Nom de l'entreprise"
+                required
+                className="w-full bg-[#0a0a0a] border border-[#333] rounded-lg px-4 py-3 text-white focus:border-[#e53e3e] focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-400 mb-2">
+                Contact <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                value={formData.contact}
+                onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+                placeholder="Nom du contact"
+                required
+                className="w-full bg-[#0a0a0a] border border-[#333] rounded-lg px-4 py-3 text-white focus:border-[#e53e3e] focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-400 mb-2">
+                Email <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="contact@entreprise.fr"
+                required
+                className="w-full bg-[#0a0a0a] border border-[#333] rounded-lg px-4 py-3 text-white focus:border-[#e53e3e] focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-400 mb-2">Téléphone</label>
+              <input
+                type="tel"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                placeholder="06 12 34 56 78"
+                className="w-full bg-[#0a0a0a] border border-[#333] rounded-lg px-4 py-3 text-white focus:border-[#e53e3e] focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-400 mb-2">Site web</label>
+            <input
+              type="url"
+              value={formData.website}
+              onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+              placeholder="https://www.entreprise.fr"
+              className="w-full bg-[#0a0a0a] border border-[#333] rounded-lg px-4 py-3 text-white focus:border-[#e53e3e] focus:outline-none"
+            />
+          </div>
+
           {/* Status */}
           <div>
             <label className="block text-sm font-medium text-gray-400 mb-2">Statut</label>
@@ -250,7 +252,7 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
                 <button
                   key={option.value}
                   type="button"
-                  onClick={() => setFormData({ ...formData, status: option.value as typeof formData.status })}
+                  onClick={() => setFormData({ ...formData, status: option.value })}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                     formData.status === option.value
                       ? option.color + ' ring-2 ring-white/20'
@@ -263,41 +265,26 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
             </div>
           </div>
 
-          {/* Tier & Assigned */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">Niveau de partenariat</label>
-              <select
-                value={formData.tier}
-                onChange={(e) => setFormData({ ...formData, tier: e.target.value })}
-                className="w-full bg-[#0a0a0a] border border-[#333] rounded-lg px-4 py-3 text-white focus:border-[#e53e3e] focus:outline-none"
-              >
-                <option value="">Non défini</option>
-                <optgroup label="Partenaires financiers">
-                  {tierOptions.filter(t => t.group === 'financial').map((tier) => (
-                    <option key={tier.value} value={tier.value}>{tier.label}</option>
-                  ))}
-                </optgroup>
-                <optgroup label="Autres partenaires">
-                  {tierOptions.filter(t => t.group === 'other').map((tier) => (
-                    <option key={tier.value} value={tier.value}>{tier.label}</option>
-                  ))}
-                </optgroup>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">Géré par</label>
-              <select
-                value={formData.assignedToId}
-                onChange={(e) => setFormData({ ...formData, assignedToId: e.target.value })}
-                className="w-full bg-[#0a0a0a] border border-[#333] rounded-lg px-4 py-3 text-white focus:border-[#e53e3e] focus:outline-none"
-              >
-                <option value="">Non assigné</option>
-                {adminUsers.map((user) => (
-                  <option key={user.id} value={user.id}>{user.name}</option>
+          {/* Tier */}
+          <div>
+            <label className="block text-sm font-medium text-gray-400 mb-2">Type de partenariat</label>
+            <select
+              value={formData.tier}
+              onChange={(e) => setFormData({ ...formData, tier: e.target.value })}
+              className="w-full bg-[#0a0a0a] border border-[#333] rounded-lg px-4 py-3 text-white focus:border-[#e53e3e] focus:outline-none"
+            >
+              <option value="">Non défini</option>
+              <optgroup label="Partenaires financiers">
+                {tierOptions.filter(t => t.group === 'financial').map((tier) => (
+                  <option key={tier.value} value={tier.value}>{tier.label}</option>
                 ))}
-              </select>
-            </div>
+              </optgroup>
+              <optgroup label="Autres partenaires">
+                {tierOptions.filter(t => t.group === 'other').map((tier) => (
+                  <option key={tier.value} value={tier.value}>{tier.label}</option>
+                ))}
+              </optgroup>
+            </select>
           </div>
 
           {/* Company info */}
@@ -361,31 +348,20 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
           </div>
 
           {/* Actions */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#222]">
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={handleDelete}
-                disabled={isLoading}
-                className="px-4 py-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition-colors disabled:opacity-50"
-              >
-                Supprimer
-              </button>
-              <button
-                type="button"
-                onClick={handleGenerateReceipt}
-                disabled={isLoading || !formData.donationAmount}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Générer reçu fiscal
-              </button>
-            </div>
+          <div className="flex items-center justify-end gap-4 pt-4 border-t border-[#222]">
+            <button
+              type="button"
+              onClick={() => router.push('/admin/partenaires')}
+              className="px-4 py-2 text-gray-400 hover:text-white transition-colors"
+            >
+              Annuler
+            </button>
             <button
               type="submit"
               disabled={isLoading}
               className="px-6 py-2 bg-[#e53e3e] text-white font-semibold rounded-lg hover:bg-[#c53030] transition-colors disabled:opacity-50"
             >
-              {isLoading ? 'Enregistrement...' : 'Enregistrer'}
+              {isLoading ? 'Création...' : 'Créer le partenaire'}
             </button>
           </div>
         </form>

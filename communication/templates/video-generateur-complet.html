@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur Vidéo Complet - Barb'n'Rock 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap');
+
+        :root {
+            --bg-dark: #0a0c0f;
+            --text-light: #f0f0f0;
+            --text-muted: #8b9299;
+            --accent-cyan: #00E5CC;
+            --accent-orange: #E85D04;
+            --accent-red: #dc2626;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #111;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* ==================== CONTROLS PANEL ==================== */
+        .controls {
+            width: 380px;
+            min-width: 380px;
+            background: #1a1a1a;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 1px solid #333;
+            max-height: 100vh;
+        }
+
+        .controls h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: var(--accent-cyan);
+        }
+
+        .control-section {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .control-section h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .control-group {
+            margin-bottom: 10px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        .control-group input,
+        .control-group select,
+        .control-group textarea {
+            width: 100%;
+            padding: 8px;
+            background: #222;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: white;
+            font-size: 13px;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary { background: var(--accent-orange); color: white; }
+        .btn-primary:hover { background: #ff6b1a; }
+        .btn-secondary { background: #333; color: white; }
+        .btn-secondary:hover { background: #444; }
+        .btn-cyan { background: var(--accent-cyan); color: black; }
+
+        /* Categories tabs */
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .category-btn {
+            padding: 6px 12px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #aaa;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .category-btn:hover { border-color: var(--accent-cyan); }
+        .category-btn.active { 
+            background: var(--accent-cyan); 
+            color: black; 
+            border-color: var(--accent-cyan);
+        }
+
+        .presets-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .preset-btn {
+            padding: 8px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #ccc;
+            font-size: 10px;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .preset-btn:hover {
+            background: #333;
+            border-color: var(--accent-cyan);
+        }
+
+        .preset-btn .name {
+            font-weight: 600;
+            margin-bottom: 2px;
+            font-size: 11px;
+        }
+
+        .preset-btn .meta {
+            font-size: 9px;
+            color: #666;
+        }
+
+        .help-text {
+            font-size: 10px;
+            color: #666;
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+
+        /* ==================== VIDEO PREVIEW ==================== */
+        .preview-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #0a0a0a;
+        }
+
+        .preview-info {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .preview-info h3 { color: white; font-size: 14px; margin-bottom: 5px; }
+        .preview-info p { color: #666; font-size: 12px; }
+
+        /* ==================== VIDEO CONTAINER ==================== */
+        /* TikTok/Reel format: 1080x1920 (9:16) - scaled to 40% for preview */
+        .video-container {
+            width: 432px;  /* 1080 * 0.40 */
+            height: 768px; /* 1920 * 0.40 */
+            background: black;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            border: 2px solid var(--accent-cyan);
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1366px; /* 768 * 16/9 pour couvrir en hauteur */
+            height: 768px;
+            pointer-events: none;
+        }
+
+        .video-bg iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.85) 100%);
+            pointer-events: none;
+        }
+
+        .video-vignette {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
+            pointer-events: none;
+        }
+
+        /* ==================== ANIMATED CONTENT ==================== */
+        .content-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 35px;
+            z-index: 10;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            opacity: 0;
+            animation: fadeSlideDown 0.6s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .badge {
+            background: var(--accent-orange);
+            color: white;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            padding: 6px 12px;
+            transform: rotate(-2deg);
+            animation: pulse 2s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        .badge.cyan { background: var(--accent-cyan); color: black; }
+        .badge.red { background: var(--accent-red); color: white; }
+
+        .logo {
+            width: 40px;
+            height: auto;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
+        }
+
+        .festival-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            letter-spacing: 2px;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            line-height: 1;
+        }
+
+        .festival-name .orange { color: #e85d04; }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .main-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 60px;
+            color: white;
+            letter-spacing: 5px;
+            line-height: 0.95;
+            text-shadow: 0 0 60px rgba(0, 229, 204, 0.6), 0 4px 20px rgba(0,0,0,0.8);
+            opacity: 0;
+            transform: scale(1.5);
+            animation: zoomIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, glitch 3s infinite 2s;
+            animation-delay: 0.5s;
+        }
+
+        .main-title .accent { color: var(--accent-cyan); }
+        .main-title .orange { color: var(--accent-orange); }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 12px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeSlideUp 0.6s ease forwards;
+            animation-delay: 1s;
+        }
+
+        .info-box {
+            margin-top: 20px;
+            padding: 10px 25px;
+            border: 2px solid var(--accent-cyan);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeSlideUp 0.6s ease forwards;
+            animation-delay: 1.3s;
+        }
+
+        /* Liste des groupes */
+        .bands-list {
+            margin-top: 15px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+            line-height: 1.6;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeSlideUp 0.6s ease forwards;
+            animation-delay: 1.5s;
+            max-width: 90%;
+        }
+
+        .bands-list .day-label {
+            display: block;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14px;
+            color: var(--accent-orange);
+            letter-spacing: 2px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+        }
+
+        .bands-list .day-label:first-child {
+            margin-top: 0;
+        }
+
+        .bands-list .bands {
+            color: rgba(255,255,255,0.85);
+        }
+
+        /* Liste des groupes en mode "gros" (sans titre principal) */
+        .bands-list.large {
+            margin-top: 0;
+            font-size: 18px;
+            line-height: 1.4;
+            animation-delay: 0.5s;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+            color: white;
+        }
+
+        .bands-list.large .day-label {
+            font-size: 24px;
+            margin-top: 18px;
+            margin-bottom: 8px;
+            color: var(--accent-orange);
+        }
+
+        .bands-list.large .day-label:first-child {
+            margin-top: 0;
+        }
+
+        .bands-list.large .bands {
+            font-size: 16px;
+            color: white;
+            display: block;
+            margin: 4px 0;
+        }
+
+        /* Têtes d'affiche (5 premiers) - cyan et 3x plus gros */
+        .bands-list.large .headliner {
+            font-size: 32px;
+            color: var(--accent-cyan);
+            display: block;
+            margin: 8px 0;
+            text-shadow: 0 0 30px rgba(0, 229, 204, 0.5);
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            opacity: 0;
+            animation: fadeSlideUp 0.6s ease forwards;
+            animation-delay: 1.6s;
+        }
+
+        .footer-left { text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        .date { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: white; letter-spacing: 2px; }
+        .location { font-size: 11px; color: var(--text-muted); }
+
+        .footer-right { text-align: right; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        .price { font-family: 'Bebas Neue', sans-serif; font-size: 30px; color: var(--accent-orange); animation: pulse 2s ease-in-out infinite; animation-delay: 2s; }
+        .price-label { font-size: 10px; color: var(--accent-cyan); }
+
+        .corner {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--accent-orange);
+            opacity: 0;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .corner-tl { top: 40px; left: 30px; border-right: none; border-bottom: none; animation-delay: 1.8s; }
+        .corner-br { bottom: 40px; right: 30px; border-left: none; border-top: none; animation-delay: 2s; }
+
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes fadeSlideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes zoomIn { from { opacity: 0; transform: scale(1.5); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 0.4; } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translate(0); text-shadow: 0 0 60px rgba(0, 229, 204, 0.6); }
+            92% { transform: translate(-3px, 2px); text-shadow: -3px 0 var(--accent-cyan), 3px 0 var(--accent-orange); }
+            94% { transform: translate(3px, -2px); text-shadow: 3px 0 var(--accent-cyan), -3px 0 var(--accent-orange); }
+            96% { transform: translate(-2px, -1px); text-shadow: -2px 0 var(--accent-orange), 2px 0 var(--accent-cyan); }
+            98% { transform: translate(2px, 1px); text-shadow: 2px 0 var(--accent-orange), -2px 0 var(--accent-cyan); }
+        }
+
+        .recording-indicator {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: rgba(255, 0, 0, 0.8);
+            border-radius: 20px;
+            font-size: 11px;
+            color: white;
+            z-index: 1000;
+        }
+        .recording-indicator.active { display: flex; }
+        .recording-dot { width: 8px; height: 8px; background: white; border-radius: 50%; animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .export-notice {
+            margin-top: 15px;
+            padding: 12px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            font-size: 11px;
+            color: #888;
+            text-align: center;
+            max-width: 400px;
+        }
+        .export-notice strong { color: var(--accent-cyan); }
+    </style>
+</head>
+
+<body>
+
+    <div class="controls">
+        <h2>🎬 GÉNÉRATEUR VIDÉO</h2>
+
+        <!-- Categories -->
+        <div class="control-section">
+            <h3>Catégorie</h3>
+            <div class="categories">
+                <button class="category-btn active" onclick="showCategory('artistes')">🎸 Artistes</button>
+                <button class="category-btn" onclick="showCategory('benevoles')">👋 Bénévoles</button>
+                <button class="category-btn" onclick="showCategory('tremplin')">🎤 Tremplin</button>
+                <button class="category-btn" onclick="showCategory('programmation')">📋 Programme</button>
+                <button class="category-btn" onclick="showCategory('countdown')">⏱️ Countdown</button>
+                <button class="category-btn" onclick="showCategory('billetterie')">🎫 Billetterie</button>
+                <button class="category-btn" onclick="showCategory('village')">🍺 Village</button>
+            </div>
+        </div>
+
+        <!-- Presets -->
+        <div class="control-section">
+            <h3>Presets</h3>
+            <div class="presets-grid" id="presets-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- YouTube / Background -->
+        <div class="control-section">
+            <h3>Arrière-plan</h3>
+            <div class="control-group">
+                <label>Type</label>
+                <select id="bg-type" onchange="updateBackground()">
+                    <option value="youtube">Vidéo YouTube</option>
+                    <option value="image">Image statique</option>
+                </select>
+            </div>
+            <div class="control-group" id="youtube-controls">
+                <label>URL ou ID YouTube</label>
+                <input type="text" id="youtube-url" placeholder="Ex: dQw4w9WgXcQ" oninput="updateBackground()">
+                <label style="margin-top: 8px;">Démarrer à (sec)</label>
+                <input type="number" id="start-time" value="0" min="0" oninput="updateBackground()">
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="control-section">
+            <h3>Contenu</h3>
+            <div class="control-group">
+                <label>Badge</label>
+                <input type="text" id="badge-text" value="🔥 NOUVEAU NOM" oninput="updateContent()">
+            </div>
+            <div class="control-group">
+                <label>Style badge</label>
+                <select id="badge-style" onchange="updateContent()">
+                    <option value="orange">Orange</option>
+                    <option value="cyan">Cyan</option>
+                    <option value="red">Rouge</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Titre principal (HTML accepté)</label>
+                <input type="text" id="main-title" value="PSYKUP" oninput="updateContent()">
+            </div>
+            <div class="control-group">
+                <label>Sous-titre</label>
+                <input type="text" id="subtitle" value="AutrucheCore • Toulouse" oninput="updateContent()">
+            </div>
+            <div class="control-group">
+                <label>Info box</label>
+                <input type="text" id="info-box" value="VENDREDI 26 JUIN" oninput="updateContent()">
+            </div>
+            <div class="control-group">
+                <label>Liste des groupes (vide = masqué)</label>
+                <textarea id="bands-list" rows="4" oninput="updateContent()" placeholder="VEN: Cachemire, Psykup...&#10;SAM: Shaârghot, Loudblast...&#10;DIM: Mainkind, UDAP..."></textarea>
+                <label style="margin-top: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="checkbox" id="bands-large" onchange="updateContent()" style="width: auto;">
+                    <span>Liste en gros (sans titre)</span>
+                </label>
+            </div>
+            <div class="control-group">
+                <label>Prix affiché</label>
+                <input type="text" id="price-text" value="36€" oninput="updateContent()">
+            </div>
+            <div class="control-group">
+                <label>Label prix</label>
+                <input type="text" id="price-label" value="Pass 3 jours" oninput="updateContent()">
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="control-section">
+            <h3>Actions</h3>
+            <button class="btn btn-primary" onclick="replayAnimation()">🔄 Rejouer l'animation</button>
+            <button class="btn btn-cyan" onclick="startRecording()">⏺️ Commencer l'enregistrement</button>
+            <button class="btn btn-secondary" onclick="openFullscreen()">📺 Plein écran</button>
+            <p class="help-text">
+                Durée recommandée : 8-15 secondes<br>
+                Utilise OBS ou QuickTime pour capturer.
+            </p>
+        </div>
+    </div>
+
+    <div class="preview-area">
+        <div class="preview-info">
+            <h3>Aperçu TikTok/Reel</h3>
+            <p>Format 1080×1920 (9:16) • Échelle 40%</p>
+        </div>
+
+        <div class="video-container" id="video-container">
+            <div class="recording-indicator" id="recording-indicator">
+                <div class="recording-dot"></div>REC
+            </div>
+
+            <div class="video-bg" id="video-bg">
+                <iframe id="youtube-iframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <div class="video-bg-image" id="video-bg-image" style="display: none;"></div>
+
+            <div class="video-overlay"></div>
+            <div class="video-vignette"></div>
+            <div class="corner corner-tl" id="corner-tl"></div>
+            <div class="corner corner-br" id="corner-br"></div>
+
+            <div class="content-layer" id="content-layer">
+                <div class="header" id="header">
+                    <div class="badge" id="badge-display">🔥 NOUVEAU NOM</div>
+                    <div class="header-brand">
+                        <img src="../../public/images/logo.png" alt="Barb'n'Rock" class="logo">
+                        <div class="festival-name">BARB'N'<span class="orange">ROCK</span></div>
+                    </div>
+                </div>
+
+                <div class="main-content">
+                    <h1 class="main-title" id="main-title-display">PSYKUP</h1>
+                    <p class="subtitle" id="subtitle-display">AutrucheCore • Toulouse</p>
+                    <div class="info-box" id="info-box-display">VENDREDI 26 JUIN</div>
+                    <div class="bands-list" id="bands-list-display" style="display: none;"></div>
+                </div>
+
+                <div class="footer" id="footer">
+                    <div class="footer-left">
+                        <div class="date">26-28 JUIN 2026</div>
+                        <div class="location">Crèvecœur-le-Grand (60)</div>
+                    </div>
+                    <div class="footer-right">
+                        <div class="price" id="price-display">36€</div>
+                        <div class="price-label" id="price-label-display">Pass 3 jours</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="export-notice">
+            <strong>💡 Astuce :</strong> Ajoute ensuite un extrait audio dans CapCut ou ton éditeur préféré.
+        </div>
+    </div>
+
+    <script>
+        // All presets organized by category
+        const allPresets = {
+            artistes: [
+                // Vendredi
+                { id: 'cachemire', name: 'Cachemire', meta: 'Vendredi', badge: '🔥 NOUVEAU NOM', badgeStyle: 'orange', title: 'CACHEMIRE', subtitle: "Rock'n'Roll • Nantes", info: 'VENDREDI 26 JUIN', youtube: 'oXr2HJpIVJU', start: 10, price: '36€', priceLabel: 'Pass 3 jours' },
+                { id: 'psykup', name: 'Psykup', meta: 'Vendredi', badge: '🔥 NOUVEAU NOM', badgeStyle: 'orange', title: 'PSYKUP', subtitle: 'AutrucheCore • Toulouse', info: 'VENDREDI 26 JUIN', youtube: 'sLZQSPiuTfg', start: 30, price: '36€', priceLabel: 'Pass 3 jours' },
+                { id: 'kaminoikari', name: 'Kami No Ikari', meta: 'Vendredi', badge: '🔥 NOUVEAU NOM', badgeStyle: 'orange', title: 'KAMI NO<br><span class="accent">IKARI</span>', subtitle: 'Deathcore mélodique • Paris', info: 'VENDREDI 26 JUIN', youtube: 'lNGYQ8-bDN8', start: 0, price: '36€', priceLabel: 'Pass 3 jours' },
+                { id: 'barabbas', name: 'Barabbas', meta: 'Vendredi', badge: '🔥 NOUVEAU NOM', badgeStyle: 'orange', title: 'BARABBAS', subtitle: 'Doom Français • Riffs Rédempteurs', info: 'VENDREDI 26 JUIN', youtube: '', start: 0, price: '36€', priceLabel: 'Pass 3 jours', bgImage: true },
+                { id: 'blackhazard', name: 'Black Hazard', meta: 'Vendredi', badge: '🔥 NOUVEAU NOM', badgeStyle: 'orange', title: 'BLACK HAZARD', subtitle: 'Heavy Rock Stoner • Hauts-de-France', info: 'VENDREDI 26 JUIN', youtube: '52OamIrdesU', start: 0, price: '36€', priceLabel: 'Pass 3 jours' },
+                // Samedi
+                { id: 'shaarghot', name: 'Shaârghot', meta: 'Samedi', badge: '⭐ TÊTE D\'AFFICHE', badgeStyle: 'cyan', title: 'SHAÂRGHOT', subtitle: 'Cyber Metal • Paris', info: 'SAMEDI 27 JUIN', youtube: 'yn4X-OtYOx0', start: 20, price: '36€', priceLabel: 'Pass 3 jours' },
+                { id: 'kravboca', name: 'Krav Boca', meta: 'Samedi', badge: '🔥 NOUVEAU NOM', badgeStyle: 'orange', title: 'KRAV BOCA', subtitle: 'Punk Rap Mandoline', info: 'SAMEDI 27 JUIN', youtube: '', start: 0, price: '36€', priceLabel: 'Pass 3 jours', bgImage: true },
+                { id: 'loudblast', name: 'Loudblast', meta: 'Samedi', badge: '⭐ LÉGENDE', badgeStyle: 'cyan', title: 'LOUDBLAST', subtitle: 'Death Metal • Lille • Depuis 1985', info: 'SAMEDI 27 JUIN', youtube: 'uc6khaqWNV4', start: 15, price: '36€', priceLabel: 'Pass 3 jours' },
+                { id: 'akiavel', name: 'Akiavel', meta: 'Samedi', badge: '🔥 NOUVEAU NOM', badgeStyle: 'orange', title: 'AKIAVEL', subtitle: 'Death Metal Moderne • Sud-Est', info: 'SAMEDI 27 JUIN', youtube: 'nqZ_b2Rk8pE', start: 15, price: '36€', priceLabel: 'Pass 3 jours' },
+                { id: 'dirtyfonzy', name: 'Dirty Fonzy', meta: 'Samedi', badge: '🔥 NOUVEAU NOM', badgeStyle: 'orange', title: 'DIRTY FONZY', subtitle: 'Punk Rock Festif • Albi', info: 'SAMEDI 27 JUIN', youtube: '', start: 0, price: '36€', priceLabel: 'Pass 3 jours', bgImage: true },
+                { id: 'breakout', name: 'Breakout', meta: 'Samedi', badge: '🔥 NOUVEAU NOM', badgeStyle: 'orange', title: 'BREAKOUT', subtitle: 'Punk • Paris', info: 'SAMEDI 27 JUIN', youtube: '0iPry24IYuE', start: 0, price: '36€', priceLabel: 'Pass 3 jours' },
+                // Dimanche
+                { id: 'mainkind', name: 'Mainkind', meta: 'Dimanche', badge: '⭐ TÊTE D\'AFFICHE', badgeStyle: 'cyan', title: 'MAINKIND', subtitle: 'Rock/Hard-Rock • France', info: 'DIMANCHE 28 JUIN', youtube: 'taKbs0ufooE', start: 0, price: '5€', priceLabel: 'Pass Dimanche' },
+                { id: 'saintrockstation', name: 'Saint Rock Station', meta: 'Dimanche', badge: '🎸 ROCK', badgeStyle: 'orange', title: 'SAINT ROCK<br><span class="accent">STATION</span>', subtitle: 'Rock/Hard Rock • On Air!', info: 'DIMANCHE 28 JUIN', youtube: '', start: 0, price: '5€', priceLabel: 'Pass Dimanche', bgImage: true },
+                { id: 'howlite', name: 'Howlite', meta: 'Dimanche', badge: '🎸 ROCK', badgeStyle: 'orange', title: 'HOWLITE', subtitle: 'Rock Alternatif • Atmosphérique', info: 'DIMANCHE 28 JUIN', youtube: '', start: 0, price: '5€', priceLabel: 'Pass Dimanche', bgImage: true },
+                { id: 'udap', name: 'UDAP', meta: 'Dimanche', badge: '🎸 ROCK', badgeStyle: 'orange', title: 'UDAP', subtitle: 'Rock/Pop Rock • Énergie Live', info: 'DIMANCHE 28 JUIN', youtube: '', start: 0, price: '5€', priceLabel: 'Pass Dimanche', bgImage: true },
+                { id: 'devonduxe', name: 'Devon Duxe', meta: 'Dimanche', badge: '🎸 ROCK', badgeStyle: 'orange', title: 'DEVON DUXE', subtitle: 'Rock Moderne • Énergie Brute', info: 'DIMANCHE 28 JUIN', youtube: '', start: 0, price: '5€', priceLabel: 'Pass Dimanche', bgImage: true },
+            ],
+            benevoles: [
+                { id: 'benev-appel', name: 'Appel Bénévoles', meta: '18 fév', badge: '👋 BÉNÉVOLES', badgeStyle: 'cyan', title: 'REJOINS<br><span class="accent">L\'ÉQUIPE</span>', subtitle: 'Du chaos', info: 'PASS GRATUIT • REPAS • T-SHIRT', youtube: '', start: 0, price: 'GRATUIT', priceLabel: 'Pass bénévole', bgImage: true },
+                { id: 'benev-rappel', name: 'Rappel Bénévoles', meta: '11 mars', badge: '👋 ON RECRUTE', badgeStyle: 'cyan', title: 'ON RECRUTE<br><span class="accent">ENCORE !</span>', subtitle: 'Bars • Merchandising • Cashless', info: 'REJOINS L\'AVENTURE', youtube: '', start: 0, price: 'GRATUIT', priceLabel: 'Pass bénévole', bgImage: true },
+                { id: 'benev-urgence', name: 'Dernière ligne droite', meta: '22 avril', badge: '⏰ URGENT', badgeStyle: 'red', title: 'DERNIÈRES<br><span class="accent">PLACES</span>', subtitle: 'Bénévoles', info: 'C\'EST MAINTENANT OU JAMAIS', youtube: '', start: 0, price: 'GRATUIT', priceLabel: 'Pass bénévole', bgImage: true },
+            ],
+            tremplin: [
+                { id: 'tremp-annonce', name: 'Annonce Tremplin', meta: '27 fév', badge: '🎤 TREMPLIN', badgeStyle: 'cyan', title: '4 AVRIL<br><span class="accent">TREMPLIN</span>', subtitle: 'La relève du rock local', info: 'ENTRÉE LIBRE', youtube: '', start: 0, price: '2 PLACES', priceLabel: 'À gagner', bgImage: true },
+                { id: 'tremp-groupes', name: 'Les candidats', meta: '18 mars', badge: '🎤 TREMPLIN', badgeStyle: 'cyan', title: 'LES<br><span class="accent">CANDIDATS</span>', subtitle: 'Qui jouera au festival ?', info: 'RDV LE 4 AVRIL', youtube: '', start: 0, price: 'VOTE', priceLabel: 'Avec ton applause', bgImage: true },
+                { id: 'tremp-j4', name: 'Tremplin J-4', meta: '31 mars', badge: '⏰ J-4', badgeStyle: 'red', title: 'J-4<br><span class="accent">TREMPLIN</span>', subtitle: 'Vendredi 4 avril', info: 'ENTRÉE LIBRE', youtube: '', start: 0, price: 'GRATUIT', priceLabel: 'Entrée libre', bgImage: true },
+                { id: 'tremp-resultats', name: 'Résultats', meta: '5 avril', badge: '🏆 GAGNANTS', badgeStyle: 'cyan', title: 'ET LES<br><span class="accent">GAGNANTS</span>', subtitle: 'SONT...', info: 'ILS REJOIGNENT L\'AFFICHE !', youtube: '', start: 0, price: '36€', priceLabel: 'Pass 3 jours', bgImage: true },
+            ],
+            programmation: [
+                { id: 'prog-complete', name: 'Prog Complète', meta: '11 groupes', badge: '🔥 PROGRAMMATION', badgeStyle: 'orange', title: '', subtitle: '', info: '', youtube: '', start: 0, price: '36€', priceLabel: 'Pass 3 jours', bgImage: true, bandsList: '*Shaârghot\n*Krav Boka\n*Cachemire\n*Loudblast\n*Psykup\nAkiavel\nDirty Fonzy\nKami No Ikari\nBreakout\nBarabbas\nBlack Hazard', bandsLarge: true },
+                { id: 'prog-vendredi', name: 'Focus Vendredi', meta: '5 groupes', badge: '📅 VENDREDI', badgeStyle: 'cyan', title: 'VENDREDI<br><span class="accent">26 JUIN</span>', subtitle: '5 groupes • Mise en jambes', info: '5 GROUPES', youtube: '', start: 0, price: '13€', priceLabel: 'Pass Vendredi', bgImage: true, bandsList: 'Cachemire • Psykup • Kami No Ikari • Barabbas • Black Hazard' },
+                { id: 'prog-samedi', name: 'Focus Samedi', meta: '7 groupes', badge: '📅 SAMEDI', badgeStyle: 'cyan', title: 'SAMEDI<br><span class="accent">27 JUIN</span>', subtitle: '7 groupes • Chaos total', info: '7 GROUPES', youtube: '', start: 0, price: '22€', priceLabel: 'Pass Samedi', bgImage: true, bandsList: 'Shaârghot • Krav Boca • Loudblast • Akiavel • Dirty Fonzy • Breakout • + Tremplin' },
+                { id: 'prog-dimanche', name: 'Focus Dimanche', meta: '6 groupes', badge: '📅 DIMANCHE', badgeStyle: 'cyan', title: 'DIMANCHE<br><span class="accent">28 JUIN</span>', subtitle: '6 groupes • Jour famille', info: '6 GROUPES', youtube: '', start: 0, price: '5€', priceLabel: 'Pass Dimanche', bgImage: true, bandsList: 'Mainkind • Saint Rock Station • Howlite • UDAP • Devon Duxe • + Tremplin' },
+                { id: 'prog-19', name: '19 groupes (post-tremplin)', meta: 'Récap', badge: '🔥 19 GROUPES', badgeStyle: 'orange', title: '19<br><span class="accent">GROUPES</span>', subtitle: 'Avec les gagnants du tremplin', info: 'L\'AFFICHE EST COMPLÈTE !', youtube: '', start: 0, price: '36€', priceLabel: 'Pass 3 jours', bgImage: true, bandsList: 'VEN: Cachemire, Psykup, Kami No Ikari, Barabbas, Black Hazard\nSAM: Shaârghot, Krav Boca, Loudblast, Akiavel, Dirty Fonzy, Breakout, TREMPLIN\nDIM: Mainkind, Saint Rock Station, Howlite, UDAP, Devon Duxe, TREMPLIN' },
+            ],
+            countdown: [
+                { id: 'cd-j60', name: 'J-60', meta: 'Countdown', badge: '⏱️ COUNTDOWN', badgeStyle: 'cyan', title: 'J-60', subtitle: 'LE CHAOS APPROCHE', info: '18 GROUPES • 36€', youtube: '', start: 0, price: '36€', priceLabel: 'Pass 3 jours', bgImage: true },
+                { id: 'cd-j30', name: 'J-30', meta: 'Countdown', badge: '⏱️ COUNTDOWN', badgeStyle: 'cyan', title: 'J-30', subtitle: 'PLUS QU\'UN MOIS', info: 'TON BILLET C\'EST FAIT ?', youtube: '', start: 0, price: '36€', priceLabel: 'Pass 3 jours', bgImage: true },
+                { id: 'cd-j15', name: 'J-15', meta: 'Countdown', badge: '⏱️ COUNTDOWN', badgeStyle: 'cyan', title: 'J-15', subtitle: 'DERNIÈRE LIGNE DROITE', info: 'PRÉPARE TES AFFAIRES 🎒', youtube: '', start: 0, price: '36€', priceLabel: 'Pass 3 jours', bgImage: true },
+                { id: 'cd-j7', name: 'J-7', meta: 'Countdown', badge: '🔥 J-7', badgeStyle: 'red', title: 'J-7', subtitle: 'UNE SEMAINE !', info: 'LE CHAOS DANS 7 JOURS', youtube: '', start: 0, price: '36€', priceLabel: 'Pass 3 jours', bgImage: true },
+                { id: 'cd-j3', name: 'J-3', meta: 'Countdown', badge: '🔥 J-3', badgeStyle: 'red', title: 'J-3', subtitle: 'TROIS JOURS...', info: 'LA TENSION MONTE !', youtube: '', start: 0, price: '36€', priceLabel: 'Pass 3 jours', bgImage: true },
+                { id: 'cd-j1', name: 'J-1', meta: 'Countdown', badge: '🔥 DEMAIN', badgeStyle: 'red', title: 'J-1', subtitle: 'C\'EST DEMAIN !', info: 'PRÊTS POUR LE CHAOS ?', youtube: '', start: 0, price: '36€', priceLabel: 'Pass 3 jours', bgImage: true },
+                { id: 'cd-jour-j', name: 'JOUR J', meta: 'C\'est parti!', badge: '🎉 C\'EST PARTI', badgeStyle: 'cyan', title: 'JOUR J', subtitle: 'LET\'S ROCK !', info: 'ON SE RETROUVE AU FEST !', youtube: '', start: 0, price: '🤘', priceLabel: 'Rock\'n\'Roll', bgImage: true },
+            ],
+            billetterie: [
+                { id: 'bill-prix', name: '36€ les 3 jours', meta: 'Prix choc', badge: '🎫 EARLY BIRD', badgeStyle: 'cyan', title: '36€', subtitle: 'PASS 3 JOURS', info: 'CAMPING GRATUIT INCLUS', youtube: '', start: 0, price: '36€', priceLabel: 'Seulement !', bgImage: true },
+                { id: 'bill-pass-ven', name: 'Pass Vendredi', meta: '13€', badge: '🎫 VENDREDI', badgeStyle: 'orange', title: '13€', subtitle: 'PASS VENDREDI', info: '5 GROUPES', youtube: '', start: 0, price: '13€', priceLabel: 'Vendredi 26', bgImage: true },
+                { id: 'bill-pass-sam', name: 'Pass Samedi', meta: '22€', badge: '🎫 SAMEDI', badgeStyle: 'orange', title: '22€', subtitle: 'PASS SAMEDI', info: '7 GROUPES + CHAOS', youtube: '', start: 0, price: '22€', priceLabel: 'Samedi 27', bgImage: true },
+                { id: 'bill-pass-dim', name: 'Pass Dimanche', meta: '5€', badge: '👨‍👩‍👧 FAMILLE', badgeStyle: 'cyan', title: '5€', subtitle: 'PASS DIMANCHE', info: '6 GROUPES • ENFANTS GRATUITS', youtube: '', start: 0, price: '5€', priceLabel: 'Dimanche 28', bgImage: true },
+                { id: 'bill-urgence', name: 'Urgence', meta: 'Dernières places', badge: '⚠️ ALERTE', badgeStyle: 'red', title: 'DERNIÈRES<br><span class="accent">PLACES</span>', subtitle: 'Early Bird bientôt fini', info: 'APRÈS = PLUS CHER', youtube: '', start: 0, price: '36€', priceLabel: 'Encore dispo', bgImage: true },
+                { id: 'bill-afterhell', name: 'Post-Hellfest', meta: 'Promo', badge: '🔥 POST-HELLFEST', badgeStyle: 'orange', title: 'LE CHAOS<br><span class="accent">CONTINUE</span>', subtitle: 'Dans 4 jours', info: 'CODE : AFTERHELL -15%', youtube: '', start: 0, price: '-15%', priceLabel: '24h seulement', bgImage: true },
+                { id: 'bill-cse', name: 'Offre CSE', meta: 'Entreprises', badge: '🏢 CSE', badgeStyle: 'cyan', title: 'OFFRE<br><span class="accent">CSE</span>', subtitle: 'Tarifs groupés entreprises', info: 'JUSQU\'À -15%', youtube: '', start: 0, price: '-15%', priceLabel: 'Groupes 10+', bgImage: true },
+            ],
+            village: [
+                { id: 'vill-annonce', name: 'Village du Chaos', meta: 'Annonce', badge: '🍺 VILLAGE', badgeStyle: 'cyan', title: 'VILLAGE DU<br><span class="accent">CHAOS</span>', subtitle: 'Plus qu\'un festival...', info: 'FOOD • BARS • ARTISANS', youtube: '', start: 0, price: '🍻', priceLabel: 'Ambiance !', bgImage: true },
+                { id: 'vill-food', name: 'Food Trucks', meta: 'Bouffe', badge: '🍔 FOOD TRUCKS', badgeStyle: 'orange', title: 'FOOD<br><span class="accent">TRUCKS</span>', subtitle: '6 Food Trucks sur site', info: 'BURGERS • PIZZA • VEGGIE', youtube: '', start: 0, price: '🍔', priceLabel: 'Miam !', bgImage: true },
+                { id: 'vill-barbiers', name: 'Barbiers', meta: 'Service', badge: '✂️ BARBIERS', badgeStyle: 'cyan', title: 'BARBE<br><span class="accent">CONTEST</span>', subtitle: '3 barbiers sur place', info: 'CONCOURS + RETOUCHES', youtube: '', start: 0, price: '✂️', priceLabel: 'Style !', bgImage: true },
+                { id: 'vill-tattoo', name: 'Tatoueurs', meta: 'Service', badge: '🖋️ TATTOO', badgeStyle: 'orange', title: 'FLASH<br><span class="accent">TATTOO</span>', subtitle: 'Tatoueurs sur place', info: 'FLASH DAY SAMEDI', youtube: '', start: 0, price: '🖋️', priceLabel: 'Encre !', bgImage: true },
+                { id: 'vill-camping', name: 'Camping', meta: 'Hébergement', badge: '⛺ CAMPING', badgeStyle: 'cyan', title: 'CAMPING<br><span class="accent">GRATUIT</span>', subtitle: 'Inclus avec ton pass', info: 'SANITAIRES • DOUCHES', youtube: '', start: 0, price: '0€', priceLabel: 'Inclus !', bgImage: true },
+                { id: 'vill-animations', name: 'Animations', meta: 'Fun', badge: '🎉 ANIMATIONS', badgeStyle: 'cyan', title: 'BARBE<br><span class="accent">CONTEST</span>', subtitle: 'Air Guitar • Plus grosse barbe', info: 'SAMEDI 27 JUIN', youtube: '', start: 0, price: '🏆', priceLabel: 'Lots à gagner', bgImage: true },
+                { id: 'vill-kids', name: 'Espace Enfants', meta: 'Dimanche', badge: '👶 KIDS', badgeStyle: 'cyan', title: 'ESPACE<br><span class="accent">ENFANTS</span>', subtitle: 'Maquillage • Jeux • Animations', info: 'DIMANCHE GRATUIT -12ANS', youtube: '', start: 0, price: '0€', priceLabel: 'Gratuit -12ans', bgImage: true },
+            ],
+        };
+
+        let currentCategory = 'artistes';
+
+        function showCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderPresets();
+        }
+
+        function renderPresets() {
+            const grid = document.getElementById('presets-grid');
+            const presets = allPresets[currentCategory];
+            grid.innerHTML = presets.map(p => `
+                <button class="preset-btn" onclick="loadPreset('${p.id}')">
+                    <div class="name">${p.name}</div>
+                    <div class="meta">${p.meta}</div>
+                </button>
+            `).join('');
+        }
+
+        function loadPreset(id) {
+            let preset = null;
+            for (const cat in allPresets) {
+                preset = allPresets[cat].find(p => p.id === id);
+                if (preset) break;
+            }
+            if (!preset) return;
+
+            document.getElementById('badge-text').value = preset.badge;
+            document.getElementById('badge-style').value = preset.badgeStyle;
+            document.getElementById('main-title').value = preset.title;
+            document.getElementById('subtitle').value = preset.subtitle;
+            document.getElementById('info-box').value = preset.info;
+            document.getElementById('youtube-url').value = preset.youtube || '';
+            document.getElementById('start-time').value = preset.start || 0;
+            document.getElementById('price-text').value = preset.price;
+            document.getElementById('price-label').value = preset.priceLabel;
+            document.getElementById('bands-list').value = preset.bandsList || '';
+            document.getElementById('bands-large').checked = preset.bandsLarge || false;
+
+            if (preset.bgImage || !preset.youtube) {
+                document.getElementById('bg-type').value = 'image';
+            } else {
+                document.getElementById('bg-type').value = 'youtube';
+            }
+
+            updateBackground();
+            updateContent();
+            replayAnimation();
+        }
+
+        function updateContent() {
+            const badge = document.getElementById('badge-display');
+            badge.textContent = document.getElementById('badge-text').value;
+            badge.className = 'badge ' + document.getElementById('badge-style').value;
+
+            document.getElementById('main-title-display').innerHTML = document.getElementById('main-title').value;
+            document.getElementById('subtitle-display').textContent = document.getElementById('subtitle').value;
+            document.getElementById('info-box-display').textContent = document.getElementById('info-box').value;
+            document.getElementById('price-display').textContent = document.getElementById('price-text').value;
+            document.getElementById('price-label-display').textContent = document.getElementById('price-label').value;
+
+            // Handle bands list
+            const bandsListText = document.getElementById('bands-list').value.trim();
+            const bandsListDisplay = document.getElementById('bands-list-display');
+            const bandsLarge = document.getElementById('bands-large').checked;
+            
+            // Handle large mode (hide title, subtitle, info-box)
+            const mainTitle = document.getElementById('main-title-display');
+            const subtitleEl = document.getElementById('subtitle-display');
+            const infoBox = document.getElementById('info-box-display');
+            
+            if (bandsLarge && bandsListText) {
+                mainTitle.style.display = 'none';
+                subtitleEl.style.display = 'none';
+                infoBox.style.display = 'none';
+                bandsListDisplay.classList.add('large');
+            } else {
+                mainTitle.style.display = 'block';
+                subtitleEl.style.display = 'block';
+                infoBox.style.display = 'block';
+                bandsListDisplay.classList.remove('large');
+            }
+            
+            if (bandsListText) {
+                bandsListDisplay.style.display = 'block';
+                // Parse the bands list
+                // Format: "VEN: band1, band2" for day labels
+                // Format: "*BandName" for headliners (cyan, bigger)
+                // Format: "BandName" for regular bands
+                let html = '';
+                const lines = bandsListText.split('\n');
+                lines.forEach(line => {
+                    const dayMatch = line.match(/^([A-Z]+):\s*(.+)$/);
+                    if (dayMatch) {
+                        html += `<span class="day-label">${dayMatch[1]}</span><span class="bands">${dayMatch[2]}</span>`;
+                    } else if (line.startsWith('*')) {
+                        // Headliner (starts with *)
+                        html += `<span class="headliner">${line.substring(1).trim()}</span>`;
+                    } else if (line.trim()) {
+                        html += `<span class="bands">${line.trim()}</span>`;
+                    }
+                });
+                bandsListDisplay.innerHTML = html;
+            } else {
+                bandsListDisplay.style.display = 'none';
+            }
+        }
+
+        function updateBackground() {
+            const bgType = document.getElementById('bg-type').value;
+            const videoBg = document.getElementById('video-bg');
+            const imageBg = document.getElementById('video-bg-image');
+            const youtubeControls = document.getElementById('youtube-controls');
+
+            if (bgType === 'youtube') {
+                videoBg.style.display = 'block';
+                imageBg.style.display = 'none';
+                youtubeControls.style.display = 'block';
+
+                let url = document.getElementById('youtube-url').value.trim();
+                const start = document.getElementById('start-time').value || 0;
+
+                let videoId = url;
+                if (url.includes('youtube.com/watch')) {
+                    const urlParams = new URLSearchParams(url.split('?')[1]);
+                    videoId = urlParams.get('v');
+                } else if (url.includes('youtu.be/')) {
+                    videoId = url.split('youtu.be/')[1].split('?')[0];
+                }
+
+                if (videoId && videoId.length >= 11) {
+                    videoId = videoId.substring(0, 11);
+                    document.getElementById('youtube-iframe').src = 
+                        `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&start=${start}`;
+                }
+            } else {
+                videoBg.style.display = 'none';
+                imageBg.style.display = 'block';
+                youtubeControls.style.display = 'none';
+                imageBg.style.backgroundImage = 'url(../../public/images/hero-visual.jpg)';
+            }
+        }
+
+        function replayAnimation() {
+            const elements = ['header', 'main-title-display', 'subtitle-display', 'info-box-display', 'bands-list-display', 'footer', 'corner-tl', 'corner-br'];
+            elements.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    const clone = el.cloneNode(true);
+                    el.parentNode.replaceChild(clone, el);
+                }
+            });
+            setTimeout(updateContent, 50);
+        }
+
+        function startRecording() {
+            document.getElementById('recording-indicator').classList.add('active');
+            replayAnimation();
+            setTimeout(() => document.getElementById('recording-indicator').classList.remove('active'), 10000);
+        }
+
+        function openFullscreen() {
+            const container = document.getElementById('video-container');
+            if (container.requestFullscreen) container.requestFullscreen();
+            else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+            replayAnimation();
+        }
+
+        // Init
+        renderPresets();
+        loadPreset('psykup');
+    </script>
+
+</body>
+</html>

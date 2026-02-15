@@ -2,6 +2,7 @@ import prisma from '@/lib/prisma';
 import Link from 'next/link';
 import Image from 'next/image';
 import FilterSelect from './FilterSelect';
+import FormattedDate from '../components/FormattedDate';
 
 const statusLabels: Record<string, { label: string; color: string }> = {
   PENDING: { label: 'En attente', color: 'bg-yellow-500/20 text-yellow-500' },
@@ -170,7 +171,7 @@ export default async function BenevolesPage({
                     </span>
                   </td>
                   <td className="px-4 py-3 text-gray-500 text-sm">
-                    {new Date(volunteer.createdAt).toLocaleDateString('fr-FR')}
+                    <FormattedDate date={volunteer.createdAt} />
                   </td>
                 </tr>
               ))}

@@ -50,10 +50,11 @@ model Partner {
   contact        String
   email          String
   phone          String?
-  tier           String?       // chaos, headbanger, moshpit, supporter
+  tier           String?       // chaos, headbanger, moshpit, supporter, institutional, media, technical
   message        String?
   status         PartnerStatus @default(PENDING)
   logo           String?       // URL du logo uploade
+  website        String?       // Site web du partenaire
   siret          String?
   address        String?
   donationAmount Float?        // Montant du don
@@ -61,15 +62,19 @@ model Partner {
   receiptNumber  String?       // Numero du recu fiscal
   receiptDate    DateTime?
   notes          String?
+  assignedToId   String?       // ID de l'admin responsable
+  assignedTo     AdminUser?    @relation(fields: [assignedToId], references: [id])
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
 }
 
 model AdminUser {
-  id           String   @id @default(cuid())
-  email        String   @unique
+  id           String    @id @default(cuid())
+  email        String    @unique
   name         String
   passwordHash String
-  role         String   @default("admin")
-  createdAt    DateTime @default(now())
+  role         String    @default("admin")
+  partners     Partner[] // Partenaires assignés à cet admin
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @default(now()) @updatedAt
 }

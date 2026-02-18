@@ -1,0 +1,125 @@
+<mjml>
+  <mj-head>
+    <mj-title>Save The Date - Barb'n'Rock 2026</mj-title>
+    <mj-preview>Le festival revient les 26-28 juin 2026 ! 🤘</mj-preview>
+    <mj-attributes>
+      <mj-all font-family="Arial, sans-serif" />
+      <mj-text font-size="16px" color="#f0f0f0" line-height="1.6" />
+      <mj-button background-color="#E85D04" color="white" font-size="16px" font-weight="bold" border-radius="4px" />
+    </mj-attributes>
+    <mj-style>
+      .accent { color: #00E5CC; }
+      .orange { color: #E85D04; }
+    </mj-style>
+  </mj-head>
+
+  <mj-body background-color="#0a0c0f">
+    <!-- Header avec logo -->
+    <mj-section background-color="#111111" padding="30px 20px">
+      <mj-column>
+        <mj-image src="https://barbnrock-festival.fr/images/logo.png" alt="Barb'n'Rock" width="120px" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Hero -->
+    <mj-section background-color="#0a0c0f" padding="40px 20px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="14px" color="#00E5CC" letter-spacing="3px" text-transform="uppercase">
+          Save The Date
+        </mj-text>
+        <mj-text align="center" font-size="42px" font-weight="bold" color="white" line-height="1.1" padding-top="10px">
+          26 • 27 • 28<br/>JUIN 2026
+        </mj-text>
+        <mj-text align="center" font-size="18px" color="#8b9299" padding-top="15px">
+          Crèvecœur-le-Grand (60) • 1h de Paris
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Concept -->
+    <mj-section background-color="#0a0c0f" padding="30px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="24px" font-weight="bold" color="#E85D04">
+          2 jours de chaos<br/>1 jour de repos
+        </mj-text>
+        <mj-divider border-color="#333" border-width="1px" padding="25px 50px" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Contenu principal -->
+    <mj-section background-color="#0a0c0f" padding="0 20px 30px">
+      <mj-column>
+        <mj-text align="center" padding-bottom="20px">
+          Salut 🤘
+        </mj-text>
+        <mj-text>
+          On espère que tu vas bien ! On voulait te prévenir en avant-première :
+        </mj-text>
+        <mj-text font-size="20px" font-weight="bold" color="white" padding="20px 0">
+          Le Barb'n'Rock Festival revient pour sa 4ème édition !
+        </mj-text>
+        <mj-text>
+          <strong style="color: #00E5CC;">Une affiche de folie se prépare.</strong> Metal, punk, rock... 18 groupes 100% français sur 3 jours.
+        </mj-text>
+        <mj-text padding-top="15px">
+          Tu as vibré avec nous en 2025 avec Lofofora, Loco Muerte, ADX ? Cette année, on met la barre encore plus haut.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Features -->
+    <mj-section background-color="#151515" padding="30px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="12px" color="#666" letter-spacing="2px" text-transform="uppercase" padding-bottom="20px">
+          Ce qui t'attend
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#151515" padding="0 20px 30px">
+      <mj-column>
+        <mj-text align="center" color="#f0f0f0">
+          🎸 <strong>18 groupes</strong> sur 3 jours
+        </mj-text>
+      </mj-column>
+      <mj-column>
+        <mj-text align="center" color="#f0f0f0">
+          🏕️ <strong>Camping GRATUIT</strong>
+        </mj-text>
+      </mj-column>
+      <mj-column>
+        <mj-text align="center" color="#f0f0f0">
+          🍺 <strong>Village du chaos</strong>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- CTA -->
+    <mj-section background-color="#0a0c0f" padding="30px 20px">
+      <mj-column>
+        <mj-text align="center" padding-bottom="20px">
+          La billetterie ouvre bientôt. Sois dans les premiers à réserver !
+        </mj-text>
+        <mj-button href="https://barbnrock-festival.fr" padding="20px 0">
+          DÉCOUVRIR LE SITE
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section background-color="#111111" padding="30px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="14px" color="#666">
+          À très vite dans la fosse ! 🤘
+        </mj-text>
+        <mj-text align="center" font-size="12px" color="#444" padding-top="20px">
+          <a href="https://instagram.com/barbnrock" style="color: #666; text-decoration: none;">Instagram</a> • 
+          <a href="https://facebook.com/barbnrockfestival" style="color: #666; text-decoration: none;">Facebook</a>
+        </mj-text>
+        <mj-text align="center" font-size="11px" color="#444" padding-top="20px">
+          Tu reçois cet email car tu es inscrit à notre newsletter.<br/>
+          <a href="{{unsubscribe_url}}" style="color: #666;">Se désabonner</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

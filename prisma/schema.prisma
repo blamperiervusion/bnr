@@ -36,6 +36,7 @@ model Volunteer {
   disponibilites String[]        // ["vendredi", "samedi", ...]
   missions       String[]        // ["accueil", "bar", ...]
   experience     String?
+  needsParking   Boolean?        // Besoin d'une place de parking
   message        String?
   status         VolunteerStatus @default(PENDING)
   team           String?         // Equipe attribuee

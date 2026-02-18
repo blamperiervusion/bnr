@@ -10,6 +10,7 @@ const navItems = [
   { href: '/admin/benevoles', label: 'Bénévoles', icon: '🙋' },
   { href: '/admin/partenaires', label: 'Partenaires', icon: '🤝' },
   { href: '/admin/utilisateurs', label: 'Utilisateurs', icon: '👥' },
+  { href: '/admin/ressources', label: 'Ressources', icon: '📁' },
 ];
 
 export default function AdminLayout({

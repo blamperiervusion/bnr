@@ -90,6 +90,7 @@ export default function BenevolesPage() {
     disponibilites: [] as string[],
     missions: [] as string[],
     experience: '',
+    needsParking: '' as '' | 'oui' | 'non',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -173,7 +174,7 @@ export default function BenevolesPage() {
 
       if (response.ok) {
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', phone: '', age: '', profileImage: '', disponibilites: [], missions: [], experience: '', message: '' });
+        setFormData({ name: '', email: '', phone: '', age: '', profileImage: '', disponibilites: [], missions: [], experience: '', needsParking: '', message: '' });
       } else {
         setSubmitStatus('error');
       }
@@ -334,7 +335,7 @@ export default function BenevolesPage() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[var(--accent-red)]">✓</span>
-                Être disponible minimum 12h sur le festival
+                Être disponible minimum 2 jours
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[var(--accent-red)]">✓</span>
@@ -562,6 +563,44 @@ export default function BenevolesPage() {
               />
             </div>
 
+            {/* Parking */}
+            <div>
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-3">
+                As-tu besoin d&apos;une place de parking ? *
+              </label>
+              <div className="flex gap-4">
+                {[
+                  { value: 'oui', label: 'Oui' },
+                  { value: 'non', label: 'Non' },
+                ].map((option) => (
+                  <label
+                    key={option.value}
+                    className={`flex items-center gap-2 px-6 py-3 rounded-lg border cursor-pointer transition-all ${
+                      formData.needsParking === option.value
+                        ? 'bg-[var(--accent-purple)]/20 border-[var(--accent-purple)]'
+                        : 'bg-[var(--muted)] border-[var(--border)] hover:border-[var(--accent-purple)]/50'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="needsParking"
+                      value={option.value}
+                      checked={formData.needsParking === option.value}
+                      onChange={(e) => setFormData({ ...formData, needsParking: e.target.value as 'oui' | 'non' })}
+                      className="sr-only"
+                    />
+                    <span className={`text-sm ${
+                      formData.needsParking === option.value
+                        ? 'text-[var(--foreground)]'
+                        : 'text-[var(--muted-foreground)]'
+                    }`}>
+                      {option.label}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
             {/* Message */}
             <div>
               <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
@@ -602,7 +641,7 @@ export default function BenevolesPage() {
               <Button 
                 type="submit" 
                 size="lg" 
-                disabled={isSubmitting || isUploading || formData.disponibilites.length === 0 || formData.missions.length === 0 || !formData.profileImage}
+                disabled={isSubmitting || isUploading || formData.disponibilites.length === 0 || formData.missions.length === 0 || !formData.profileImage || !formData.needsParking}
               >
                 {isSubmitting ? '⏳ Envoi en cours...' : '🙋 Envoyer ma candidature'}
               </Button>

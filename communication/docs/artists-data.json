@@ -1,0 +1,199 @@
+{
+  "_comment": "FICHIER GÉNÉRÉ - NE PAS MODIFIER DIRECTEMENT",
+  "_source": "Éditer lib/data/artists-config.ts puis exécuter: npm run sync-artists",
+  "_lastUpdated": "2026-02-11",
+  
+  "artists": {
+    "psykup": {
+      "name": "PSYKUP",
+      "genre": "AutrucheCore • Toulouse",
+      "day": "VENDREDI 26 JUIN",
+      "youtube": "sLZQSPiuTfg",
+      "start": 30,
+      "image": "bands/psykup.jpg",
+      "social": {
+        "website": "https://www.psykup.net/",
+        "facebook": "https://www.facebook.com/psykup",
+        "instagram": "https://www.instagram.com/psykupmusic/",
+        "spotify": "https://open.spotify.com/artist/2Z1p4Xmc2Mne50blMUd4cH"
+      }
+    },
+    "cachemire": {
+      "name": "CACHEMIRE",
+      "genre": "Rock'n'Roll • Nantes",
+      "day": "VENDREDI 26 JUIN",
+      "youtube": "oXr2HJpIVJU",
+      "start": 10,
+      "image": "bands/cachemire.jpg",
+      "social": {
+        "facebook": "https://www.facebook.com/cachemiremusic/"
+      }
+    },
+    "kami-no-ikari": {
+      "name": "KAMI NO IKARI",
+      "genre": "Deathcore mélodique • Paris",
+      "day": "VENDREDI 26 JUIN",
+      "youtube": "lNGYQ8-bDN8",
+      "start": 0,
+      "image": "bands/kami-no-ikari.jpg",
+      "social": {
+        "website": "https://www.kaminoikari.com/",
+        "facebook": "https://www.facebook.com/kaminoikari.music",
+        "instagram": "https://www.instagram.com/kaminoikari_music/",
+        "spotify": "https://open.spotify.com/artist/50w6So1pU1erYm1J3cGxXY"
+      }
+    },
+    "barabbas": {
+      "name": "BARABBAS",
+      "genre": "Doom français",
+      "day": "VENDREDI 26 JUIN",
+      "youtube": null,
+      "start": 0,
+      "image": "bands/barabbas.jpg",
+      "social": {
+        "facebook": "https://www.facebook.com/BarabbasMusic/"
+      }
+    },
+    "black-hazard": {
+      "name": "BLACK HAZARD",
+      "genre": "Heavy Rock Stoner • Hauts-de-France",
+      "day": "VENDREDI 26 JUIN",
+      "youtube": "52OamIrdesU",
+      "start": 0,
+      "image": "bands/black-hazard.jpg",
+      "social": {
+        "facebook": "https://www.facebook.com/BLACKHAZARDBAND/"
+      }
+    },
+    "shaarghot": {
+      "name": "SHAÂRGHOT",
+      "genre": "Cyber Metal • Paris",
+      "day": "SAMEDI 27 JUIN",
+      "youtube": "yn4X-OtYOx0",
+      "start": 20,
+      "image": "bands/shaarghot.jpg",
+      "social": {
+        "facebook": "https://www.facebook.com/shaarghot/",
+        "instagram": "https://www.instagram.com/shaarghot/",
+        "spotify": "https://open.spotify.com/artist/0wxpqCSmhtwnRXoWPoHAcj"
+      }
+    },
+    "loudblast": {
+      "name": "LOUDBLAST",
+      "genre": "Death Metal • Lille • Depuis 1985",
+      "day": "SAMEDI 27 JUIN",
+      "youtube": "uc6khaqWNV4",
+      "start": 15,
+      "image": "bands/loudblast.jpg",
+      "social": {
+        "website": "https://loudblast-music.com/",
+        "facebook": "https://www.facebook.com/Loudblast.official/",
+        "spotify": "https://open.spotify.com/artist/1xK59OXxi2TReP0IGvm0K5"
+      }
+    },
+    "krav-boca": {
+      "name": "KRAV BOCA",
+      "genre": "Punk Rap Mandoline",
+      "day": "SAMEDI 27 JUIN",
+      "youtube": null,
+      "start": 0,
+      "image": "bands/krav-boca.jpg",
+      "social": {
+        "website": "https://kravboca.com/",
+        "facebook": "https://www.facebook.com/kravboca",
+        "instagram": "https://www.instagram.com/kravboca",
+        "spotify": "https://open.spotify.com/artist/4xFUf1FHVy696Q1JQZMTRj"
+      }
+    },
+    "akiavel": {
+      "name": "AKIAVEL",
+      "genre": "Death Metal Moderne • Sud-Est",
+      "day": "SAMEDI 27 JUIN",
+      "youtube": "nqZ_b2Rk8pE",
+      "start": 0,
+      "image": "bands/akiavel.jpg",
+      "social": {
+        "website": "https://www.akiavel.com/",
+        "facebook": "https://www.facebook.com/Akiavel",
+        "instagram": "https://www.instagram.com/akiavel/",
+        "spotify": "https://open.spotify.com/artist/14M2CyExjuwWrJlJGYvg6T"
+      }
+    },
+    "dirty-fonzy": {
+      "name": "DIRTY FONZY",
+      "genre": "Punk Rock Mélodique • Albi",
+      "day": "SAMEDI 27 JUIN",
+      "youtube": null,
+      "start": 0,
+      "image": "bands/dirty-fonzy.jpg",
+      "social": {
+        "website": "https://linktr.ee/DirtyFonzy",
+        "facebook": "https://www.facebook.com/dirtyfonzy/",
+        "instagram": "https://www.instagram.com/dirty_fonzy/"
+      }
+    },
+    "breakout": {
+      "name": "BREAKOUT",
+      "genre": "Punk • Paris",
+      "day": "SAMEDI 27 JUIN",
+      "youtube": "0iPry24IYuE",
+      "start": 0,
+      "image": "bands/breakout.jpg",
+      "social": {
+        "facebook": "https://www.facebook.com/breakoutpunx/",
+        "instagram": "https://www.instagram.com/breakout_punk_band/"
+      }
+    },
+    "mainkind": {
+      "name": "MAINKIND",
+      "genre": "Rock/Hard-Rock",
+      "day": "DIMANCHE 28 JUIN",
+      "youtube": null,
+      "start": 0,
+      "image": "bands/mainkind.jpg",
+      "social": {}
+    }
+  },
+
+  "festival": {
+    "name": "Barb'n'Rock Festival",
+    "year": 2026,
+    "dates": {
+      "start": "2026-06-26",
+      "end": "2026-06-28",
+      "display": "26-28 JUIN 2026"
+    },
+    "location": {
+      "city": "Crèvecœur-le-Grand",
+      "department": "60",
+      "region": "Hauts-de-France"
+    },
+    "prices": {
+      "pass3days": 36,
+      "friday": 13,
+      "saturday": 22,
+      "sunday": 5,
+      "fridaySaturday": 33
+    },
+    "contact": {
+      "email": "barbnrock.festival@gmail.com",
+      "phone": "Luc Pouilly - 06 27 81 62 03"
+    },
+    "social": {
+      "instagram": "@barbnrock",
+      "facebook": "/barbnrockfestival",
+      "website": "barbnrock-festival.fr"
+    }
+  },
+
+  "previousArtists": [
+    "Dagoba",
+    "Black Bomb A", 
+    "Sidilarsen",
+    "Darcy",
+    "Guerilla Poubelle",
+    "Lofofora",
+    "Les Garçons Bouchers",
+    "Poezie Zero"
+  ]
+}

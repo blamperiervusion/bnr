@@ -147,6 +147,20 @@ export default async function VolunteerDetailPage({
               </div>
             )}
 
+            {/* Parking */}
+            <div className="mt-6">
+              <label className="text-sm text-gray-500 block mb-2">Place de parking</label>
+              <span
+                className={`px-2 py-1 text-xs rounded ${
+                  volunteer.needsParking
+                    ? 'bg-[#E85D04]/20 text-[#E85D04]'
+                    : 'bg-gray-500/20 text-gray-400'
+                }`}
+              >
+                {volunteer.needsParking ? '🚗 Oui' : 'Non'}
+              </span>
+            </div>
+
             {/* Message */}
             {volunteer.message && (
               <div className="mt-6">

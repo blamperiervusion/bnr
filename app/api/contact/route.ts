@@ -41,6 +41,7 @@ interface BenevoleFormData extends BaseFormData {
   disponibilites: string[];
   missions: string[];
   experience?: string;
+  needsParking?: string;
   message?: string;
 }
 
@@ -144,6 +145,11 @@ function generateEmailContent(data: FormData): { subject: string; html: string }
               </div>
             ` : ''}
             
+            <div style="background: #fef2f2; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <h3 style="margin-top: 0; color: #991b1b;">🚗 Place de parking</h3>
+              <p><strong>${data.needsParking === 'oui' ? 'Oui, besoin d\'une place' : 'Non'}</strong></p>
+            </div>
+            
             ${data.message ? `
               <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0;">
                 <h3 style="margin-top: 0; color: #856404;">Message</h3>
@@ -235,6 +241,7 @@ async function saveToDatabase(data: FormData): Promise<void> {
           disponibilites: data.disponibilites,
           missions: data.missions,
           experience: data.experience || null,
+          needsParking: data.needsParking === 'oui',
           message: data.message || null,
           status: 'PENDING',
         },

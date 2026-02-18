@@ -1,0 +1,168 @@
+<mjml>
+  <mj-head>
+    <mj-title>Billetterie ouverte - Barb'n'Rock 2026</mj-title>
+    <mj-preview>Les Early Bird sont disponibles ! 36€ le pass 3 jours 🔥</mj-preview>
+    <mj-attributes>
+      <mj-all font-family="Arial, sans-serif" />
+      <mj-text font-size="16px" color="#f0f0f0" line-height="1.6" />
+      <mj-button background-color="#E85D04" color="white" font-size="18px" font-weight="bold" border-radius="4px" inner-padding="18px 40px" />
+    </mj-attributes>
+  </mj-head>
+
+  <mj-body background-color="#0a0c0f">
+    <!-- Header -->
+    <mj-section background-color="#111111" padding="30px 20px">
+      <mj-column>
+        <mj-image src="https://barbnrock-festival.fr/images/logo.png" alt="Barb'n'Rock" width="120px" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Alert Banner -->
+    <mj-section background-color="#E85D04" padding="15px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="14px" font-weight="bold" color="white" letter-spacing="2px" text-transform="uppercase">
+          🔥 Billetterie ouverte 🔥
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Hero -->
+    <mj-section background-color="#0a0c0f" padding="40px 20px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="48px" font-weight="bold" color="#E85D04" line-height="1">
+          36€
+        </mj-text>
+        <mj-text align="center" font-size="18px" color="white" padding-top="5px">
+          PASS 3 JOURS - EARLY BIRD
+        </mj-text>
+        <mj-text align="center" font-size="14px" color="#00E5CC" padding-top="10px">
+          Camping GRATUIT inclus 🏕️
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- CTA Principal -->
+    <mj-section background-color="#0a0c0f" padding="20px 20px 40px">
+      <mj-column>
+        <mj-button href="https://www.helloasso.com/associations/acpc/evenements/barb-n-rock-festival-2026">
+          RÉSERVER MA PLACE
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- Message -->
+    <mj-section background-color="#0a0c0f" padding="0 20px 30px">
+      <mj-column>
+        <mj-text>
+          Salut 🤘
+        </mj-text>
+        <mj-text padding-top="15px">
+          <strong style="color: white;">C'est le moment !</strong> Les tarifs Early Bird sont disponibles, et on sait qu'ils partent vite.
+        </mj-text>
+        <mj-text padding-top="15px">
+          L'année dernière, les Very Early Bird ont été épuisés en quelques jours. Ne rate pas le coche cette année !
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Tarifs -->
+    <mj-section background-color="#151515" padding="30px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="12px" color="#666" letter-spacing="2px" text-transform="uppercase" padding-bottom="20px">
+          Tarifs Early Bird
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#151515" padding="0 20px">
+      <mj-column>
+        <mj-text align="center">
+          <span style="font-size: 32px; font-weight: bold; color: #E85D04;">36€</span><br/>
+          <span style="font-size: 12px; color: #888;">PASS 3 JOURS</span>
+        </mj-text>
+      </mj-column>
+      <mj-column>
+        <mj-text align="center">
+          <span style="font-size: 32px; font-weight: bold; color: #E85D04;">13€</span><br/>
+          <span style="font-size: 12px; color: #888;">VENDREDI</span>
+        </mj-text>
+      </mj-column>
+      <mj-column>
+        <mj-text align="center">
+          <span style="font-size: 32px; font-weight: bold; color: #E85D04;">22€</span><br/>
+          <span style="font-size: 12px; color: #888;">SAMEDI</span>
+        </mj-text>
+      </mj-column>
+      <mj-column>
+        <mj-text align="center">
+          <span style="font-size: 32px; font-weight: bold; color: #00E5CC;">5€</span><br/>
+          <span style="font-size: 12px; color: #888;">DIMANCHE</span>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#151515" padding="20px 20px 30px">
+      <mj-column>
+        <mj-text align="center" font-size="13px" color="#888">
+          Gratuit pour les moins de 12 ans
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Premiers noms -->
+    <mj-section background-color="#0a0c0f" padding="30px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="12px" color="#666" letter-spacing="2px" text-transform="uppercase" padding-bottom="15px">
+          Déjà confirmés
+        </mj-text>
+        <mj-text align="center" font-size="24px" font-weight="bold" color="white">
+          LOUDBLAST • SHAÂRGHOT<br/>PSYKUP • CACHEMIRE
+        </mj-text>
+        <mj-text align="center" font-size="14px" color="#888" padding-top="15px">
+          + 14 autres groupes à venir...
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Dates & Lieu -->
+    <mj-section background-color="#0a0c0f" padding="20px 20px 40px">
+      <mj-column>
+        <mj-divider border-color="#333" border-width="1px" padding="0 50px 25px" />
+        <mj-text align="center" font-size="20px" font-weight="bold" color="white">
+          26 • 27 • 28 JUIN 2026
+        </mj-text>
+        <mj-text align="center" font-size="14px" color="#888" padding-top="5px">
+          Crèvecœur-le-Grand (60) • 1h de Paris
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- CTA Final -->
+    <mj-section background-color="#1a1a1a" padding="30px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="18px" color="white" padding-bottom="20px">
+          Tu attends quoi ? 🤘
+        </mj-text>
+        <mj-button href="https://www.helloasso.com/associations/acpc/evenements/barb-n-rock-festival-2026">
+          JE PRENDS MON BILLET
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section background-color="#111111" padding="30px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="14px" color="#666">
+          On a hâte de te voir dans la fosse !
+        </mj-text>
+        <mj-text align="center" font-size="12px" color="#444" padding-top="20px">
+          <a href="https://instagram.com/barbnrock" style="color: #666; text-decoration: none;">Instagram</a> • 
+          <a href="https://facebook.com/barbnrockfestival" style="color: #666; text-decoration: none;">Facebook</a> •
+          <a href="https://barbnrock-festival.fr" style="color: #666; text-decoration: none;">Site web</a>
+        </mj-text>
+        <mj-text align="center" font-size="11px" color="#444" padding-top="20px">
+          Tu reçois cet email car tu es inscrit à notre newsletter.<br/>
+          <a href="{{unsubscribe_url}}" style="color: #666;">Se désabonner</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

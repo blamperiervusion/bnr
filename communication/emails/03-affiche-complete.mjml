@@ -1,0 +1,175 @@
+<mjml>
+  <mj-head>
+    <mj-title>Affiche complète - Barb'n'Rock 2026</mj-title>
+    <mj-preview>18 groupes sur 3 jours : Loudblast, Shaârghot, Psykup... Découvre le programme 🎸</mj-preview>
+    <mj-attributes>
+      <mj-all font-family="Arial, sans-serif" />
+      <mj-text font-size="16px" color="#f0f0f0" line-height="1.6" />
+      <mj-button background-color="#E85D04" color="white" font-size="18px" font-weight="bold" border-radius="4px" inner-padding="18px 40px" />
+    </mj-attributes>
+  </mj-head>
+
+  <mj-body background-color="#0a0c0f">
+    <!-- Header -->
+    <mj-section background-color="#111111" padding="30px 20px">
+      <mj-column>
+        <mj-image src="https://barbnrock-festival.fr/images/logo.png" alt="Barb'n'Rock" width="120px" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Hero -->
+    <mj-section background-color="#0a0c0f" padding="40px 20px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="14px" color="#00E5CC" letter-spacing="3px" text-transform="uppercase">
+          L'affiche est complète
+        </mj-text>
+        <mj-text align="center" font-size="38px" font-weight="bold" color="white" line-height="1.1" padding-top="10px">
+          18 GROUPES<br/>3 JOURS<br/>1 FESTIVAL
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Affiche Image -->
+    <mj-section background-color="#0a0c0f" padding="20px 20px">
+      <mj-column>
+        <mj-image src="https://barbnrock-festival.fr/images/affiche-2026.jpg" alt="Affiche Barb'n'Rock 2026" border-radius="8px" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Message -->
+    <mj-section background-color="#0a0c0f" padding="20px 20px 30px">
+      <mj-column>
+        <mj-text>
+          Salut 🤘
+        </mj-text>
+        <mj-text padding-top="15px">
+          <strong style="color: white;">Ça y est, l'affiche est bouclée !</strong> 18 groupes 100% français pour 3 jours de pure énergie metal, punk et rock.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Vendredi -->
+    <mj-section background-color="#151515" padding="25px 20px 15px">
+      <mj-column>
+        <mj-text align="center" font-size="12px" color="#E85D04" letter-spacing="2px" text-transform="uppercase">
+          VENDREDI 26 JUIN
+        </mj-text>
+        <mj-text align="center" font-size="12px" color="#666" padding-top="5px">
+          Ouverture : 18h
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#151515" padding="10px 20px 25px">
+      <mj-column>
+        <mj-text align="center" font-size="20px" font-weight="bold" color="white">
+          SHAÂRGHOT
+        </mj-text>
+        <mj-text align="center" font-size="14px" color="#888" padding-top="10px">
+          Darktribe • Cachemire • Wormsand • Zoldier Noiz
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Samedi -->
+    <mj-section background-color="#1a1a1a" padding="25px 20px 15px">
+      <mj-column>
+        <mj-text align="center" font-size="12px" color="#E85D04" letter-spacing="2px" text-transform="uppercase">
+          SAMEDI 27 JUIN
+        </mj-text>
+        <mj-text align="center" font-size="12px" color="#666" padding-top="5px">
+          Ouverture : 14h
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#1a1a1a" padding="10px 20px 25px">
+      <mj-column>
+        <mj-text align="center" font-size="20px" font-weight="bold" color="white">
+          LOUDBLAST • KRAV BOCA
+        </mj-text>
+        <mj-text align="center" font-size="14px" color="#888" padding-top="10px">
+          Lyzanxia • Room music • Vellocinate • Iron Bastards
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Dimanche -->
+    <mj-section background-color="#151515" padding="25px 20px 15px">
+      <mj-column>
+        <mj-text align="center" font-size="12px" color="#00E5CC" letter-spacing="2px" text-transform="uppercase">
+          DIMANCHE 28 JUIN • JOURNÉE FAMILLE
+        </mj-text>
+        <mj-text align="center" font-size="12px" color="#666" padding-top="5px">
+          Entrée 5€ seulement !
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#151515" padding="10px 20px 25px">
+      <mj-column>
+        <mj-text align="center" font-size="20px" font-weight="bold" color="white">
+          PSYKUP • SUPERFLAME
+        </mj-text>
+        <mj-text align="center" font-size="14px" color="#888" padding-top="10px">
+          Smash Hit Combo • Octavion • Pantha • Meliora
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Village -->
+    <mj-section background-color="#0a0c0f" padding="30px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="12px" color="#666" letter-spacing="2px" text-transform="uppercase" padding-bottom="15px">
+          Le Village du Chaos
+        </mj-text>
+        <mj-text align="center" font-size="14px" color="#f0f0f0">
+          🍔 Food Trucks variés • 🍺 Bars • 💉 Tattoo Artists<br/>
+          💈 Barbers • 🎪 Animations • 🏕️ Camping GRATUIT
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- CTA -->
+    <mj-section background-color="#0a0c0f" padding="20px 20px 40px">
+      <mj-column>
+        <mj-text align="center" font-size="16px" color="#E85D04" padding-bottom="20px">
+          ⚠️ Dernières places Early Bird disponibles
+        </mj-text>
+        <mj-button href="https://www.helloasso.com/associations/acpc/evenements/barb-n-rock-festival-2026">
+          RÉSERVER MAINTENANT
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- Infos pratiques -->
+    <mj-section background-color="#1a1a1a" padding="30px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="12px" color="#666" letter-spacing="2px" text-transform="uppercase" padding-bottom="15px">
+          Infos pratiques
+        </mj-text>
+        <mj-text align="center" font-size="14px" color="#f0f0f0">
+          📍 Crèvecœur-le-Grand (60) • 1h de Paris<br/>
+          🚗 Parking gratuit sur place<br/>
+          🏕️ Camping ouvert dès le vendredi matin<br/>
+          🎫 Prévente uniquement - Pas de vente sur place
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section background-color="#111111" padding="30px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="14px" color="#666">
+          On se voit dans la fosse ! 🤘
+        </mj-text>
+        <mj-text align="center" font-size="12px" color="#444" padding-top="20px">
+          <a href="https://instagram.com/barbnrock" style="color: #666; text-decoration: none;">Instagram</a> • 
+          <a href="https://facebook.com/barbnrockfestival" style="color: #666; text-decoration: none;">Facebook</a> •
+          <a href="https://barbnrock-festival.fr" style="color: #666; text-decoration: none;">Site web</a>
+        </mj-text>
+        <mj-text align="center" font-size="11px" color="#444" padding-top="20px">
+          Tu reçois cet email car tu es inscrit à notre newsletter.<br/>
+          <a href="{{unsubscribe_url}}" style="color: #666;">Se désabonner</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

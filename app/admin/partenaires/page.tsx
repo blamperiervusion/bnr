@@ -4,6 +4,8 @@ import Image from 'next/image';
 import FilterSelect from './FilterSelect';
 import FormattedDate from '../components/FormattedDate';
 
+export const dynamic = 'force-dynamic';
+
 const statusLabels: Record<string, { label: string; color: string }> = {
   PENDING: { label: 'En attente', color: 'bg-yellow-500/20 text-yellow-500' },
   CONTACTED: { label: 'Contacté', color: 'bg-blue-500/20 text-blue-500' },

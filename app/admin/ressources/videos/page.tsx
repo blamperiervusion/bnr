@@ -53,6 +53,8 @@ const videoPresets: VideoCategory[] = [
         mainText: 'PSYKUP',
         subtitle: 'AutrucheCore • Toulouse • 30 ans',
         infoBox: 'VENDREDI 26 JUIN',
+        youtubeUrl: 'zJrvYjKlQYc',
+        youtubeStart: 0,
       },
       {
         id: 'cachemire',

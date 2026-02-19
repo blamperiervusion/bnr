@@ -1,6 +1,9 @@
 import prisma from '@/lib/prisma';
 import Link from 'next/link';
 
+// Désactiver le cache pour avoir des données à jour
+export const dynamic = 'force-dynamic';
+
 async function getStats() {
   const [
     totalVolunteers,

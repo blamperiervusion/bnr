@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import UserForm from './UserForm';
 
+export const dynamic = 'force-dynamic';
+
 async function getUser(id: string) {
   return prisma.adminUser.findUnique({
     where: { id },

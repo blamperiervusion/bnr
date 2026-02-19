@@ -36,6 +36,7 @@ export default function VolunteerForm({ volunteer }: VolunteerFormProps) {
     team: volunteer.team || '',
     notes: volunteer.notes || '',
   });
+  const [resendAssignment, setResendAssignment] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,11 +47,16 @@ export default function VolunteerForm({ volunteer }: VolunteerFormProps) {
       const response = await fetch(`/api/admin/volunteers/${volunteer.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, resendAssignment }),
       });
 
       if (response.ok) {
-        setMessage({ type: 'success', text: 'Modifications enregistrées' });
+        const emailSent = resendAssignment || (formData.team && formData.team !== (volunteer.team || ''));
+        setMessage({ 
+          type: 'success', 
+          text: emailSent && formData.team ? 'Modifications enregistrées + email envoyé' : 'Modifications enregistrées'
+        });
+        setResendAssignment(false);
         router.refresh();
       } else {
         const data = await response.json();
@@ -125,6 +131,11 @@ export default function VolunteerForm({ volunteer }: VolunteerFormProps) {
               </button>
             ))}
           </div>
+          {formData.status === 'VALIDATED' && volunteer.status !== 'VALIDATED' && (
+            <p className="text-sm text-green-400 mt-2">
+              📧 Un email de validation sera envoyé au bénévole
+            </p>
+          )}
         </div>
 
         {/* Team */}
@@ -142,6 +153,29 @@ export default function VolunteerForm({ volunteer }: VolunteerFormProps) {
               <option key={team} value={team}>{team}</option>
             ))}
           </select>
+          
+          {/* Option pour renvoyer l'email d'affectation */}
+          {formData.team && volunteer.status === 'VALIDATED' && (
+            <div className="mt-3">
+              {formData.team !== (volunteer.team || '') ? (
+                <p className="text-sm text-[#00E5CC]">
+                  📧 Un email d&apos;affectation sera envoyé au bénévole
+                </p>
+              ) : (
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={resendAssignment}
+                    onChange={(e) => setResendAssignment(e.target.checked)}
+                    className="w-4 h-4 rounded border-[#333] bg-[#0a0a0a] text-[#00E5CC] focus:ring-[#00E5CC]"
+                  />
+                  <span className="text-sm text-gray-400">
+                    Renvoyer l&apos;email d&apos;affectation
+                  </span>
+                </label>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Notes */}

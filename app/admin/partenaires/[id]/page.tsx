@@ -5,6 +5,8 @@ import Link from 'next/link';
 import PartnerForm from './PartnerForm';
 import FormattedDate from '../../components/FormattedDate';
 
+export const dynamic = 'force-dynamic';
+
 async function getPartner(id: string) {
   return prisma.partner.findUnique({
     where: { id },

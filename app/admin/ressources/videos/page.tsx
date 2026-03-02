@@ -45,6 +45,8 @@ const videoPresets: VideoCategory[] = [
         mainText: 'LOUDBLAST',
         subtitle: 'Death Metal • Lille • Depuis 1985',
         infoBox: 'SAMEDI 27 JUIN',
+        youtubeUrl: 'uc6khaqWNV4',
+        youtubeStart: 15,
       },
       {
         id: 'psykup',
@@ -377,23 +379,36 @@ export default function VideoGeneratorPage() {
               border: '2px solid #00E5CC',
             }}
           >
-            {/* YouTube Background */}
+            {/* YouTube Background - 3 stacked videos */}
             {youtubeEmbedUrl && (
               <div
-                className="absolute pointer-events-none"
+                className="absolute pointer-events-none overflow-hidden"
                 style={{
-                  top: '50%',
+                  top: 0,
                   left: '50%',
-                  transform: 'translate(-50%, -50%)',
+                  transform: 'translateX(-50%)',
                   width: 1366 * 0.4,
-                  height: 768,
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
                 }}
               >
-                <iframe
-                  src={youtubeEmbedUrl}
-                  className="w-full h-full border-0"
-                  allow="autoplay; encrypted-media"
-                />
+                {[0, 1, 2].map((i) => (
+                  <div key={i} style={{ flex: 1, position: 'relative' }}>
+                    <iframe
+                      src={youtubeEmbedUrl}
+                      className="absolute border-0"
+                      style={{
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: 1366 * 0.4,
+                        height: 768 / 3,
+                      }}
+                      allow="autoplay; encrypted-media"
+                    />
+                  </div>
+                ))}
               </div>
             )}
 

@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: '📊' },
+  { href: '/admin/tremplin', label: 'Tremplin 2026', icon: '🎸' },
   { href: '/admin/benevoles', label: 'Bénévoles', icon: '🙋' },
   { href: '/admin/partenaires', label: 'Partenaires', icon: '🤝' },
   { href: '/admin/utilisateurs', label: 'Utilisateurs', icon: '👥' },

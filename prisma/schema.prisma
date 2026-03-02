@@ -79,3 +79,37 @@ model AdminUser {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @default(now()) @updatedAt
 }
+
+enum TremplinStatus {
+  PENDING
+  PRESELECTED
+  SELECTED
+  REJECTED
+}
+
+model TremplinBand {
+  id              String         @id @default(cuid())
+  bandName        String
+  genre           String
+  city            String
+  formationYear   Int?
+  contactName     String
+  contactEmail    String
+  contactPhone    String
+  members         String         // JSON string: [{name, instrument}]
+  bio             String         @db.Text
+  youtubeLink     String?
+  spotifyLink     String?
+  bandcampLink    String?
+  facebookLink    String?
+  instagramLink   String?
+  otherLink       String?
+  photoUrl        String?        // URL de la photo du groupe
+  demoUrl         String?        // URL du fichier demo/musique
+  motivation      String?        @db.Text
+  status          TremplinStatus @default(PENDING)
+  notes           String?        @db.Text
+  rating          Int?           // Note de 1 à 5
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}

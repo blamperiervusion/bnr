@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demande FDVA 2026 - ACPC</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bebas+Neue&display=swap');
+
+        :root {
+            --bg-light: #ffffff;
+            --bg-section: #f8f9fa;
+            --text-dark: #1a1a1a;
+            --text-muted: #6c757d;
+            --accent-primary: #00A896;
+            --accent-secondary: #E85D04;
+            --border-color: #dee2e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.4;
+            font-size: 9pt;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 12mm 18mm;
+            background: var(--bg-light);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent-primary);
+        }
+
+        .header-left {
+            flex: 1;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .logo-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            letter-spacing: 2px;
+        }
+
+        .logo-text .barb {
+            color: var(--text-dark);
+        }
+
+        .logo-text .rock {
+            color: var(--accent-primary);
+        }
+
+        .asso-name {
+            font-size: 8pt;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .doc-type {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            color: var(--accent-secondary);
+            letter-spacing: 1px;
+        }
+
+        .doc-ref {
+            font-size: 8pt;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        /* MAIN TITLE */
+        .main-title {
+            text-align: center;
+            margin: 12px 0;
+            padding: 10px;
+            background: linear-gradient(135deg, var(--accent-primary), #00c4b0);
+            color: white;
+            border-radius: 6px;
+        }
+
+        .main-title h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-bottom: 3px;
+        }
+
+        .main-title .subtitle {
+            font-size: 9pt;
+            opacity: 0.95;
+        }
+
+        /* INFO BOX */
+        .info-box {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .info-item {
+            background: var(--bg-section);
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-item .label {
+            font-size: 7pt;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .info-item .value {
+            font-size: 10pt;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .info-item.highlight {
+            background: var(--accent-secondary);
+            border-color: var(--accent-secondary);
+        }
+
+        .info-item.highlight .label,
+        .info-item.highlight .value {
+            color: white;
+        }
+
+        /* SECTIONS */
+        .section {
+            margin: 12px 0;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12pt;
+            color: var(--accent-primary);
+            letter-spacing: 1px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid var(--accent-secondary);
+            margin-bottom: 8px;
+        }
+
+        .section-title .number {
+            display: inline-block;
+            background: var(--accent-primary);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 18px;
+            font-size: 9pt;
+            margin-right: 6px;
+        }
+
+        .subsection-title {
+            font-size: 9pt;
+            font-weight: 600;
+            color: var(--accent-secondary);
+            margin: 8px 0 5px 0;
+        }
+
+        /* CONTENT */
+        p {
+            margin-bottom: 5px;
+            text-align: justify;
+            font-size: 8pt;
+        }
+
+        ul {
+            margin: 5px 0 5px 15px;
+        }
+
+        li {
+            margin-bottom: 2px;
+            font-size: 8pt;
+        }
+
+        strong {
+            color: var(--text-dark);
+        }
+
+        /* TABLES */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 6px 0;
+            font-size: 8pt;
+        }
+
+        th, td {
+            padding: 4px 8px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--accent-primary);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 8pt;
+            letter-spacing: 0.5px;
+        }
+
+        tr:nth-child(even) {
+            background: var(--bg-section);
+        }
+
+        .table-highlight td {
+            background: rgba(0, 168, 150, 0.1);
+            font-weight: 600;
+        }
+
+        .table-total td {
+            background: var(--accent-primary);
+            color: white;
+            font-weight: 700;
+        }
+
+        /* HIGHLIGHT BOX */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 168, 150, 0.08), rgba(232, 93, 4, 0.05));
+            border-left: 3px solid var(--accent-primary);
+            padding: 6px 10px;
+            margin: 6px 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .highlight-box.warning {
+            border-left-color: var(--accent-secondary);
+            background: linear-gradient(135deg, rgba(232, 93, 4, 0.08), rgba(0, 168, 150, 0.03));
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-size: 8pt;
+        }
+
+        /* CRITERIA BOX */
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin: 8px 0;
+        }
+
+        .criteria-item {
+            background: var(--bg-section);
+            padding: 6px 8px;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent-primary);
+        }
+
+        .criteria-item h4 {
+            font-size: 8pt;
+            color: var(--accent-primary);
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .criteria-item p {
+            font-size: 7pt;
+            color: var(--text-muted);
+            margin: 0;
+            text-align: left;
+            line-height: 1.3;
+        }
+
+        /* BUDGET BOX */
+        .budget-summary {
+            background: var(--accent-secondary);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .budget-summary .amount {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 2px;
+        }
+
+        .budget-summary .label {
+            font-size: 8pt;
+            opacity: 0.9;
+        }
+
+        /* SIGNATURE */
+        .signature-section {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .signature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .signature-box {
+            text-align: center;
+        }
+
+        .signature-box .role {
+            font-weight: 600;
+            margin-bottom: 2px;
+            font-size: 8pt;
+        }
+
+        .signature-box .name {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 8pt;
+        }
+
+        .signature-line {
+            border-top: 1px solid var(--text-dark);
+            padding-top: 4px;
+            font-size: 7pt;
+            color: var(--text-muted);
+        }
+
+        /* FOOTER - non utilisé */
+
+        /* SCREEN */
+        @media screen {
+            body {
+                background: #e0e0e0;
+                padding: 20px 0;
+            }
+
+            .page {
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                margin-bottom: 30px;
+            }
+        }
+
+        /* PRINT */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
+            html, body {
+                margin: 0 !important;
+                padding: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            body {
+                background: white !important;
+            }
+
+            .page {
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                padding: 12mm 18mm;
+                box-shadow: none;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+
+            .page:last-child {
+                page-break-after: auto;
+            }
+        }
+
+        /* STATS MINI */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin: 6px 0;
+        }
+
+        .stat-mini {
+            background: var(--bg-section);
+            padding: 5px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .stat-mini .number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 16px;
+            color: var(--accent-primary);
+        }
+
+        .stat-mini .label {
+            font-size: 6pt;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* EVOLUTION */
+        .evolution-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 6px 0;
+        }
+
+        .evolution-item {
+            flex: 1;
+            text-align: center;
+            padding: 5px;
+            background: var(--bg-section);
+            border-radius: 6px;
+        }
+
+        .evolution-item.current {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .evolution-item .year {
+            font-size: 7pt;
+            opacity: 0.8;
+        }
+
+        .evolution-item .value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 16px;
+        }
+
+        .evolution-item .growth {
+            font-size: 7pt;
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .evolution-item.current .growth {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .evolution-arrow {
+            font-size: 14px;
+            color: var(--accent-primary);
+        }
+
+        /* OBJECTIVES */
+        .objectives-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .objectives-list li {
+            padding: 5px 10px;
+            background: var(--bg-section);
+            border-radius: 4px;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 8pt;
+        }
+
+        .objectives-list .num {
+            background: var(--accent-primary);
+            color: white;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* ANNEXE NOTE */
+        .annexe-note {
+            background: var(--bg-section);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 7pt;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PAGE 1 -->
+    <div class="page">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo-text">
+                    <span class="barb">BARB'N'</span><span class="rock">ROCK</span>
+                </div>
+                <div class="asso-name">Association Crépicordienne pour la Promotion de la Culture</div>
+            </div>
+            <div class="header-right">
+                <div class="doc-type">DEMANDE FDVA 2026</div>
+                <div class="doc-ref">Axe 1 - Fonctionnement<br>Code subvention : 529</div>
+            </div>
+        </div>
+
+        <div class="main-title">
+            <h1>DEMANDE DE SUBVENTION FDVA 2026</h1>
+            <div class="subtitle">Fonds pour le Développement de la Vie Associative</div>
+        </div>
+
+        <div class="info-box">
+            <div class="info-item">
+                <div class="label">Dispositif</div>
+                <div class="value">FDVA 2 - Axe 1</div>
+            </div>
+            <div class="info-item">
+                <div class="label">Département</div>
+                <div class="value">Oise (60)</div>
+            </div>
+            <div class="info-item highlight">
+                <div class="label">Montant sollicité</div>
+                <div class="value">5 000 €</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span class="number">1</span>IDENTIFICATION DU DEMANDEUR</h2>
+            <p><strong>Association Crépicordienne pour la Promotion de la Culture (ACPC)</strong><br>
+            Association loi 1901 créée en 2023 – Siège social : Crèvecœur-le-Grand (60360)</p>
+            <p class="annexe-note">Voir documents administratifs en annexe (statuts, RNA, SIRET, liste dirigeants)</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span class="number">2</span>PRÉSENTATION DE L'ASSOCIATION</h2>
+            
+            <h3 class="subsection-title">Objet et mission</h3>
+            <p>L'ACPC a pour objet la <strong>promotion de la culture musicale et artistique sur le territoire de Crèvecœur-le-Grand et ses environs</strong>. Sa mission principale est l'organisation du <strong>Barb'n'Rock Festival</strong>, événement rock/metal qui rassemble plusieurs milliers de festivaliers chaque année dans l'Oise.</p>
+
+            <h3 class="subsection-title">Rôle structurant pour le territoire</h3>
+            <p>Au-delà du festival, l'ACPC s'est imposée comme un <strong>acteur de la vie culturelle locale</strong> :</p>
+            <ul>
+                <li><strong>Soutien à la commune de Crèvecœur-le-Grand</strong> : aide à l'organisation de concerts municipaux, appui logistique, prêt de matériel technique, mise à disposition de bénévoles</li>
+                <li><strong>Accompagnement du festival Jardizik</strong> : conseil, prêt de matériel, renfort bénévoles</li>
+                <li><strong>Soutien à la chorale locale</strong> : accompagnement technique et logistique</li>
+                <li><strong>Mutualisation</strong> : conseil aux associations, prêt de matériel, partage de compétences</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span class="number">3</span>BILAN D'ACTIVITÉ 2025</h2>
+
+            <h3 class="subsection-title">Barb'n'Rock Festival 2025 - 3ème édition</h3>
+            <div class="stats-row">
+                <div class="stat-mini">
+                    <div class="number">2 200</div>
+                    <div class="label">Festivaliers</div>
+                </div>
+                <div class="stat-mini">
+                    <div class="number">12</div>
+                    <div class="label">Groupes</div>
+                </div>
+                <div class="stat-mini">
+                    <div class="number">80+</div>
+                    <div class="label">Bénévoles</div>
+                </div>
+                <div class="stat-mini">
+                    <div class="number">25+</div>
+                    <div class="label">Partenaires</div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Évolution depuis la création</h3>
+            <div class="evolution-row">
+                <div class="evolution-item">
+                    <div class="year">2023</div>
+                    <div class="value">1 000</div>
+                    <div class="growth">Lancement</div>
+                </div>
+                <div class="evolution-arrow">→</div>
+                <div class="evolution-item">
+                    <div class="year">2024</div>
+                    <div class="value">1 400</div>
+                    <div class="growth">+40%</div>
+                </div>
+                <div class="evolution-arrow">→</div>
+                <div class="evolution-item current">
+                    <div class="year">2025</div>
+                    <div class="value">2 200</div>
+                    <div class="growth">+57%</div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Actions de soutien au territoire en 2025</h3>
+            <ul>
+                <li>3 événements municipaux soutenus</li>
+                <li>1 festival partenaire accompagné (Jardizik)</li>
+                <li>2 représentations de la chorale locale soutenues</li>
+                <li>Environ 150 heures de prêt de matériel valorisées</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page" style="page-break-before: always;">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo-text">
+                    <span class="barb">BARB'N'</span><span class="rock">ROCK</span>
+                </div>
+                <div class="asso-name">Association Crépicordienne pour la Promotion de la Culture</div>
+            </div>
+            <div class="header-right">
+                <div class="doc-type">DEMANDE FDVA 2026</div>
+                <div class="doc-ref">Page 2/4</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span class="number">4</span>PROJET 2026</h2>
+
+            <h3 class="subsection-title">Objectifs de l'association</h3>
+            <ol class="objectives-list">
+                <li><span class="num">1</span><strong>Animer la vie culturelle locale</strong> tout au long de l'année</li>
+                <li><span class="num">2</span><strong>Accompagner les acteurs locaux</strong> (commune, Jardizik, chorale)</li>
+                <li><span class="num">3</span><strong>Mutualiser les ressources</strong> du territoire (matériel, compétences, bénévoles)</li>
+                <li><span class="num">4</span><strong>Favoriser l'accès à la culture en milieu rural</strong> via des tarifs accessibles</li>
+            </ol>
+
+            <h3 class="subsection-title">Barb'n'Rock Festival 2026 - 4ème édition</h3>
+            <table>
+                <tr>
+                    <th style="width: 35%;">Élément</th>
+                    <th>Détail</th>
+                </tr>
+                <tr>
+                    <td><strong>Dates</strong></td>
+                    <td>26, 27 et 28 juin 2026</td>
+                </tr>
+                <tr>
+                    <td><strong>Lieu</strong></td>
+                    <td>Crèvecœur-le-Grand (60)</td>
+                </tr>
+                <tr>
+                    <td><strong>Concept</strong></td>
+                    <td>"2 jours de chaos, 1 jour de repos"</td>
+                </tr>
+                <tr>
+                    <td><strong>Objectif festivaliers</strong></td>
+                    <td>3 000</td>
+                </tr>
+                <tr>
+                    <td><strong>Groupes programmés</strong></td>
+                    <td>18</td>
+                </tr>
+                <tr>
+                    <td><strong>Bénévoles prévus</strong></td>
+                    <td>50+</td>
+                </tr>
+            </table>
+
+            <p><strong>Programmation confirmée</strong> : Shaârghot, Loudblast, Krav Boca, Cachemire, Psykup, Mainkind, Akiavel, Dirty Fonzy, Kami No Ikari, Barabbas, Black Hazard, Breakout + vainqueurs du tremplin</p>
+
+            <p><strong>Tarification accessible</strong> : Pass 3 jours 42€ / Dimanche familial 5€ / Moins de 12 ans GRATUIT / Parking et camping GRATUIT</p>
+
+            <h3 class="subsection-title">Calendrier des activités 2026</h3>
+            <table>
+                <tr>
+                    <th style="width: 30%;">Période</th>
+                    <th>Actions ACPC</th>
+                </tr>
+                <tr>
+                    <td>Janvier-Mars</td>
+                    <td>Préparation Barb'n'Rock, soutien événements commune</td>
+                </tr>
+                <tr>
+                    <td>Avril</td>
+                    <td>Tremplin Barb'n'Rock (4 avril)</td>
+                </tr>
+                <tr>
+                    <td>Mai</td>
+                    <td>Logistique festival, soutien Jardizik</td>
+                </tr>
+                <tr class="table-highlight">
+                    <td><strong>Juin</strong></td>
+                    <td><strong>BARB'N'ROCK FESTIVAL (26-28 juin)</strong></td>
+                </tr>
+                <tr>
+                    <td>Juillet-Décembre</td>
+                    <td>Bilan, soutien événements, accompagnement chorale</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span class="number">5</span>BUDGET PRÉVISIONNEL 2026</h2>
+            <p class="annexe-note">Voir budget détaillé en annexe.</p>
+            <div class="highlight-box warning">
+                <p><strong>Point d'attention</strong> : La fin du dispositif PMSE entraîne une hausse directe des coûts de location de matériel estimée à <strong>+1 000 €</strong> pour 2026.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="page" style="page-break-before: always;">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo-text">
+                    <span class="barb">BARB'N'</span><span class="rock">ROCK</span>
+                </div>
+                <div class="asso-name">Association Crépicordienne pour la Promotion de la Culture</div>
+            </div>
+            <div class="header-right">
+                <div class="doc-type">DEMANDE FDVA 2026</div>
+                <div class="doc-ref">Page 3/4</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span class="number">6</span>VALORISATION "COMPTABLE" DU BÉNÉVOLAT</h2>
+
+            <table>
+                <tr>
+                    <th>Activité</th>
+                    <th style="text-align: center;">Bénévoles</th>
+                    <th style="text-align: center;">Heures</th>
+                    <th style="text-align: center;">Total</th>
+                </tr>
+                <tr>
+                    <td>Barb'n'Rock Festival</td>
+                    <td style="text-align: center;">50</td>
+                    <td style="text-align: center;">20h</td>
+                    <td style="text-align: center;">1 000 h</td>
+                </tr>
+                <tr>
+                    <td>Préparation festival</td>
+                    <td style="text-align: center;">10</td>
+                    <td style="text-align: center;">50h</td>
+                    <td style="text-align: center;">500 h</td>
+                </tr>
+                <tr>
+                    <td>Soutien événements commune</td>
+                    <td style="text-align: center;">5</td>
+                    <td style="text-align: center;">15h</td>
+                    <td style="text-align: center;">75 h</td>
+                </tr>
+                <tr>
+                    <td>Soutien Jardizik</td>
+                    <td style="text-align: center;">3</td>
+                    <td style="text-align: center;">15h</td>
+                    <td style="text-align: center;">45 h</td>
+                </tr>
+                <tr>
+                    <td>Soutien chorale</td>
+                    <td style="text-align: center;">3</td>
+                    <td style="text-align: center;">10h</td>
+                    <td style="text-align: center;">30 h</td>
+                </tr>
+                <tr>
+                    <td>Tremplin (avril)</td>
+                    <td style="text-align: center;">15</td>
+                    <td style="text-align: center;">8h</td>
+                    <td style="text-align: center;">120 h</td>
+                </tr>
+                <tr class="table-total">
+                    <td><strong>TOTAL</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: center;"><strong>1 770 h</strong></td>
+                </tr>
+            </table>
+
+            <div class="highlight-box">
+                <p><strong>Valorisation</strong> : 1 770 h × 11,88 € (SMIC horaire) = <strong>21 028 €</strong></p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span class="number">7</span>INDICATEURS D'ÉVALUATION</h2>
+
+            <table>
+                <tr>
+                    <th>Catégorie</th>
+                    <th>Indicateur</th>
+                    <th style="text-align: center;">Objectif 2026</th>
+                </tr>
+                <tr>
+                    <td rowspan="2"><strong>Activité</strong></td>
+                    <td>Festivaliers Barb'n'Rock</td>
+                    <td style="text-align: center;">3 000</td>
+                </tr>
+                <tr>
+                    <td>Événements soutenus</td>
+                    <td style="text-align: center;">6 minimum</td>
+                </tr>
+                <tr>
+                    <td rowspan="2"><strong>Mutualisation</strong></td>
+                    <td>Associations accompagnées</td>
+                    <td style="text-align: center;">3</td>
+                </tr>
+                <tr>
+                    <td>Prêts de matériel</td>
+                    <td style="text-align: center;">10 minimum</td>
+                </tr>
+                <tr>
+                    <td rowspan="2"><strong>Bénévolat</strong></td>
+                    <td>Bénévoles actifs</td>
+                    <td style="text-align: center;">50+</td>
+                </tr>
+                <tr>
+                    <td>Heures valorisées</td>
+                    <td style="text-align: center;">1 770 h</td>
+                </tr>
+                <tr>
+                    <td rowspan="2"><strong>Impact local</strong></td>
+                    <td>Retombées économiques</td>
+                    <td style="text-align: center;">150 000 €</td>
+                </tr>
+                <tr>
+                    <td>Partenaires locaux</td>
+                    <td style="text-align: center;">30+</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- PAGE 4 -->
+    <div class="page" style="page-break-before: always;">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo-text">
+                    <span class="barb">BARB'N'</span><span class="rock">ROCK</span>
+                </div>
+                <div class="asso-name">Association Crépicordienne pour la Promotion de la Culture</div>
+            </div>
+            <div class="header-right">
+                <div class="doc-type">DEMANDE FDVA 2026</div>
+                <div class="doc-ref">Page 4/4</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span class="number">8</span>OBJET DE LA DEMANDE FDVA</h2>
+
+            <div class="budget-summary">
+                <div class="label">Montant sollicité</div>
+                <div class="amount">5 000 €</div>
+                <div class="label">Affectation exclusive au fonctionnement de l'association</div>
+            </div>
+
+            <p style="font-style: italic; color: var(--text-muted); margin-bottom: 8px;">Exemples de dépenses de fonctionnement (budget annuel de l'association &gt; 100 000 €) :</p>
+
+            <table>
+                <tr>
+                    <th>Poste</th>
+                    <th style="text-align: right;">Montant</th>
+                </tr>
+                <tr>
+                    <td>Assurances annuelles (RC, événementiel)</td>
+                    <td style="text-align: right;">1 500 €</td>
+                </tr>
+                <tr>
+                    <td>Frais liés aux bénévoles (repas, déplacements, équipements)</td>
+                    <td style="text-align: right;">1 200 €</td>
+                </tr>
+                <tr>
+                    <td>Audits et diagnostics sécurité</td>
+                    <td style="text-align: right;">800 €</td>
+                </tr>
+                <tr>
+                    <td>Communication / Relations presse</td>
+                    <td style="text-align: right;">1 000 €</td>
+                </tr>
+                <tr>
+                    <td>Frais administratifs (comptabilité, fournitures)</td>
+                    <td style="text-align: right;">500 €</td>
+                </tr>
+                <tr class="table-total">
+                    <td><strong>TOTAL</strong></td>
+                    <td style="text-align: right;"><strong>5 000 €</strong></td>
+                </tr>
+            </table>
+
+            <h3 class="subsection-title">Justification - Critères FDVA Axe 1</h3>
+            <div class="criteria-grid">
+                <div class="criteria-item">
+                    <h4>✓ Dynamisme en territoire rural</h4>
+                    <p>Crèvecœur-le-Grand est une commune rurale de l'Oise. Seul événement rock/metal d'envergure sur ce territoire.</p>
+                </div>
+                <div class="criteria-item">
+                    <h4>✓ Mobilisation de bénévoles</h4>
+                    <p>50+ bénévoles actifs sur l'année. Équipe fidèle impliquée sur plusieurs événements.</p>
+                </div>
+                <div class="criteria-item">
+                    <h4>✓ Accompagnement acteurs locaux</h4>
+                    <p>Soutien à 3 structures partenaires (commune, Jardizik, chorale). Mutualisation des ressources.</p>
+                </div>
+                <div class="criteria-item">
+                    <h4>✓ Accessibilité et mixité sociale</h4>
+                    <p>Tarifs accessibles, journée familiale à 5€, gratuit pour les moins de 12 ans.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span class="number">9</span>ENGAGEMENT</h2>
+            <p>L'ACPC s'engage à :</p>
+            <ul>
+                <li>Utiliser la subvention conformément à l'objet demandé</li>
+                <li>Transmettre un compte-rendu financier après réalisation</li>
+                <li>Mentionner le soutien du FDVA dans ses communications</li>
+                <li>Respecter le Contrat d'Engagement Républicain</li>
+            </ul>
+        </div>
+
+        <div class="signature-section">
+            <div class="signature-grid">
+                <div class="signature-box">
+                    <div class="role">Fait à Crèvecœur-le-Grand</div>
+                    <div class="name">Le _______________</div>
+                    <div class="signature-line">Date</div>
+                </div>
+                <div class="signature-box">
+                    <div class="role">Le Président</div>
+                    <div class="name">Benjamin Lampérier</div>
+                    <div class="signature-line">Signature</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -29,7 +29,6 @@ const nextConfig: NextConfig = {
       { source: '/village-barbus', destination: '/village', permanent: true },
       
       // Pages supprimées → Accueil
-      { source: '/tremplin', destination: '/', permanent: true },
       { source: '/landing-2026', destination: '/', permanent: true },
       { source: '/a-propos', destination: '/', permanent: true },
       

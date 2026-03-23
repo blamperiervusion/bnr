@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface AnnouncementBannerProps {
@@ -31,15 +30,8 @@ export default function AnnouncementBanner({ onClose }: AnnouncementBannerProps)
             <p className="text-xs sm:text-sm font-medium">
               <span className="font-bold">TREMPLIN BARB&apos;N&apos;ROCK 2026</span>
               <span className="mx-2 opacity-60">|</span>
-              <span className="hidden sm:inline">4 avril 2026 — </span>
-              <span>Inscriptions ouvertes !</span>
+              <span>Rendez-vous le 4 avril !</span>
             </p>
-            <Link
-              href="/tremplin"
-              className="bg-white/20 hover:bg-white/30 px-3 py-1 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wide transition-colors whitespace-nowrap"
-            >
-              S&apos;inscrire →
-            </Link>
             <button
               onClick={handleClose}
               className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 p-1 hover:bg-white/20 rounded transition-colors"

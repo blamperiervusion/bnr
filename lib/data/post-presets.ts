@@ -9,6 +9,8 @@ export interface PostPreset {
   descText: string;
   bg: string;
   caption: string;
+  footerDate?: string;
+  footerButton?: string;
 }
 
 export interface PresetCategory {
@@ -420,6 +422,183 @@ EN ÉCHANGE :
 Inscris-toi sur barbnrock-festival.fr/benevoles
 
 → Lien en bio`,
+      },
+    ],
+  },
+  {
+    id: 'tremplin',
+    title: 'Tremplin 2026',
+    icon: '🎸',
+    posts: [
+      {
+        id: 'tremplin-lancement',
+        title: 'Lancement Tremplin',
+        badge: '🎸 TREMPLIN 2026',
+        badgeClass: 'cyan',
+        mainText: 'TREMPLIN<br><span class="accent">OUVERT</span>',
+        subText: 'Inscriptions jusqu\'au 15 mars',
+        descText: 'Ta première scène t\'attend',
+        bg: '/images/hero-visual.jpg',
+        footerDate: '4 AVRIL 2026',
+        footerButton: 'INSCRIS-TOI',
+        caption: `🎸 TREMPLIN BARB'N'ROCK 2026 🎸
+
+Ton groupe débute ? Tu cherches ta première scène ?
+On est là pour te lancer ! 🚀
+
+📅 4 AVRIL 2026
+Soirée tremplin à Crèvecœur-le-Grand
+
+🏆 À GAGNER :
+• 1er prix : Concert au festival + couverture médiatique
+• 2ème & 3ème prix : Entrées festival + merch
+
+✅ CATÉGORIES :
+• Samedi : Metal / Punk (compos)
+• Dimanche : Rock / Reprises
+
+📍 Priorité aux groupes de l'Oise et environs
+
+⏰ Inscriptions ouvertes jusqu'au 15 mars
+
+→ barbnrock-festival.fr/tremplin`,
+      },
+      {
+        id: 'tremplin-rappel',
+        title: 'Rappel Tremplin',
+        badge: '⏰ RAPPEL',
+        mainText: 'TREMPLIN<br><span class="accent">J-30</span>',
+        subText: 'Plus que quelques jours pour s\'inscrire',
+        descText: 'Ta première scène t\'attend',
+        bg: '/images/hero-visual.jpg',
+        footerDate: '4 AVRIL 2026',
+        footerButton: 'INSCRIS-TOI',
+        caption: `⏰ RAPPEL TREMPLIN ⏰
+
+Tu repousses depuis des semaines ?
+C'est maintenant ou jamais !
+
+TREMPLIN BARB'N'ROCK 2026
+📅 4 avril • Crèvecœur-le-Grand
+
+🎯 On cherche des groupes amateurs qui débutent
+🎯 Priorité aux groupes de l'Oise
+
+⏰ Inscriptions jusqu'au 15 mars
+🏆 1er prix : Concert au festival !
+
+C'est ton moment.
+
+→ barbnrock-festival.fr/tremplin`,
+      },
+      {
+        id: 'tremplin-dernieres-heures',
+        title: 'Dernières heures',
+        badge: '🚨 DERNIER JOUR',
+        mainText: 'TREMPLIN<br><span class="accent-orange">DEADLINE</span>',
+        subText: 'Inscriptions fermées ce soir minuit',
+        descText: 'Dernière chance !',
+        bg: '/images/hero-visual.jpg',
+        footerDate: '4 AVRIL 2026',
+        footerButton: 'INSCRIS-TOI',
+        caption: `🚨 DERNIER JOUR 🚨
+
+Les inscriptions au tremplin ferment CE SOIR MINUIT !
+
+Tu hésites encore ?
+Rappelle-toi pourquoi t'as monté ton groupe.
+Pour jouer. Sur scène. Devant du monde.
+
+Ça commence ici.
+
+TREMPLIN BARB'N'ROCK 2026
+📅 4 avril • Crèvecœur-le-Grand
+🏆 1er prix : Concert au festival !
+
+Dernières heures pour t'inscrire.
+
+→ barbnrock-festival.fr/tremplin`,
+      },
+      {
+        id: 'tremplin-rdv-4-avril',
+        title: 'RDV 4 avril - Concerts',
+        badge: '📍 RDV LE 4 AVRIL',
+        badgeClass: 'gold',
+        mainText: 'JOURNÉE<br><span class="accent">TREMPLIN</span>',
+        subText: '14h • Parking Leclerc',
+        descText: 'Annonce des groupes très bientôt !',
+        bg: '/images/hero-visual.jpg',
+        footerDate: '4 AVRIL 2026',
+        footerButton: 'ENTRÉE GRATUITE',
+        caption: `🎸 JOURNÉE TREMPLIN BARB'N'ROCK 2026
+
+📅 4 avril 2026
+⏰ 14h00
+📍 Parking du Leclerc - Crèvecœur-le-Grand
+
+L'annonce des groupes présélectionnés arrive très bientôt ! 🔥
+
+Entrée gratuite pour le public 🤘
+Venez nombreux soutenir la scène locale !
+
+→ barbnrock-festival.fr/tremplin`,
+      },
+      {
+        id: 'tremplin-preselection',
+        title: 'Annonce présélectionnés',
+        badge: '📣 ANNONCE',
+        badgeClass: 'gold',
+        mainText: '6 GROUPES<br><span class="accent">PRÉSÉLECTIONNÉS</span>',
+        subText: 'RDV le 4 avril pour la finale',
+        descText: 'Merci à tous les candidats !',
+        bg: '/images/hero-visual.jpg',
+        footerDate: '4 AVRIL 2026',
+        footerButton: 'ENTRÉE GRATUITE',
+        caption: `📣 PRÉSÉLECTION TREMPLIN 2026 📣
+
+Et les 6 groupes présélectionnés sont...
+
+🔥 SAMEDI - Metal/Punk :
+• [Groupe 1]
+• [Groupe 2]
+• [Groupe 3]
+
+🎸 DIMANCHE - Rock/Reprises :
+• [Groupe 4]
+• [Groupe 5]
+• [Groupe 6]
+
+Merci à tous les groupes qui ont candidaté ! 🙏
+La qualité des candidatures était incroyable.
+
+📅 RDV le 4 avril pour la finale !
+
+Entrée gratuite pour le public 🤘`,
+      },
+      {
+        id: 'tremplin-soiree',
+        title: 'Soirée Tremplin',
+        badge: '🔥 CE SOIR',
+        mainText: 'TREMPLIN<br><span class="accent">CE SOIR</span>',
+        subText: 'Entrée gratuite • 19h',
+        descText: '6 groupes • 1 gagnant • Le festival 🎯',
+        bg: '/images/hero-visual.jpg',
+        footerDate: '4 AVRIL 2026',
+        footerButton: 'ENTRÉE GRATUITE',
+        caption: `🔥 C'EST CE SOIR 🔥
+
+SOIRÉE TREMPLIN BARB'N'ROCK 2026
+
+📍 Crèvecœur-le-Grand
+🕖 19h00
+🎟️ ENTRÉE GRATUITE
+
+6 groupes amateurs s'affrontent pour une place au festival !
+
+🎸 Metal/Punk + Rock/Reprises
+🏆 Le gagnant jouera au Barb'n'Rock 2026
+
+Viens soutenir la scène locale ! 🤘`,
       },
     ],
   },

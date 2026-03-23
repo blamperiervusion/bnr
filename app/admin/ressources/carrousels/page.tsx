@@ -346,7 +346,7 @@ export default function CarrouselsPage() {
                 <h1
                   style={{
                     fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: '64px',
+                    fontSize: `${selectedArtist.nameSize || 64}px`,
                     color: '#f0f0f0',
                     letterSpacing: '6px',
                     textShadow: '0 0 40px rgba(0, 229, 204, 0.5)',

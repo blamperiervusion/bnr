@@ -20,6 +20,7 @@ export interface CarrouselArtistData {
   tip: string;
   reasons: string[];
   quote: string;
+  nameSize?: number; // Taille custom pour les noms longs (défaut: 64)
 }
 
 export const carrouselArtistsData: CarrouselArtistData[] = [
@@ -59,8 +60,8 @@ export const carrouselArtistsData: CarrouselArtistData[] = [
     city: 'Nantes',
     genre: "Rock'n'roll français",
     since: 'Depuis 10 ans',
-    albums: ['"Que dalle" (2024)', '"Les vivants"', '"Cachemire" (EP)'],
-    ytLink: '🎥 YouTube : "Cachemire - Que dalle"',
+    albums: ['"Suffit juste d\'une seconde" (2025)', '"Dernier essai" (2022)', '"Qui est la punk ?" (2018)'],
+    ytLink: '🎥 YouTube : "CACHEMIRE / RESET / Live Hellfest 25"',
     tip: 'Le rock français a trouvé sa relève.',
     reasons: [
       'Énergie punk + mélodies rock',
@@ -92,6 +93,7 @@ export const carrouselArtistsData: CarrouselArtistData[] = [
       'Nouveauté qui déchire',
     ],
     quote: '"Kami No Ikari, ça arrache."',
+    nameSize: 48,
   },
   {
     id: 'barabbas',

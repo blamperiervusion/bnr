@@ -345,7 +345,7 @@ export default function PostGeneratorPage() {
                       letterSpacing: 1,
                     }}
                   >
-                    <span data-export-offset="6">26 • 27 • 28 JUIN 2026</span>
+                    <span data-export-offset="6">{selectedPreset.footerDate || '26 • 27 • 28 JUIN 2026'}</span>
                   </div>
                   <div
                     style={{
@@ -367,7 +367,7 @@ export default function PostGeneratorPage() {
                     letterSpacing: 2 * fontScale,
                   }}
                 >
-                  <span data-export-offset="8">BILLETS DISPO</span>
+                  <span data-export-offset="8">{selectedPreset.footerButton || 'BILLETS DISPO'}</span>
                 </div>
               </div>
             </div>

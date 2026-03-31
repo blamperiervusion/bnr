@@ -1,0 +1,253 @@
+<mjml>
+  <mj-head>
+    <mj-title>Journée Tremplin + Préventes Festival - Barb'n'Rock 2026</mj-title>
+    <mj-preview>RDV le 4 avril pour la journée tremplin ! Et les préventes du festival sont ouvertes 🎸</mj-preview>
+    <mj-font name="Montserrat" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" />
+    <mj-attributes>
+      <mj-all font-family="Montserrat, Arial, sans-serif" />
+      <mj-text font-size="16px" color="#e8e8e8" line-height="1.7" />
+      <mj-button background-color="#E85D04" color="white" font-size="16px" font-weight="700" border-radius="50px" inner-padding="16px 45px" text-transform="uppercase" letter-spacing="1px" />
+      <mj-class name="card" background-color="#141419" border-radius="12px" />
+    </mj-attributes>
+    <mj-style>
+      .gradient-text { background: linear-gradient(135deg, #00E5CC 0%, #00B3A0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      .glow { text-shadow: 0 0 20px rgba(0, 229, 204, 0.5); }
+      .price-badge { background: linear-gradient(135deg, #E85D04 0%, #FF7A29 100%); border-radius: 16px; padding: 25px; display: inline-block; }
+    </mj-style>
+  </mj-head>
+
+  <mj-body background-color="#08090c">
+    <!-- Header avec accent line -->
+    <mj-section background-color="#0d0e12" padding="0">
+      <mj-column>
+        <mj-spacer height="4px" css-class="accent-line" container-background-color="#00E5CC" />
+      </mj-column>
+    </mj-section>
+    
+    <mj-section background-color="#0d0e12" padding="35px 20px">
+      <mj-column>
+        <mj-image src="https://barbnrock-festival.fr/images/logo.png" alt="Barb'n'Rock" width="100px" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Alert Banner - Design amélioré -->
+    <mj-section background-color="#00E5CC" padding="18px 20px" border-radius="0">
+      <mj-column>
+        <mj-text align="center" font-size="13px" font-weight="700" color="#08090c" letter-spacing="3px" text-transform="uppercase">
+          ⚡ Journée Tremplin — 4 avril ⚡
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Message intro avec style -->
+    <mj-section background-color="#08090c" padding="50px 30px 30px">
+      <mj-column>
+        <mj-text font-size="22px" font-weight="600" color="white">
+          Salut 🤘
+        </mj-text>
+        <mj-text padding-top="15px" font-size="17px" color="#a0a0a0">
+          Deux événements à ne pas manquer !
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- CARD 1 : TREMPLIN -->
+    <mj-section background-color="#08090c" padding="10px 20px 0">
+      <mj-column background-color="#141419" border-radius="16px 16px 0 0" padding="5px">
+        <!-- Badge top -->
+        <mj-text align="center" font-size="11px" color="#00E5CC" letter-spacing="3px" text-transform="uppercase" padding="25px 20px 10px">
+          ● Événement à venir
+        </mj-text>
+        
+        <!-- Titre principal -->
+        <mj-text align="center" font-size="36px" font-weight="900" color="white" line-height="1.1" padding="10px 20px 5px" text-transform="uppercase">
+          Journée<br/>Tremplin
+        </mj-text>
+        
+        <!-- Date stylisée -->
+        <mj-text align="center" padding="15px 20px 20px">
+          <span style="background: linear-gradient(135deg, #00E5CC 0%, #00B3A0 100%); color: #08090c; padding: 8px 20px; border-radius: 25px; font-size: 14px; font-weight: 700; letter-spacing: 1px;">4 AVRIL 2026</span>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Image d'illustration -->
+    <mj-section background-color="#08090c" padding="0 20px">
+      <mj-column background-color="#141419" padding="0">
+        <mj-image src="https://barbnrock-festival.fr/images/tremplin-2026.jpg" alt="Tremplin Barb'n'Rock 2026" fluid-on-mobile="true" padding="0 20px" border-radius="8px" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Infos pratiques -->
+    <mj-section background-color="#08090c" padding="0 20px">
+      <mj-column background-color="#141419" padding="25px 20px">
+        <mj-text align="center" font-size="28px" font-weight="700" color="#E85D04" padding="0 20px 5px">
+          14h00
+        </mj-text>
+        <mj-text align="center" font-size="15px" color="white" padding="5px 20px 0">
+          Parking du Leclerc
+        </mj-text>
+        <mj-text align="center" font-size="13px" color="#666" padding="3px 20px 0">
+          Crèvecœur-le-Grand
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Les 6 groupes sélectionnés -->
+    <mj-section background-color="#08090c" padding="0 20px">
+      <mj-column background-color="#141419" padding="0 20px">
+        <mj-divider border-color="#252530" border-width="1px" padding="15px 20px" />
+        
+        <mj-text align="center" font-size="11px" color="#E85D04" letter-spacing="2px" text-transform="uppercase" padding="15px 20px 10px">
+          🎸 6 Groupes en compétition
+        </mj-text>
+        
+        <mj-text align="center" font-size="15px" color="white" line-height="2.2" padding="5px 20px 20px">
+          <span style="background-color: #1e1e28; padding: 6px 14px; border-radius: 20px; margin: 3px; display: inline-block;">Late Blossom</span>
+          <span style="background-color: #1e1e28; padding: 6px 14px; border-radius: 20px; margin: 3px; display: inline-block;">Sadraen</span>
+          <span style="background-color: #1e1e28; padding: 6px 14px; border-radius: 20px; margin: 3px; display: inline-block;">MRWL</span><br/>
+          <span style="background-color: #1e1e28; padding: 6px 14px; border-radius: 20px; margin: 3px; display: inline-block;">Antenox</span>
+          <span style="background-color: #1e1e28; padding: 6px 14px; border-radius: 20px; margin: 3px; display: inline-block;">Adore</span>
+          <span style="background-color: #1e1e28; padding: 6px 14px; border-radius: 20px; margin: 3px; display: inline-block;">Rocklines</span>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Description + CTA -->
+    <mj-section background-color="#08090c" padding="0 20px">
+      <mj-column background-color="#141419" border-radius="0 0 16px 16px" padding="0 20px 30px">
+        <mj-divider border-color="#252530" border-width="1px" padding="5px 20px 20px" />
+        
+        <mj-text align="center" font-size="15px" color="#a0a0a0" padding="0 10px 15px" line-height="1.6">
+          Viens soutenir la scène locale et voter pour ton groupe préféré !
+        </mj-text>
+        
+        <!-- Badge gratuit -->
+        <mj-text align="center" padding="15px 20px 5px">
+          <span style="border: 2px solid #00E5CC; color: #00E5CC; padding: 10px 25px; border-radius: 25px; font-size: 12px; font-weight: 700; letter-spacing: 2px;">🎟️ ENTRÉE GRATUITE</span>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Spacer design -->
+    <mj-section background-color="#08090c" padding="25px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="24px" color="#252530">
+          • • •
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- CARD 2 : PRÉVENTES -->
+    <mj-section background-color="#08090c" padding="10px 20px 0">
+      <mj-column background-color="#141419" border-radius="16px 16px 0 0" padding="5px">
+        <!-- Badge top -->
+        <mj-text align="center" font-size="11px" color="#E85D04" letter-spacing="3px" text-transform="uppercase" padding="25px 20px 10px">
+          🔥 Rappel
+        </mj-text>
+        
+        <!-- Titre -->
+        <mj-text align="center" font-size="32px" font-weight="900" color="white" line-height="1.15" padding="10px 20px 20px" text-transform="uppercase">
+          Les préventes<br/>sont ouvertes !
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Affiche du festival -->
+    <mj-section background-color="#08090c" padding="0 20px">
+      <mj-column background-color="#141419" padding="0 25px 20px">
+        <mj-image src="https://barbnrock-festival.fr/images/affiche-2026.jpg" alt="Affiche Barb'n'Rock 2026" fluid-on-mobile="true" border-radius="12px" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Prix principal -->
+    <mj-section background-color="#08090c" padding="0 20px">
+      <mj-column background-color="#141419" border-radius="0" padding="0 20px">
+        <mj-text align="center" padding="10px 20px">
+          <span style="background: linear-gradient(135deg, #E85D04 0%, #FF7A29 100%); color: white; padding: 20px 35px; border-radius: 16px; display: inline-block;">
+            <span style="font-size: 48px; font-weight: 900;">36€</span><br/>
+            <span style="font-size: 12px; letter-spacing: 2px; opacity: 0.9;">PASS 3 JOURS</span>
+          </span>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Prix par jour -->
+    <mj-section background-color="#08090c" padding="20px 20px 0">
+      <mj-column background-color="#1a1a22" border-radius="12px" padding="20px 10px" width="30%">
+        <mj-text align="center" padding="0">
+          <span style="font-size: 26px; font-weight: 700; color: white;">13€</span><br/>
+          <span style="font-size: 10px; color: #666; letter-spacing: 1px;">VENDREDI</span>
+        </mj-text>
+      </mj-column>
+      <mj-column background-color="#1a1a22" border-radius="12px" padding="20px 10px" width="30%">
+        <mj-text align="center" padding="0">
+          <span style="font-size: 26px; font-weight: 700; color: white;">22€</span><br/>
+          <span style="font-size: 10px; color: #666; letter-spacing: 1px;">SAMEDI</span>
+        </mj-text>
+      </mj-column>
+      <mj-column background-color="#1a1a22" border-radius="12px" padding="20px 10px" width="30%">
+        <mj-text align="center" padding="0">
+          <span style="font-size: 26px; font-weight: 700; color: #00E5CC;">5€</span><br/>
+          <span style="font-size: 10px; color: #666; letter-spacing: 1px;">DIMANCHE</span>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Camping -->
+    <mj-section background-color="#08090c" padding="25px 20px">
+      <mj-column>
+        <mj-text align="center">
+          <span style="background-color: rgba(0, 229, 204, 0.15); color: #00E5CC; padding: 12px 25px; border-radius: 25px; font-size: 13px; font-weight: 600;">🏕️ Camping GRATUIT inclus</span>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Dates & Lieu Festival -->
+    <mj-section background-color="#08090c" padding="10px 20px 20px">
+      <mj-column>
+        <mj-text align="center" font-size="22px" font-weight="700" color="white" letter-spacing="2px">
+          26 · 27 · 28 JUIN 2026
+        </mj-text>
+        <mj-text align="center" font-size="13px" color="#666" padding-top="8px">
+          Crèvecœur-le-Grand (60) — 1h de Paris
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- CTA Final -->
+    <mj-section background-color="#141419" padding="45px 20px" border-radius="16px 16px 0 0">
+      <mj-column>
+        <mj-text align="center" font-size="18px" font-weight="600" color="white" padding-bottom="25px">
+          Réserve ta place maintenant 🤘
+        </mj-text>
+        <mj-button href="https://www.helloasso.com/associations/acpc/evenements/barb-n-rock-festival-2026">
+          Prendre mon billet
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section background-color="#0d0e12" padding="40px 20px 30px">
+      <mj-column>
+        <mj-text align="center" font-size="14px" color="#555">
+          On compte sur toi le 4 avril et en juin ! 🤘
+        </mj-text>
+        
+        <!-- Social links -->
+        <mj-text align="center" font-size="13px" color="#444" padding-top="25px">
+          <a href="https://instagram.com/barbnrock" style="color: #666; text-decoration: none; padding: 0 8px;">Instagram</a> · 
+          <a href="https://facebook.com/barbnrockfestival" style="color: #666; text-decoration: none; padding: 0 8px;">Facebook</a> ·
+          <a href="https://barbnrock-festival.fr" style="color: #666; text-decoration: none; padding: 0 8px;">Site web</a>
+        </mj-text>
+        
+        <!-- Unsub -->
+        <mj-divider border-color="#1a1a22" border-width="1px" padding="25px 60px 20px" />
+        <mj-text align="center" font-size="11px" color="#3a3a3a" line-height="1.6">
+          Tu reçois cet email car tu es inscrit à notre newsletter.<br/>
+          <a href="{{unsubscribe_url}}" style="color: #555; text-decoration: underline;">Se désabonner</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

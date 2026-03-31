@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pub Facebook - Affiche Complète - Barb'n'Rock 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap');
+
+        :root {
+            --bg-dark: #0a0c0f;
+            --text-light: #f0f0f0;
+            --text-muted: #8b9299;
+            --accent-cyan: #00E5CC;
+            --accent-orange: #E85D04;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #111;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--accent-orange);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #333;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .format-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .format-btn {
+            padding: 8px 16px;
+            background: #222;
+            border: 2px solid #444;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .format-btn.active {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 229, 204, 0.1);
+        }
+
+        /* ==================== VIDEO CANVAS ==================== */
+        .video-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Format 1:1 par défaut */
+        .video-container.square {
+            width: 600px;
+            height: 600px;
+        }
+
+        /* Format 9:16 Story */
+        .video-container.story {
+            width: 405px;
+            height: 720px;
+        }
+
+        /* Format 16:9 */
+        .video-container.landscape {
+            width: 800px;
+            height: 450px;
+        }
+
+        .video-content {
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background image */
+        .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/images/hero-visual.jpg') center/cover;
+            opacity: 0.4;
+        }
+
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                rgba(10, 12, 15, 0.3) 0%, 
+                rgba(10, 12, 15, 0.7) 40%,
+                rgba(10, 12, 15, 0.95) 100%);
+        }
+
+        /* Content */
+        .content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .logo {
+            width: 60px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .badge {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            padding: 8px 16px;
+            background: var(--accent-orange);
+            color: white;
+            transform: rotate(-2deg);
+            opacity: 0;
+            animation: slideIn 0.5s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        /* Title */
+        .title-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .main-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            color: var(--text-light);
+            letter-spacing: 6px;
+            text-shadow: 0 0 40px rgba(0, 229, 204, 0.4);
+            opacity: 0;
+            animation: fadeIn 0.6s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        .main-title .accent {
+            color: var(--accent-cyan);
+        }
+
+        .subtitle {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            color: var(--accent-orange);
+            letter-spacing: 3px;
+            margin-top: 5px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            animation-delay: 0.7s;
+        }
+
+        /* Lineup */
+        .lineup-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .day-block {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .day-block.animate {
+            animation: slideUp 0.5s ease forwards;
+        }
+
+        .day-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            padding: 4px 10px;
+            display: inline-block;
+        }
+
+        .day-label.vendredi {
+            color: var(--accent-orange);
+            border-left: 3px solid var(--accent-orange);
+        }
+
+        .day-label.samedi {
+            color: var(--accent-cyan);
+            border-left: 3px solid var(--accent-cyan);
+        }
+
+        .day-label.dimanche {
+            color: #a78bfa;
+            border-left: 3px solid #a78bfa;
+        }
+
+        .bands {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        .bands .headliner {
+            color: var(--accent-cyan);
+            font-size: 24px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            animation-delay: 3s;
+        }
+
+        .date-info {
+            text-align: left;
+        }
+
+        .date {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            color: var(--text-light);
+            letter-spacing: 2px;
+        }
+
+        .location {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .cta {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 16px;
+            letter-spacing: 2px;
+            padding: 12px 24px;
+            background: var(--accent-orange);
+            color: white;
+            border-radius: 30px;
+            animation: pulse 2s ease-in-out infinite;
+            animation-delay: 3.5s;
+        }
+
+        .price {
+            text-align: center;
+        }
+
+        .price-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            color: var(--accent-orange);
+        }
+
+        .price-label {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px) rotate(-2deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(-2deg);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Caption zone */
+        .caption-zone {
+            max-width: 600px;
+            margin-top: 30px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .caption-zone h3 {
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .caption-text {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .copy-btn {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: var(--accent-cyan);
+            color: black;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="controls">
+        <div class="format-selector">
+            <button class="format-btn active" onclick="setFormat('square')">1:1 Feed</button>
+            <button class="format-btn" onclick="setFormat('story')">9:16 Story</button>
+            <button class="format-btn" onclick="setFormat('landscape')">16:9</button>
+        </div>
+        <button class="btn btn-primary" onclick="playAnimation()">Rejouer l'animation</button>
+        <button class="btn btn-secondary" onclick="resetAnimation()">Reset</button>
+    </div>
+
+    <div class="video-container square" id="videoContainer">
+        <div class="video-content">
+            <div class="bg-image"></div>
+            <div class="bg-overlay"></div>
+            
+            <div class="content">
+                <!-- Header -->
+                <div class="header">
+                    <div class="badge">L'AFFICHE 2026</div>
+                    <img src="/images/logo.png" alt="Logo" class="logo">
+                </div>
+
+                <!-- Title -->
+                <div class="title-section">
+                    <h1 class="main-title">BARB'N'<span class="accent">ROCK</span></h1>
+                    <p class="subtitle">18 GROUPES • 3 JOURS</p>
+                </div>
+
+                <!-- Lineup -->
+                <div class="lineup-section">
+                    <div class="day-block" id="vendredi">
+                        <div class="day-label vendredi">VENDREDI 26 JUIN</div>
+                        <div class="bands">
+                            <span class="headliner">PSYKUP</span> • CACHEMIRE • KAMI NO IKARI<br>
+                            BARABBAS • BLACK HAZARD
+                        </div>
+                    </div>
+
+                    <div class="day-block" id="samedi">
+                        <div class="day-label samedi">SAMEDI 27 JUIN</div>
+                        <div class="bands">
+                            <span class="headliner">SHAÂRGHOT</span> • <span class="headliner">LOUDBLAST</span><br>
+                            AKIAVEL • KRAV BOCA • DIRTY FONZY • BREAKOUT • OGARYA
+                        </div>
+                    </div>
+
+                    <div class="day-block" id="dimanche">
+                        <div class="day-label dimanche">DIMANCHE 28 JUIN</div>
+                        <div class="bands">
+                            <span class="headliner">MAINKIND</span> • SAINT ROCK STATION • HOWLITE<br>
+                            UDAP • DEVON DUXE + TREMPLIN
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="footer">
+                    <div class="date-info">
+                        <div class="date">26 • 27 • 28 JUIN 2026</div>
+                        <div class="location">Crèvecœur-le-Grand (60)</div>
+                    </div>
+                    <div class="price">
+                        <div class="price-value">36€</div>
+                        <div class="price-label">PASS 3 JOURS</div>
+                    </div>
+                    <div class="cta">BILLETS DISPO</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Caption pour Facebook -->
+    <div class="caption-zone">
+        <h3>Texte pour la pub Facebook</h3>
+        <div class="caption-text" id="caption">L'AFFICHE 2026 EST LÀ 🔥
+
+18 groupes. 3 jours. 1 festival de dingue.
+
+🗓️ VENDREDI 26 JUIN
+PSYKUP • Cachemire • Kami No Ikari • Barabbas • Black Hazard
+
+🗓️ SAMEDI 27 JUIN
+SHAÂRGHOT • LOUDBLAST • Akiavel • Krav Boca • Dirty Fonzy • Breakout • Ogarya
+
+🗓️ DIMANCHE 28 JUIN
+Mainkind • Saint Rock Station • Howlite • Udap • Devon Duxe + Tremplin
+
+📍 Crèvecœur-le-Grand (60) • 1h de Paris
+🎫 Pass 3 jours : 36€ (camping GRATUIT inclus)
+🎫 Vendredi : 13€ | Samedi : 22€ | Dimanche : 5€
+
+Le meilleur rapport qualité/prix de l'été.
+On t'attend dans la fosse 🤘
+
+👉 Billets sur barbnrock-festival.fr</div>
+        <button class="copy-btn" onclick="copyCaption()">Copier le texte</button>
+    </div>
+
+    <script>
+        function setFormat(format) {
+            const container = document.getElementById('videoContainer');
+            container.className = 'video-container ' + format;
+            
+            document.querySelectorAll('.format-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function playAnimation() {
+            const days = ['vendredi', 'samedi', 'dimanche'];
+            
+            // Reset
+            days.forEach(day => {
+                document.getElementById(day).classList.remove('animate');
+            });
+
+            // Animate with delays
+            setTimeout(() => document.getElementById('vendredi').classList.add('animate'), 1000);
+            setTimeout(() => document.getElementById('samedi').classList.add('animate'), 1800);
+            setTimeout(() => document.getElementById('dimanche').classList.add('animate'), 2600);
+        }
+
+        function resetAnimation() {
+            const days = ['vendredi', 'samedi', 'dimanche'];
+            days.forEach(day => {
+                document.getElementById(day).classList.remove('animate');
+            });
+        }
+
+        function copyCaption() {
+            const caption = document.getElementById('caption').textContent;
+            navigator.clipboard.writeText(caption);
+            alert('Texte copié !');
+        }
+
+        // Auto-play on load
+        window.onload = function() {
+            setTimeout(playAnimation, 500);
+        };
+    </script>
+</body>
+
+</html>

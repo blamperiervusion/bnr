@@ -548,32 +548,31 @@ Venez nombreux soutenir la scène locale !
         title: 'Annonce présélectionnés',
         badge: '📣 ANNONCE',
         badgeClass: 'gold',
-        mainText: '6 GROUPES<br><span class="accent">PRÉSÉLECTIONNÉS</span>',
-        subText: 'RDV le 4 avril pour la finale',
-        descText: 'Merci à tous les candidats !',
+        mainText: '6 GROUPES<br><span class="accent">SÉLECTIONNÉS</span>',
+        subText: 'RDV le 4 avril !',
+        descText: 'Late Blossom • Sadraen • MRWL • Antenox • Adore • Rocklines',
         bg: '/images/hero-visual.jpg',
         footerDate: '4 AVRIL 2026',
         footerButton: 'ENTRÉE GRATUITE',
-        caption: `📣 PRÉSÉLECTION TREMPLIN 2026 📣
+        caption: `📣 TREMPLIN BARB'N'ROCK 2026 📣
 
-Et les 6 groupes présélectionnés sont...
+Les 6 groupes sélectionnés sont...
 
-🔥 SAMEDI - Metal/Punk :
-• [Groupe 1]
-• [Groupe 2]
-• [Groupe 3]
-
-🎸 DIMANCHE - Rock/Reprises :
-• [Groupe 4]
-• [Groupe 5]
-• [Groupe 6]
+🎸 LATE BLOSSOM
+🎸 SADRAEN
+🎸 MRWL
+🎸 ANTENOX
+🎸 ADORE
+🎸 ROCKLINES
 
 Merci à tous les groupes qui ont candidaté ! 🙏
-La qualité des candidatures était incroyable.
 
-📅 RDV le 4 avril pour la finale !
+📅 RDV le 4 avril
+⏰ 14h00
+📍 Parking du Leclerc - Crèvecœur-le-Grand
 
-Entrée gratuite pour le public 🤘`,
+Entrée gratuite pour le public 🤘
+Venez nombreux soutenir la scène locale !`,
       },
       {
         id: 'tremplin-soiree',

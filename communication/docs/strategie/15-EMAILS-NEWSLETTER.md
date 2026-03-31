@@ -103,5 +103,6 @@ Les templates sont disponibles dans `/communication/emails/` :
 - `02-ouverture-billetterie.mjml`
 - `03-affiche-complete.mjml`
 - `04-derniere-chance.mjml`
+- `05-tremplin-preventes.mjml` (Journée tremplin + rappel préventes)
 
 Pour compiler en HTML : `npx mjml input.mjml -o output.html`

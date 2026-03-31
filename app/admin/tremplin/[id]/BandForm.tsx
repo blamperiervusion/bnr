@@ -18,21 +18,44 @@ export default function BandForm({ band }: { band: TremplinBand }) {
   const [notes, setNotes] = useState(band.notes || '');
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [resendRejection, setResendRejection] = useState(false);
+  const [message, setMessage] = useState<{ type: 'success' | 'error' | 'info'; text: string } | null>(null);
 
   const handleSave = async () => {
     setIsSaving(true);
+    setMessage(null);
     try {
+      const payload: Record<string, unknown> = { 
+        status, 
+        rating: rating || null, 
+        notes: notes || null 
+      };
+      
+      if (resendRejection && status === 'REJECTED') {
+        payload.rejectionEmailSent = false;
+      }
+
       const response = await fetch(`/api/admin/tremplin/${band.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status, rating: rating || null, notes: notes || null }),
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
+        const data = await response.json();
+        if (data.emailSent) {
+          setMessage({ type: 'success', text: '✅ Email de refus envoyé au groupe' });
+        } else if (status === 'REJECTED' && band.rejectionEmailSent && !resendRejection) {
+          setMessage({ type: 'info', text: 'ℹ️ Email de refus déjà envoyé précédemment' });
+        } else {
+          setMessage({ type: 'success', text: '✅ Modifications enregistrées' });
+        }
+        setResendRejection(false);
         router.refresh();
       }
     } catch (error) {
       console.error('Error saving:', error);
+      setMessage({ type: 'error', text: '❌ Erreur lors de l\'enregistrement' });
     } finally {
       setIsSaving(false);
     }
@@ -61,6 +84,17 @@ export default function BandForm({ band }: { band: TremplinBand }) {
     <div className="bg-[#111] border border-[#222] rounded-lg p-6">
       <h3 className="text-lg font-bold text-white mb-6">⚙️ Gestion</h3>
 
+      {/* Message de feedback */}
+      {message && (
+        <div className={`mb-6 p-4 rounded-lg ${
+          message.type === 'success' ? 'bg-green-500/20 text-green-400' :
+          message.type === 'error' ? 'bg-red-500/20 text-red-400' :
+          'bg-blue-500/20 text-blue-400'
+        }`}>
+          {message.text}
+        </div>
+      )}
+
       {/* Status */}
       <div className="mb-6">
         <label className="text-sm text-gray-500 block mb-2">Statut</label>
@@ -79,6 +113,29 @@ export default function BandForm({ band }: { band: TremplinBand }) {
             </button>
           ))}
         </div>
+        
+        {/* Info email de refus */}
+        {status === 'REJECTED' && !band.rejectionEmailSent && band.status !== 'REJECTED' && (
+          <p className="mt-3 text-sm text-orange-400">
+            📧 Un email de refus avec le code promo TREMPLIN26 sera envoyé au groupe
+          </p>
+        )}
+        
+        {/* Option pour renvoyer l'email de refus */}
+        {status === 'REJECTED' && band.rejectionEmailSent && (
+          <div className="mt-3 flex items-center gap-3">
+            <span className="text-sm text-green-500">✅ Email de refus déjà envoyé</span>
+            <label className="flex items-center gap-2 text-sm text-gray-400 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={resendRejection}
+                onChange={(e) => setResendRejection(e.target.checked)}
+                className="rounded border-gray-600 bg-gray-800"
+              />
+              Renvoyer l&apos;email
+            </label>
+          </div>
+        )}
       </div>
 
       {/* Rating */}

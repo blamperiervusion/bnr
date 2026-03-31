@@ -110,6 +110,7 @@ model TremplinBand {
   status          TremplinStatus @default(PENDING)
   notes           String?        @db.Text
   rating          Int?           // Note de 1 à 5
+  rejectionEmailSent Boolean     @default(false)
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
 }

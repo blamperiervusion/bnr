@@ -5,6 +5,7 @@ import "./globals.css";
 import JsonLd, { organizationSchema } from "@/components/JsonLd";
 import Providers from "@/components/Providers";
 import LayoutWrapper from "@/components/LayoutWrapper";
+import MetaPixel from "@/components/MetaPixel";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
@@ -101,6 +102,7 @@ export default function RootLayout({
         className={`${bebasNeue.variable} ${dmSans.variable} font-body antialiased bg-[var(--background)] text-[var(--foreground)] min-h-screen`}
       >
         <JsonLd data={organizationSchema} />
+        <MetaPixel />
         <Providers>
           <LayoutWrapper>
             {children}

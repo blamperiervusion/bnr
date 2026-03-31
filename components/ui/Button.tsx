@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { isTicketUrl, trackInitiateCheckout } from '@/lib/hooks/useMetaTracking';
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -71,6 +72,13 @@ export default function Button({
     </>
   );
 
+  const handleExternalClick = () => {
+    if (href && isTicketUrl(href)) {
+      trackInitiateCheckout(36);
+    }
+    onClick?.();
+  };
+
   if (href) {
     if (external) {
       return (
@@ -81,6 +89,7 @@ export default function Button({
           className={`${buttonClasses} group`}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onClick={handleExternalClick}
         >
           {content}
         </motion.a>

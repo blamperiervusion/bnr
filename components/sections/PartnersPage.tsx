@@ -1,18 +1,26 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { SectionTitle, Button } from '@/components/ui';
-import { partners, partnerCategories, Partner } from '@/lib/data/partners';
+import { partnerCategories } from '@/lib/data/partners';
 
-function PartnerCard({ partner, size = 'md' }: { partner: Partner; size?: 'lg' | 'md' | 'sm' }) {
+interface PartnerData {
+  id: string;
+  company: string;
+  logo: string | null;
+  website: string | null;
+  tier: string | null;
+}
+
+function PartnerCard({ partner, size = 'md' }: { partner: PartnerData; size?: 'lg' | 'md' | 'sm' }) {
   const sizes = {
     lg: 'w-48 h-32',
     md: 'w-40 h-24',
     sm: 'w-32 h-20',
   };
 
-  const category = partnerCategories[partner.category] || { name: 'Partenaire', color: '#666666' };
+  const tier = (partner.tier || 'supporter') as keyof typeof partnerCategories;
+  const category = partnerCategories[tier] || { name: 'Partenaire', color: '#666666' };
 
   return (
     <motion.a
@@ -33,25 +41,31 @@ function PartnerCard({ partner, size = 'md' }: { partner: Partner; size?: 'lg' |
         // eslint-disable-next-line @next/next/no-img-element
         <img 
           src={partner.logo} 
-          alt={partner.name} 
+          alt={partner.company} 
           className="max-w-full max-h-full object-contain relative z-10" 
         />
       ) : (
         <span className="text-[var(--muted-foreground)] text-sm text-center font-medium relative z-10 group-hover:text-[var(--foreground)] transition-colors">
-          {partner.name}
+          {partner.company}
         </span>
       )}
     </motion.a>
   );
 }
 
-export default function PartnersPage() {
-  const chaosPartners = partners.filter(p => p.category === 'chaos');
-  const headbangerPartners = partners.filter(p => p.category === 'headbanger');
-  const moshpitPartners = partners.filter(p => p.category === 'moshpit');
-  const supporterPartners = partners.filter(p => p.category === 'supporter');
-  const mediaPartners = partners.filter(p => p.category === 'media');
-  const institutionalPartners = partners.filter(p => p.category === 'institutional');
+interface PartnersPageProps {
+  partners: PartnerData[];
+}
+
+export default function PartnersPage({ partners }: PartnersPageProps) {
+  const chaosPartners = partners.filter(p => p.tier === 'chaos');
+  const headbangerPartners = partners.filter(p => p.tier === 'headbanger');
+  const moshpitPartners = partners.filter(p => p.tier === 'moshpit');
+  const supporterPartners = partners.filter(p => p.tier === 'supporter');
+  const mediaPartners = partners.filter(p => p.tier === 'media');
+  const institutionalPartners = partners.filter(p => p.tier === 'institutional');
+  const technicalPartners = partners.filter(p => p.tier === 'technical');
+  const echangePartners = partners.filter(p => p.tier === 'echange');
 
   return (
     <div className="pt-24 pb-16">
@@ -259,6 +273,64 @@ export default function PartnersPage() {
               </h2>
               <div className="flex flex-wrap justify-center gap-4">
                 {institutionalPartners.map((partner, index) => (
+                  <motion.div
+                    key={partner.id}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <PartnerCard partner={partner} size="sm" />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Technical Partners */}
+          {technicalPartners.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 
+                className="text-xl font-display text-center mb-8 uppercase tracking-wider"
+                style={{ color: partnerCategories.technical.color }}
+              >
+                🔧 {partnerCategories.technical.name}
+              </h2>
+              <div className="flex flex-wrap justify-center gap-4">
+                {technicalPartners.map((partner, index) => (
+                  <motion.div
+                    key={partner.id}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <PartnerCard partner={partner} size="sm" />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Echange Partners */}
+          {echangePartners.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 
+                className="text-xl font-display text-center mb-8 uppercase tracking-wider"
+                style={{ color: partnerCategories.echange.color }}
+              >
+                🤝 {partnerCategories.echange.name}
+              </h2>
+              <div className="flex flex-wrap justify-center gap-4">
+                {echangePartners.map((partner, index) => (
                   <motion.div
                     key={partner.id}
                     initial={{ opacity: 0, scale: 0.8 }}

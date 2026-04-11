@@ -3,63 +3,33 @@
 import { motion } from 'framer-motion';
 import { SectionTitle, Card } from '@/components/ui';
 
-const foodTrucks = {
-  name: 'Food Trucks',
-  type: 'Cuisine variée',
-  description: 'Plusieurs food trucks seront présents pour vous proposer une cuisine variée. De quoi reprendre des forces entre deux concerts !',
-  emoji: '🍔',
-};
+type StandCategory = 'FOOD' | 'BAR' | 'MERCHANDISING' | 'ARTISANAT' | 'TATTOO' | 'BARBIER' | 'ASSOCIATION' | 'DIVERS';
 
-const bar = {
-  name: 'Le Bar du Festival',
-  description: 'Une sélection de bières belges. De quoi se rafraîchir avec style entre deux pits.',
-  emoji: '🍺',
-};
+interface Stand {
+  id: string;
+  name: string;
+  category: StandCategory;
+  description: string | null;
+  logo: string | null;
+  website: string | null;
+  instagram: string | null;
+  facebook: string | null;
+}
 
-const standCategories = [
-  {
-    id: 'cat-1',
-    name: 'Merchandising',
-    count: '5+ stands',
-    description: 'T-shirts des groupes, patches, pins, posters, vinyles, CDs... Tout pour repartir avec des souvenirs.',
-    emoji: '👕',
-  },
-  {
-    id: 'cat-2',
-    name: 'Artisanat',
-    count: '5+ stands',
-    description: 'Bijoux forgés, accessoires en cuir, créations uniques. Du fait-main par des artisans passionnés.',
-    emoji: '⚒️',
-  },
-  {
-    id: 'cat-3',
-    name: 'Tatouage & Piercing',
-    count: '2-3 stands',
-    description: 'Tattoo flash et piercing par des pros. Walk-in welcome, hygiène irréprochable.',
-    emoji: '🖋️',
-  },
-  {
-    id: 'cat-4',
-    name: 'Barbiers',
-    count: '3 barbiers',
-    description: 'Besoin d\'une coupe fresh ou d\'une barbe taillée au carré ? Nos barbiers sont là pour te refaire une beauté.',
-    emoji: '💈',
-  },
-  {
-    id: 'cat-5',
-    name: 'Associations',
-    count: '3+ stands',
-    description: 'Associations locales, culturelles et caritatives. Viens découvrir et soutenir leurs actions.',
-    emoji: '🤝',
-  },
-  {
-    id: 'cat-6',
-    name: 'Divers & Curiosités',
-    count: '5+ stands',
-    description: 'Stands insolites et découvertes en tout genre. Laisse-toi surprendre !',
-    emoji: '✨',
-  },
-];
+interface VillagePageProps {
+  stands?: Stand[];
+}
+
+const categoryConfig: Record<StandCategory, { label: string; emoji: string; description: string }> = {
+  FOOD: { label: 'Food Trucks', emoji: '🍔', description: 'De quoi reprendre des forces entre deux concerts !' },
+  BAR: { label: 'Bar', emoji: '🍺', description: 'Une sélection de bières belges. De quoi se rafraîchir avec style.' },
+  MERCHANDISING: { label: 'Merchandising', emoji: '👕', description: 'T-shirts des groupes, patches, pins, posters, vinyles... Tout pour repartir avec des souvenirs.' },
+  ARTISANAT: { label: 'Artisanat', emoji: '⚒️', description: 'Bijoux forgés, accessoires en cuir, créations uniques. Du fait-main par des artisans passionnés.' },
+  TATTOO: { label: 'Tatouage & Piercing', emoji: '🖋️', description: 'Tattoo flash et piercing par des pros. Walk-in welcome, hygiène irréprochable.' },
+  BARBIER: { label: 'Barbiers', emoji: '💈', description: 'Besoin d\'une coupe fresh ou d\'une barbe taillée au carré ? Nos barbiers sont là.' },
+  ASSOCIATION: { label: 'Associations', emoji: '🤝', description: 'Associations locales, culturelles et caritatives. Viens découvrir et soutenir leurs actions.' },
+  DIVERS: { label: 'Divers & Curiosités', emoji: '✨', description: 'Stands insolites et découvertes en tout genre. Laisse-toi surprendre !' },
+};
 
 const activities = [
   {
@@ -71,7 +41,20 @@ const activities = [
   },
 ];
 
-export default function VillagePage() {
+export default function VillagePage({ stands = [] }: VillagePageProps) {
+  const standsByCategory = stands.reduce((acc, stand) => {
+    if (!acc[stand.category]) {
+      acc[stand.category] = [];
+    }
+    acc[stand.category].push(stand);
+    return acc;
+  }, {} as Record<StandCategory, Stand[]>);
+
+  const foodStands = standsByCategory.FOOD || [];
+  const barStands = standsByCategory.BAR || [];
+  const otherCategories: StandCategory[] = ['MERCHANDISING', 'ARTISANAT', 'TATTOO', 'BARBIER', 'ASSOCIATION', 'DIVERS'];
+  
+  const totalStands = stands.filter(s => !['FOOD', 'BAR'].includes(s.category)).length;
   return (
     <div className="pt-24 pb-16">
       {/* Hero */}
@@ -112,8 +95,9 @@ export default function VillagePage() {
               LE VILLAGE
             </h1>
             <p className="text-xl text-[var(--muted-foreground)] mt-6 max-w-3xl mx-auto">
-              3 food trucks, 1 bar avec une sélection de bières ultra quali, 
-              et une vingtaine de stands pour flâner entre deux concerts.
+              {foodStands.length > 0 ? `${foodStands.length} food truck${foodStands.length > 1 ? 's' : ''}` : 'Des food trucks'}, 
+              {barStands.length > 0 ? ` ${barStands.length} bar${barStands.length > 1 ? 's' : ''}` : ' un bar'} avec une sélection de bières ultra quali
+              {totalStands > 0 && `, et ${totalStands} stand${totalStands > 1 ? 's' : ''} pour flâner entre deux concerts`}.
               <span className="text-[var(--accent-red)]"> No bullshit, que du bon.</span>
             </p>
           </motion.div>
@@ -123,11 +107,11 @@ export default function VillagePage() {
       {/* Food Trucks & Bar Section */}
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <SectionTitle subtitle="3 food trucks + 1 bar pour te sustenter">
+          <SectionTitle subtitle={`${foodStands.length > 0 ? foodStands.length : 'Des'} food truck${foodStands.length !== 1 ? 's' : ''} + ${barStands.length > 0 ? barStands.length : 'un'} bar pour te sustenter`}>
             🔥 BOUFFE & BOISSONS
           </SectionTitle>
 
-          {/* Bar highlight */}
+          {/* Bar */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -136,17 +120,26 @@ export default function VillagePage() {
           >
             <Card className="p-8 border-2 border-[var(--accent-orange)] bg-[var(--accent-orange)]/5">
               <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-                <span className="text-7xl">{bar.emoji}</span>
-                <div>
+                <span className="text-7xl">🍺</span>
+                <div className="flex-1">
                   <h3 className="font-display text-3xl text-[var(--foreground)] uppercase">
-                    {bar.name}
+                    Le Bar du Festival
                   </h3>
                   <p className="text-[var(--accent-orange)] text-sm font-bold uppercase tracking-wider mb-2">
                     Bières belges
                   </p>
                   <p className="text-[var(--muted-foreground)] leading-relaxed">
-                    {bar.description}
+                    Une sélection de bières belges. De quoi se rafraîchir avec style entre deux pits.
                   </p>
+                  {barStands.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-4">
+                      {barStands.map((stand) => (
+                        <span key={stand.id} className="text-sm bg-[var(--accent-orange)]/20 text-[var(--accent-orange)] px-3 py-1 rounded-full">
+                          {stand.name}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </Card>
@@ -160,17 +153,45 @@ export default function VillagePage() {
           >
             <Card className="p-8 border-2 border-[var(--accent-cyan)] bg-[var(--accent-cyan)]/5">
               <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-                <span className="text-7xl">{foodTrucks.emoji}</span>
-                <div>
+                <span className="text-7xl">🍔</span>
+                <div className="flex-1">
                   <h3 className="font-display text-3xl text-[var(--foreground)] uppercase">
-                    {foodTrucks.name}
+                    Food Trucks
                   </h3>
                   <p className="text-[var(--accent-cyan)] text-sm font-bold uppercase tracking-wider mb-2">
-                    {foodTrucks.type}
+                    Cuisine variée
                   </p>
                   <p className="text-[var(--muted-foreground)] leading-relaxed">
-                    {foodTrucks.description}
+                    {foodStands.length > 0 
+                      ? `${foodStands.length} food truck${foodStands.length > 1 ? 's' : ''} pour reprendre des forces entre deux concerts !`
+                      : 'Plusieurs food trucks seront présents pour vous proposer une cuisine variée.'
+                    }
                   </p>
+                  {foodStands.length > 0 && (
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
+                      {foodStands.map((stand) => (
+                        <motion.a
+                          key={stand.id}
+                          href={stand.website || stand.instagram || stand.facebook || undefined}
+                          target={stand.website || stand.instagram || stand.facebook ? '_blank' : undefined}
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.05 }}
+                          className="bg-[var(--background)]/50 border border-[var(--border)] rounded-lg p-4 text-center hover:border-[var(--accent-cyan)] transition-colors"
+                        >
+                          {stand.logo ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={stand.logo} alt={stand.name} className="w-full h-16 object-contain mb-2" />
+                          ) : (
+                            <span className="text-3xl block mb-2">🍽️</span>
+                          )}
+                          <p className="font-bold text-white text-sm">{stand.name}</p>
+                          {stand.description && (
+                            <p className="text-xs text-[var(--muted-foreground)] mt-1 line-clamp-2">{stand.description}</p>
+                          )}
+                        </motion.a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </Card>
@@ -181,53 +202,93 @@ export default function VillagePage() {
       {/* Stands Section */}
       <section className="py-20 px-4 bg-[var(--muted)]/30">
         <div className="max-w-6xl mx-auto">
-          <SectionTitle subtitle="Une vingtaine de stands pour flâner et découvrir">
+          <SectionTitle subtitle={totalStands > 0 ? `${totalStands} stand${totalStands > 1 ? 's' : ''} pour flâner et découvrir` : 'Des stands pour flâner et découvrir'}>
             💀 LES STANDS
           </SectionTitle>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-            {standCategories.map((cat, index) => (
-              <motion.div
-                key={cat.id}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="p-6 h-full group" glowColor="pink">
-                  <div className="flex items-start gap-4">
-                    <motion.span 
-                      className="text-5xl"
-                      whileHover={{ rotate: [0, -10, 10, 0], scale: 1.2 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {cat.emoji}
-                    </motion.span>
+          <div className="space-y-12 mt-12">
+            {otherCategories.map((categoryKey, catIndex) => {
+              const categoryStands = standsByCategory[categoryKey] || [];
+              const config = categoryConfig[categoryKey];
+              
+              if (categoryStands.length === 0) return null;
+              
+              return (
+                <motion.div
+                  key={categoryKey}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: catIndex * 0.1 }}
+                >
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-4xl">{config.emoji}</span>
                     <div>
-                      <h3 className="font-display text-2xl text-[var(--foreground)] uppercase group-hover:text-[var(--accent-cyan)] transition-colors">
-                        {cat.name}
+                      <h3 className="font-display text-2xl text-[var(--foreground)] uppercase">
+                        {config.label}
                       </h3>
-                      <p className="text-[var(--accent-cyan)] text-sm font-bold uppercase tracking-wider">
-                        {cat.count}
+                      <p className="text-[var(--accent-cyan)] text-sm font-bold">
+                        {categoryStands.length} stand{categoryStands.length > 1 ? 's' : ''}
                       </p>
                     </div>
                   </div>
-                  <p className="text-[var(--muted-foreground)] mt-4 text-sm leading-relaxed">
-                    {cat.description}
-                  </p>
-                </Card>
-              </motion.div>
-            ))}
+                  
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {categoryStands.map((stand, index) => (
+                      <motion.a
+                        key={stand.id}
+                        href={stand.website || stand.instagram || stand.facebook || undefined}
+                        target={stand.website || stand.instagram || stand.facebook ? '_blank' : undefined}
+                        rel="noopener noreferrer"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.05 }}
+                        whileHover={{ scale: 1.05, y: -5 }}
+                        className="bg-[var(--muted)]/50 border border-[var(--border)] rounded-lg p-4 text-center hover:border-[var(--accent-cyan)] transition-all group cursor-pointer"
+                      >
+                        {stand.logo ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={stand.logo} alt={stand.name} className="w-full h-20 object-contain mb-3" />
+                        ) : (
+                          <span className="text-4xl block mb-3">{config.emoji}</span>
+                        )}
+                        <p className="font-bold text-white text-sm group-hover:text-[var(--accent-cyan)] transition-colors">
+                          {stand.name}
+                        </p>
+                        {stand.description && (
+                          <p className="text-xs text-[var(--muted-foreground)] mt-2 line-clamp-2">
+                            {stand.description}
+                          </p>
+                        )}
+                        {(stand.instagram || stand.facebook || stand.website) && (
+                          <div className="flex justify-center gap-2 mt-3 text-gray-500">
+                            {stand.website && <span title="Site web">🌐</span>}
+                            {stand.instagram && <span title="Instagram">📷</span>}
+                            {stand.facebook && <span title="Facebook">📘</span>}
+                          </div>
+                        )}
+                      </motion.a>
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center text-[var(--muted-foreground)] mt-8"
-          >
-            Liste complète des exposants disponible prochainement !
-          </motion.p>
+          {totalStands === 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-center py-12"
+            >
+              <span className="text-6xl block mb-4">🏕️</span>
+              <p className="text-[var(--muted-foreground)]">
+                Liste complète des exposants disponible prochainement !
+              </p>
+            </motion.div>
+          )}
         </div>
       </section>
 

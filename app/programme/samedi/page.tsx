@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import ProgrammeDay from '@/components/sections/ProgrammeDay';
-import { getProgrammeByDay } from '@/lib/data/programme';
+import { getProgrammeByDayFromDB, getAllDaysFromDB } from '@/lib/data/programme-db';
 import { notFound } from 'next/navigation';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "Programme Samedi 27 Juin",
@@ -15,12 +17,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function SamediPage() {
-  const dayData = getProgrammeByDay('samedi');
+export default async function SamediPage() {
+  const [dayData, allDays] = await Promise.all([
+    getProgrammeByDayFromDB('samedi'),
+    getAllDaysFromDB(),
+  ]);
   
   if (!dayData) {
     notFound();
   }
 
-  return <ProgrammeDay dayData={dayData} />;
+  return <ProgrammeDay dayData={dayData} allDays={allDays} />;
 }

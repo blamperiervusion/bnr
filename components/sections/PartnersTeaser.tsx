@@ -3,11 +3,25 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { SectionTitle, Button } from '@/components/ui';
-import { partners, partnerCategories } from '@/lib/data/partners';
+import { partnerCategories } from '@/lib/data/partners';
 
-export default function PartnersTeaser() {
-  const chaosPartners = partners.filter(p => p.category === 'chaos');
-  const headbangerPartners = partners.filter(p => p.category === 'headbanger');
+interface PartnerData {
+  id: string;
+  company: string;
+  logo: string | null;
+  website: string | null;
+  tier: string | null;
+}
+
+interface PartnersTeaserProps {
+  partners?: PartnerData[];
+}
+
+export default function PartnersTeaser({ partners = [] }: PartnersTeaserProps) {
+  const chaosPartners = partners.filter(p => p.tier === 'chaos');
+  const headbangerPartners = partners.filter(p => p.tier === 'headbanger');
+  const moshpitPartners = partners.filter(p => p.tier === 'moshpit');
+  const otherPartners = partners.filter(p => !['chaos', 'headbanger', 'moshpit'].includes(p.tier || ''));
   const hasPartners = partners.length > 0;
 
   return (
@@ -27,24 +41,27 @@ export default function PartnersTeaser() {
                 </h3>
                 <div className="flex flex-wrap justify-center gap-8">
                   {chaosPartners.map((partner, index) => (
-                    <motion.div
+                    <motion.a
                       key={partner.id}
+                      href={partner.website || undefined}
+                      target={partner.website ? '_blank' : undefined}
+                      rel={partner.website ? 'noopener noreferrer' : undefined}
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
                       whileHover={{ scale: 1.1 }}
-                      className="w-40 h-24 bg-[var(--muted)]/50 border border-[var(--border)] rounded-lg flex items-center justify-center p-4 hover:border-[var(--accent-orange)]/50 transition-colors cursor-pointer"
+                      className="w-44 h-28 bg-[var(--muted)]/50 border border-[var(--border)] rounded-lg flex items-center justify-center p-4 hover:border-[var(--accent-orange)]/50 transition-colors cursor-pointer"
                     >
                       {partner.logo ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={partner.logo} alt={partner.name} className="max-w-full max-h-full object-contain" />
+                        <img src={partner.logo} alt={partner.company} className="max-w-full max-h-full object-contain" />
                       ) : (
                         <span className="text-[var(--muted-foreground)] text-sm text-center font-medium">
-                          {partner.name}
+                          {partner.company}
                         </span>
                       )}
-                    </motion.div>
+                    </motion.a>
                   ))}
                 </div>
               </div>
@@ -58,24 +75,58 @@ export default function PartnersTeaser() {
                 </h3>
                 <div className="flex flex-wrap justify-center gap-6">
                   {headbangerPartners.map((partner, index) => (
-                    <motion.div
+                    <motion.a
                       key={partner.id}
+                      href={partner.website || undefined}
+                      target={partner.website ? '_blank' : undefined}
+                      rel={partner.website ? 'noopener noreferrer' : undefined}
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
                       whileHover={{ scale: 1.1 }}
-                      className="w-32 h-20 bg-[var(--muted)]/50 border border-[var(--border)] rounded-lg flex items-center justify-center p-3 hover:border-[var(--accent-cyan)]/50 transition-colors cursor-pointer"
+                      className="w-36 h-24 bg-[var(--muted)]/50 border border-[var(--border)] rounded-lg flex items-center justify-center p-3 hover:border-[var(--accent-cyan)]/50 transition-colors cursor-pointer"
                     >
                       {partner.logo ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={partner.logo} alt={partner.name} className="max-w-full max-h-full object-contain" />
+                        <img src={partner.logo} alt={partner.company} className="max-w-full max-h-full object-contain" />
                       ) : (
                         <span className="text-[var(--muted-foreground)] text-xs text-center">
-                          {partner.name}
+                          {partner.company}
                         </span>
                       )}
-                    </motion.div>
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Moshpit + Other Partners */}
+            {(moshpitPartners.length > 0 || otherPartners.length > 0) && (
+              <div className="mt-10">
+                <div className="flex flex-wrap justify-center gap-4">
+                  {[...moshpitPartners, ...otherPartners].map((partner, index) => (
+                    <motion.a
+                      key={partner.id}
+                      href={partner.website || undefined}
+                      target={partner.website ? '_blank' : undefined}
+                      rel={partner.website ? 'noopener noreferrer' : undefined}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 }}
+                      whileHover={{ scale: 1.1 }}
+                      className="w-28 h-20 bg-[var(--muted)]/50 border border-[var(--border)] rounded-lg flex items-center justify-center p-2 hover:border-[var(--accent-cyan)]/50 transition-colors cursor-pointer"
+                    >
+                      {partner.logo ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={partner.logo} alt={partner.company} className="max-w-full max-h-full object-contain" />
+                      ) : (
+                        <span className="text-[var(--muted-foreground)] text-[10px] text-center">
+                          {partner.company}
+                        </span>
+                      )}
+                    </motion.a>
                   ))}
                 </div>
               </div>

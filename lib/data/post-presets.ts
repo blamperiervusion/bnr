@@ -652,6 +652,91 @@ Repars avec un souvenir permanent.
       },
     ],
   },
+  {
+    id: 'ambiance',
+    title: 'Ambiance & Musique',
+    icon: '🎧',
+    posts: [
+      {
+        id: 'spotify-playlist',
+        title: 'Playlist Spotify',
+        badge: '🎧 PLAYLIST',
+        badgeClass: 'cyan',
+        mainText: 'PLAYLIST<br><span class="accent">OFFICIELLE</span>',
+        subText: 'Tous les artistes du festival',
+        descText: '🎵 Spotify • Écoute maintenant',
+        bg: '/images/hero-visual.jpg',
+        caption: `🎧 PLAYLIST OFFICIELLE 🎧
+
+T'as envie de chauffer tes oreilles avant le festival ?
+
+On t'a préparé LA playlist avec tous les artistes de l'affiche 2026 🔥
+
+Psykup • Loudblast • Shaârghot • Cachemire
+Akiavel • Krav Boca • Dirty Fonzy • Mainkind
+Et tous les autres...
+
+🎵 Dispo sur Spotify
+→ Lien en bio
+
+26-28 Juin • Crèvecœur-le-Grand
+🎫 36€ les 3 jours`,
+      },
+      {
+        id: 'spotify-playlist-countdown',
+        title: 'Playlist + Countdown',
+        badge: '🎧 ÉCOUTE',
+        badgeClass: 'cyan',
+        mainText: 'WARM-UP<br><span class="accent">PLAYLIST</span>',
+        subText: 'Prépare tes oreilles',
+        descText: '18 groupes à découvrir avant le jour J',
+        bg: '/images/hero-visual.jpg',
+        caption: `Plus que quelques semaines...
+
+C'est le moment de préparer tes oreilles pour le chaos ! 🤘
+
+On a réuni TOUS les artistes du festival dans une playlist Spotify :
+
+🔊 Psykup
+🔊 Loudblast
+🔊 Shaârghot
+🔊 Cachemire
+🔊 Akiavel
+🔊 Krav Boca
+🔊 Dirty Fonzy
+🔊 Mainkind
+🔊 + tous les autres !
+
+Lance-la en boucle, apprends les paroles, arrive prêt(e) pour le festival.
+
+🎧 Lien en bio
+
+#barbnrock #festival #metal #punk #rock #playlist #spotify`,
+      },
+      {
+        id: 'spotify-share',
+        title: 'Partage ta playlist',
+        badge: '📢 PARTAGE',
+        mainText: 'MONTE<br><span class="accent">LE SON</span>',
+        subText: 'Partage la playlist',
+        descText: 'Fais découvrir l\'affiche à tes potes',
+        bg: '/images/hero-visual.jpg',
+        caption: `T'as des potes qui connaissent pas encore l'affiche ?
+
+Envoie-leur la playlist 🎧
+
+Tous les artistes du Barb'n'Rock 2026 réunis :
+Metal • Punk • Rock • Cyber Metal • AutrucheCore 🦤
+
+Fais tourner, fais découvrir, fais headbanger.
+
+🎵 Playlist Spotify → Lien en bio
+
+26-28 Juin • Crèvecœur-le-Grand
+🎫 36€ les 3 jours (camping inclus)`,
+      },
+    ],
+  },
 ];
 
 export function getPresetById(id: string): PostPreset | undefined {

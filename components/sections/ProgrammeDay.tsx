@@ -1,19 +1,43 @@
 'use client';
 
 import { BandCard, Button, SectionTitle } from '@/components/ui';
-import { DayProgramme, programme } from '@/lib/data/programme';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { HELLOASSO_URL } from '@/lib/constants';
 
-interface ProgrammeDayProps {
-    dayData: DayProgramme;
+export interface BandData {
+    id: string;
+    name: string;
+    order: number;
+    time?: string | null;
+    description: string;
+    imageUrl?: string | null;
+    videoUrl?: string | null;
+    socialLinks?: {
+        website?: string | null;
+        facebook?: string | null;
+        instagram?: string | null;
+        spotify?: string | null;
+    };
 }
 
-export default function ProgrammeDay({ dayData }: ProgrammeDayProps) {
-    const currentIndex = programme.findIndex(d => d.slug === dayData.slug);
-    const prevDay = currentIndex > 0 ? programme[currentIndex - 1] : null;
-    const nextDay = currentIndex < programme.length - 1 ? programme[currentIndex + 1] : null;
+export interface DayProgrammeData {
+    day: string;
+    date: string;
+    slug: string;
+    openingTime: string;
+    bands: BandData[];
+}
+
+interface ProgrammeDayProps {
+    dayData: DayProgrammeData;
+    allDays: { day: string; slug: string }[];
+}
+
+export default function ProgrammeDay({ dayData, allDays }: ProgrammeDayProps) {
+    const currentIndex = allDays.findIndex(d => d.slug === dayData.slug);
+    const prevDay = currentIndex > 0 ? allDays[currentIndex - 1] : null;
+    const nextDay = currentIndex < allDays.length - 1 ? allDays[currentIndex + 1] : null;
 
     // Sort bands by order
     const sortedBands = [...dayData.bands].sort((a, b) => a.order - b.order);
@@ -54,7 +78,7 @@ export default function ProgrammeDay({ dayData }: ProgrammeDayProps) {
             <section className="px-4 py-8 border-b border-[var(--border)]">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex justify-center gap-4 flex-wrap">
-                        {programme.map((day) => (
+                        {allDays.map((day) => (
                             <Link
                                 key={day.slug}
                                 href={`/programme/${day.slug}`}
@@ -104,11 +128,16 @@ export default function ProgrammeDay({ dayData }: ProgrammeDayProps) {
 
                                     <BandCard
                                         name={band.name}
-                                        time={band.time}
+                                        time={band.time ?? undefined}
                                         description={band.description}
-                                        imageUrl={band.imageUrl}
-                                        videoUrl={band.videoUrl}
-                                        socialLinks={band.socialLinks}
+                                        imageUrl={band.imageUrl ?? undefined}
+                                        videoUrl={band.videoUrl ?? undefined}
+                                        socialLinks={band.socialLinks ? {
+                                            website: band.socialLinks.website ?? undefined,
+                                            facebook: band.socialLinks.facebook ?? undefined,
+                                            instagram: band.socialLinks.instagram ?? undefined,
+                                            spotify: band.socialLinks.spotify ?? undefined,
+                                        } : undefined}
                                     />
                                 </motion.div>
                             ))}

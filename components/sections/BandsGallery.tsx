@@ -4,11 +4,15 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { SectionTitle, Button } from '@/components/ui';
-import { programme, Band } from '@/lib/data/programme';
+import type { BandData } from './ProgrammeDay';
 
-interface BandWithDay extends Band {
+interface BandWithDay extends BandData {
   daySlug: string;
   dayName: string;
+}
+
+interface BandsGalleryProps {
+  bands?: BandWithDay[];
 }
 
 function getYouTubeEmbedUrl(url: string): string {
@@ -16,7 +20,7 @@ function getYouTubeEmbedUrl(url: string): string {
   return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1` : '';
 }
 
-export default function BandsGallery() {
+export default function BandsGallery({ bands = [] }: BandsGalleryProps) {
   const [selectedBand, setSelectedBand] = useState<BandWithDay | null>(null);
 
   // Custom order for bands on home page
@@ -41,18 +45,14 @@ export default function BandsGallery() {
     'Tremplin Dimanche',
   ];
   
-  const confirmedBands = programme
-    .flatMap(day => day.bands.map(band => ({ ...band, daySlug: day.slug, dayName: day.day })))
+  const confirmedBands = bands
     .filter(band => !band.name.includes('confirmer') && !band.name.includes('To Be Announced'))
     .sort((a, b) => {
       const indexA = customOrder.indexOf(a.name);
       const indexB = customOrder.indexOf(b.name);
-      // If both are in custom order, sort by custom order
       if (indexA !== -1 && indexB !== -1) return indexA - indexB;
-      // If only one is in custom order, prioritize it
       if (indexA !== -1) return -1;
       if (indexB !== -1) return 1;
-      // Otherwise, sort by day (dimanche last) then by order
       const dayOrder = { 'vendredi': 1, 'samedi': 2, 'dimanche': 3 };
       const dayDiff = (dayOrder[a.daySlug as keyof typeof dayOrder] || 0) - (dayOrder[b.daySlug as keyof typeof dayOrder] || 0);
       if (dayDiff !== 0) return dayDiff;

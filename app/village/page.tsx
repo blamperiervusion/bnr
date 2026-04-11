@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import VillagePage from '@/components/sections/VillagePage';
+import prisma from '@/lib/prisma';
 
 export const metadata: Metadata = {
   title: "Le Village",
@@ -13,6 +14,30 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Village() {
-  return <VillagePage />;
+async function getVisibleStands() {
+  return prisma.villageStand.findMany({
+    where: {
+      isVisible: true,
+    },
+    orderBy: [
+      { order: 'asc' },
+      { name: 'asc' },
+    ],
+    select: {
+      id: true,
+      name: true,
+      category: true,
+      description: true,
+      logo: true,
+      website: true,
+      instagram: true,
+      facebook: true,
+    },
+  });
+}
+
+export default async function Village() {
+  const stands = await getVisibleStands();
+  
+  return <VillagePage stands={stands} />;
 }

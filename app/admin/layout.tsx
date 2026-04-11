@@ -7,11 +7,15 @@ import Link from 'next/link';
 
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: '📊' },
+  { href: '/admin/programmation', label: 'Programmation', icon: '🎤' },
   { href: '/admin/tremplin', label: 'Tremplin 2026', icon: '🎸' },
   { href: '/admin/benevoles', label: 'Bénévoles', icon: '🙋' },
   { href: '/admin/partenaires', label: 'Partenaires', icon: '🤝' },
+  { href: '/admin/village', label: 'Village', icon: '🏕️' },
+  { href: '/admin/compta', label: 'Comptabilité', icon: '💰' },
   { href: '/admin/utilisateurs', label: 'Utilisateurs', icon: '👥' },
   { href: '/admin/ressources', label: 'Ressources', icon: '📁' },
+  { href: '/admin/parametres', label: 'Paramètres', icon: '⚙️' },
 ];
 
 export default function AdminLayout({

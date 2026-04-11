@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import PartnersPage from '@/components/sections/PartnersPage';
+import prisma from '@/lib/prisma';
 
 export const metadata: Metadata = {
   title: "Nos Partenaires",
@@ -13,6 +14,29 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Partenaires() {
-  return <PartnersPage />;
+async function getValidatedPartners() {
+  const partners = await prisma.partner.findMany({
+    where: {
+      status: 'VALIDATED',
+    },
+    select: {
+      id: true,
+      company: true,
+      logo: true,
+      website: true,
+      tier: true,
+    },
+    orderBy: [
+      { donationAmount: 'desc' },
+      { company: 'asc' },
+    ],
+  });
+
+  return partners;
+}
+
+export default async function Partenaires() {
+  const partners = await getValidatedPartners();
+  
+  return <PartnersPage partners={partners} />;
 }

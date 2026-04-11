@@ -114,3 +114,141 @@ model TremplinBand {
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
 }
+
+enum VillageStandCategory {
+  FOOD
+  BAR
+  MERCHANDISING
+  ARTISANAT
+  TATTOO
+  BARBIER
+  ASSOCIATION
+  DIVERS
+}
+
+model VillageStand {
+  id          String               @id @default(cuid())
+  name        String
+  category    VillageStandCategory
+  description String?              @db.Text
+  logo        String?              // URL du logo
+  website     String?
+  instagram   String?
+  facebook    String?
+  contact     String?              // Nom du contact
+  email       String?
+  phone       String?
+  isVisible   Boolean              @default(true)
+  order       Int                  @default(0)
+  notes       String?              @db.Text
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+}
+
+// ==========================================
+// PROGRAMMATION - Groupes du festival
+// ==========================================
+
+model Band {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  day          String   // vendredi, samedi, dimanche
+  order        Int      @default(0)
+  time         String?  // ex: "21h30"
+  endTime      String?  // ex: "22h30"
+  description  String   @db.Text
+  imageUrl     String?
+  videoUrl     String?
+
+  // Liens sociaux
+  website      String?
+  facebook     String?
+  instagram    String?
+  spotify      String?
+
+  // Fichiers (stockés via Vercel Blob)
+  techRiderUrl String?
+  contractUrl  String?
+
+  // Métadonnées internes
+  notes        String?  @db.Text
+  isVisible    Boolean  @default(true)
+  isHeadliner  Boolean  @default(false)
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// ==========================================
+// COMPTABILITÉ - Association 1901
+// ==========================================
+
+model ComptaCategory {
+  id           String        @id @default(cuid())
+  code         String        @unique
+  name         String
+  type         String        // "charge" ou "produit"
+  parentCode   String?
+  tags         String?       // public_funding, private_funding, technical, artistic
+  transactions Transaction[]
+}
+
+model Transaction {
+  id           String          @id @default(cuid())
+  date         DateTime
+  valueDate    DateTime?
+  label        String
+  description  String?
+  amount       Decimal         @db.Decimal(10, 2)
+  type         String          // "debit" ou "credit"
+
+  categoryId   String?
+  category     ComptaCategory? @relation(fields: [categoryId], references: [id])
+
+  sourceFile   String?
+  isReconciled Boolean         @default(false)
+  notes        String?
+
+  exerciceYear Int
+
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  @@index([exerciceYear])
+  @@index([categoryId])
+}
+
+model ComptaExercice {
+  id             String   @id @default(cuid())
+  year           Int      @unique
+  startDate      DateTime
+  endDate        DateTime
+  isClosed       Boolean  @default(false)
+  openingBalance Decimal  @db.Decimal(10, 2)
+  closingBalance Decimal? @db.Decimal(10, 2)
+}
+
+// ==========================================
+// PARAMÈTRES DU FESTIVAL
+// ==========================================
+
+model FestivalDay {
+  id           String   @id @default(cuid())
+  slug         String   @unique // vendredi, samedi, dimanche
+  name         String   // Vendredi, Samedi, Dimanche
+  date         DateTime
+  openingTime  String   // ex: "14h00"
+  closingTime  String?  // ex: "02h00"
+  isVisible    Boolean  @default(true)
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model FestivalSettings {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}

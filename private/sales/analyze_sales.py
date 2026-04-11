@@ -15,7 +15,7 @@ FILES = {
     2023: "export-barb-n-rock-festival-association-crepicordienne-pour-la-promotion-de-la-culture-acpc-.csv",
     2024: "export-barb-n-rock-festival-2024-association-crepicordienne-pour-la-promotion-de-la-culture-.csv",
     2025: "export-barb-n-rock-festival-2025-association-crepicordienne-pour-la-promotion-de-la-culture-.csv",
-    2026: "export-barb-n-rock-festival-2026-association-crepicordienne-pour-la-promotion-de-la-culture-acpc-05_12_2025-28_03_2026.xlsx",
+    2026: "export-barb-n-rock-festival-2026-association-crepicordienne-pour-la-promotion-de-la-culture-acpc-05_12_2025-06_04_2026.xlsx",
 }
 
 EXCLUDED_TARIFS = [

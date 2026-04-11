@@ -5,7 +5,20 @@ import { put } from '@vercel/blob';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 
-// POST /api/admin/upload - Upload d'images (admin)
+const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
+const DOCUMENT_TYPES = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+
+const uploadConfig: Record<string, { folder: string; allowedTypes: string[]; maxSize: number }> = {
+  'volunteer-photo': { folder: 'volunteers', allowedTypes: IMAGE_TYPES, maxSize: 2 * 1024 * 1024 },
+  'partner-logo': { folder: 'partners', allowedTypes: IMAGE_TYPES, maxSize: 2 * 1024 * 1024 },
+  'village-logo': { folder: 'village', allowedTypes: IMAGE_TYPES, maxSize: 2 * 1024 * 1024 },
+  'band-image': { folder: 'bands', allowedTypes: IMAGE_TYPES, maxSize: 2 * 1024 * 1024 },
+  'band-techrider': { folder: 'bands/techriders', allowedTypes: DOCUMENT_TYPES, maxSize: 10 * 1024 * 1024 },
+  'band-contract': { folder: 'bands/contracts', allowedTypes: DOCUMENT_TYPES, maxSize: 10 * 1024 * 1024 },
+  'compta-releve': { folder: 'compta/releves', allowedTypes: DOCUMENT_TYPES, maxSize: 10 * 1024 * 1024 },
+};
+
+// POST /api/admin/upload - Upload de fichiers (admin)
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
   
@@ -22,22 +35,28 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Fichier requis' }, { status: 400 });
     }
 
+    // Récupérer la configuration pour ce type
+    const config = uploadConfig[type] || { 
+      folder: 'uploads', 
+      allowedTypes: IMAGE_TYPES, 
+      maxSize: 2 * 1024 * 1024 
+    };
+
     // Validation du type de fichier
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
-    if (!allowedTypes.includes(file.type)) {
+    if (!config.allowedTypes.includes(file.type)) {
       return NextResponse.json({ error: 'Type de fichier non autorisé' }, { status: 400 });
     }
 
-    // Validation de la taille (max 2MB)
-    const maxSize = 2 * 1024 * 1024;
-    if (file.size > maxSize) {
-      return NextResponse.json({ error: 'Fichier trop volumineux (max 2MB)' }, { status: 400 });
+    // Validation de la taille
+    if (file.size > config.maxSize) {
+      const maxMB = config.maxSize / 1024 / 1024;
+      return NextResponse.json({ error: `Fichier trop volumineux (max ${maxMB}MB)` }, { status: 400 });
     }
 
     // Générer un nom de fichier unique
     const timestamp = Date.now();
     const extension = file.name.split('.').pop();
-    const folder = type === 'volunteer-photo' ? 'volunteers' : 'partners';
+    const folder = config.folder;
     const filename = `${timestamp}.${extension}`;
 
     // Si BLOB_READ_WRITE_TOKEN est configuré, utiliser Vercel Blob (production)

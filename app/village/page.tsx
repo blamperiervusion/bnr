@@ -2,6 +2,8 @@ import { Metadata } from 'next';
 import VillagePage from '@/components/sections/VillagePage';
 import prisma from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "Le Village",
   description: "Découvrez le Village du Barb'n'Rock Festival : stands, artisans, tattoo, food trucks et bières belges. L'esprit punk et metal dans ton assiette !",

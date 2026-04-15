@@ -178,12 +178,12 @@ export default function VillagePage({ stands = [] }: VillagePageProps) {
                           whileHover={{ scale: 1.05 }}
                           className="bg-[var(--background)]/50 border border-[var(--border)] rounded-lg p-4 text-center hover:border-[var(--accent-cyan)] transition-colors"
                         >
-                          {stand.logo ? (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img src={stand.logo} alt={stand.name} className="w-full h-16 object-contain mb-2" />
-                          ) : (
-                            <span className="text-3xl block mb-2">🍽️</span>
-                          )}
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img 
+                            src={stand.logo || '/images/placeholder-stand.png'} 
+                            alt={stand.name} 
+                            className="w-full h-16 object-contain mb-2" 
+                          />
                           <p className="font-bold text-white text-sm">{stand.name}</p>
                           {stand.description && (
                             <p className="text-xs text-[var(--muted-foreground)] mt-1 line-clamp-2">{stand.description}</p>
@@ -247,12 +247,12 @@ export default function VillagePage({ stands = [] }: VillagePageProps) {
                         whileHover={{ scale: 1.05, y: -5 }}
                         className="bg-[var(--muted)]/50 border border-[var(--border)] rounded-lg p-4 text-center hover:border-[var(--accent-cyan)] transition-all group cursor-pointer"
                       >
-                        {stand.logo ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img src={stand.logo} alt={stand.name} className="w-full h-20 object-contain mb-3" />
-                        ) : (
-                          <span className="text-4xl block mb-3">{config.emoji}</span>
-                        )}
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img 
+                          src={stand.logo || '/images/placeholder-stand.png'} 
+                          alt={stand.name} 
+                          className="w-full h-20 object-contain mb-3" 
+                        />
                         <p className="font-bold text-white text-sm group-hover:text-[var(--accent-cyan)] transition-colors">
                           {stand.name}
                         </p>

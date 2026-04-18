@@ -179,20 +179,22 @@ export default function LineupCarouselPage() {
                 className="relative overflow-hidden rounded-xl cursor-pointer shadow-2xl shrink-0"
                 style={{ width: SLIDE_WIDTH, height: SLIDE_HEIGHT, background: '#0a0c0f' }}
               >
-                {/* Band image */}
+                {/* Band image - zoomed out */}
                 <div
-                  className="absolute inset-0 bg-cover bg-center"
+                  className="absolute bg-center"
                   style={{
+                    inset: '-10%',
                     backgroundImage: `url(${band.imageUrl || '/images/placeholder-stand.png'})`,
+                    backgroundSize: 'cover',
                     filter: 'grayscale(20%)',
                   }}
                 />
                 
-                {/* Gradient overlay */}
+                {/* Gradient overlay - reduced opacity */}
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: 'linear-gradient(180deg, rgba(10,12,15,0.3) 0%, rgba(10,12,15,0.5) 40%, rgba(10,12,15,0.95) 100%)',
+                    background: 'linear-gradient(180deg, rgba(10,12,15,0.15) 0%, rgba(10,12,15,0.3) 40%, rgba(10,12,15,0.9) 100%)',
                   }}
                 />
 

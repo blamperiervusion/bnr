@@ -169,7 +169,17 @@ export default function LineupCarouselPage() {
               <img
                 src={`/images/carousel-lineup/${selectedDay}.png`}
                 alt={`Lineup ${selectedDay}`}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                style={{ 
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  minWidth: '100%',
+                  minHeight: '100%',
+                  width: 'auto',
+                  height: 'auto',
+                  objectFit: 'cover',
+                }}
               />
 
               {exporting === 0 && (
@@ -231,25 +241,27 @@ export default function LineupCarouselPage() {
 
                 {/* Content */}
                 <div style={{ 
-                  position: 'relative', 
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
                   zIndex: 10, 
-                  height: '100%', 
                   display: 'flex', 
                   flexDirection: 'column', 
                   padding: '20px',
-                  boxSizing: 'border-box',
                 }}>
                   {/* Date badge */}
                   <div
                     style={{ 
-                      alignSelf: 'flex-start',
+                      display: 'inline-block',
                       padding: '6px 16px', 
                       borderRadius: '9999px', 
                       fontWeight: 'bold', 
                       fontSize: '12px',
                       backgroundColor: config.color, 
                       color: config.color === '#E85D04' ? '#ffffff' : '#000000',
-                      marginBottom: '0',
+                      alignSelf: 'flex-start',
                     }}
                   >
                     {config.label} {config.date}
@@ -261,7 +273,6 @@ export default function LineupCarouselPage() {
                     display: 'flex', 
                     alignItems: 'center', 
                     justifyContent: 'center',
-                    marginTop: '-20px',
                   }}>
                     <h2
                       style={{
@@ -272,7 +283,7 @@ export default function LineupCarouselPage() {
                         fontFamily: "'Bebas Neue', sans-serif",
                         fontSize: band.name.length > 12 ? '42px' : '52px',
                         textShadow: '0 0 40px rgba(232, 93, 4, 0.5)',
-                        lineHeight: 1.1,
+                        lineHeight: 1,
                         margin: 0,
                         padding: 0,
                       }}
@@ -284,10 +295,10 @@ export default function LineupCarouselPage() {
                   {/* Footer */}
                   <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
                     <div>
-                      <p style={{ color: '#00E5CC', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.1em', margin: 0 }}>
+                      <p style={{ color: '#00E5CC', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.1em', margin: 0, lineHeight: 1.4 }}>
                         BARB&apos;N&apos;ROCK 2026
                       </p>
-                      <p style={{ color: '#6b7280', fontSize: '12px', margin: 0 }}>Crèvecœur-le-Grand</p>
+                      <p style={{ color: '#6b7280', fontSize: '12px', margin: 0, lineHeight: 1.4 }}>Crèvecœur-le-Grand</p>
                     </div>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img

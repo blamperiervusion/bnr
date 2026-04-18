@@ -179,15 +179,13 @@ export default function LineupCarouselPage() {
                 className="relative overflow-hidden rounded-xl cursor-pointer shadow-2xl shrink-0"
                 style={{ width: SLIDE_WIDTH, height: SLIDE_HEIGHT, background: '#0a0c0f' }}
               >
-                {/* Band image - zoomed out to show more */}
+                {/* Band image */}
                 <div
                   className="absolute inset-0"
                   style={{
                     backgroundImage: `url(${band.imageUrl || '/images/placeholder-stand.png'})`,
-                    backgroundSize: '85%',
-                    backgroundPosition: 'center 20%',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundColor: '#0a0c0f',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center 40%',
                     filter: 'grayscale(20%)',
                   }}
                 />

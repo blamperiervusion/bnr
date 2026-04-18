@@ -149,65 +149,19 @@ export default function LineupCarouselPage() {
         {/* Slides Preview */}
         <div className="flex-1 overflow-x-auto">
           <div className="flex gap-5 pb-6">
-            {/* Slide 1: Lineup */}
+            {/* Slide 1: Lineup (image générée) */}
             <div
               ref={el => { slidesRef.current[0] = el; }}
               onClick={() => exportSlide(0)}
               className="relative overflow-hidden rounded-xl cursor-pointer shadow-2xl shrink-0"
               style={{ width: SLIDE_WIDTH, height: SLIDE_HEIGHT, background: '#0a0c0f' }}
             >
-              {/* Background texture */}
-              <div className="absolute inset-0 opacity-20" style={{
-                backgroundImage: 'url(/images/texture-grunge.png)',
-                backgroundSize: 'cover',
-              }} />
-              
-              {/* Corner accents */}
-              <div className="absolute top-4 left-4 w-12 h-12 border-t-2 border-l-2" style={{ borderColor: '#E85D04' }} />
-              <div className="absolute bottom-4 right-4 w-12 h-12 border-b-2 border-r-2" style={{ borderColor: '#E85D04' }} />
-
-              {/* Content */}
-              <div className="relative z-10 h-full flex flex-col items-center justify-center p-6">
-                {/* Date badge */}
-                <div
-                  className="px-5 py-2 rounded-full font-bold text-sm mb-6"
-                  style={{ backgroundColor: config.color, color: config.color === '#E85D04' ? 'white' : 'black' }}
-                >
-                  {config.label} {config.date}
-                </div>
-
-                {/* Band names */}
-                <div className="text-center space-y-1">
-                  {currentBands.map((band, i) => (
-                    <p
-                      key={band.name}
-                      className="text-white font-bold tracking-wider"
-                      style={{
-                        fontFamily: "'Bebas Neue', sans-serif",
-                        fontSize: band.isHeadliner ? '32px' : i < 3 ? '24px' : '20px',
-                        color: band.isHeadliner ? '#f0f0f0' : '#c0c0c0',
-                        textShadow: band.isHeadliner ? '0 0 30px rgba(0, 229, 204, 0.4)' : 'none',
-                      }}
-                    >
-                      {band.name.toUpperCase()}
-                    </p>
-                  ))}
-                </div>
-
-                {/* Footer */}
-                <div className="absolute bottom-6 text-center">
-                  <p className="text-gray-400 text-xs tracking-widest">BARB'N'ROCK FESTIVAL 2026</p>
-                  <p className="text-gray-500 text-xs">Crèvecœur-le-Grand</p>
-                </div>
-
-                {/* Logo */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/logo.png"
-                  alt="Logo"
-                  className="absolute bottom-4 right-4 w-10 opacity-70"
-                />
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`/images/carousel-lineup/${selectedDay}.png`}
+                alt={`Lineup ${selectedDay}`}
+                className="w-full h-full object-cover"
+              />
 
               {exporting === 0 && (
                 <div data-export-overlay className="absolute inset-0 bg-black/70 flex items-center justify-center text-white">

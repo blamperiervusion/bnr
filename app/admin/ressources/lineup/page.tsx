@@ -156,7 +156,11 @@ export default function LineupCarouselPage() {
               style={{ 
                 width: SLIDE_WIDTH, 
                 height: SLIDE_HEIGHT, 
-                background: '#0a0c0f',
+                backgroundImage: `url(/images/carousel-lineup/${selectedDay}.png)`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center center',
+                backgroundRepeat: 'no-repeat',
+                backgroundColor: '#0a0c0f',
                 position: 'relative',
                 overflow: 'hidden',
                 borderRadius: '12px',
@@ -165,29 +169,15 @@ export default function LineupCarouselPage() {
                 flexShrink: 0,
               }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`/images/carousel-lineup/${selectedDay}.png`}
-                alt={`Lineup ${selectedDay}`}
-                style={{ 
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  minWidth: '100%',
-                  minHeight: '100%',
-                  width: 'auto',
-                  height: 'auto',
-                  objectFit: 'cover',
-                }}
-              />
-
               {exporting === 0 && (
                 <div 
                   data-export-overlay 
                   style={{ 
                     position: 'absolute', 
-                    inset: 0, 
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
                     backgroundColor: 'rgba(0,0,0,0.7)', 
                     display: 'flex', 
                     alignItems: 'center', 
@@ -209,7 +199,7 @@ export default function LineupCarouselPage() {
                 style={{ 
                   width: SLIDE_WIDTH, 
                   height: SLIDE_HEIGHT, 
-                  background: '#0a0c0f',
+                  backgroundColor: '#0a0c0f',
                   position: 'relative',
                   overflow: 'hidden',
                   borderRadius: '12px',
@@ -222,11 +212,13 @@ export default function LineupCarouselPage() {
                 <div
                   style={{
                     position: 'absolute',
-                    inset: 0,
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
                     backgroundImage: `url(${band.imageUrl || '/images/placeholder-stand.png'})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center 40%',
-                    filter: 'grayscale(20%)',
                   }}
                 />
                 
@@ -234,92 +226,105 @@ export default function LineupCarouselPage() {
                 <div
                   style={{
                     position: 'absolute',
-                    inset: 0,
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
                     background: 'linear-gradient(180deg, rgba(10,12,15,0.15) 0%, rgba(10,12,15,0.3) 40%, rgba(10,12,15,0.9) 100%)',
                   }}
                 />
 
-                {/* Content */}
-                <div style={{ 
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  zIndex: 10, 
-                  display: 'flex', 
-                  flexDirection: 'column', 
-                  padding: '20px',
-                }}>
-                  {/* Date badge */}
-                  <div
-                    style={{ 
-                      display: 'inline-block',
-                      padding: '6px 16px', 
-                      borderRadius: '9999px', 
-                      fontWeight: 'bold', 
-                      fontSize: '12px',
-                      backgroundColor: config.color, 
-                      color: config.color === '#E85D04' ? '#ffffff' : '#000000',
-                      alignSelf: 'flex-start',
+                {/* Date badge - absolute top left */}
+                <div
+                  style={{ 
+                    position: 'absolute',
+                    top: 20,
+                    left: 20,
+                    zIndex: 10,
+                    padding: '6px 16px', 
+                    borderRadius: 9999, 
+                    fontWeight: 'bold', 
+                    fontSize: 12,
+                    backgroundColor: config.color, 
+                    color: config.color === '#E85D04' ? '#ffffff' : '#000000',
+                  }}
+                >
+                  {config.label} {config.date}
+                </div>
+
+                {/* Band name - absolute center */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    zIndex: 10,
+                    width: '90%',
+                    textAlign: 'center',
+                  }}
+                >
+                  <span
+                    style={{
+                      color: '#ffffff',
+                      fontWeight: 'bold',
+                      letterSpacing: 2,
+                      fontFamily: "'Bebas Neue', sans-serif",
+                      fontSize: band.name.length > 12 ? 42 : 52,
+                      textShadow: '0 0 40px rgba(232, 93, 4, 0.5)',
                     }}
                   >
-                    {config.label} {config.date}
-                  </div>
+                    {band.name.toUpperCase()}
+                  </span>
+                </div>
 
-                  {/* Band name - centered */}
-                  <div style={{ 
-                    flex: 1, 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    justifyContent: 'center',
-                  }}>
-                    <h2
-                      style={{
-                        color: '#ffffff',
-                        textAlign: 'center',
-                        fontWeight: 'bold',
-                        letterSpacing: '0.05em',
-                        fontFamily: "'Bebas Neue', sans-serif",
-                        fontSize: band.name.length > 12 ? '42px' : '52px',
-                        textShadow: '0 0 40px rgba(232, 93, 4, 0.5)',
-                        lineHeight: 1,
-                        margin: 0,
-                        padding: 0,
-                      }}
-                    >
-                      {band.name.toUpperCase()}
-                    </h2>
+                {/* Footer left - absolute bottom */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: 20,
+                    left: 20,
+                    zIndex: 10,
+                  }}
+                >
+                  <div style={{ color: '#00E5CC', fontSize: 12, fontWeight: 'bold', letterSpacing: 1 }}>
+                    BARB&apos;N&apos;ROCK 2026
                   </div>
-
-                  {/* Footer */}
-                  <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
-                    <div>
-                      <p style={{ color: '#00E5CC', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.1em', margin: 0, lineHeight: 1.4 }}>
-                        BARB&apos;N&apos;ROCK 2026
-                      </p>
-                      <p style={{ color: '#6b7280', fontSize: '12px', margin: 0, lineHeight: 1.4 }}>Crèvecœur-le-Grand</p>
-                    </div>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="/images/logo.png"
-                      alt="Logo"
-                      style={{ width: '40px', opacity: 0.8 }}
-                    />
+                  <div style={{ color: '#6b7280', fontSize: 12 }}>
+                    Crèvecœur-le-Grand
                   </div>
                 </div>
+
+                {/* Logo - absolute bottom right */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/logo.png"
+                  alt="Logo"
+                  style={{ 
+                    position: 'absolute',
+                    bottom: 20,
+                    right: 20,
+                    width: 40, 
+                    opacity: 0.8,
+                    zIndex: 10,
+                  }}
+                />
 
                 {exporting === index + 1 && (
                   <div 
                     data-export-overlay 
                     style={{ 
                       position: 'absolute', 
-                      inset: 0, 
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
                       backgroundColor: 'rgba(0,0,0,0.7)', 
                       display: 'flex', 
                       alignItems: 'center', 
                       justifyContent: 'center', 
-                      color: '#ffffff' 
+                      color: '#ffffff',
+                      zIndex: 20,
                     }}
                   >
                     ⏳ Export...

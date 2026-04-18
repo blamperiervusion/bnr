@@ -68,6 +68,30 @@ export default function LineupCarouselPage() {
           if (overlay) (overlay as HTMLElement).style.display = 'none';
           clonedElement.style.boxShadow = 'none';
           clonedElement.style.borderRadius = '0';
+          
+          // Appliquer les corrections de position pour l'export
+          const offsetElements = clonedElement.querySelectorAll('[data-export-offset]');
+          offsetElements.forEach((el) => {
+            const htmlEl = el as HTMLElement;
+            const offset = parseInt(htmlEl.dataset.exportOffset || '0');
+            if (offset) {
+              // Si l'élément a un top défini, on le décale vers le haut
+              if (htmlEl.style.top) {
+                if (htmlEl.style.top.includes('%')) {
+                  // Pour les éléments centrés avec %, on ajuste le transform
+                  htmlEl.style.marginTop = `-${offset}px`;
+                } else {
+                  const currentTop = parseInt(htmlEl.style.top) || 0;
+                  htmlEl.style.top = `${currentTop - offset}px`;
+                }
+              }
+              // Si l'élément a un bottom défini, on l'augmente pour le décaler vers le haut
+              if (htmlEl.style.bottom && !htmlEl.style.top) {
+                const currentBottom = parseInt(htmlEl.style.bottom) || 0;
+                htmlEl.style.bottom = `${currentBottom + offset}px`;
+              }
+            }
+          });
         },
       });
 
@@ -236,6 +260,7 @@ export default function LineupCarouselPage() {
 
                 {/* Date badge - absolute top left */}
                 <div
+                  data-export-offset="15"
                   style={{ 
                     position: 'absolute',
                     top: 20,
@@ -254,6 +279,7 @@ export default function LineupCarouselPage() {
 
                 {/* Band name - absolute center */}
                 <div
+                  data-export-offset="25"
                   style={{
                     position: 'absolute',
                     top: '50%',
@@ -280,6 +306,7 @@ export default function LineupCarouselPage() {
 
                 {/* Footer left - absolute bottom */}
                 <div
+                  data-export-offset="15"
                   style={{
                     position: 'absolute',
                     bottom: 20,
@@ -300,6 +327,7 @@ export default function LineupCarouselPage() {
                 <img
                   src="/images/logo.png"
                   alt="Logo"
+                  data-export-offset="15"
                   style={{ 
                     position: 'absolute',
                     bottom: 20,

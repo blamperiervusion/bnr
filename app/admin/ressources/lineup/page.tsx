@@ -217,29 +217,25 @@ export default function LineupCarouselPage() {
                 backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(232, 93, 4, 0.3) 0%, transparent 50%)',
               }} />
 
-              {/* Date badge - same as artist slides */}
+              {/* Date badge - centered */}
               <div style={{
                 position: 'absolute',
                 top: 20,
-                left: 20,
+                left: '50%',
+                transform: 'translateX(-50%)',
                 zIndex: 10,
-                display: 'table',
                 height: 28,
+                lineHeight: '28px',
                 padding: '0 16px',
                 borderRadius: 9999,
                 backgroundColor: config.color,
+                fontWeight: 'bold',
+                fontSize: 12,
+                color: config.color === '#E85D04' ? '#ffffff' : '#000000',
+                fontFamily: 'Arial, Helvetica, sans-serif',
+                textAlign: 'center',
               }}>
-                <span style={{
-                  display: 'table-cell',
-                  verticalAlign: 'middle',
-                  fontWeight: 'bold',
-                  fontSize: 12,
-                  lineHeight: 1,
-                  color: config.color === '#E85D04' ? '#ffffff' : '#000000',
-                  fontFamily: 'system-ui, -apple-system, sans-serif',
-                }}>
-                  {config.label} {config.date}
-                </span>
+                {config.label} {config.date}
               </div>
 
               {/* Band names */}
@@ -379,30 +375,22 @@ export default function LineupCarouselPage() {
                 />
 
                 {/* Date badge - absolute top left */}
-                <div
-                  style={{ 
-                    position: 'absolute',
-                    top: 20,
-                    left: 20,
-                    zIndex: 10,
-                    display: 'table',
-                    height: 28,
-                    padding: '0 16px', 
-                    borderRadius: 9999, 
-                    backgroundColor: config.color, 
-                  }}
-                >
-                  <span style={{
-                    display: 'table-cell',
-                    verticalAlign: 'middle',
-                    fontWeight: 'bold', 
-                    fontSize: 12,
-                    lineHeight: 1,
-                    color: config.color === '#E85D04' ? '#ffffff' : '#000000',
-                    fontFamily: 'system-ui, -apple-system, sans-serif',
-                  }}>
-                    {config.label} {config.date}
-                  </span>
+                <div style={{ 
+                  position: 'absolute',
+                  top: 20,
+                  left: 20,
+                  zIndex: 10,
+                  height: 28,
+                  lineHeight: '28px',
+                  padding: '0 16px', 
+                  borderRadius: 9999, 
+                  backgroundColor: config.color,
+                  fontWeight: 'bold', 
+                  fontSize: 12,
+                  color: config.color === '#E85D04' ? '#ffffff' : '#000000',
+                  fontFamily: 'Arial, Helvetica, sans-serif',
+                }}>
+                  {config.label} {config.date}
                 </div>
 
                 {/* Band name - absolute center */}

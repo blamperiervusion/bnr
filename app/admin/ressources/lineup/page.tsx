@@ -153,18 +153,38 @@ export default function LineupCarouselPage() {
             <div
               ref={el => { slidesRef.current[0] = el; }}
               onClick={() => exportSlide(0)}
-              className="relative overflow-hidden rounded-xl cursor-pointer shadow-2xl shrink-0"
-              style={{ width: SLIDE_WIDTH, height: SLIDE_HEIGHT, background: '#0a0c0f' }}
+              style={{ 
+                width: SLIDE_WIDTH, 
+                height: SLIDE_HEIGHT, 
+                background: '#0a0c0f',
+                position: 'relative',
+                overflow: 'hidden',
+                borderRadius: '12px',
+                cursor: 'pointer',
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+                flexShrink: 0,
+              }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`/images/carousel-lineup/${selectedDay}.png`}
                 alt={`Lineup ${selectedDay}`}
-                className="w-full h-full object-cover"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
 
               {exporting === 0 && (
-                <div data-export-overlay className="absolute inset-0 bg-black/70 flex items-center justify-center text-white">
+                <div 
+                  data-export-overlay 
+                  style={{ 
+                    position: 'absolute', 
+                    inset: 0, 
+                    backgroundColor: 'rgba(0,0,0,0.7)', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center', 
+                    color: '#ffffff' 
+                  }}
+                >
                   ⏳ Export...
                 </div>
               )}
@@ -216,7 +236,8 @@ export default function LineupCarouselPage() {
                   height: '100%', 
                   display: 'flex', 
                   flexDirection: 'column', 
-                  padding: '24px' 
+                  padding: '20px',
+                  boxSizing: 'border-box',
                 }}>
                   {/* Date badge */}
                   <div
@@ -227,14 +248,21 @@ export default function LineupCarouselPage() {
                       fontWeight: 'bold', 
                       fontSize: '12px',
                       backgroundColor: config.color, 
-                      color: config.color === '#E85D04' ? '#ffffff' : '#000000' 
+                      color: config.color === '#E85D04' ? '#ffffff' : '#000000',
+                      marginBottom: '0',
                     }}
                   >
                     {config.label} {config.date}
                   </div>
 
                   {/* Band name - centered */}
-                  <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ 
+                    flex: 1, 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    marginTop: '-20px',
+                  }}>
                     <h2
                       style={{
                         color: '#ffffff',
@@ -245,6 +273,8 @@ export default function LineupCarouselPage() {
                         fontSize: band.name.length > 12 ? '42px' : '52px',
                         textShadow: '0 0 40px rgba(232, 93, 4, 0.5)',
                         lineHeight: 1.1,
+                        margin: 0,
+                        padding: 0,
                       }}
                     >
                       {band.name.toUpperCase()}
@@ -254,10 +284,10 @@ export default function LineupCarouselPage() {
                   {/* Footer */}
                   <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
                     <div>
-                      <p style={{ color: '#00E5CC', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.1em' }}>
+                      <p style={{ color: '#00E5CC', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.1em', margin: 0 }}>
                         BARB&apos;N&apos;ROCK 2026
                       </p>
-                      <p style={{ color: '#6b7280', fontSize: '12px' }}>Crèvecœur-le-Grand</p>
+                      <p style={{ color: '#6b7280', fontSize: '12px', margin: 0 }}>Crèvecœur-le-Grand</p>
                     </div>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img

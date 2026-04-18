@@ -257,17 +257,14 @@ export default function LineupCarouselPage() {
                     top: 20,
                     left: 20,
                     zIndex: 10,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: 28,
-                    padding: '0 16px', 
+                    padding: '8px 16px 6px 16px', 
                     borderRadius: 9999, 
                     fontWeight: 'bold', 
                     fontSize: 12,
                     lineHeight: 1,
                     backgroundColor: config.color, 
                     color: config.color === '#E85D04' ? '#ffffff' : '#000000',
+                    fontFamily: 'system-ui, -apple-system, sans-serif',
                   }}
                 >
                   {config.label} {config.date}

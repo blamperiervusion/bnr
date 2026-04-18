@@ -52,53 +52,45 @@ export default function LineupCarouselPage() {
     if (!slide) return;
 
     setExporting(slideIndex);
-    await new Promise(resolve => setTimeout(resolve, 100));
+    
+    // Attendre que les fonts soient chargées
+    await document.fonts.ready;
+    await new Promise(resolve => setTimeout(resolve, 200));
 
     try {
       const html2canvas = (await import('html2canvas')).default;
-      const scale = 1080 / SLIDE_WIDTH;
+      // Augmenter le scale pour une meilleure qualité (4x au lieu de 3.33x)
+      const scale = 4;
       const canvas = await html2canvas(slide, {
         scale,
         useCORS: true,
         allowTaint: true,
         backgroundColor: '#0a0c0f',
         logging: false,
+        imageTimeout: 15000,
         onclone: (clonedDoc, clonedElement) => {
           const overlay = clonedElement.querySelector('[data-export-overlay]');
           if (overlay) (overlay as HTMLElement).style.display = 'none';
           clonedElement.style.boxShadow = 'none';
           clonedElement.style.borderRadius = '0';
-          
-          // Appliquer les corrections de position pour l'export
-          const offsetElements = clonedElement.querySelectorAll('[data-export-offset]');
-          offsetElements.forEach((el) => {
-            const htmlEl = el as HTMLElement;
-            const offset = parseInt(htmlEl.dataset.exportOffset || '0');
-            if (offset) {
-              // Si l'élément a un top défini, on le décale vers le haut
-              if (htmlEl.style.top) {
-                if (htmlEl.style.top.includes('%')) {
-                  // Pour les éléments centrés avec %, on ajuste le transform
-                  htmlEl.style.marginTop = `-${offset}px`;
-                } else {
-                  const currentTop = parseInt(htmlEl.style.top) || 0;
-                  htmlEl.style.top = `${currentTop - offset}px`;
-                }
-              }
-              // Si l'élément a un bottom défini, on l'augmente pour le décaler vers le haut
-              if (htmlEl.style.bottom && !htmlEl.style.top) {
-                const currentBottom = parseInt(htmlEl.style.bottom) || 0;
-                htmlEl.style.bottom = `${currentBottom + offset}px`;
-              }
-            }
-          });
         },
       });
+      
+      // Redimensionner à 1080x1350 pour une qualité optimale
+      const finalCanvas = document.createElement('canvas');
+      finalCanvas.width = 1080;
+      finalCanvas.height = 1350;
+      const ctx = finalCanvas.getContext('2d');
+      if (ctx) {
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(canvas, 0, 0, 1080, 1350);
+      }
 
       const link = document.createElement('a');
       const slideName = slideIndex === 0 ? 'lineup' : currentBands[slideIndex - 1]?.name.toLowerCase().replace(/\s+/g, '-');
       link.download = `barbnrock-${selectedDay}-${String(slideIndex + 1).padStart(2, '0')}-${slideName}.png`;
-      link.href = canvas.toDataURL('image/png');
+      link.href = finalCanvas.toDataURL('image/png', 1.0);
       link.click();
     } catch (error) {
       console.error('Export error:', error);
@@ -260,7 +252,6 @@ export default function LineupCarouselPage() {
 
                 {/* Date badge - absolute top left */}
                 <div
-                  data-export-offset="15"
                   style={{ 
                     position: 'absolute',
                     top: 20,
@@ -279,7 +270,6 @@ export default function LineupCarouselPage() {
 
                 {/* Band name - absolute center */}
                 <div
-                  data-export-offset="25"
                   style={{
                     position: 'absolute',
                     top: '50%',
@@ -306,7 +296,6 @@ export default function LineupCarouselPage() {
 
                 {/* Footer left - absolute bottom */}
                 <div
-                  data-export-offset="15"
                   style={{
                     position: 'absolute',
                     bottom: 20,
@@ -327,7 +316,6 @@ export default function LineupCarouselPage() {
                 <img
                   src="/images/logo.png"
                   alt="Logo"
-                  data-export-offset="15"
                   style={{ 
                     position: 'absolute',
                     bottom: 20,

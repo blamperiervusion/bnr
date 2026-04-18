@@ -76,18 +76,15 @@ export default function LineupCarouselPage() {
             const computed = window.getComputedStyle(htmlEl);
             
             // Fix color properties that might use oklab
-            ['color', 'backgroundColor', 'borderColor'].forEach(prop => {
-              const value = computed.getPropertyValue(prop.replace(/([A-Z])/g, '-$1').toLowerCase());
-              if (value && (value.includes('oklab') || value.includes('oklch'))) {
-                // Create a temporary element to get the computed RGB value
-                const temp = document.createElement('div');
-                temp.style.color = value;
-                document.body.appendChild(temp);
-                const rgb = window.getComputedStyle(temp).color;
-                document.body.removeChild(temp);
-                (htmlEl.style as Record<string, string>)[prop] = rgb;
-              }
-            });
+            const colorValue = computed.color;
+            const bgValue = computed.backgroundColor;
+            
+            if (colorValue && (colorValue.includes('oklab') || colorValue.includes('oklch'))) {
+              htmlEl.style.color = '#ffffff';
+            }
+            if (bgValue && (bgValue.includes('oklab') || bgValue.includes('oklch'))) {
+              htmlEl.style.backgroundColor = '#0a0c0f';
+            }
           });
         },
       });

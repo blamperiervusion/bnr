@@ -165,18 +165,14 @@ export default function LineupCarouselPage() {
         {/* Slides Preview */}
         <div className="flex-1 overflow-x-auto">
           <div className="flex gap-5 pb-6">
-            {/* Slide 1: Lineup (image générée) */}
+            {/* Slide 1: Lineup (dynamique) */}
             <div
               ref={el => { slidesRef.current[0] = el; }}
               onClick={() => exportSlide(0)}
               style={{ 
                 width: SLIDE_WIDTH, 
                 height: SLIDE_HEIGHT, 
-                backgroundImage: `url(/images/carousel-lineup/${selectedDay}.png)`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center center',
-                backgroundRepeat: 'no-repeat',
-                backgroundColor: '#0a0c0f',
+                background: 'linear-gradient(180deg, #1a1a2e 0%, #0a0c0f 50%, #1a0a0a 100%)',
                 position: 'relative',
                 overflow: 'hidden',
                 borderRadius: '12px',
@@ -185,6 +181,104 @@ export default function LineupCarouselPage() {
                 flexShrink: 0,
               }}
             >
+              {/* Background texture */}
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundImage: 'radial-gradient(circle at 20% 80%, rgba(232, 93, 4, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(0, 229, 204, 0.1) 0%, transparent 40%)',
+              }} />
+
+              {/* Date badge */}
+              <div style={{
+                position: 'absolute',
+                top: 20,
+                left: '50%',
+                transform: 'translateX(-50%)',
+                zIndex: 10,
+                padding: '8px 20px 6px 20px',
+                borderRadius: 9999,
+                fontWeight: 'bold',
+                fontSize: 14,
+                lineHeight: 1,
+                backgroundColor: config.color,
+                color: config.color === '#E85D04' ? '#ffffff' : '#000000',
+                fontFamily: 'system-ui, -apple-system, sans-serif',
+              }}>
+                {config.label} {config.date}
+              </div>
+
+              {/* Band names */}
+              <div style={{
+                position: 'absolute',
+                top: 60,
+                left: 0,
+                right: 0,
+                bottom: 80,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: 4,
+                padding: '0 10px',
+              }}>
+                {currentBands.map((band, idx) => {
+                  const baseSize = 28;
+                  const decrease = 3;
+                  const fontSize = Math.max(baseSize - (idx * decrease), 14);
+                  const isHeadliner = idx === 0;
+                  return (
+                    <div
+                      key={band.name}
+                      style={{
+                        color: '#ffffff',
+                        fontFamily: "'Bebas Neue', sans-serif",
+                        fontSize: fontSize,
+                        fontWeight: 'bold',
+                        letterSpacing: isHeadliner ? 3 : 2,
+                        textAlign: 'center',
+                        textShadow: isHeadliner ? '0 0 30px rgba(232, 93, 4, 0.5)' : 'none',
+                        lineHeight: 1.1,
+                      }}
+                    >
+                      {band.name.toUpperCase()}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Footer */}
+              <div style={{
+                position: 'absolute',
+                bottom: 15,
+                left: 15,
+                zIndex: 10,
+              }}>
+                <div style={{ color: '#00E5CC', fontSize: 11, fontWeight: 'bold', letterSpacing: 1, margin: 0 }}>
+                  BARB&apos;N&apos;ROCK 2026
+                </div>
+                <div style={{ color: '#6b7280', fontSize: 10, margin: 0 }}>
+                  Crèvecœur-le-Grand
+                </div>
+              </div>
+
+              {/* Logo */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/logo.png"
+                alt="Logo"
+                style={{
+                  position: 'absolute',
+                  bottom: 12,
+                  right: 12,
+                  width: 40,
+                  height: 40,
+                  objectFit: 'contain',
+                }}
+              />
+
               {exporting === 0 && (
                 <div 
                   data-export-overlay 

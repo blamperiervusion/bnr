@@ -68,24 +68,6 @@ export default function LineupCarouselPage() {
           if (overlay) (overlay as HTMLElement).style.display = 'none';
           clonedElement.style.boxShadow = 'none';
           clonedElement.style.borderRadius = '0';
-          
-          // Convert oklab/oklch colors to rgb for html2canvas compatibility
-          const allElements = clonedElement.querySelectorAll('*');
-          allElements.forEach((el) => {
-            const htmlEl = el as HTMLElement;
-            const computed = window.getComputedStyle(htmlEl);
-            
-            // Fix color properties that might use oklab
-            const colorValue = computed.color;
-            const bgValue = computed.backgroundColor;
-            
-            if (colorValue && (colorValue.includes('oklab') || colorValue.includes('oklch'))) {
-              htmlEl.style.color = '#ffffff';
-            }
-            if (bgValue && (bgValue.includes('oklab') || bgValue.includes('oklch'))) {
-              htmlEl.style.backgroundColor = '#0a0c0f';
-            }
-          });
         },
       });
 
@@ -194,13 +176,23 @@ export default function LineupCarouselPage() {
                 key={band.name}
                 ref={el => { slidesRef.current[index + 1] = el; }}
                 onClick={() => exportSlide(index + 1)}
-                className="relative overflow-hidden rounded-xl cursor-pointer shadow-2xl shrink-0"
-                style={{ width: SLIDE_WIDTH, height: SLIDE_HEIGHT, background: '#0a0c0f' }}
+                style={{ 
+                  width: SLIDE_WIDTH, 
+                  height: SLIDE_HEIGHT, 
+                  background: '#0a0c0f',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  borderRadius: '12px',
+                  cursor: 'pointer',
+                  boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+                  flexShrink: 0,
+                }}
               >
                 {/* Band image */}
                 <div
-                  className="absolute inset-0"
                   style={{
+                    position: 'absolute',
+                    inset: 0,
                     backgroundImage: `url(${band.imageUrl || '/images/placeholder-stand.png'})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center 40%',
@@ -208,29 +200,47 @@ export default function LineupCarouselPage() {
                   }}
                 />
                 
-                {/* Gradient overlay - reduced opacity */}
+                {/* Gradient overlay */}
                 <div
-                  className="absolute inset-0"
                   style={{
+                    position: 'absolute',
+                    inset: 0,
                     background: 'linear-gradient(180deg, rgba(10,12,15,0.15) 0%, rgba(10,12,15,0.3) 40%, rgba(10,12,15,0.9) 100%)',
                   }}
                 />
 
                 {/* Content */}
-                <div className="relative z-10 h-full flex flex-col p-6">
+                <div style={{ 
+                  position: 'relative', 
+                  zIndex: 10, 
+                  height: '100%', 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  padding: '24px' 
+                }}>
                   {/* Date badge */}
                   <div
-                    className="self-start px-4 py-1.5 rounded-full font-bold text-xs"
-                    style={{ backgroundColor: config.color, color: config.color === '#E85D04' ? 'white' : 'black' }}
+                    style={{ 
+                      alignSelf: 'flex-start',
+                      padding: '6px 16px', 
+                      borderRadius: '9999px', 
+                      fontWeight: 'bold', 
+                      fontSize: '12px',
+                      backgroundColor: config.color, 
+                      color: config.color === '#E85D04' ? '#ffffff' : '#000000' 
+                    }}
                   >
                     {config.label} {config.date}
                   </div>
 
                   {/* Band name - centered */}
-                  <div className="flex-1 flex items-center justify-center">
+                  <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <h2
-                      className="text-white text-center font-bold tracking-wider"
                       style={{
+                        color: '#ffffff',
+                        textAlign: 'center',
+                        fontWeight: 'bold',
+                        letterSpacing: '0.05em',
                         fontFamily: "'Bebas Neue', sans-serif",
                         fontSize: band.name.length > 12 ? '42px' : '52px',
                         textShadow: '0 0 40px rgba(232, 93, 4, 0.5)',
@@ -242,22 +252,35 @@ export default function LineupCarouselPage() {
                   </div>
 
                   {/* Footer */}
-                  <div className="flex items-end justify-between">
+                  <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
                     <div>
-                      <p className="text-[#00E5CC] text-xs font-bold tracking-widest">BARB'N'ROCK 2026</p>
-                      <p className="text-gray-500 text-xs">Crèvecœur-le-Grand</p>
+                      <p style={{ color: '#00E5CC', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.1em' }}>
+                        BARB&apos;N&apos;ROCK 2026
+                      </p>
+                      <p style={{ color: '#6b7280', fontSize: '12px' }}>Crèvecœur-le-Grand</p>
                     </div>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/images/logo.png"
                       alt="Logo"
-                      className="w-10 opacity-80"
+                      style={{ width: '40px', opacity: 0.8 }}
                     />
                   </div>
                 </div>
 
                 {exporting === index + 1 && (
-                  <div data-export-overlay className="absolute inset-0 bg-black/70 flex items-center justify-center text-white">
+                  <div 
+                    data-export-overlay 
+                    style={{ 
+                      position: 'absolute', 
+                      inset: 0, 
+                      backgroundColor: 'rgba(0,0,0,0.7)', 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center', 
+                      color: '#ffffff' 
+                    }}
+                  >
                     ⏳ Export...
                   </div>
                 )}

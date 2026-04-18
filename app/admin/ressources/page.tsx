@@ -76,6 +76,14 @@ const generators = [
     icon: '🎪',
     tags: ['Instagram', 'Carrousel', 'Infos'],
   },
+  {
+    id: 'lineup',
+    title: 'Carrousels Lineup',
+    description: 'Lineup par jour avec images des artistes',
+    href: '/admin/ressources/lineup',
+    icon: '🎤',
+    tags: ['Instagram', 'Carrousel', 'Lineup'],
+  },
 ];
 
 export default function RessourcesPage() {

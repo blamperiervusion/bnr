@@ -217,16 +217,15 @@ export default function LineupCarouselPage() {
                 backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(232, 93, 4, 0.3) 0%, transparent 50%)',
               }} />
 
-              {/* Date badge - using table-cell for vertical centering */}
+              {/* Date badge - same as artist slides */}
               <div style={{
                 position: 'absolute',
-                top: 18,
-                left: '50%',
-                transform: 'translateX(-50%)',
+                top: 20,
+                left: 20,
                 zIndex: 10,
                 display: 'table',
-                height: 32,
-                padding: '0 24px',
+                height: 28,
+                padding: '0 16px',
                 borderRadius: 9999,
                 backgroundColor: config.color,
               }}>
@@ -234,7 +233,7 @@ export default function LineupCarouselPage() {
                   display: 'table-cell',
                   verticalAlign: 'middle',
                   fontWeight: 'bold',
-                  fontSize: 14,
+                  fontSize: 12,
                   lineHeight: 1,
                   color: config.color === '#E85D04' ? '#ffffff' : '#000000',
                   fontFamily: 'system-ui, -apple-system, sans-serif',
@@ -246,21 +245,21 @@ export default function LineupCarouselPage() {
               {/* Band names */}
               <div style={{
                 position: 'absolute',
-                top: 65,
+                top: 60,
                 left: 0,
                 right: 0,
-                bottom: 70,
+                bottom: 65,
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                gap: 6,
-                padding: '0 8px',
+                gap: 8,
+                padding: '0 6px',
               }}>
                 {currentBands.map((band, idx) => {
-                  const baseSize = 38;
-                  const decrease = 4;
-                  const fontSize = Math.max(baseSize - (idx * decrease), 16);
+                  const baseSize = 48;
+                  const decrease = 5;
+                  const fontSize = Math.max(baseSize - (idx * decrease), 20);
                   const isHeadliner = idx === 0;
                   return (
                     <div

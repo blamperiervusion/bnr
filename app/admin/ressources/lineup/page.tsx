@@ -172,7 +172,7 @@ export default function LineupCarouselPage() {
               style={{ 
                 width: SLIDE_WIDTH, 
                 height: SLIDE_HEIGHT, 
-                background: 'linear-gradient(180deg, #1a1a2e 0%, #0a0c0f 50%, #1a0a0a 100%)',
+                backgroundColor: '#0a0c0f',
                 position: 'relative',
                 overflow: 'hidden',
                 borderRadius: '12px',
@@ -181,53 +181,86 @@ export default function LineupCarouselPage() {
                 flexShrink: 0,
               }}
             >
-              {/* Background texture */}
+              {/* Background image from headliner */}
+              {currentBands[0]?.imageUrl && (
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  backgroundImage: `url(${currentBands[0].imageUrl})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center 30%',
+                  filter: 'blur(3px) brightness(0.3)',
+                  transform: 'scale(1.1)',
+                }} />
+              )}
+              
+              {/* Dark overlay gradient */}
               <div style={{
                 position: 'absolute',
                 top: 0,
                 left: 0,
                 right: 0,
                 bottom: 0,
-                backgroundImage: 'radial-gradient(circle at 20% 80%, rgba(232, 93, 4, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(0, 229, 204, 0.1) 0%, transparent 40%)',
+                background: 'linear-gradient(180deg, rgba(10,12,15,0.7) 0%, rgba(10,12,15,0.85) 50%, rgba(10,12,15,0.95) 100%)',
               }} />
 
-              {/* Date badge */}
+              {/* Color accents */}
               <div style={{
                 position: 'absolute',
-                top: 20,
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(232, 93, 4, 0.3) 0%, transparent 50%)',
+              }} />
+
+              {/* Date badge - using table-cell for vertical centering */}
+              <div style={{
+                position: 'absolute',
+                top: 18,
                 left: '50%',
                 transform: 'translateX(-50%)',
                 zIndex: 10,
-                padding: '8px 20px 6px 20px',
+                display: 'table',
+                height: 32,
+                padding: '0 24px',
                 borderRadius: 9999,
-                fontWeight: 'bold',
-                fontSize: 14,
-                lineHeight: 1,
                 backgroundColor: config.color,
-                color: config.color === '#E85D04' ? '#ffffff' : '#000000',
-                fontFamily: 'system-ui, -apple-system, sans-serif',
               }}>
-                {config.label} {config.date}
+                <span style={{
+                  display: 'table-cell',
+                  verticalAlign: 'middle',
+                  fontWeight: 'bold',
+                  fontSize: 14,
+                  lineHeight: 1,
+                  color: config.color === '#E85D04' ? '#ffffff' : '#000000',
+                  fontFamily: 'system-ui, -apple-system, sans-serif',
+                }}>
+                  {config.label} {config.date}
+                </span>
               </div>
 
               {/* Band names */}
               <div style={{
                 position: 'absolute',
-                top: 60,
+                top: 65,
                 left: 0,
                 right: 0,
-                bottom: 80,
+                bottom: 70,
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                gap: 4,
-                padding: '0 10px',
+                gap: 6,
+                padding: '0 8px',
               }}>
                 {currentBands.map((band, idx) => {
-                  const baseSize = 28;
-                  const decrease = 3;
-                  const fontSize = Math.max(baseSize - (idx * decrease), 14);
+                  const baseSize = 38;
+                  const decrease = 4;
+                  const fontSize = Math.max(baseSize - (idx * decrease), 16);
                   const isHeadliner = idx === 0;
                   return (
                     <div
@@ -237,9 +270,11 @@ export default function LineupCarouselPage() {
                         fontFamily: "'Bebas Neue', sans-serif",
                         fontSize: fontSize,
                         fontWeight: 'bold',
-                        letterSpacing: isHeadliner ? 3 : 2,
+                        letterSpacing: isHeadliner ? 4 : 2,
                         textAlign: 'center',
-                        textShadow: isHeadliner ? '0 0 30px rgba(232, 93, 4, 0.5)' : 'none',
+                        textShadow: isHeadliner 
+                          ? '0 0 40px rgba(232, 93, 4, 0.8), 0 2px 4px rgba(0,0,0,0.5)' 
+                          : '0 2px 4px rgba(0,0,0,0.5)',
                         lineHeight: 1.1,
                       }}
                     >
@@ -252,8 +287,8 @@ export default function LineupCarouselPage() {
               {/* Footer */}
               <div style={{
                 position: 'absolute',
-                bottom: 15,
-                left: 15,
+                bottom: 12,
+                left: 12,
                 zIndex: 10,
               }}>
                 <div style={{ color: '#00E5CC', fontSize: 11, fontWeight: 'bold', letterSpacing: 1, margin: 0 }}>
@@ -271,10 +306,10 @@ export default function LineupCarouselPage() {
                 alt="Logo"
                 style={{
                   position: 'absolute',
-                  bottom: 12,
-                  right: 12,
-                  width: 40,
-                  height: 40,
+                  bottom: 10,
+                  right: 10,
+                  width: 44,
+                  height: 44,
                   objectFit: 'contain',
                 }}
               />
@@ -351,17 +386,24 @@ export default function LineupCarouselPage() {
                     top: 20,
                     left: 20,
                     zIndex: 10,
-                    padding: '8px 16px 6px 16px', 
+                    display: 'table',
+                    height: 28,
+                    padding: '0 16px', 
                     borderRadius: 9999, 
+                    backgroundColor: config.color, 
+                  }}
+                >
+                  <span style={{
+                    display: 'table-cell',
+                    verticalAlign: 'middle',
                     fontWeight: 'bold', 
                     fontSize: 12,
                     lineHeight: 1,
-                    backgroundColor: config.color, 
                     color: config.color === '#E85D04' ? '#ffffff' : '#000000',
                     fontFamily: 'system-ui, -apple-system, sans-serif',
-                  }}
-                >
-                  {config.label} {config.date}
+                  }}>
+                    {config.label} {config.date}
+                  </span>
                 </div>
 
                 {/* Band name - absolute center */}

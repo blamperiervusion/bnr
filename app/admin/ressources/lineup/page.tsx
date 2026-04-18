@@ -68,6 +68,27 @@ export default function LineupCarouselPage() {
           if (overlay) (overlay as HTMLElement).style.display = 'none';
           clonedElement.style.boxShadow = 'none';
           clonedElement.style.borderRadius = '0';
+          
+          // Convert oklab/oklch colors to rgb for html2canvas compatibility
+          const allElements = clonedElement.querySelectorAll('*');
+          allElements.forEach((el) => {
+            const htmlEl = el as HTMLElement;
+            const computed = window.getComputedStyle(htmlEl);
+            
+            // Fix color properties that might use oklab
+            ['color', 'backgroundColor', 'borderColor'].forEach(prop => {
+              const value = computed.getPropertyValue(prop.replace(/([A-Z])/g, '-$1').toLowerCase());
+              if (value && (value.includes('oklab') || value.includes('oklch'))) {
+                // Create a temporary element to get the computed RGB value
+                const temp = document.createElement('div');
+                temp.style.color = value;
+                document.body.appendChild(temp);
+                const rgb = window.getComputedStyle(temp).color;
+                document.body.removeChild(temp);
+                (htmlEl.style as Record<string, string>)[prop] = rgb;
+              }
+            });
+          });
         },
       });
 

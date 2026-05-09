@@ -1,7 +1,7 @@
 <mjml>
   <mj-head>
-    <mj-title>Affiche complète - Barb'n'Rock 2026</mj-title>
-    <mj-preview>18 groupes sur 3 jours : Loudblast, Shaârghot, Psykup... Découvre le programme 🎸</mj-preview>
+    <mj-title>Barb'n'Rock 2026 - Réserve ta place avant le 31 mai</mj-title>
+    <mj-preview>Le tarif Early Bird se termine le 31 mai — 19 groupes, 3 jours, 1 seul prix 🎸</mj-preview>
     <mj-attributes>
       <mj-all font-family="Arial, sans-serif" />
       <mj-text font-size="16px" color="#f0f0f0" line-height="1.6" />
@@ -20,11 +20,14 @@
     <!-- Hero -->
     <mj-section background-color="#0a0c0f" padding="40px 20px 20px">
       <mj-column>
-        <mj-text align="center" font-size="14px" color="#00E5CC" letter-spacing="3px" text-transform="uppercase">
-          L'affiche est complète
+        <mj-text align="center" font-size="14px" color="#E85D04" letter-spacing="3px" text-transform="uppercase">
+          Early Bird — jusqu'au 31 mai
         </mj-text>
         <mj-text align="center" font-size="38px" font-weight="bold" color="white" line-height="1.1" padding-top="10px">
-          18 GROUPES<br/>3 JOURS<br/>1 FESTIVAL
+          19 GROUPES<br/>3 JOURS<br/>1 FESTIVAL
+        </mj-text>
+        <mj-text align="center" font-size="16px" color="#f0f0f0" padding-top="15px">
+          C'est le moment de prendre ta place au meilleur prix.
         </mj-text>
       </mj-column>
     </mj-section>
@@ -32,7 +35,7 @@
     <!-- Affiche Image -->
     <mj-section background-color="#0a0c0f" padding="20px 20px">
       <mj-column>
-        <mj-image src="https://barbnrock-festival.fr/images/affiche-2026.jpg" alt="Affiche Barb'n'Rock 2026" border-radius="8px" />
+        <mj-image src="https://barbnrock-festival.fr/images/affiche-2026-v3.png" alt="Affiche Barb'n'Rock 2026" border-radius="8px" />
       </mj-column>
     </mj-section>
 
@@ -43,7 +46,7 @@
           Salut 🤘
         </mj-text>
         <mj-text padding-top="15px">
-          <strong style="color: white;">Ça y est, l'affiche est bouclée !</strong> 18 groupes 100% français pour 3 jours de pure énergie metal, punk et rock.
+          Tu connais déjà l'affiche — 19 groupes 100% français sur 3 jours. Ce que tu ne sais peut-être pas, c'est que <strong style="color: white;">le tarif Early Bird s'arrête le 31 mai.</strong> Après cette date, le prix augmente. Si tu n'as pas encore ta place, c'est maintenant qu'il faut se bouger.
         </mj-text>
       </mj-column>
     </mj-section>
@@ -62,10 +65,10 @@
     <mj-section background-color="#151515" padding="10px 20px 25px">
       <mj-column>
         <mj-text align="center" font-size="20px" font-weight="bold" color="white">
-          SHAÂRGHOT
+          CACHEMIRE • PSYKUP
         </mj-text>
         <mj-text align="center" font-size="14px" color="#888" padding-top="10px">
-          Darktribe • Cachemire • Wormsand • Zoldier Noiz
+          Kami No Ikari • Barabbas • Black Hazard
         </mj-text>
       </mj-column>
     </mj-section>
@@ -84,10 +87,10 @@
     <mj-section background-color="#1a1a1a" padding="10px 20px 25px">
       <mj-column>
         <mj-text align="center" font-size="20px" font-weight="bold" color="white">
-          LOUDBLAST • KRAV BOCA
+          SHAÂRGHOT • KRAV BOCA • LOUDBLAST
         </mj-text>
         <mj-text align="center" font-size="14px" color="#888" padding-top="10px">
-          Lyzanxia • Room music • Vellocinate • Iron Bastards
+          Akiavel • Dirty Fonzy • Breakout • Ogarya • MRWL
         </mj-text>
       </mj-column>
     </mj-section>
@@ -106,10 +109,10 @@
     <mj-section background-color="#151515" padding="10px 20px 25px">
       <mj-column>
         <mj-text align="center" font-size="20px" font-weight="bold" color="white">
-          PSYKUP • SUPERFLAME
+          MAINKIND
         </mj-text>
         <mj-text align="center" font-size="14px" color="#888" padding-top="10px">
-          Smash Hit Combo • Octavion • Pantha • Meliora
+          Saint Rock Station • Howlite • Udap • Devon Duxe • ADORE
         </mj-text>
       </mj-column>
     </mj-section>
@@ -130,11 +133,14 @@
     <!-- CTA -->
     <mj-section background-color="#0a0c0f" padding="20px 20px 40px">
       <mj-column>
-        <mj-text align="center" font-size="16px" color="#E85D04" padding-bottom="20px">
-          ⚠️ Dernières places Early Bird disponibles
+        <mj-text align="center" font-size="22px" font-weight="bold" color="white" padding-bottom="5px">
+          Le tarif Early Bird, c'est jusqu'au 31 mai.
+        </mj-text>
+        <mj-text align="center" font-size="14px" color="#888" padding-bottom="25px">
+          Après, le prix augmente. Plus de 3 semaines pour agir — mais autant ne pas attendre.
         </mj-text>
         <mj-button href="https://www.helloasso.com/associations/acpc/evenements/barb-n-rock-festival-2026">
-          RÉSERVER MAINTENANT
+          JE PRENDS MA PLACE
         </mj-button>
       </mj-column>
     </mj-section>
@@ -149,7 +155,7 @@
           📍 Crèvecœur-le-Grand (60) • 1h de Paris<br/>
           🚗 Parking gratuit sur place<br/>
           🏕️ Camping ouvert dès le vendredi matin<br/>
-          🎫 Prévente uniquement - Pas de vente sur place
+          🎫 Billetterie sur place disponible
         </mj-text>
       </mj-column>
     </mj-section>

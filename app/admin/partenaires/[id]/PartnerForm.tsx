@@ -5,6 +5,12 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import type { Partner } from '@prisma/client';
 
+const PAYMENT_FORM_OPTIONS = [
+  { value: 'virement', label: 'Virement / Carte bancaire' },
+  { value: 'cheque', label: 'Chèque' },
+  { value: 'especes', label: 'Espèces' },
+];
+
 const tierOptions = [
   // Partenaires financiers (visibles dans le formulaire public)
   { value: 'chaos', label: 'CHAOS (2000€+)', color: '#E85D04', group: 'financial' },
@@ -41,7 +47,12 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-  
+  const [paymentForm, setPaymentForm] = useState('virement');
+  const [generatedDocs, setGeneratedDocs] = useState({
+    invoiceNumber: partner.invoiceNumber || '',
+    receiptNumber: partner.receiptNumber || '',
+  });
+
   const [formData, setFormData] = useState({
     status: partner.status,
     tier: partner.tier || '',
@@ -118,36 +129,73 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
     }
   };
 
-  const handleGenerateReceipt = async () => {
-    if (!formData.donationAmount || !formData.siret || !formData.address) {
-      setMessage({ type: 'error', text: 'SIRET, adresse et montant requis pour le reçu' });
+  const downloadPdf = (blob: Blob, filename: string) => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  };
+
+  const handleGenerateInvoice = async () => {
+    if (!formData.donationAmount) {
+      setMessage({ type: 'error', text: 'Montant requis pour générer une facture' });
       return;
     }
 
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/admin/receipt/${partner.id}`, {
+      const response = await fetch(`/api/admin/invoice/${partner.id}`, {
         method: 'POST',
         credentials: 'include',
       });
 
       if (response.ok) {
-        // Télécharger le PDF
         const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `recu-fiscal-${partner.company.replace(/\s+/g, '-')}.pdf`;
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-        
+        downloadPdf(blob, `facture-${partner.company.replace(/\s+/g, '-')}.pdf`);
+        const newNum = response.headers.get('X-Invoice-Number') || '';
+        if (newNum) setGeneratedDocs(prev => ({ ...prev, invoiceNumber: newNum }));
         router.refresh();
-        setMessage({ type: 'success', text: 'Reçu fiscal généré' });
+        setMessage({ type: 'success', text: 'Facture générée et téléchargée' });
       } else {
         const data = await response.json();
-        setMessage({ type: 'error', text: data.error || 'Erreur génération reçu' });
+        setMessage({ type: 'error', text: data.error || 'Erreur génération facture' });
+      }
+    } catch {
+      setMessage({ type: 'error', text: 'Erreur de connexion' });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGenerateCerfa = async () => {
+    if (!formData.donationAmount || !formData.siret) {
+      setMessage({ type: 'error', text: 'SIRET et montant requis pour le CERFA' });
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const response = await fetch(`/api/admin/cerfa/${partner.id}`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ paymentForm }),
+      });
+
+      if (response.ok) {
+        const blob = await response.blob();
+        downloadPdf(blob, `cerfa-2041-MEC-SD-${partner.company.replace(/\s+/g, '-')}.pdf`);
+        const newNum = response.headers.get('X-Receipt-Number') || '';
+        if (newNum) setGeneratedDocs(prev => ({ ...prev, receiptNumber: newNum }));
+        router.refresh();
+        setMessage({ type: 'success', text: 'CERFA 2041-MEC-SD généré et téléchargé' });
+      } else {
+        const data = await response.json();
+        setMessage({ type: 'error', text: data.error || 'Erreur génération CERFA' });
       }
     } catch {
       setMessage({ type: 'error', text: 'Erreur de connexion' });
@@ -362,24 +410,14 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
 
           {/* Actions */}
           <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#222]">
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={handleDelete}
-                disabled={isLoading}
-                className="px-4 py-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition-colors disabled:opacity-50"
-              >
-                Supprimer
-              </button>
-              <button
-                type="button"
-                onClick={handleGenerateReceipt}
-                disabled={isLoading || !formData.donationAmount}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Générer reçu fiscal
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={handleDelete}
+              disabled={isLoading}
+              className="px-4 py-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition-colors disabled:opacity-50"
+            >
+              Supprimer
+            </button>
             <button
               type="submit"
               disabled={isLoading}
@@ -389,6 +427,94 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
             </button>
           </div>
         </form>
+      </div>
+
+      {/* Documents section */}
+      <div className="bg-[#111] border border-[#222] rounded-lg p-6">
+        <h2 className="text-lg font-semibold text-white mb-1">Documents</h2>
+        <p className="text-gray-500 text-sm mb-6">
+          Générez une facture (partenariat commercial) ou le CERFA officiel 2041-MEC-SD (mécénat, réduction d&apos;impôt art. 238 bis CGI).
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          {/* Facture */}
+          <div className="bg-[#0a0a0a] border border-[#333] rounded-lg p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-lg">🧾</span>
+              <h3 className="text-white font-semibold">Facture</h3>
+            </div>
+            <p className="text-gray-500 text-xs mb-4">
+              Pour les partenariats commerciaux (contrepartie : visibilité, billets, stands…).
+              TVA non applicable — art. 293 B CGI.
+            </p>
+            {generatedDocs.invoiceNumber && (
+              <div className="mb-3 px-3 py-2 bg-green-500/10 border border-green-500/30 rounded text-green-400 text-xs font-mono">
+                Dernier n° : {generatedDocs.invoiceNumber}
+              </div>
+            )}
+            <button
+              type="button"
+              onClick={handleGenerateInvoice}
+              disabled={isLoading || !formData.donationAmount}
+              className="w-full px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed text-sm font-medium"
+            >
+              {isLoading ? 'Génération…' : 'Générer la facture (PDF)'}
+            </button>
+            {!formData.donationAmount && (
+              <p className="text-yellow-600 text-xs mt-2">Renseigner le montant du partenariat d&apos;abord.</p>
+            )}
+          </div>
+
+          {/* CERFA */}
+          <div className="bg-[#0a0a0a] border border-[#333] rounded-lg p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-lg">📋</span>
+              <h3 className="text-white font-semibold">CERFA 2041-MEC-SD</h3>
+              <span className="text-xs text-gray-500 font-mono">N°16216*03</span>
+            </div>
+            <p className="text-gray-500 text-xs mb-4">
+              Reçu officiel des dons — article 238 bis CGI. Permet à l&apos;entreprise de déduire 60% du montant.
+            </p>
+            <div className="mb-3">
+              <label className="block text-xs font-medium text-gray-400 mb-1.5">Mode de versement</label>
+              <div className="flex gap-2 flex-wrap">
+                {PAYMENT_FORM_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => setPaymentForm(opt.value)}
+                    className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
+                      paymentForm === opt.value
+                        ? 'bg-[#e53e3e] text-white'
+                        : 'bg-[#222] text-gray-400 hover:bg-[#333]'
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            {generatedDocs.receiptNumber && (
+              <div className="mb-3 px-3 py-2 bg-green-500/10 border border-green-500/30 rounded text-green-400 text-xs font-mono">
+                Dernier n° : {generatedDocs.receiptNumber}
+              </div>
+            )}
+            <button
+              type="button"
+              onClick={handleGenerateCerfa}
+              disabled={isLoading || !formData.donationAmount || !formData.siret}
+              className="w-full px-4 py-2.5 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed text-sm font-medium"
+            >
+              {isLoading ? 'Génération…' : 'Générer le CERFA (PDF)'}
+            </button>
+            {(!formData.donationAmount || !formData.siret) && (
+              <p className="text-yellow-600 text-xs mt-2">
+                {!formData.donationAmount ? 'Renseigner le montant.' : 'SIRET requis pour le CERFA.'}
+              </p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

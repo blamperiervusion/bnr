@@ -60,13 +60,44 @@ model Partner {
   address        String?
   donationAmount Float?        // Montant du don
   donationDate   DateTime?
-  receiptNumber  String?       // Numero du recu fiscal
+  receiptNumber  String?       // Numero du recu fiscal (CERFA 2041-MEC-SD)
   receiptDate    DateTime?
+  invoiceNumber  String?       // Numero de facture
+  invoiceDate    DateTime?
   notes          String?
   assignedToId   String?       // ID de l'admin responsable
   assignedTo     AdminUser?    @relation(fields: [assignedToId], references: [id])
+  invoices       Invoice[]
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
+}
+
+// Factures libres (non liées à un partenaire)
+model Invoice {
+  id            String    @id @default(cuid())
+  invoiceNumber String    @unique
+  invoiceDate   DateTime  @default(now())
+
+  // Informations client
+  clientName    String
+  clientSiret   String?
+  clientAddress String?
+  clientContact String?
+  clientEmail   String?
+
+  // Contenu de la facture
+  lines         String    @db.Text // JSON: [{description, amount}]
+  totalAmount   Float
+  paymentDate   DateTime?
+  paymentMethod String?   @default("virement") // virement, cheque, especes
+
+  // Optionnel : lien vers un partenaire existant
+  partnerId     String?
+  partner       Partner?  @relation(fields: [partnerId], references: [id])
+
+  notes         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
 model AdminUser {

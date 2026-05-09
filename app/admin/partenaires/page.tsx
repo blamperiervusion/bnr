@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import FilterSelect from './FilterSelect';
 import FormattedDate from '../components/FormattedDate';
+import PartnerActions from './PartnerActions';
 
 export const dynamic = 'force-dynamic';
 
@@ -153,6 +154,14 @@ export default async function PartenairesPage({
                         <FormattedDate date={partner.createdAt} />
                       </span>
                     </div>
+                    <div className="mt-2 pt-2 border-t border-[#222]">
+                      <PartnerActions
+                        partnerId={partner.id}
+                        companyName={partner.company}
+                        hasDonation={!!partner.donationAmount}
+                        hasSiret={!!partner.siret}
+                      />
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -171,6 +180,7 @@ export default async function PartenairesPage({
                   <th className="px-4 py-3 text-left text-sm font-medium text-gray-400">Montant</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-gray-400">Statut</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-gray-400">Date</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-400">Documents</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#222]">
@@ -234,6 +244,14 @@ export default async function PartenairesPage({
                     </td>
                     <td className="px-4 py-3 text-gray-500 text-sm">
                       <FormattedDate date={partner.createdAt} />
+                    </td>
+                    <td className="px-4 py-3">
+                      <PartnerActions
+                        partnerId={partner.id}
+                        companyName={partner.company}
+                        hasDonation={!!partner.donationAmount}
+                        hasSiret={!!partner.siret}
+                      />
                     </td>
                   </tr>
                 ))}

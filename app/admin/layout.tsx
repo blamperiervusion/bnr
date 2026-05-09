@@ -5,17 +5,28 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-const navItems = [
-  { href: '/admin', label: 'Dashboard', icon: '📊' },
-  { href: '/admin/programmation', label: 'Programmation', icon: '🎤' },
-  { href: '/admin/tremplin', label: 'Tremplin 2026', icon: '🎸' },
-  { href: '/admin/benevoles', label: 'Bénévoles', icon: '🙋' },
-  { href: '/admin/partenaires', label: 'Partenaires', icon: '🤝' },
-  { href: '/admin/village', label: 'Village', icon: '🏕️' },
-  { href: '/admin/compta', label: 'Comptabilité', icon: '💰' },
-  { href: '/admin/utilisateurs', label: 'Utilisateurs', icon: '👥' },
-  { href: '/admin/ressources', label: 'Ressources', icon: '📁' },
-  { href: '/admin/parametres', label: 'Paramètres', icon: '⚙️' },
+const navGroups = [
+  {
+    label: 'Festival',
+    items: [
+      { href: '/admin', label: 'Dashboard', icon: '📊' },
+      { href: '/admin/programmation', label: 'Programmation', icon: '🎤' },
+      { href: '/admin/tremplin', label: 'Tremplin 2026', icon: '🎸' },
+      { href: '/admin/benevoles', label: 'Bénévoles', icon: '🙋' },
+      { href: '/admin/partenaires', label: 'Partenaires', icon: '🤝' },
+      { href: '/admin/village', label: 'Village', icon: '🏕️' },
+    ],
+  },
+  {
+    label: 'Gestion',
+    items: [
+      { href: '/admin/compta', label: 'Comptabilité', icon: '💰' },
+      { href: '/admin/factures', label: 'Factures', icon: '🧾' },
+      { href: '/admin/ressources', label: 'Ressources', icon: '📁' },
+      { href: '/admin/utilisateurs', label: 'Utilisateurs', icon: '👥' },
+      { href: '/admin/parametres', label: 'Paramètres', icon: '⚙️' },
+    ],
+  },
 ];
 
 export default function AdminLayout({
@@ -107,27 +118,34 @@ export default function AdminLayout({
           </Link>
         </div>
 
-        <nav className="mt-6">
-          {navItems.map((item) => {
-            const isActive = pathname === item.href || 
-              (item.href !== '/admin' && pathname.startsWith(item.href));
-            
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setSidebarOpen(false)}
-                className={`flex items-center gap-3 px-6 py-3 text-sm transition-colors ${
-                  isActive
-                    ? 'bg-[#e53e3e]/20 text-[#e53e3e] border-r-2 border-[#e53e3e]'
-                    : 'text-gray-400 hover:bg-[#1a1a1a] hover:text-white'
-                }`}
-              >
-                <span className="text-lg">{item.icon}</span>
-                {item.label}
-              </Link>
-            );
-          })}
+        <nav className="mt-4">
+          {navGroups.map((group) => (
+            <div key={group.label} className="mb-2">
+              <p className="px-6 py-2 text-xs font-semibold text-gray-600 uppercase tracking-widest">
+                {group.label}
+              </p>
+              {group.items.map((item) => {
+                const isActive =
+                  pathname === item.href ||
+                  (item.href !== '/admin' && pathname.startsWith(item.href));
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setSidebarOpen(false)}
+                    className={`flex items-center gap-3 px-6 py-2.5 text-sm transition-colors ${
+                      isActive
+                        ? 'bg-[#e53e3e]/20 text-[#e53e3e] border-r-2 border-[#e53e3e]'
+                        : 'text-gray-400 hover:bg-[#1a1a1a] hover:text-white'
+                    }`}
+                  >
+                    <span className="text-base">{item.icon}</span>
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </div>
+          ))}
         </nav>
 
         {/* User info & logout */}

@@ -97,7 +97,7 @@ async function sendTeamAssignmentEmail(volunteer: { name: string; email: string;
           </ul>
         </div>
         
-        <p>Des questions sur ton affectation ? Réponds directement à cet email !</p>
+        <p>Des questions sur ton affectation ? Contacte-nous à <a href="mailto:barbnrock.festival@gmail.com">barbnrock.festival@gmail.com</a> ou sur le groupe WhatsApp.</p>
         
         <p style="margin-top: 30px;">On a hâte de te voir ! 🤘</p>
         

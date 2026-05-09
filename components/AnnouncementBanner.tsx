@@ -28,9 +28,9 @@ export default function AnnouncementBanner({ onClose }: AnnouncementBannerProps)
           <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center gap-2 sm:gap-4 text-center">
             <span className="text-lg hidden sm:inline">🎸</span>
             <p className="text-xs sm:text-sm font-medium">
-              <span className="font-bold">TREMPLIN BARB&apos;N&apos;ROCK 2026</span>
+              <span className="font-bold">TARIF EARLY BIRD</span>
               <span className="mx-2 opacity-60">|</span>
-              <span>Rendez-vous le 4 avril !</span>
+              <span>Profitez du tarif préférentiel jusqu&apos;au <span className="font-bold underline">31 mai 2026</span> !</span>
             </p>
             <button
               onClick={handleClose}

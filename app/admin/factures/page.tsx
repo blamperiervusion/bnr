@@ -104,6 +104,7 @@ export default async function FacturesPage() {
           }))}
           partnerInvoices={partnerInvoices.map((p) => ({
             ...p,
+            invoiceNumber: p.invoiceNumber!,
             invoiceDate: p.invoiceDate ? p.invoiceDate.toISOString() : new Date().toISOString(),
           }))}
         />

@@ -21,7 +21,9 @@ export default function PartnersTeaser({ partners = [] }: PartnersTeaserProps) {
   const chaosPartners = partners.filter(p => p.tier === 'chaos');
   const headbangerPartners = partners.filter(p => p.tier === 'headbanger');
   const moshpitPartners = partners.filter(p => p.tier === 'moshpit');
-  const otherPartners = partners.filter(p => !['chaos', 'headbanger', 'moshpit'].includes(p.tier || ''));
+  const supporterPartners = partners.filter(p => p.tier === 'supporter');
+  const institutionalPartners = partners.filter(p => p.tier === 'institutional');
+  const otherPartners = partners.filter(p => !['chaos', 'headbanger', 'moshpit', 'supporter', 'institutional'].includes(p.tier || ''));
   const hasPartners = partners.length > 0;
 
   return (
@@ -101,11 +103,11 @@ export default function PartnersTeaser({ partners = [] }: PartnersTeaserProps) {
               </div>
             )}
 
-            {/* Moshpit + Other Partners */}
-            {(moshpitPartners.length > 0 || otherPartners.length > 0) && (
+            {/* Moshpit + Supporter + Other Partners */}
+            {(moshpitPartners.length > 0 || supporterPartners.length > 0 || otherPartners.length > 0) && (
               <div className="mt-10">
                 <div className="flex flex-wrap justify-center gap-4">
-                  {[...moshpitPartners, ...otherPartners].map((partner, index) => (
+                  {[...moshpitPartners, ...supporterPartners, ...otherPartners].map((partner, index) => (
                     <motion.a
                       key={partner.id}
                       href={partner.website || undefined}
@@ -117,6 +119,40 @@ export default function PartnersTeaser({ partners = [] }: PartnersTeaserProps) {
                       transition={{ delay: index * 0.05 }}
                       whileHover={{ scale: 1.1 }}
                       className="w-28 h-20 bg-[var(--muted)]/50 border border-[var(--border)] rounded-lg flex items-center justify-center p-2 hover:border-[var(--accent-cyan)]/50 transition-colors cursor-pointer"
+                    >
+                      {partner.logo ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={partner.logo} alt={partner.company} className="max-w-full max-h-full object-contain" />
+                      ) : (
+                        <span className="text-[var(--muted-foreground)] text-[10px] text-center">
+                          {partner.company}
+                        </span>
+                      )}
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Partenaires Institutionnels */}
+            {institutionalPartners.length > 0 && (
+              <div className="mt-10">
+                <h3 className="text-center text-sm uppercase tracking-wider mb-6" style={{ color: partnerCategories.institutional.color }}>
+                  {partnerCategories.institutional.name}
+                </h3>
+                <div className="flex flex-wrap justify-center gap-4">
+                  {institutionalPartners.map((partner, index) => (
+                    <motion.a
+                      key={partner.id}
+                      href={partner.website || undefined}
+                      target={partner.website ? '_blank' : undefined}
+                      rel={partner.website ? 'noopener noreferrer' : undefined}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 }}
+                      whileHover={{ scale: 1.05 }}
+                      className="w-32 h-20 bg-[var(--muted)]/50 border border-[var(--border)] rounded-lg flex items-center justify-center p-3 hover:border-[var(--accent-cyan)]/50 transition-colors cursor-pointer"
                     >
                       {partner.logo ? (
                         // eslint-disable-next-line @next/next/no-img-element

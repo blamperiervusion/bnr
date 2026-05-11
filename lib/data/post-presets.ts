@@ -255,6 +255,230 @@ Metal alternatif moderne. Gros son, mélodies accrocheuses. Le dimanche en douce
 🎫 Pass 3 jours : 36€ (camping inclus)
 → Lien en bio`,
       },
+      {
+        id: 'annonce-kaminoikari',
+        title: 'Annonce Kami No Ikari',
+        badge: '🔥 NOUVEAU NOM',
+        mainText: 'KAMI NO IKARI',
+        subText: 'Metal • Picardie',
+        descText: 'VENDREDI 26 JUIN',
+        bg: '/images/bands/kami-no-ikari.jpg',
+        caption: `🔥 NOUVEAU NOM 🔥
+
+KAMI NO IKARI rejoint l'affiche !
+
+📍 VENDREDI 26 JUIN
+
+"La Colère des Dieux" — metal lourd et enragé, droit dans la gueule. Une des valeurs sûres de la scène régionale.
+
+🎫 Vendredi : 13€ / Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`,
+      },
+      {
+        id: 'annonce-barabbas',
+        title: 'Annonce Barabbas',
+        badge: '🔥 NOUVEAU NOM',
+        mainText: 'BARABBAS',
+        subText: 'Rock Metal • France',
+        descText: 'VENDREDI 26 JUIN',
+        bg: '/images/bands/barabbas.jpg',
+        caption: `🔥 NOUVEAU NOM 🔥
+
+BARABBAS rejoint l'affiche !
+
+📍 VENDREDI 26 JUIN
+
+Rock metal brut et sans filtre. Un son qui punche, une énergie de scène qui retourne le public.
+
+🎫 Vendredi : 13€ / Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`,
+      },
+      {
+        id: 'annonce-blackhazard',
+        title: 'Annonce Black Hazard',
+        badge: '🔥 NOUVEAU NOM',
+        mainText: 'BLACK HAZARD',
+        subText: 'Metal • France',
+        descText: 'VENDREDI 26 JUIN',
+        bg: '/images/bands/black-hazard.jpg',
+        caption: `🔥 NOUVEAU NOM 🔥
+
+BLACK HAZARD rejoint l'affiche !
+
+📍 VENDREDI 26 JUIN
+
+Metal puissant et sombre. Un groupe qui n'a peur de rien — ni du volume, ni de la profondeur. Viendra ouvrir le week-end comme il se doit.
+
+🎫 Vendredi : 13€ / Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`,
+      },
+      {
+        id: 'annonce-breakout',
+        title: 'Annonce Breakout',
+        badge: '🔥 NOUVEAU NOM',
+        mainText: 'BREAKOUT',
+        subText: 'Metal / Hard Rock',
+        descText: 'SAMEDI 27 JUIN',
+        bg: '/images/bands/breakout.jpg',
+        caption: `🔥 NOUVEAU NOM 🔥
+
+BREAKOUT rejoint l'affiche !
+
+📍 SAMEDI 27 JUIN
+
+Hard rock percutant, riffs acérés et énergie à revendre. Le genre de groupe qui te fait regretter de pas avoir les oreilles protégées.
+
+🎫 Samedi : 22€ / Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`,
+      },
+      {
+        id: 'annonce-ogarya',
+        title: 'Annonce Ogarya',
+        badge: '🔥 NOUVEAU NOM',
+        mainText: 'OGARYA',
+        subText: 'Metal • France',
+        descText: 'SAMEDI 27 JUIN',
+        bg: '/images/bands/to-be-announced.jpg',
+        caption: `🔥 NOUVEAU NOM 🔥
+
+OGARYA rejoint l'affiche !
+
+📍 SAMEDI 27 JUIN
+
+Une intensité brute, un son qui s'impose. Ogarya, c'est l'une des surprises de cette édition. À découvrir absolument.
+
+🎫 Samedi : 22€ / Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`,
+      },
+      {
+        id: 'annonce-mrwl',
+        title: 'Annonce MRWL',
+        badge: '🏆 TREMPLIN 2026',
+        badgeClass: 'gold',
+        mainText: 'MRWL',
+        subText: 'Lauréat Tremplin 2026',
+        descText: 'SAMEDI 27 JUIN',
+        bg: '/images/bands/tremplin-samedi.jpg',
+        caption: `🏆 TREMPLIN BARB'N'ROCK 2026 — LAURÉAT SAMEDI 🏆
+
+Félicitations à MRWL !
+
+Ils ont remporté le Tremplin 2026 et montent sur la grande scène.
+
+📍 SAMEDI 27 JUIN
+
+La récompense du travail, du talent, et d'une performance qui a tout écrasé le 4 avril.
+
+On se retrouve en juin 🤘
+
+🎫 Samedi : 22€ / Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`,
+      },
+      {
+        id: 'annonce-saintrockstation',
+        title: 'Annonce Saint Rock Station',
+        badge: '🔥 NOUVEAU NOM',
+        mainText: 'SAINT ROCK<br>STATION',
+        subText: 'Rock • France',
+        descText: 'DIMANCHE 28 JUIN',
+        bg: '/images/bands/saint-rock-station.jpg',
+        caption: `🔥 NOUVEAU NOM 🔥
+
+SAINT ROCK STATION rejoint l'affiche !
+
+📍 DIMANCHE 28 JUIN — Journée Famille 🎉
+
+Rock accessible et fédérateur. Le groupe idéal pour ouvrir la journée du dimanche, quand toute la famille débarque. Du rock qui donne le sourire.
+
+🎫 Dimanche : 5€ seulement !
+🎫 Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`,
+      },
+      {
+        id: 'annonce-howlite',
+        title: 'Annonce Howlite',
+        badge: '🔥 NOUVEAU NOM',
+        mainText: 'HOWLITE',
+        subText: 'Rock Alternatif',
+        descText: 'DIMANCHE 28 JUIN',
+        bg: '/images/bands/howlite.jpg',
+        caption: `🔥 NOUVEAU NOM 🔥
+
+HOWLITE rejoint l'affiche !
+
+📍 DIMANCHE 28 JUIN
+
+Rock alternatif texturé et sensible. Des mélodies qui restent en tête longtemps après le concert. La belle surprise du dimanche.
+
+🎫 Dimanche : 5€ seulement !
+🎫 Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`,
+      },
+      {
+        id: 'annonce-udap',
+        title: 'Annonce Udap',
+        badge: '🔥 NOUVEAU NOM',
+        mainText: 'UDAP',
+        subText: 'Rock • France',
+        descText: 'DIMANCHE 28 JUIN',
+        bg: '/images/bands/udap.jpg',
+        caption: `🔥 NOUVEAU NOM 🔥
+
+UDAP rejoint l'affiche !
+
+📍 DIMANCHE 28 JUIN
+
+Énergie rock, générosité sur scène et un son qui impressionne. Udap va chauffer l'après-midi du dimanche.
+
+🎫 Dimanche : 5€ seulement !
+🎫 Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`,
+      },
+      {
+        id: 'annonce-devonduxe',
+        title: 'Annonce Devon Duxe',
+        badge: '🔥 NOUVEAU NOM',
+        mainText: 'DEVON DUXE',
+        subText: 'Rock • France',
+        descText: 'DIMANCHE 28 JUIN',
+        bg: '/images/bands/devon-duxe.jpg',
+        caption: `🔥 NOUVEAU NOM 🔥
+
+DEVON DUXE rejoint l'affiche !
+
+📍 DIMANCHE 28 JUIN
+
+Rock puissant et direct. Devon Duxe débarque avec un son qui tient la route et une présence de scène qui impressionne. À voir absolument.
+
+🎫 Dimanche : 5€ seulement !
+🎫 Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`,
+      },
+      {
+        id: 'annonce-adore',
+        title: 'Annonce ADORE',
+        badge: '🏆 TREMPLIN 2026',
+        badgeClass: 'gold',
+        mainText: 'ADORE',
+        subText: 'Lauréat Tremplin Dimanche',
+        descText: 'DIMANCHE 28 JUIN',
+        bg: '/images/bands/tremplin-dimanche.jpg',
+        caption: `🏆 TREMPLIN BARB'N'ROCK 2026 — LAURÉAT DIMANCHE 🏆
+
+Félicitations à ADORE !
+
+Ils ont conquis le jury et le public le 4 avril, et montent sur scène au festival.
+
+📍 DIMANCHE 28 JUIN — Journée Famille 🎉
+
+La plus belle récompense pour des artistes qui méritent d'être entendus.
+
+Bravo à eux, et rendez-vous en juin 🤘
+
+🎫 Dimanche : 5€ seulement !
+🎫 Pass 3 jours : 36€ (camping inclus)
+→ Lien en bio`,
+      },
     ],
   },
   {
@@ -611,19 +835,18 @@ Viens soutenir la scène locale ! 🤘`,
         title: 'Food Trucks',
         badge: '🍔 FOOD',
         mainText: 'FOOD<br><span class="accent">TRUCKS</span>',
-        subText: 'Burgers • Tacos • Veggie',
+        subText: 'Fuu Fuu • O van resto • Beer to Burger',
         descText: 'De quoi reprendre des forces entre les pogos',
         bg: '/images/hero-visual.jpg',
         caption: `🍔 FOOD TRUCKS 🍔
 
 De quoi reprendre des forces entre les pogos !
 
-• Burgers smashés
-• Tacos gourmets
-• Options végétariennes
-• Et plus encore...
+🍔 Beer to Burger — burgers artisanaux
+🌮 Fuu Fuu — spécialités asiatiques
+🥙 O van resto — cuisine du monde
 
-Le tout à prix festival raisonnables.
+Le tout à prix festival raisonnables, servi 3 jours de suite.
 
 26-28 Juin • Crèvecœur-le-Grand
 🎫 36€ les 3 jours
@@ -635,15 +858,118 @@ Le tout à prix festival raisonnables.
         title: 'Tatoueurs',
         badge: '🖋️ INK',
         mainText: 'FLASH<br><span class="accent">TATTOO</span>',
-        subText: 'Tatoueurs sur place',
-        descText: 'Repars avec un souvenir permanent',
+        subText: '4 artistes sur place tout le week-end',
+        descText: 'José Martinez • Moog\'s Ink • MJA • Ink Dreamer',
         bg: '/images/hero-visual.jpg',
         caption: `🖋️ FLASH TATTOO 🖋️
 
-Des tatoueurs seront présents tout le week-end !
+4 tatoueurs présents tout le week-end !
+
+🖋️ José Martinez
+🖋️ Moog's Ink Tattoo
+🖋️ MJA Tattoo
+🖋️ Ink Dreamer
 
 Flash tattoo, designs exclusifs festival.
-Repars avec un souvenir permanent.
+Repars avec un souvenir permanent du meilleur week-end de ton été.
+
+26-28 Juin • Crèvecœur-le-Grand
+🎫 36€ les 3 jours
+
+→ Lien en bio`,
+      },
+      {
+        id: 'village-barbiers',
+        title: 'Barbiers',
+        badge: '💈 BARBIERS',
+        badgeClass: 'cyan',
+        mainText: 'BARBIERS<br><span class="accent">ON SITE</span>',
+        subText: 'V du Barbier • Nine Hair Beard',
+        descText: 'Coupe, barbe, style — même au festival',
+        bg: '/images/hero-visual.jpg',
+        caption: `💈 BARBIERS AU FESTIVAL 💈
+
+On s'occupait du son, on s'occupe aussi du look.
+
+💈 V du Barbier
+💈 Nine Hair Beard
+
+Coupe, taille de barbe, soins — tout le week-end sur place.
+
+Parce que même au festival, on peut être stylé. 😎
+
+26-28 Juin • Crèvecœur-le-Grand
+🎫 36€ les 3 jours
+
+→ Lien en bio`,
+      },
+      {
+        id: 'village-artisanat',
+        title: 'Artisanat',
+        badge: '✂️ ARTISANAT',
+        badgeClass: 'cyan',
+        mainText: 'ARTISANS<br><span class="accent">& CRÉATEURS</span>',
+        subText: '5 stands • Bijoux • Art • Upcycling',
+        descText: 'Jagers Walks • Oxmoz • Artii Steeve • ...',
+        bg: '/images/hero-visual.jpg',
+        caption: `✂️ LE VILLAGE ARTISANAL ✂️
+
+Des créateurs d'exception t'attendent dans le Village du Chaos !
+
+🪵 Jagers Walks — sculptures & créations bois
+💎 Oxmoz Bijoux — bijoux faits main
+🎨 Agnès Delvaux Création — art & créations textiles
+🖼️ Artii Steeve — art tatoo & illustration
+♻️ Light Be Recycling — objets upcyclés lumineux
+
+Du fait-main, du local, du beau.
+
+26-28 Juin • Crèvecœur-le-Grand
+🎫 36€ les 3 jours
+
+→ Lien en bio`,
+      },
+      {
+        id: 'village-merchandising',
+        title: 'Merchandising & Mode',
+        badge: '👕 MERCH',
+        mainText: 'MODE &<br><span class="accent">MERCH</span>',
+        subText: 'J\'taime pas clothing • Créa by Mag • Rockin\'oktopus',
+        descText: 'Fringues, accessoires et merch rock',
+        bg: '/images/hero-visual.jpg',
+        caption: `👕 SHOPPING AU VILLAGE 👕
+
+Repars avec plus que des souvenirs dans la tête !
+
+🤘 J't'aime pas clothing — fringues rock & provoc
+🎨 Créa by Mag — créations & impressions personnalisées
+🐙 Rockin'oktopus — accessoires et merch rock
+
+T-shirts, casquettes, prints, bijoux, tout le merch qu'il te faut.
+
+26-28 Juin • Crèvecœur-le-Grand
+🎫 36€ les 3 jours
+
+→ Lien en bio`,
+      },
+      {
+        id: 'village-divers',
+        title: 'Bien-être & Divers',
+        badge: '🔮 VILLAGE',
+        badgeClass: 'cyan',
+        mainText: 'BIEN-ÊTRE<br><span class="accent">& SPIRITIEL</span>',
+        subText: 'Pierre de lune • Sev\'ekilibre • Mystikdreams',
+        descText: 'L\'autre face du Village du Chaos',
+        bg: '/images/hero-visual.jpg',
+        caption: `🔮 L'AUTRE FACE DU VILLAGE 🔮
+
+Le Village du Chaos, c'est aussi un espace de détente et d'exploration !
+
+🌙 Pierre de lune by Malhorie — minéraux & lithothérapie
+⚖️ Sev'ekilibre — bien-être & massages
+✨ Mystikdreams — univers mystique & créations
+
+Entre deux concerts, prenez le temps de souffler, découvrir, et vous ressourcer.
 
 26-28 Juin • Crèvecœur-le-Grand
 🎫 36€ les 3 jours

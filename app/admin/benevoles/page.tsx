@@ -36,6 +36,39 @@ const teamOptions = [
   'Cashless',
 ];
 
+const teamIcons: Record<string, string> = {
+  Accueil: '🎟️',
+  Bar: '🍺',
+  Sécurité: '🛡️',
+  Technique: '🔧',
+  'Éco-équipe': '♻️',
+  Animation: '🎉',
+  Merchandising: '👕',
+  Artistes: '🎸',
+  Cashless: '💳',
+};
+
+async function getTeamStats() {
+  const allVolunteers = await prisma.volunteer.findMany({
+    select: { team: true, status: true },
+  });
+
+  const stats: Record<string, { total: number; validated: number }> = {};
+  let unassigned = 0;
+
+  for (const v of allVolunteers) {
+    if (v.team) {
+      if (!stats[v.team]) stats[v.team] = { total: 0, validated: 0 };
+      stats[v.team].total++;
+      if (v.status === 'VALIDATED') stats[v.team].validated++;
+    } else {
+      unassigned++;
+    }
+  }
+
+  return { stats, unassigned, total: allVolunteers.length };
+}
+
 async function getVolunteers(searchParams: { status?: string; team?: string }) {
   const where: Record<string, unknown> = {};
   
@@ -58,13 +91,44 @@ export default async function BenevolesPage({
   searchParams: Promise<{ status?: string; team?: string }>;
 }) {
   const params = await searchParams;
-  const volunteers = await getVolunteers(params);
+  const [volunteers, { stats, unassigned, total }] = await Promise.all([
+    getVolunteers(params),
+    getTeamStats(),
+  ]);
 
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold text-white">Bénévoles</h1>
         <span className="text-gray-500">{volunteers.length} candidature(s)</span>
+      </div>
+
+      {/* Team stats */}
+      <div className="mb-8">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Répartition par équipe</h2>
+          <span className="text-xs text-gray-600">{total} candidature(s) au total · {unassigned} non attribuée(s)</span>
+        </div>
+        <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-3">
+          {teamOptions.map((team) => {
+            const s = stats[team];
+            const count = s?.total ?? 0;
+            const validated = s?.validated ?? 0;
+            return (
+              <div
+                key={team}
+                className="bg-[#111] border border-[#222] rounded-lg p-3 flex flex-col items-center gap-1 text-center hover:border-[#e53e3e]/40 transition-colors"
+              >
+                <span className="text-2xl">{teamIcons[team]}</span>
+                <span className="text-2xl font-bold text-white leading-none">{count}</span>
+                {validated > 0 && (
+                  <span className="text-xs text-green-500 font-medium">{validated} ✓</span>
+                )}
+                <span className="text-[10px] text-gray-500 leading-tight">{team}</span>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Filters */}

@@ -18,6 +18,14 @@ const navGroups = [
     ],
   },
   {
+    label: 'Boutique',
+    items: [
+      { href: '/admin/boutique', label: 'Produits', icon: '👕' },
+      { href: '/admin/boutique/commandes', label: 'Commandes', icon: '📦' },
+      { href: '/admin/boutique/parametres', label: 'Paramètres livraison', icon: '🚚' },
+    ],
+  },
+  {
     label: 'Gestion',
     items: [
       { href: '/admin/compta', label: 'Comptabilité', icon: '💰' },

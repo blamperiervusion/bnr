@@ -47,6 +47,18 @@ export default function LineupCarouselPage() {
   const currentBands = bands[selectedDay] || [];
   const config = dayConfig[selectedDay];
 
+  /** Slide 1 : compacter quand beaucoup d’actes (ex. samedi) pour tout faire tenir en 4:5 */
+  const lineupCount = currentBands.length;
+  const lineupTight = lineupCount >= 6;
+  const lineupVeryTight = lineupCount >= 8;
+  const lineupGap = lineupVeryTight ? 3 : lineupTight ? 5 : 8;
+  const lineupBaseSize = lineupVeryTight ? 40 : lineupTight ? 44 : 48;
+  const lineupDecrease = lineupVeryTight ? 2.4 : lineupTight ? 3.1 : 5;
+  const lineupMinSize = lineupVeryTight ? 16 : lineupTight ? 18 : 20;
+  const lineupLineHeight = lineupTight ? 0.98 : 1.1;
+  const lineupListTop = lineupVeryTight ? 50 : 54;
+  const lineupListBottom = lineupVeryTight ? 56 : 60;
+
   const exportSlide = async (slideIndex: number) => {
     const slide = slidesRef.current[slideIndex];
     if (!slide) return;
@@ -240,21 +252,22 @@ export default function LineupCarouselPage() {
               {/* Band names */}
               <div style={{
                 position: 'absolute',
-                top: 60,
+                top: lineupListTop,
                 left: 0,
                 right: 0,
-                bottom: 65,
+                bottom: lineupListBottom,
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                gap: 8,
-                padding: '0 6px',
+                gap: lineupGap,
+                padding: '0 4px',
               }}>
                 {currentBands.map((band, idx) => {
-                  const baseSize = 48;
-                  const decrease = 5;
-                  const fontSize = Math.max(baseSize - (idx * decrease), 20);
+                  const fontSize = Math.max(
+                    lineupBaseSize - idx * lineupDecrease,
+                    lineupMinSize
+                  );
                   const isHeadliner = idx === 0;
                   return (
                     <div
@@ -264,12 +277,12 @@ export default function LineupCarouselPage() {
                         fontFamily: "'Bebas Neue', sans-serif",
                         fontSize: fontSize,
                         fontWeight: 'bold',
-                        letterSpacing: isHeadliner ? 4 : 2,
+                        letterSpacing: isHeadliner ? (lineupTight ? 2.5 : 4) : (lineupTight ? 1.5 : 2),
                         textAlign: 'center',
                         textShadow: isHeadliner 
                           ? '0 0 40px rgba(232, 93, 4, 0.8), 0 2px 4px rgba(0,0,0,0.5)' 
                           : '0 2px 4px rgba(0,0,0,0.5)',
-                        lineHeight: 1.1,
+                        lineHeight: lineupLineHeight,
                       }}
                     >
                       {band.name.toUpperCase()}

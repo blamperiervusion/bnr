@@ -33,6 +33,13 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# local Python venv (analyse ventes)
+private/sales/.venv/
+private/sales/.mplconfig/
+# exports billetterie (données personnelles)
+private/sales/*.xlsx
+private/sales/*.csv
+
 # vercel
 .vercel
 

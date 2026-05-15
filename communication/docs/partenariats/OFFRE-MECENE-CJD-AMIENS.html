@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Offre Mécène CJD Amiens - Barb'n'Rock Festival 2026</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 3px solid #E85D04;
+    }
+    
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #E85D04;
+      letter-spacing: 2px;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-top: 5px;
+    }
+    
+    h1 {
+      font-size: 24px;
+      color: #1a1a1a;
+      margin: 30px 0 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #E85D04;
+    }
+    
+    h2 {
+      font-size: 18px;
+      color: #E85D04;
+      margin: 25px 0 15px;
+    }
+    
+    .context-box {
+      background: #f8f9fa;
+      border-left: 4px solid #00E5CC;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .pack-box {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 12px;
+      margin: 30px 0;
+    }
+    
+    .pack-title {
+      font-size: 22px;
+      color: #E85D04;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .pack-price {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    
+    .pack-price .big {
+      font-size: 48px;
+      font-weight: bold;
+      color: #00E5CC;
+    }
+    
+    .pack-price .small {
+      color: #999;
+      font-size: 14px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+      background: #f5f5f5;
+      font-weight: 600;
+    }
+    
+    .pack-box table {
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+    }
+    
+    .pack-box th {
+      background: rgba(232, 93, 4, 0.3);
+      color: white;
+    }
+    
+    .pack-box td {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .highlight-box {
+      background: #E85D04;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin: 20px 0;
+    }
+    
+    .highlight-box .amount {
+      font-size: 36px;
+      font-weight: bold;
+    }
+    
+    .fiscal-table {
+      background: #f0fff4;
+      border: 2px solid #00E5CC;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .fiscal-table th {
+      background: #00E5CC;
+      color: #1a1a1a;
+    }
+    
+    .benefits-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .benefits-list li {
+      padding: 10px 0;
+      padding-left: 30px;
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .benefits-list li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #00E5CC;
+      font-weight: bold;
+    }
+    
+    .email-section {
+      background: #fafafa;
+      border: 1px solid #ddd;
+      padding: 25px;
+      margin: 30px 0;
+      border-radius: 8px;
+    }
+    
+    .email-header {
+      background: #f0f0f0;
+      padding: 10px 15px;
+      margin: -25px -25px 20px;
+      border-radius: 8px 8px 0 0;
+      font-family: monospace;
+    }
+    
+    .email-content {
+      white-space: pre-wrap;
+      font-size: 14px;
+    }
+    
+    .footer {
+      margin-top: 50px;
+      padding-top: 20px;
+      border-top: 2px solid #eee;
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+    }
+    
+    .cta-box {
+      background: linear-gradient(135deg, #E85D04 0%, #ff7b2e 100%);
+      color: white;
+      padding: 25px;
+      border-radius: 12px;
+      text-align: center;
+      margin: 30px 0;
+    }
+    
+    .cta-box h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+    
+    blockquote {
+      background: #fff8f0;
+      border-left: 4px solid #E85D04;
+      padding: 15px 20px;
+      margin: 20px 0;
+      font-style: italic;
+    }
+    
+    .page-break {
+      page-break-before: always;
+      break-before: page;
+    }
+    
+    @media print {
+      body { padding: 20px; }
+      .pack-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .highlight-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .fiscal-table { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .cta-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break { page-break-before: always; break-before: page; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">BARB'N'ROCK FESTIVAL</div>
+    <div class="subtitle">4ème édition • 26-28 Juin 2026 • Crèvecœur-le-Grand</div>
+  </div>
+
+  <h1>OFFRE MÉCÈNE EXCLUSIVE - CJD AMIENS</h1>
+
+  <div class="context-box">
+    <strong>Contexte :</strong> Les membres du CJD Amiens seront présents le <strong>vendredi 26 juin 2026</strong> pour leur plénière. Chaque membre dispose déjà d'une <strong>place incluse</strong> pour le vendredi soir.
+    <br><br>
+    Cette offre permet d'<strong>upgrader votre expérience</strong> en devenant mécène du festival.
+  </div>
+
+  <div class="pack-box">
+    <div class="pack-title">PACK MÉCÈNE CJD</div>
+    
+    <div class="pack-price">
+      <div class="big">250€</div>
+      <div class="small">Coût réel après réduction fiscale : <strong style="color: #00E5CC; font-size: 18px;">100€</strong></div>
+    </div>
+
+    <table>
+      <tr>
+        <th>Avantage</th>
+        <th>Détail</th>
+      </tr>
+      <tr>
+        <td>🍺 Cashless</td>
+        <td><strong>30€ de crédit</strong> (consommations bar & food trucks)</td>
+      </tr>
+      <tr>
+        <td>👥 Invités</td>
+        <td><strong>2 pass vendredi</strong> supplémentaires pour vos proches</td>
+      </tr>
+      <tr>
+        <td>⭐ Espace VIP</td>
+        <td>Accès à l'<strong>espace VIP</strong> toute la soirée</td>
+      </tr>
+      <tr>
+        <td>🎸 Backstages</td>
+        <td><strong>Visite exclusive</strong> des coulisses</td>
+      </tr>
+      <tr>
+        <td>📍 Visibilité</td>
+        <td><strong>Logo de votre entreprise</strong> sur le site du festival</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h2>Avantage fiscal</h2>
+
+  <table class="fiscal-table">
+    <tr>
+      <th></th>
+      <th>Montant</th>
+    </tr>
+    <tr>
+      <td>Don</td>
+      <td>250€</td>
+    </tr>
+    <tr>
+      <td>Réduction fiscale (60%)</td>
+      <td>-150€</td>
+    </tr>
+    <tr>
+      <td><strong>Coût réel pour l'entreprise</strong></td>
+      <td><strong style="color: #00E5CC; font-size: 20px;">100€</strong></td>
+    </tr>
+  </table>
+
+  <blockquote>
+    Pour <strong>100€ net</strong>, vous profitez d'une soirée VIP complète avec 2 invités et soutenez un événement culturel local.
+  </blockquote>
+
+  <h2>Conformité fiscale</h2>
+  <p>
+    Les contreparties valorisables respectent la règle des 25% du don :
+  </p>
+  <ul>
+    <li>2 pass vendredi : 26€ (2 × 13€)</li>
+    <li>Cashless : 30€</li>
+    <li><strong>Total : 56€</strong> (< 25% de 250€ = 62,50€) ✓</li>
+  </ul>
+  <p style="font-size: 14px; color: #666;">
+    <em>Note : L'accès VIP, backstages et logo sont des avantages symboliques non valorisables.</em>
+  </p>
+
+  <div class="cta-box">
+    <h3>Comment souscrire ?</h3>
+    <p style="margin: 0;">
+      1. Répondez à notre email avec les infos de votre entreprise<br>
+      2. Recevez la convention de mécénat<br>
+      3. Réglez par virement ou chèque<br>
+      4. Recevez votre reçu fiscal
+    </p>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h2>Pourquoi devenir mécène ?</h2>
+  <ul>
+    <li><strong>Soutenez la culture locale</strong> – Le Barb'n'Rock est organisé par une association loi 1901</li>
+    <li><strong>Avantage fiscal de 60%</strong> – Un don de 250€ ne vous coûte que 100€</li>
+    <li><strong>Vivez une expérience unique</strong> – Au-delà de la plénière, profitez vraiment du festival</li>
+    <li><strong>Fédérez vos proches</strong> – Invitez 2 personnes à vous rejoindre</li>
+  </ul>
+
+  <div class="highlight-box">
+    <div>📅 Date limite</div>
+    <div class="amount">15 juin 2026</div>
+    <div>Pour garantir l'intégration de votre logo</div>
+  </div>
+
+  <h2>À propos du festival</h2>
+  <p>
+    4ème édition du festival de musique metal/rock, les 26-28 juin 2026 à Crèvecœur-le-Grand (60).
+  </p>
+  <ul>
+    <li><strong>Vendredi soir :</strong> Programmation rock/metal accessible</li>
+    <li><strong>Samedi :</strong> Têtes d'affiche (Loudblast, Shaârghot...)</li>
+    <li><strong>Dimanche :</strong> Journée famille</li>
+  </ul>
+  <p>
+    <strong>3 000 festivaliers attendus • 100% artistes français</strong>
+  </p>
+
+  <div class="footer">
+    <p>
+      <strong>Barb'n'Rock Festival</strong><br>
+      Association Crépicordienne pour la Promotion de la Culture (ACPC)<br>
+      <a href="https://barbnrock-festival.fr">barbnrock-festival.fr</a> • 
+      <a href="mailto:barbnrock.festival@gmail.com">barbnrock.festival@gmail.com</a>
+    </p>
+  </div>
+
+</body>
+</html>

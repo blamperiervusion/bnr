@@ -113,11 +113,13 @@ export default function AdminLayout({
       {/* Sidebar */}
       <aside className={`
         fixed left-0 top-0 h-full w-64 bg-[#111] border-r border-[#222] z-50
+        flex flex-col
         transform transition-transform duration-300 ease-in-out
         lg:translate-x-0
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-        <div className="p-6">
+        {/* Logo */}
+        <div className="p-6 shrink-0">
           <Link href="/admin" className="block">
             <h1 className="text-xl font-bold text-white">
               Barb&apos;n&apos;Rock
@@ -126,7 +128,8 @@ export default function AdminLayout({
           </Link>
         </div>
 
-        <nav className="mt-4">
+        {/* Nav scrollable */}
+        <nav className="flex-1 overflow-y-auto mt-2 pb-2">
           {navGroups.map((group) => (
             <div key={group.label} className="mb-2">
               <p className="px-6 py-2 text-xs font-semibold text-gray-600 uppercase tracking-widest">
@@ -157,7 +160,7 @@ export default function AdminLayout({
         </nav>
 
         {/* User info & logout */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6 border-t border-[#222]">
+        <div className="shrink-0 p-4 lg:p-6 border-t border-[#222]">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-10 h-10 rounded-full bg-[#e53e3e] flex items-center justify-center text-white font-bold shrink-0">
               {session.user?.name?.charAt(0).toUpperCase() || 'A'}

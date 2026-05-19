@@ -3,6 +3,8 @@ import JsonLd, { festivalSchema } from '@/components/JsonLd';
 import prisma from '@/lib/prisma';
 import { getAllBandsFromDB } from '@/lib/data/programme-db';
 
+export const dynamic = 'force-dynamic';
+
 async function getValidatedPartners() {
   const partners = await prisma.partner.findMany({
     where: {

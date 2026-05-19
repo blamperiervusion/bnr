@@ -2,6 +2,8 @@ import { Metadata } from 'next';
 import PartnersPage from '@/components/sections/PartnersPage';
 import prisma from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "Nos Partenaires",
   description: "Découvrez les partenaires qui soutiennent le Barb'n'Rock Festival et rendent cet événement possible.",

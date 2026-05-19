@@ -35,6 +35,7 @@ export default function VolunteerForm({ volunteer }: VolunteerFormProps) {
     status: volunteer.status,
     team: volunteer.team || '',
     notes: volunteer.notes || '',
+    email: volunteer.email,
   });
   const [resendAssignment, setResendAssignment] = useState(false);
 
@@ -176,6 +177,20 @@ export default function VolunteerForm({ volunteer }: VolunteerFormProps) {
               )}
             </div>
           )}
+        </div>
+
+        {/* Email */}
+        <div>
+          <label className="block text-sm font-medium text-gray-400 mb-2">
+            Email
+          </label>
+          <input
+            type="email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            required
+            className="w-full bg-[#0a0a0a] border border-[#333] rounded-lg px-4 py-3 text-white focus:border-[#e53e3e] focus:outline-none"
+          />
         </div>
 
         {/* Notes */}

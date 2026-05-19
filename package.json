@@ -10,7 +10,8 @@
     "postinstall": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "npx tsx prisma/seed.ts",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "sync:offre-cjd": "bash scripts/sync-offre-cjd-public.sh"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

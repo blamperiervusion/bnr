@@ -13,7 +13,7 @@ SALES_DIR = Path(__file__).parent
 # Aligné sur analyze_sales.py
 FILES_2024 = "export-barb-n-rock-festival-2024-association-crepicordienne-pour-la-promotion-de-la-culture-.csv"
 FILES_2025 = "export-barb-n-rock-festival-2025-association-crepicordienne-pour-la-promotion-de-la-culture-.csv"
-FILE_2026 = "export-barb-n-rock-festival-2026-association-crepicordienne-pour-la-promotion-de-la-culture-acpc-05_12_2025-13_05_2026.xlsx"
+FILE_2026 = "export-barb-n-rock-festival-2026-association-crepicordienne-pour-la-promotion-de-la-culture-acpc-05_12_2025-18_05_2026.xlsx"
 
 EXCLUDED_TARIFS = [
     "Prévente Cashless",

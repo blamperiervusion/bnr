@@ -158,7 +158,7 @@ export async function PATCH(
   }
 
   // Validation des champs autorisés
-  const allowedFields = ['status', 'team', 'notes'];
+  const allowedFields = ['status', 'team', 'notes', 'email'];
   const data: Record<string, unknown> = {};
   
   for (const field of allowedFields) {

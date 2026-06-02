@@ -1,13 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import type { SacemTvaMode } from '@/lib/invoices/sacem';
 
 const defaultForm = {
   dossierRef: '',
   documentNumber: 'DP-SACEM-2026-001',
   invoiceDate: new Date().toISOString().split('T')[0],
   amount: '1500',
-  tvaMode: 'subvention_non_imposable' as const,
+  tvaMode: 'subvention_non_imposable' as SacemTvaMode,
   siret: '',
   addressLine: 'Crèvecœur-le-Grand',
   postalCode: '60360',
@@ -158,7 +159,7 @@ export default function SacemInvoiceForm() {
               onChange={(e) =>
                 setForm({
                   ...form,
-                  tvaMode: e.target.value as 'subvention_non_imposable' | 'facture_avec_tva',
+                  tvaMode: e.target.value as SacemTvaMode,
                 })
               }
               className="w-full bg-[#0a0a0a] border border-[#333] rounded-lg px-3 py-2 text-white text-sm"

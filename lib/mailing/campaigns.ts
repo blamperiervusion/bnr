@@ -134,8 +134,14 @@ function buildVolunteerWhere(filters: VolunteerCampaignFilters): Prisma.Voluntee
 
   if (filters.search && filters.search.trim()) {
     const query = filters.search.trim();
+    const existingAnd = where.AND;
+    const andConditions: Prisma.VolunteerWhereInput[] = existingAnd
+      ? Array.isArray(existingAnd)
+        ? existingAnd
+        : [existingAnd]
+      : [];
     where.AND = [
-      ...(where.AND ?? []),
+      ...andConditions,
       {
         OR: [
           { name: { contains: query, mode: 'insensitive' } },

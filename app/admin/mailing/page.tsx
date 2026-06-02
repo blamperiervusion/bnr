@@ -161,7 +161,10 @@ export default function MailingPage() {
 
       const data = (await response.json()) as PreviewResponse | { error?: string };
       if (!response.ok) {
-        setFeedback({ type: 'error', text: data.error || "Impossible de générer l'aperçu" });
+        setFeedback({
+          type: 'error',
+          text: ('error' in data ? data.error : undefined) || "Impossible de générer l'aperçu",
+        });
         return;
       }
 
@@ -214,7 +217,10 @@ export default function MailingPage() {
 
       const data = (await response.json()) as SendResponse | { error?: string };
       if (!response.ok) {
-        setFeedback({ type: 'error', text: data.error || "Impossible d'envoyer la campagne" });
+        setFeedback({
+          type: 'error',
+          text: ('error' in data ? data.error : undefined) || "Impossible d'envoyer la campagne",
+        });
         return;
       }
 

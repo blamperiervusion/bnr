@@ -104,21 +104,32 @@ export default function ProgrammeDay({ dayData, allDays }: ProgrammeDayProps) {
                     {/* Timeline visualization */}
                     <div className="relative mt-12">
                         {/* Vertical line */}
-                        <div className="absolute left-4 md:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[var(--accent-red)] via-[var(--accent-cyan)] to-[var(--accent-red)]" />
+                        <div className="absolute left-[4.65rem] md:left-[5.65rem] top-0 bottom-0 w-0.5 bg-gradient-to-b from-[var(--accent-red)] via-[var(--accent-cyan)] to-[var(--accent-red)]" />
 
                         {/* Bands */}
                         <div className="space-y-8">
-                            {sortedBands.map((band, index) => (
+                            {sortedBands.map((band, index) => {
+                                const displayTime = band.time?.trim() || undefined;
+
+                                return (
                                 <motion.div
                                     key={band.id}
                                     initial={{ opacity: 0, x: -30 }}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true, margin: '-50px' }}
                                     transition={{ delay: index * 0.1 }}
-                                    className="relative pl-12 md:pl-20"
+                                    className="relative pl-20 md:pl-28"
                                 >
+                                    {displayTime && (
+                                        <div className="absolute left-0 top-6 w-16 md:w-20 text-right">
+                                            <span className="font-display text-xl md:text-2xl text-[var(--accent-cyan)] tracking-wide">
+                                                {displayTime}
+                                            </span>
+                                        </div>
+                                    )}
+
                                     {/* Timeline dot */}
-                                    <div className="absolute left-2 md:left-6 top-6 w-4 h-4 rounded-full bg-[var(--accent-red)] border-4 border-[var(--background)] z-10">
+                                    <div className="absolute left-[4.5rem] md:left-[5.5rem] top-6 w-4 h-4 rounded-full bg-[var(--accent-red)] border-4 border-[var(--background)] z-10">
                                         <motion.div
                                             className="absolute inset-0 rounded-full bg-[var(--accent-red)]"
                                             animate={{ scale: [1, 1.5, 1], opacity: [1, 0, 1] }}
@@ -128,7 +139,6 @@ export default function ProgrammeDay({ dayData, allDays }: ProgrammeDayProps) {
 
                                     <BandCard
                                         name={band.name}
-                                        time={band.time ?? undefined}
                                         description={band.description}
                                         imageUrl={band.imageUrl ?? undefined}
                                         videoUrl={band.videoUrl ?? undefined}
@@ -140,7 +150,7 @@ export default function ProgrammeDay({ dayData, allDays }: ProgrammeDayProps) {
                                         } : undefined}
                                     />
                                 </motion.div>
-                            ))}
+                            )})}
                         </div>
                     </div>
                 </div>

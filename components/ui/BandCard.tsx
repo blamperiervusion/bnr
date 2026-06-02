@@ -32,10 +32,11 @@ export default function BandCard({
     imageUrl,
     videoUrl,
     socialLinks,
-    showTime = false
+    showTime = false,
 }: BandCardProps) {
     const [showVideo, setShowVideo] = useState(false);
     const [mounted, setMounted] = useState(false);
+    const displayTime = time?.trim() || undefined;
 
     useEffect(() => {
         setMounted(true);
@@ -92,9 +93,9 @@ export default function BandCard({
                                 {description}
                             </p>
                             <div className="flex items-center gap-4 flex-wrap">
-                                {time && (
+                                {showTime && displayTime && (
                                     <span className="text-sm text-[var(--accent-cyan)]">
-                                        {time}
+                                        {displayTime}
                                     </span>
                                 )}
                                 {socialLinks?.spotify && (
@@ -153,9 +154,9 @@ export default function BandCard({
                         </div>
                     )}
                     {/* Time badge */}
-                    {showTime && time && (
+                    {showTime && displayTime && (
                         <div className="absolute top-2 left-2 bg-[var(--accent-red)] px-3 py-1 rounded">
-                            <span className="text-sm font-bold text-white">{time}</span>
+                            <span className="text-sm font-bold text-white">{displayTime}</span>
                         </div>
                     )}
                 </div>

@@ -36,9 +36,11 @@ yarn-error.log*
 # local Python venv (analyse ventes)
 private/sales/.venv/
 private/sales/.mplconfig/
+private/sales/.matplotlib/
 # exports billetterie (données personnelles)
 private/sales/*.xlsx
 private/sales/*.csv
+private/sacem/facture-sacem.config.json
 
 # vercel
 .vercel

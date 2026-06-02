@@ -26,7 +26,12 @@ const categoryConfig: Record<StandCategory, { label: string; emoji: string; desc
   MERCHANDISING: { label: 'Merchandising', emoji: '👕', description: 'T-shirts des groupes, patches, pins, posters, vinyles... Tout pour repartir avec des souvenirs.' },
   ARTISANAT: { label: 'Artisanat', emoji: '⚒️', description: 'Bijoux forgés, accessoires en cuir, créations uniques. Du fait-main par des artisans passionnés.' },
   TATTOO: { label: 'Tatouage & Piercing', emoji: '🖋️', description: 'Tattoo flash et piercing par des pros. Walk-in welcome, hygiène irréprochable.' },
-  BARBIER: { label: 'Barbiers', emoji: '💈', description: 'Besoin d\'une coupe fresh ou d\'une barbe taillée au carré ? Nos barbiers sont là.' },
+  BARBIER: {
+    label: 'Barbiers',
+    emoji: '💈',
+    description:
+      'V du Barbier et Nine Hair Beard : coupe, barbe et soins comme en salon, au cœur du village.',
+  },
   ASSOCIATION: { label: 'Associations', emoji: '🤝', description: 'Associations locales, culturelles et caritatives. Viens découvrir et soutenir leurs actions.' },
   DIVERS: { label: 'Divers & Curiosités', emoji: '✨', description: 'Stands insolites et découvertes en tout genre. Laisse-toi surprendre !' },
 };

@@ -1,0 +1,24 @@
+{
+  "dossierRef": "MA01-26XXXXX",
+  "documentNumber": "DP-SACEM-2026-001",
+  "invoiceDate": "2026-05-25",
+  "amount": 1500,
+  "tvaMode": "subvention_non_imposable",
+  "beneficiary": {
+    "legalForm": "Association loi 1901",
+    "siret": "00000000000000",
+    "addressLine": "Crèvecœur-le-Grand",
+    "postalCode": "60360",
+    "city": "Crèvecœur-le-Grand",
+    "contactName": "Benjamin Lampérier",
+    "phone": "+33 6 00 00 00 00",
+    "email": "barbnrock.festival@gmail.com"
+  },
+  "bank": {
+    "accountHolder": "Association Crépicordienne pour la Promotion de la Culture",
+    "iban": "FR76 XXXX XXXX XXXX XXXX XXXX XXX",
+    "bic": "AGRIFRPPXXX",
+    "bankName": "Crédit Agricole"
+  },
+  "aidSubject": "Aide financière Action culturelle de la Sacem — programme Festivals et salles 2026, au titre de l'organisation du Barb'n'Rock Festival (26, 27 et 28 juin 2026, Crèvecœur-le-Grand, Oise). Montant alloué par convention : 1 500,00 €."
+}

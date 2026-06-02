@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma';
+import Link from 'next/link';
 import InvoiceForm from './InvoiceForm';
 import InvoiceList from './InvoiceList';
 
@@ -60,11 +61,19 @@ export default async function FacturesPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl lg:text-3xl font-bold text-white">Factures</h1>
-        <p className="text-gray-500 text-sm mt-1">
-          {totalInvoices} facture(s) émise(s) — gérez les factures partenaires et libres
-        </p>
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl lg:text-3xl font-bold text-white">Factures</h1>
+          <p className="text-gray-500 text-sm mt-1">
+            {totalInvoices} facture(s) émise(s) — gérez les factures partenaires et libres
+          </p>
+        </div>
+        <Link
+          href="/admin/factures/sacem"
+          className="px-3 py-2 bg-[#111] border border-[#333] rounded-lg text-gray-400 hover:text-white hover:border-[#555] transition-colors text-sm"
+        >
+          Demande de paiement Sacem
+        </Link>
       </div>
 
       {/* Stats */}

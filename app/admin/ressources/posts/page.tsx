@@ -226,17 +226,20 @@ export default function PostGeneratorPage() {
           >
             {/* Background Image */}
             <div
-              className="absolute inset-0 bg-cover bg-center opacity-70"
+              className="absolute inset-0 bg-cover bg-center"
               style={{
                 backgroundImage: `url(${selectedPreset.bg})`,
                 filter: 'grayscale(10%)',
+                opacity: selectedPreset.bgOpacity ?? 0.7,
               }}
             />
             {/* Overlay */}
             <div
               className="absolute inset-0"
               style={{
-                background: 'linear-gradient(180deg, rgba(10, 12, 15, 0.1) 0%, rgba(10, 12, 15, 0.4) 50%, rgba(10, 12, 15, 0.9) 100%)',
+                background:
+                  selectedPreset.overlayGradient ??
+                  'linear-gradient(180deg, rgba(10, 12, 15, 0.1) 0%, rgba(10, 12, 15, 0.4) 50%, rgba(10, 12, 15, 0.9) 100%)',
               }}
             />
             {/* Corner accents */}
@@ -296,7 +299,14 @@ export default function PostGeneratorPage() {
                   className="leading-tight"
                   style={{
                     fontFamily: 'Bebas Neue, sans-serif',
-                    fontSize: (selectedPreset.mainClass === 'price' ? 80 : selectedPreset.mainClass === 'countdown' ? 120 : 48) * fontScale,
+                    fontSize:
+                      (selectedPreset.mainClass === 'price'
+                        ? 80
+                        : selectedPreset.mainClass === 'countdown'
+                          ? 120
+                          : selectedPreset.mainClass === 'compact'
+                            ? 38
+                            : 48) * fontScale,
                     letterSpacing: 4 * fontScale,
                     lineHeight: 1.1,
                     color: selectedPreset.mainClass === 'price' ? '#E85D04' : selectedPreset.mainClass === 'countdown' ? '#00E5CC' : '#f0f0f0',

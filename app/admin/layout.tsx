@@ -30,6 +30,7 @@ const navGroups = [
     items: [
       { href: '/admin/compta', label: 'Comptabilité', icon: '💰' },
       { href: '/admin/factures', label: 'Factures', icon: '🧾' },
+      { href: '/admin/mailing', label: 'Mailing', icon: '📧' },
       { href: '/admin/ressources', label: 'Ressources', icon: '📁' },
       { href: '/admin/utilisateurs', label: 'Utilisateurs', icon: '👥' },
       { href: '/admin/parametres', label: 'Paramètres', icon: '⚙️' },

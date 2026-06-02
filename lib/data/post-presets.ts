@@ -4,10 +4,14 @@ export interface PostPreset {
   badge: string;
   badgeClass?: 'cyan' | 'gold' | 'orange';
   mainText: string;
-  mainClass?: 'price' | 'countdown';
+  mainClass?: 'price' | 'countdown' | 'compact';
   subText: string;
   descText: string;
   bg: string;
+  /** Opacité du fond photo (0–1). Défaut 0,7 dans le générateur. */
+  bgOpacity?: number;
+  /** Dégradé par-dessus la photo (lisibilité du texte). */
+  overlayGradient?: string;
   caption: string;
   footerDate?: string;
   footerButton?: string;
@@ -860,7 +864,9 @@ Le tout à prix festival raisonnables, servi 3 jours de suite.
         mainText: 'FLASH<br><span class="accent">TATTOO</span>',
         subText: '4 artistes sur place tout le week-end',
         descText: 'José Martinez • Moog\'s Ink • MJA • Ink Dreamer',
-        bg: '/images/hero-visual.jpg',
+        bg: '/images/posts/tatoueurs-village-2026.png',
+        bgOpacity: 1,
+        overlayGradient: 'none',
         caption: `🖋️ FLASH TATTOO 🖋️
 
 4 tatoueurs présents tout le week-end !
@@ -881,24 +887,27 @@ Repars avec un souvenir permanent du meilleur week-end de ton été.
       {
         id: 'village-barbiers',
         title: 'Barbiers',
-        badge: '💈 BARBIERS',
+        badge: '💈 AU VILLAGE',
         badgeClass: 'cyan',
-        mainText: 'BARBIERS<br><span class="accent">ON SITE</span>',
-        subText: 'V du Barbier • Nine Hair Beard',
-        descText: 'Coupe, barbe, style — même au festival',
-        bg: '/images/hero-visual.jpg',
-        caption: `💈 BARBIERS AU FESTIVAL 💈
+        mainText:
+          'V DU<br>BARBIER<br><span class="accent">&</span><br>NINE HAIR<br>BEARD',
+        mainClass: 'compact',
+        subText: 'Barbiers pros sur le festival',
+        descText: 'Coupe, taille de barbe, au rasoir — tout le week-end',
+        bg: '/images/posts/barbiers-village-2026.png',
+        bgOpacity: 0.82,
+        overlayGradient:
+          'linear-gradient(180deg, rgba(10, 12, 15, 0.35) 0%, rgba(10, 12, 15, 0.5) 45%, rgba(10, 12, 15, 0.88) 100%)',
+        caption: `💈 V DU BARBIER & NINE HAIR BEARD 💈
 
-On s'occupait du son, on s'occupe aussi du look.
+Les deux crews tiennent le stand barbier au Village du Chaos : coupe, barbe, soins — comme en salon, mais entre deux concerts.
 
 💈 V du Barbier
 💈 Nine Hair Beard
 
-Coupe, taille de barbe, soins — tout le week-end sur place.
+📷 Photo : Le Bonhomme Picard
 
-Parce que même au festival, on peut être stylé. 😎
-
-26-28 Juin • Crèvecœur-le-Grand
+26-28 juin • Crèvecœur-le-Grand
 🎫 36€ les 3 jours
 
 → Lien en bio`,

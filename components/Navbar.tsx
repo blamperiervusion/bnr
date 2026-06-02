@@ -30,11 +30,7 @@ const ctaLinks = [
   { href: HELLOASSO_URL, label: 'Billetterie', primary: true, external: true },
 ];
 
-interface NavbarProps {
-  bannerVisible?: boolean;
-}
-
-export default function Navbar({ bannerVisible = true }: NavbarProps) {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
@@ -87,9 +83,7 @@ export default function Navbar({ bannerVisible = true }: NavbarProps) {
   return (
     <>
       <motion.nav
-        className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
-          bannerVisible ? 'top-[40px]' : 'top-0'
-        } ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? 'bg-[var(--background)]/95 backdrop-blur-md border-b border-[var(--border)]'
             : 'bg-transparent'

@@ -1,3 +1,6 @@
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
+import { authOptions } from '@/lib/auth';
 import Link from 'next/link';
 import prisma from '@/lib/prisma';
 
@@ -55,6 +58,9 @@ async function getComptaStats() {
 }
 
 export default async function ComptaPage() {
+  const session = await getServerSession(authOptions);
+  if (!session) redirect('/admin/login');
+
   const stats = await getComptaStats();
   const currentYear = new Date().getFullYear();
 

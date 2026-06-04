@@ -1,8 +1,11 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { Decimal } from '@prisma/client/runtime/library';
+import { requireAdmin } from '@/lib/auth-guard';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const authError = await requireAdmin(request);
+  if (authError) return authError;
   try {
     const currentYear = new Date().getFullYear();
 

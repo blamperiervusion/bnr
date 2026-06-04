@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import { requireAdmin } from '@/lib/auth-guard';
 
 function slugify(text: string): string {
   return text
@@ -10,7 +11,10 @@ function slugify(text: string): string {
     .replace(/(^-|-$)/g, '');
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const authError = await requireAdmin(request);
+  if (authError) return authError;
+
   try {
     const bands = await prisma.band.findMany({
       orderBy: [
@@ -31,6 +35,9 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+  const authError = await requireAdmin(request);
+  if (authError) return authError;
+
   try {
     const data = await request.json();
 

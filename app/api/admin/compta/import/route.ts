@@ -2,10 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { Decimal } from '@prisma/client/runtime/library';
 import { parseCSV, parseManualEntry } from '@/lib/compta/parsers/csv-parser';
+import { requireAdmin } from '@/lib/auth-guard';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
+  const authError = await requireAdmin(request);
+  if (authError) return authError;
+
   try {
     const formData = await request.formData();
     const file = formData.get('file') as File | null;

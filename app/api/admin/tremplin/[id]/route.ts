@@ -86,7 +86,7 @@ async function sendRejectionEmail(band: { bandName: string; contactName: string;
             <p>
               <a href="https://barbnrock-festival.fr">Site web</a> · 
               <a href="https://instagram.com/barbnrock">Instagram</a> · 
-              <a href="https://facebook.com/barbnrockfestival">Facebook</a>
+              <a href="https://www.facebook.com/barbnrock.festival/">Facebook</a>
             </p>
           </div>
         </body>

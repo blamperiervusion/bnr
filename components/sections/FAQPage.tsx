@@ -114,7 +114,7 @@ export default function FAQPage() {
                 📧 Nous contacter
               </Button>
               <Button
-                href="https://facebook.com/barbnrock"
+                href="https://www.facebook.com/barbnrock.festival/"
                 external
                 variant="outline"
               >

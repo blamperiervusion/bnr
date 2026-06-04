@@ -57,7 +57,7 @@ export const organizationSchema = {
   description:
     "Festival de musique Punk et Metal à Crèvecœur-le-Grand. Bearded Rock Experience.",
   sameAs: [
-    'https://www.facebook.com/barbnrockfestival', // À remplacer par l'URL réelle
+    'https://www.facebook.com/barbnrock.festival/',
     'https://www.instagram.com/barbnrockfestival', // À remplacer par l'URL réelle
   ],
   contactPoint: {

@@ -49,6 +49,7 @@ const teams: Team[] = [
       { name: 'Gendek François',     photo: 'https://iks0xxkxqmnlh62j.public.blob.vercel-storage.com/volunteers/1771447026160-1jun8v.png' },
       { name: 'Vitu Lucien',         photo: 'https://iks0xxkxqmnlh62j.public.blob.vercel-storage.com/volunteers/1777125032783-07ntau.jpg' },
       { name: 'Christin Marie-Line', photo: 'https://iks0xxkxqmnlh62j.public.blob.vercel-storage.com/volunteers/1778951583639-4owuo3.jpg' },
+      { name: 'Manesse Pauline',     photo: 'https://iks0xxkxqmnlh62j.public.blob.vercel-storage.com/volunteers/1781262115464-4nin4a.jpeg' },
     ],
   },
   {
@@ -127,13 +128,13 @@ const teams: Team[] = [
       { name: 'Mayot Franck',        photo: 'https://iks0xxkxqmnlh62j.public.blob.vercel-storage.com/volunteers/1771454012144-ni5166.jpg', isResp: true },
       { name: 'Palain Alain',        photo: 'https://iks0xxkxqmnlh62j.public.blob.vercel-storage.com/volunteers/1771446283525-tx2ir8.jpg' },
       { name: 'Bisoullier Valérian', photo: 'https://iks0xxkxqmnlh62j.public.blob.vercel-storage.com/volunteers/1771485378717-jes07q.jpg' },
-      { name: 'Levert Gaétan',       photo: 'https://iks0xxkxqmnlh62j.public.blob.vercel-storage.com/volunteers/1771447841465-dqo70i.jpg' },
       { name: 'Aquilina Julien',     photo: 'https://iks0xxkxqmnlh62j.public.blob.vercel-storage.com/volunteers/1771450711917-ppfcf0.png' },
       { name: 'Mathon Doun',         photo: 'https://iks0xxkxqmnlh62j.public.blob.vercel-storage.com/volunteers/1771507784784-h3x26s.jpg' },
       { name: 'Jose Ministro',       photo: 'https://iks0xxkxqmnlh62j.public.blob.vercel-storage.com/volunteers/1776502181616-09yxea.png' },
       { name: 'Druelle Vincent',     photo: 'https://iks0xxkxqmnlh62j.public.blob.vercel-storage.com/volunteers/1772149283125-7y0p1n.jpeg' },
       { name: 'Dranguet David',      photo: 'https://iks0xxkxqmnlh62j.public.blob.vercel-storage.com/volunteers/1778611397713-aks8oh.jpg' },
       { name: 'Dumont Arthur',       photo: 'https://iks0xxkxqmnlh62j.public.blob.vercel-storage.com/volunteers/1780843894068-08q6ij.jpeg' },
+      { name: 'RÉMOND Laurent',      photo: 'https://iks0xxkxqmnlh62j.public.blob.vercel-storage.com/volunteers/1781290654869-y0pyra.jpeg' },
     ],
   },
   {

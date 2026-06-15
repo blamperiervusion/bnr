@@ -239,6 +239,24 @@ export async function getPartnerCampaignRecipients(
   );
 }
 
+// Resend rate limits: 2 req/s (free) — 10 req/s (pro)
+// Batch size: up to 100 emails per batch call (Resend batch API)
+// Delay between batches to stay safely under the limit
+const BATCH_SIZE = 50;
+const BATCH_DELAY_MS = 1200; // ~1 batch/sec → safe on all plans
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function chunk<T>(arr: T[], size: number): T[][] {
+  const chunks: T[][] = [];
+  for (let i = 0; i < arr.length; i += size) {
+    chunks.push(arr.slice(i, i + size));
+  }
+  return chunks;
+}
+
 export async function sendCampaign(
   recipients: CampaignRecipient[],
   message: CampaignMessageInput,
@@ -247,39 +265,81 @@ export async function sendCampaign(
   const uniqueRecipients = deduplicateRecipients(recipients);
 
   if (uniqueRecipients.length === 0) {
-    return {
-      totalRecipients: 0,
-      sentCount: 0,
-      failedCount: 0,
-      failures: [],
-    };
+    return { totalRecipients: 0, sentCount: 0, failedCount: 0, failures: [] };
   }
 
   const r = getResend();
   const failures: { email: string; reason: string }[] = [];
   let sentCount = 0;
 
-  for (const recipient of uniqueRecipients) {
+  const batches = chunk(uniqueRecipients, BATCH_SIZE);
+
+  for (let batchIndex = 0; batchIndex < batches.length; batchIndex++) {
+    const batch = batches[batchIndex];
+
+    // Pause between batches (not before the first one)
+    if (batchIndex > 0) {
+      await sleep(BATCH_DELAY_MS);
+    }
+
     try {
-      const { error } = await r.emails.send({
-        from: sender,
-        to: recipient.email,
-        subject: message.subject,
-        html: message.html,
-        text: message.text,
-        replyTo: message.replyTo,
-      });
+      // Use Resend batch API to send the whole batch in one call
+      const { data, error } = await r.batch.send(
+        batch.map((recipient) => ({
+          from: sender,
+          to: recipient.email,
+          subject: message.subject,
+          html: message.html,
+          ...(message.text ? { text: message.text } : {}),
+          ...(message.replyTo ? { replyTo: message.replyTo } : {}),
+        })),
+      );
 
       if (error) {
-        failures.push({ email: recipient.email, reason: error.message || 'Unknown resend error' });
+        // Batch-level error: mark all recipients in this batch as failed
+        for (const recipient of batch) {
+          failures.push({ email: recipient.email, reason: error.message || 'Batch error' });
+        }
+      } else if (data) {
+        // data is an array of results, one per email in the batch
+        const results = Array.isArray(data) ? data : [];
+        batch.forEach((recipient, i) => {
+          const result = results[i] as { id?: string; error?: { message?: string } } | undefined;
+          if (result?.error) {
+            failures.push({ email: recipient.email, reason: result.error.message || 'Unknown error' });
+          } else {
+            sentCount += 1;
+          }
+        });
       } else {
-        sentCount += 1;
+        // No data, no error — count all as sent
+        sentCount += batch.length;
       }
-    } catch (error) {
-      failures.push({
-        email: recipient.email,
-        reason: error instanceof Error ? error.message : 'Unknown error',
-      });
+    } catch (err) {
+      // Fallback: send one by one if batch call throws
+      for (const recipient of batch) {
+        try {
+          await sleep(300);
+          const { error } = await r.emails.send({
+            from: sender,
+            to: recipient.email,
+            subject: message.subject,
+            html: message.html,
+            ...(message.text ? { text: message.text } : {}),
+            ...(message.replyTo ? { replyTo: message.replyTo } : {}),
+          });
+          if (error) {
+            failures.push({ email: recipient.email, reason: error.message || 'Unknown resend error' });
+          } else {
+            sentCount += 1;
+          }
+        } catch (innerErr) {
+          failures.push({
+            email: recipient.email,
+            reason: innerErr instanceof Error ? innerErr.message : 'Unknown error',
+          });
+        }
+      }
     }
   }
 

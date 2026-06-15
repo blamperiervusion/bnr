@@ -422,7 +422,7 @@ function generateInvoiceHTML(partner: {
       <div class="party-title">Client</div>
       <div class="party-name">${partner.company}</div>
       ${partner.siret ? `<div class="party-detail">SIRET : ${partner.siret}</div>` : ''}
-      ${partner.contact ? `<div class="party-detail">Contact : ${partner.contact}</div>` : ''}
+      ${partner.contact ? `<div class="party-detail">Interlocuteur : ${partner.contact}</div>` : ''}
       ${partner.address ? `<div class="party-detail">${partner.address}</div>` : ''}
     </div>
   </div>

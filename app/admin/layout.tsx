@@ -15,6 +15,7 @@ const navGroups = [
       { href: '/admin/benevoles', label: 'Bénévoles', icon: '🙋' },
       { href: '/admin/partenaires', label: 'Partenaires', icon: '🤝' },
       { href: '/admin/village', label: 'Village', icon: '🏕️' },
+      { href: '/admin/covoiturage', label: 'Covoiturage', icon: '🚗' },
     ],
   },
   {

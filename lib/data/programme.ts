@@ -95,7 +95,7 @@ export const programme: DayProgramme[] = [
     day: 'Samedi',
     date: '27 Juin 2026',
     slug: 'samedi',
-    openingTime: '13h00',
+    openingTime: '14h15',
     bands: [
       {
         id: 'sam-1',

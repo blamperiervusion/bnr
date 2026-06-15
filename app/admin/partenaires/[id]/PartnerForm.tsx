@@ -57,6 +57,7 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
     status: partner.status,
     tier: partner.tier || '',
     logo: partner.logo || '',
+    contact: partner.contact || '',
     siret: partner.siret || '',
     address: partner.address || '',
     donationAmount: partner.donationAmount?.toString() || '',
@@ -345,6 +346,29 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
                   <option key={user.id} value={user.id}>{user.name}</option>
                 ))}
               </select>
+            </div>
+          </div>
+
+          {/* Contact */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-400 mb-2">Entreprise</label>
+              <input
+                type="text"
+                value={partner.company}
+                disabled
+                className="w-full bg-[#0a0a0a] border border-[#333] rounded-lg px-4 py-3 text-gray-500 cursor-not-allowed"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-400 mb-2">Interlocuteur</label>
+              <input
+                type="text"
+                value={formData.contact}
+                onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+                placeholder="Prénom Nom"
+                className="w-full bg-[#0a0a0a] border border-[#333] rounded-lg px-4 py-3 text-white focus:border-[#e53e3e] focus:outline-none"
+              />
             </div>
           </div>
 

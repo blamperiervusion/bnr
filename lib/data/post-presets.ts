@@ -54,17 +54,16 @@ Camping GRATUIT inclus.
         id: 'prix-detail',
         title: 'Prix par jour',
         badge: 'TARIFS',
-        mainText: '13€',
+        mainText: '18€',
         mainClass: 'price',
         subText: 'Vendredi',
-        descText: '22€ Samedi • 33€ Ven+Sam • 36€ Pass 3j',
+        descText: '27€ Samedi • 42€ Pass 3j',
         bg: '/images/hero-visual.jpg',
         caption: `Le détail qui tue 👇
 
-🔥 Vendredi (Psykup + Cachemire + ...) : 13€
-🔥 Samedi (Loudblast + Shaârghot + ...) : 22€
-🔥 Les deux jours de chaos : 33€
-🔥 Pass 3 jours complet : 36€
+🔥 Vendredi (Psykup + Cachemire + ...) : 18€
+🔥 Samedi (Loudblast + Shaârghot + ...) : 27€
+🔥 Pass 3 jours complet : 42€
 
 Oui, c'est vraiment ces prix-là.
 Oui, le camping est gratuit.
@@ -90,7 +89,7 @@ Merci ! Vous avez été rapides 💀
 Les EARLY BIRD sont ouverts :
 • Pass 3 jours : 36€
 • Samedi : 22€
-• Vendredi : 13€
+• Vendredi : 18€
 • Dimanche : 5€
 
 🎫 Lien en bio`,
@@ -178,7 +177,7 @@ Rock'n'roll français survitaminé.
 Riffs qui tabassent, textes en français qui percutent.
 
 📍 Vendredi 26 Juin
-🎫 13€ la journée / 36€ les 3 jours
+🎫 18€ la journée / 42€ les 3 jours
 
 → Lien en bio`,
       },
@@ -275,7 +274,7 @@ KAMI NO IKARI rejoint l'affiche !
 
 "La Colère des Dieux" — metal lourd et enragé, droit dans la gueule. Une des valeurs sûres de la scène régionale.
 
-🎫 Vendredi : 13€ / Pass 3 jours : 36€ (camping inclus)
+🎫 Vendredi : 18€ / Pass 3 jours : 42€ (camping inclus)
 → Lien en bio`,
       },
       {
@@ -294,7 +293,7 @@ BARABBAS rejoint l'affiche !
 
 Rock metal brut et sans filtre. Un son qui punche, une énergie de scène qui retourne le public.
 
-🎫 Vendredi : 13€ / Pass 3 jours : 36€ (camping inclus)
+🎫 Vendredi : 18€ / Pass 3 jours : 42€ (camping inclus)
 → Lien en bio`,
       },
       {
@@ -313,7 +312,7 @@ BLACK HAZARD rejoint l'affiche !
 
 Metal puissant et sombre. Un groupe qui n'a peur de rien — ni du volume, ni de la profondeur. Viendra ouvrir le week-end comme il se doit.
 
-🎫 Vendredi : 13€ / Pass 3 jours : 36€ (camping inclus)
+🎫 Vendredi : 18€ / Pass 3 jours : 42€ (camping inclus)
 → Lien en bio`,
       },
       {
@@ -579,9 +578,9 @@ T'as ton billet ? T'as ta tente ?
 Les Very Early Bird sont ÉPUISÉS.
 Les Early Bird partent vite.
 
-Pass 3 jours : 36€ → bientôt 42€
-Vendredi : 13€ → bientôt 18€
-Samedi : 22€ → bientôt 27€
+Pass 3 jours : 42€
+Vendredi : 18€
+Samedi : 27€
 
 Tu veux économiser ? C'est maintenant.
 
@@ -602,9 +601,9 @@ Billetterie ferme DEMAIN SOIR.
 Après, faudra venir sur place.
 Et ça sera 5€ de plus.
 
-Pass 3 jours : 36€ (demain : 42€)
-Pass Samedi : 22€ (demain : 27€)
-Pass Vendredi : 13€ (demain : 18€)
+Pass 3 jours : 42€
+Pass Samedi : 27€
+Pass Vendredi : 18€
 
 C'est maintenant ou jamais.
 

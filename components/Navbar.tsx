@@ -19,8 +19,8 @@ const navLinks = [
   { href: '/village', label: 'Le Village' },
   { href: '/partenaires', label: 'Partenaires' },
   { href: '/benevoles', label: 'Bénévoles' },
+  { href: '/covoiturage', label: 'Covoiturage' },
   { href: '/faq', label: 'FAQ' },
-  { href: '/jeu', label: '🎮 Jouer' },
 ];
 
 import { HELLOASSO_URL } from '@/lib/constants';
@@ -30,7 +30,7 @@ const ctaLinks = [
   { href: HELLOASSO_URL, label: 'Billetterie', primary: true, external: true },
 ];
 
-export default function Navbar() {
+export default function Navbar({ bannerVisible = false }: { bannerVisible?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
@@ -83,11 +83,12 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? 'bg-[var(--background)]/95 backdrop-blur-md border-b border-[var(--border)]'
             : 'bg-transparent'
         }`}
+        style={{ top: bannerVisible ? 36 : 0 }}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
@@ -118,7 +119,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-5">
               {navLinks.map((link) => (
                 <div key={link.label} className="relative group">
                   {link.submenu ? (
@@ -174,7 +175,7 @@ export default function Navbar() {
               ))}
 
               {/* CTA Buttons */}
-              <div className="flex items-center gap-4 ml-4">
+              <div className="flex items-center gap-3 ml-2">
                 {ctaLinks.map((link) =>
                   link.external ? (
                     <a

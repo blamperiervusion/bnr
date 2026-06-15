@@ -50,7 +50,7 @@ export async function PATCH(
 
   // Validation des champs autorisés
   const allowedFields = [
-    'status', 'tier', 'logo', 'siret', 'address',
+    'status', 'tier', 'logo', 'contact', 'siret', 'address',
     'donationAmount', 'donationDate', 'notes', 'assignedToId'
   ];
   const data: Record<string, unknown> = {};

@@ -4,7 +4,7 @@ import type { DayProgrammeData, BandData } from '@/components/sections/Programme
 // Fallback config in case DB is not seeded
 const defaultDayConfig: Record<string, { day: string; date: string; openingTime: string }> = {
   vendredi: { day: 'Vendredi', date: '26 Juin 2026', openingTime: '18h00' },
-  samedi: { day: 'Samedi', date: '27 Juin 2026', openingTime: '13h00' },
+  samedi: { day: 'Samedi', date: '27 Juin 2026', openingTime: '14h15' },
   dimanche: { day: 'Dimanche', date: '28 Juin 2026', openingTime: '14h00' },
 };
 

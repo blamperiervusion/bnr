@@ -167,6 +167,11 @@ export async function PATCH(
     }
   }
 
+  // disponibilites est un tableau — traitement séparé
+  if (Array.isArray(body.disponibilites)) {
+    data.disponibilites = body.disponibilites;
+  }
+
   try {
     const volunteer = await prisma.volunteer.update({
       where: { id },

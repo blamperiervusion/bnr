@@ -18,7 +18,7 @@ async function main() {
       slug: 'samedi',
       name: 'Samedi',
       date: new Date('2026-06-20'),
-      openingTime: '14h00',
+      openingTime: '14h15',
       closingTime: '03h00',
       order: 1,
     },

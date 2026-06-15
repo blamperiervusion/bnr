@@ -41,6 +41,8 @@ private/sales/.matplotlib/
 private/sales/*.xlsx
 private/sales/*.csv
 private/sacem/facture-sacem.config.json
+# CERFA générés (documents fiscaux)
+private/cerfa/*.pdf
 
 # vercel
 .vercel

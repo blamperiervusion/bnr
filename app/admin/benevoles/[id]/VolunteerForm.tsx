@@ -4,6 +4,12 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Volunteer } from '@prisma/client';
 
+const disponibiliteOptions = [
+  { value: 'vendredi',  label: 'Vendredi 26 juin' },
+  { value: 'samedi',   label: 'Samedi 27 juin' },
+  { value: 'dimanche', label: 'Dimanche 28 juin' },
+];
+
 const teamOptions = [
   'Accueil',
   'Bar',
@@ -36,7 +42,17 @@ export default function VolunteerForm({ volunteer }: VolunteerFormProps) {
     team: volunteer.team || '',
     notes: volunteer.notes || '',
     email: volunteer.email,
+    disponibilites: volunteer.disponibilites ?? [],
   });
+
+  const toggleDispo = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      disponibilites: prev.disponibilites.includes(value)
+        ? prev.disponibilites.filter(d => d !== value)
+        : [...prev.disponibilites, value],
+    }));
+  };
   const [resendAssignment, setResendAssignment] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -136,6 +152,44 @@ export default function VolunteerForm({ volunteer }: VolunteerFormProps) {
             <p className="text-sm text-green-400 mt-2">
               📧 Un email de validation sera envoyé au bénévole
             </p>
+          )}
+        </div>
+
+        {/* Disponibilités */}
+        <div>
+          <label className="block text-sm font-medium text-gray-400 mb-2">
+            Présences
+          </label>
+          <div className="flex gap-3 flex-wrap">
+            {disponibiliteOptions.map(opt => {
+              const checked = formData.disponibilites.includes(opt.value);
+              return (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => toggleDispo(opt.value)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
+                    checked
+                      ? 'bg-[#00E5CC]/15 border-[#00E5CC] text-[#00E5CC]'
+                      : 'bg-[#1a1a1a] border-[#333] text-gray-400 hover:border-[#555]'
+                  }`}
+                >
+                  <span className={`w-4 h-4 rounded border flex items-center justify-center shrink-0 ${
+                    checked ? 'bg-[#00E5CC] border-[#00E5CC]' : 'border-[#555]'
+                  }`}>
+                    {checked && (
+                      <svg className="w-3 h-3 text-black" fill="none" viewBox="0 0 12 12">
+                        <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
+                  </span>
+                  {opt.label}
+                </button>
+              );
+            })}
+          </div>
+          {formData.disponibilites.length === 0 && (
+            <p className="text-xs text-yellow-500/80 mt-2">⚠️ Aucune présence sélectionnée</p>
           )}
         </div>
 

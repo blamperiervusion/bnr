@@ -100,7 +100,12 @@ export default async function AdminCovoituragePage() {
                   <p className="text-gray-500 text-xs italic mb-2">&ldquo;{offer.message}&rdquo;</p>
                 )}
                 <p className="text-gray-600 text-xs mb-3">{offer.email}</p>
-                <CarpoolAdminActions offerId={offer.id} currentStatus={offer.status} />
+                <CarpoolAdminActions
+                  offerId={offer.id}
+                  currentStatus={offer.status}
+                  currentCity={offer.city}
+                  hasCoords={offer.lat !== null && offer.lng !== null}
+                />
               </div>
             ))}
           </div>
@@ -129,7 +134,14 @@ export default async function AdminCovoituragePage() {
                     </td>
                     <td className="px-4 py-3">
                       <p className="text-white font-medium">{offer.name}</p>
-                      <p className="text-gray-400 text-sm">{offer.city}</p>
+                      <div className="flex items-center gap-1.5 mt-0.5">
+                        <p className="text-gray-400 text-sm">{offer.city}</p>
+                        {offer.lat !== null && offer.lng !== null ? (
+                          <span className="text-green-500 text-xs" title={`${offer.lat?.toFixed(4)}, ${offer.lng?.toFixed(4)}`}>📍</span>
+                        ) : (
+                          <span className="text-orange-400 text-xs" title="Pas de coordonnées">⚠️</span>
+                        )}
+                      </div>
                       {offer.message && (
                         <p className="text-gray-600 text-xs italic mt-0.5 max-w-xs truncate">&ldquo;{offer.message}&rdquo;</p>
                       )}
@@ -150,7 +162,12 @@ export default async function AdminCovoituragePage() {
                       </span>
                     </td>
                     <td className="px-4 py-3">
-                      <CarpoolAdminActions offerId={offer.id} currentStatus={offer.status} />
+                      <CarpoolAdminActions
+                        offerId={offer.id}
+                        currentStatus={offer.status}
+                        currentCity={offer.city}
+                        hasCoords={offer.lat !== null && offer.lng !== null}
+                      />
                     </td>
                   </tr>
                 ))}

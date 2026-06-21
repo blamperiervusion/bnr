@@ -1,4 +1,4 @@
-import { Hero, BandsGallery, PartnersTeaser, CTASection } from '@/components/sections';
+import { Hero, BandsGallery, PartnersTeaser, CTASection, AssociationBanner } from '@/components/sections';
 import JsonLd, { festivalSchema } from '@/components/JsonLd';
 import prisma from '@/lib/prisma';
 import { getAllBandsFromDB } from '@/lib/data/programme-db';
@@ -38,6 +38,7 @@ export default async function Home() {
       <Hero />
       <BandsGallery bands={bands} />
       <CTASection />
+      <AssociationBanner />
       <PartnersTeaser partners={partners} />
     </>
   );

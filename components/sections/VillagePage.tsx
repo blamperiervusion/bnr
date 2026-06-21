@@ -297,6 +297,78 @@ export default function VillagePage({ stands = [] }: VillagePageProps) {
         </div>
       </section>
 
+      {/* Association Section */}
+      <section className="py-20 px-4 bg-gradient-to-b from-transparent via-[var(--accent-red)]/5 to-transparent">
+        <div className="max-w-5xl mx-auto">
+          <SectionTitle subtitle="Chaque année, le festival s'engage pour une cause">
+            💝 ASSOCIATION DE L&apos;ANNÉE
+          </SectionTitle>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-12"
+          >
+            <Card className="p-8 md:p-12 border-2 border-[var(--accent-red)] bg-[var(--accent-red)]/5 relative overflow-hidden">
+              {/* Decorative background element */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent-red)]/10 rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+
+              <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start">
+                <div className="flex-shrink-0 text-center">
+                  <span className="text-8xl block mb-3">🧸</span>
+                  <a
+                    href="https://www.instagram.com/association.les.fees.sourires/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-[var(--accent-red)]/20 hover:bg-[var(--accent-red)]/30 text-[var(--accent-red)] font-bold text-sm px-4 py-2 rounded-full transition-colors"
+                  >
+                    <span>📷</span>
+                    <span>@les.fees.sourires</span>
+                  </a>
+                </div>
+
+                <div className="flex-1">
+                  <p className="text-[var(--accent-red)] text-sm font-bold uppercase tracking-widest mb-2">
+                    Association soutenue en 2026
+                  </p>
+                  <h3 className="font-display text-4xl md:text-5xl text-[var(--foreground)] uppercase mb-4">
+                    Les Fées Sourires
+                  </h3>
+                  <p className="text-[var(--muted-foreground)] leading-relaxed mb-6">
+                    Améliorer la qualité de vie des enfants hospitalisés et de leurs familles : offrir un environnement agréable, 
+                    acquérir des jeux, permettre à des intervenants de réaliser des activités au sein des services — pour les 
+                    anniversaires, les fêtes de Noël, les moments forts de l&apos;hospitalisation. Contribuer au bien-être de 
+                    l&apos;enfant et de sa famille pendant le séjour hospitalier.
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="flex items-start gap-3 bg-[var(--background)]/50 border border-[var(--border)] rounded-xl p-4 flex-1">
+                      <span className="text-2xl flex-shrink-0">🏪</span>
+                      <div>
+                        <p className="font-bold text-[var(--foreground)] text-sm uppercase tracking-wide">10% des ventes</p>
+                        <p className="text-[var(--muted-foreground)] text-xs mt-1">
+                          Tous les stands du village s&apos;engagent à reverser 10% de leurs recettes à l&apos;association.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3 bg-[var(--background)]/50 border border-[var(--border)] rounded-xl p-4 flex-1">
+                      <span className="text-2xl flex-shrink-0">🎟️</span>
+                      <div>
+                        <p className="font-bold text-[var(--foreground)] text-sm uppercase tracking-wide">Tombola solidaire</p>
+                        <p className="text-[var(--muted-foreground)] text-xs mt-1">
+                          Les gains de la tombola organisée pendant le festival sont intégralement reversés à l&apos;association.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Activities Section */}
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto">
@@ -430,8 +502,17 @@ export default function VillagePage({ stands = [] }: VillagePageProps) {
                   10% Solidaires
                 </h3>
                 <p className="text-[var(--muted-foreground)] text-sm">
-                  Tous engagés ! Chaque année, les stands du village reversent 10% de leurs ventes 
-                  à une association caritative.
+                  Tous engagés ! Les stands du village reversent 10% de leurs ventes et les gains 
+                  de la tombola sont intégralement donnés à{' '}
+                  <a
+                    href="https://www.instagram.com/association.les.fees.sourires/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[var(--accent-red)] hover:underline font-bold"
+                  >
+                    Les Fées Sourires
+                  </a>
+                  , l&apos;association soutenue cette année.
                 </p>
               </Card>
             </motion.div>

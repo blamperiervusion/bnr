@@ -12,3 +12,4 @@ export { default as BilletteriePage } from './BilletteriePage';
 export { default as BenevolesPage } from './BenevolesPage';
 export { default as FAQPage } from './FAQPage';
 export { default as VillagePage } from './VillagePage';
+export { default as AssociationBanner } from './AssociationBanner';

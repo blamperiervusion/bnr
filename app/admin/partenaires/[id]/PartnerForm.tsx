@@ -58,6 +58,7 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
     tier: partner.tier || '',
     logo: partner.logo || '',
     contact: partner.contact || '',
+    email: partner.email || '',
     siret: partner.siret || '',
     address: partner.address || '',
     donationAmount: partner.donationAmount?.toString() || '',
@@ -370,6 +371,18 @@ export default function PartnerForm({ partner, adminUsers }: PartnerFormProps) {
                 className="w-full bg-[#0a0a0a] border border-[#333] rounded-lg px-4 py-3 text-white focus:border-[#e53e3e] focus:outline-none"
               />
             </div>
+          </div>
+
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-medium text-gray-400 mb-2">Adresse email</label>
+            <input
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              placeholder="contact@entreprise.fr"
+              className="w-full bg-[#0a0a0a] border border-[#333] rounded-lg px-4 py-3 text-white focus:border-[#e53e3e] focus:outline-none"
+            />
           </div>
 
           {/* Company info */}

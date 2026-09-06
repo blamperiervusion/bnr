@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import CarpoolBanner from '@/components/CarpoolBanner';
 import { NoiseOverlay } from '@/components/ui';
 import Loader from '@/components/Loader';
+import WelcomeLetterModal from '@/components/WelcomeLetterModal';
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -33,6 +34,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     <>
       <Loader />
       <NoiseOverlay />
+      <WelcomeLetterModal />
       <CarpoolBanner onVisibilityChange={handleBannerVisibility} />
       <Navbar bannerVisible={bannerVisible} />
       <main className="min-h-screen">
